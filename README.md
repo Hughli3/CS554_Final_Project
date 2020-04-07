@@ -1,5 +1,8 @@
 # CS554_Fincal_Project
 
+## Group Name 
+FirstLast
+
 ## Group Members 
 Xinyu Chen, Yanzhe Wu, Yong Que, Zheng Li
 
