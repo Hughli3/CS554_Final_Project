@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import NoMatch from "./NoMatch"
 
-class Home extends Component{
+class AccountProfile extends Component{
     constructor(props){
         super(props)
         this.state = {notFind:false, loading:true}
@@ -27,11 +27,11 @@ class Home extends Component{
         } else {
             return (
                 <div className='App-body'>
-                    <h1 className='cap-first-letter'> Home </h1>
+                    <h1 className='cap-first-letter'> AccountProfile </h1>
                 </div>
             );
         }
     }
 }
 
-export default Home;
+export default AccountProfile;
