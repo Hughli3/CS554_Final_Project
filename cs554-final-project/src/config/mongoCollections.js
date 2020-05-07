@@ -18,10 +18,9 @@ const getCollectionFn = collection => {
 /* Now, you can list your collections here: */
 module.exports = {
     users: getCollectionFn("users"),
-    houses: getCollectionFn("houses"),
-    watchlists: getCollectionFn("watchlists"),
+    property: getCollectionFn("property"),
     fsFiles: getCollectionFn("fs.files"),
-    fsChunks: getCollectionFn("fs.chunks"),
+    fsChunks: getCollectionFn("fs.chunks")
 };
 
 //  function main(){
