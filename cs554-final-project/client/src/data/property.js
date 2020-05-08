@@ -18,7 +18,7 @@ async function ifOwner(owner){
     const usersCollection = await users();
     let parsedOwner = ObjectId.createFromHexString(owner);
     const user = await usersCollection.find({_id:parsedOwner});
-    if (user == null) thorw `owner with the id ${parsedOwner} is not exist`;
+    if (user == null) throw `owner with the id ${parsedOwner} is not exist`;
 }
 
 function checkPropertyInfo(propertyInfo){
@@ -80,9 +80,9 @@ async function validateOwner(owner){
     if (owner.constructor !== String) throw "owner is not a string";
   
     const usersCollection = await users();
-    parsedOwner = ObjectId.createFromHexString(owner);
+    let parsedOwner = ObjectId.createFromHexString(owner);
     const user = await usersCollection.find({_id:parsedOwner});
-    if (user == null) thorw `owner with the id ${parsedOwner} is not exist`;
+    if (user == null) throw `owner with the id ${parsedOwner} is not exist`;
   }
 
 function validateType(type){

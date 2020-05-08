@@ -2,16 +2,19 @@ import React, { useCallback, useContext } from "react";
 import { withRouter, Redirect } from "react-router";
 import { AuthContext } from "./Auth.js";
 import app from "./AuthBase";
+import user from "../../data/user";
 
 const SignUp = ({ history }) => {
-  const handleSignUp = useCallback(async event => {
+  const handleSignUp = useCallback(async (event, currentUser) => {
     event.preventDefault();
     const { email, password } = event.target.elements;
     try {
-      await app
+      let signupInfo = await app
         .auth()
         .createUserWithEmailAndPassword(email.value, password.value);
       history.push("/");
+      
+      user.addUser(signupInfo.user.uid, signupInfo.user.email)
       // TODO init user in db
       
     } catch (error) {
