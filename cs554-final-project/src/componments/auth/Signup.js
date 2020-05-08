@@ -1,5 +1,6 @@
-import React, { useCallback } from "react";
-import { withRouter } from "react-router";
+import React, { useCallback, useContext } from "react";
+import { withRouter, Redirect } from "react-router";
+import { AuthContext } from "./Auth.js";
 import app from "./AuthBase";
 
 const SignUp = ({ history }) => {
@@ -11,10 +12,18 @@ const SignUp = ({ history }) => {
         .auth()
         .createUserWithEmailAndPassword(email.value, password.value);
       history.push("/");
+      // TODO init user in db
+      
     } catch (error) {
       alert(error);
     }
+
   }, [history]);
+
+  const { currentUser } = useContext(AuthContext);
+  if (currentUser) {
+    return <Redirect to="/account" />;
+  }
 
   return (
     <div>
