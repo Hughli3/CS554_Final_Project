@@ -69,24 +69,24 @@ function App() {
           <p>Wekcome!</p>
         </div>
 
-        <Switch>
-          <Route exact path='/property' component={AllHouseProperty}/>
-          <Route exact path='/property/:id' component={HouseProperty}/>
-          <Route exact path='/user/:id' component={User}/>
+        <Route exact path='/' component={Home}/>
+        <Route exact path='/account/login' component={Login}/>
+        <Route exact path='/account/signup' component={Signup}/>
 
-          <Route exact path='/account' component={Account}/>
-          <Route exact path='/account/login' component={Login}/>
-          <Route exact path='/account/signup' component={Signup}/>
+{/* 
+        <Route exact path='/property' component={AllHouseProperty}/>
+        <Route exact path='/property/:id' component={HouseProperty}/>
+        <Route exact path='/user/:id' component={User}/>
 
-          <Route exact path='/account/profile' component={AccountProfile}/>
-          <Route exact path='/account/watchlist' component={AccountWatchlist}/>
-          <Route exact path='/account/property' component={AccountAllProperty}/>
-          <Route exact path='/account/property/add' component={AccountAddProperty}/>
-          <Route exact path='/account/property/:id' component={AccountProperty}/>
+        <Route exact path='/account' component={Account}/>
+
+        <Route exact path='/account/profile' component={AccountProfile}/>
+        <Route exact path='/account/watchlist' component={AccountWatchlist}/>
+        <Route exact path='/account/property' component={AccountAllProperty}/>
+        <Route exact path='/account/property/add' component={AccountAddProperty}/>
+        <Route exact path='/account/property/:id' component={AccountProperty}/>
           
-          <Route exact path='/' component={Home}/>
-          <Route exact path='*' component={NoMatch} status={404}/>
-        </Switch>
+        <Route exact path='*' component={NoMatch} status={404}/> */}
       </div>
     </Router>
   );

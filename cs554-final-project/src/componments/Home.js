@@ -1,37 +1,23 @@
-import React, {Component} from 'react';
-import NoMatch from "./NoMatch"
+import React from 'react';
+import app from "../base"
 
-class Home extends Component{
-    constructor(props){
-        super(props)
-        this.state = {notFind:false, loading:true}
-    }
+const Home = () => {
+	// const [ loading, setLoading ] = useState(true);
 
-    async getUser() {
-        try {
-            this.setState({loading:false})
-        } catch (e) {
-            this.setState({notFind:true})
-        }
-    }
-
-    componentDidMount() {
-        this.getUser();
-    }
-
-    render() {
-        if(this.state.loading){
-            return <div><p>Loading...</p></div>;
-        } else if(this.state.notFind){
-            return <NoMatch />
-        } else {
-            return (
-                <div className='App-body'>
-                    <h1 className='cap-first-letter'> Home </h1>
-                </div>
-            );
-        }
-    }
+    // if (loading) {
+	// 	return (
+	// 		<div className='show-body'>
+	// 			<p>loading...</p>
+	// 		</div>
+	// 	)
+	// }
+    
+    return (
+        <div className='App-body'>
+            <h1 className='cap-first-letter'> Home </h1>
+            <button onClick={() => app.auth().signOut()}>Sign out</button>
+        </div>
+    );
 }
 
 export default Home;

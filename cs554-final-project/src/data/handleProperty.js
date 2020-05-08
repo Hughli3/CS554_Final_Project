@@ -19,7 +19,6 @@ async function ifOwner(owner){
     let parsedOwner = ObjectId.createFromHexString(owner);
     const user = await usersCollection.find({_id:parsedOwner});
     if (user == null) thorw `owner with the id ${parsedOwner} is not exist`;
-       
 }
 
 function checkPropertyInfo(propertyInfo){
