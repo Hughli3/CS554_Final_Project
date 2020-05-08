@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import NoMatch from "./NoMatch"
+import NoMatch from "../NoMatch"
 
-class Login extends Component{
+class AccountWatchlist extends Component{
     constructor(props){
         super(props)
         this.state = {notFind:false, loading:true}
@@ -27,11 +27,11 @@ class Login extends Component{
         } else {
             return (
                 <div className='App-body'>
-                    <h1 className='cap-first-letter'> Login </h1>
+                    <h1 className='cap-first-letter'> AccountWatchlist </h1>
                 </div>
             );
         }
     }
 }
 
-export default Login;
+export default AccountWatchlist;

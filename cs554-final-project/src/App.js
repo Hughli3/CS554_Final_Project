@@ -1,36 +1,30 @@
 import React from 'react';
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import logo from './img/logo.png';
 import './App.css';
+import app from "./componments/auth/AuthBase"
 
 import Home from "./componments/Home"
-import AllHouseProperty from "./componments/AllHouseProperty"
-import HouseProperty from "./componments/HouseProperty"
-import User from "./componments/User"
-import Account from "./componments/Account"
-import Login from "./componments/Login"
-import Signup from "./componments/Signup"
-import AccountProfile from "./componments/AccountProfile"
-import AccountWatchlist from "./componments/AccountWatchlist"
-import AccountAllProperty from "./componments/AccountAllProperty"
-import AccountProperty from "./componments/AccountProperty"
-import AccountAddProperty from "./componments/AccountAddProperty"
-import NoMatch from "./componments/NoMatch"
+import Property from "./componments/Property"
+import SingleProperty from "./componments/SingleProperty"
+import Account from "./componments/account/Account"
 
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
-} from "react-router-dom";
+import Login from "./componments/auth/Login"
+import Signup from "./componments/auth/Signup"
+import { AuthProvider } from "./componments/auth/Auth";
+import PrivateRoute from "./componments/auth/PrivateRoute";
 
 function App() {
+  let isLoggedIn = app.auth().currentUser
   return (
-    <Router>
       <div className="App">
         <header className='App-header'>
           <img src={logo} className='App-logo' alt='logo' />
           <h1 className='App-title'>Welcome to the Pokedex</h1>
         </header>
+
+        <AuthProvider>
+          <Router>
 
         <div className="App-body">
           <ul>
@@ -40,55 +34,35 @@ function App() {
             <li>
               <Link className='HousePropertylink' to='/property'>property</Link>
             </li>
-            <li>
-              <Link className='Userlink' to='/user/1'>user</Link>
-            </li>
-            <li>
-              <Link className='Accountlink' to='/account'>account</Link>
-            </li>
-            <li>
-              <Link className='Loginlink' to='/account/login'>login</Link>
-            </li>
-            <li>
-              <Link className='Signuplink' to='/account/signup'>signup</Link>
-            </li>
-            <li>
-              <Link className='AccountProfilelink' to='/account/profile'>account profile</Link>
-            </li>
-            <li>
-              <Link className='AccountWatchlistlink' to='/account/watchlist'>account watchlist</Link>
-            </li>
-            <li>
-              <Link className='AccountPropertylink' to='/account/property'>account property</Link>
-            </li>
-            <li>
-              <Link className='AccountAddPropertylink' to='/account/property/add'>account add Property</Link>
-            </li>
+            {isLoggedIn ? (
+              <li>
+                <Link className='Accountlink' to='/account'>account</Link>
+              </li>
+            ) : (
+              <div>
+                <li>
+                  <Link className='Loginlink' to='/login'>login</Link>
+                </li>
+                <li>
+                  <Link className='Signuplink' to='/signup'>signup</Link>
+                </li>
+              </div>
+            )}
           </ul>
-
-          <p>Wekcome!</p>
         </div>
 
         <Route exact path='/' component={Home}/>
-        <Route exact path='/account/login' component={Login}/>
-        <Route exact path='/account/signup' component={Signup}/>
+        <Route exact path='/property' component={Property}/>
+        <Route exact path='/property/:id' component={SingleProperty}/>
 
-{/* 
-        <Route exact path='/property' component={AllHouseProperty}/>
-        <Route exact path='/property/:id' component={HouseProperty}/>
-        <Route exact path='/user/:id' component={User}/>
+        <PrivateRoute exact path='/account' component={Account}/>
 
-        <Route exact path='/account' component={Account}/>
+        <Route exact path='/login' component={Login}/>
+        <Route exact path='/signup' component={Signup}/>
 
-        <Route exact path='/account/profile' component={AccountProfile}/>
-        <Route exact path='/account/watchlist' component={AccountWatchlist}/>
-        <Route exact path='/account/property' component={AccountAllProperty}/>
-        <Route exact path='/account/property/add' component={AccountAddProperty}/>
-        <Route exact path='/account/property/:id' component={AccountProperty}/>
-          
-        <Route exact path='*' component={NoMatch} status={404}/> */}
-      </div>
-    </Router>
+      </Router>
+    </AuthProvider>
+    </div>
   );
 }
 

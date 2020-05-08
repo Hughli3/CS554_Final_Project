@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import NoMatch from "./NoMatch"
 
-class AllHouseProperty extends Component{
+class Account extends Component{
     constructor(props){
         super(props)
         this.state = {notFind:false, loading:true}
@@ -23,15 +22,15 @@ class AllHouseProperty extends Component{
         if(this.state.loading){
             return <div><p>Loading...</p></div>;
         } else if(this.state.notFind){
-            return <NoMatch />
+            return ""
         } else {
             return (
                 <div className='App-body'>
-                    <h1 className='cap-first-letter'> AllHouseProperty </h1>
+                    <h1 className='cap-first-letter'> Account </h1>
                 </div>
             );
         }
     }
 }
 
-export default AllHouseProperty;
+export default Account;

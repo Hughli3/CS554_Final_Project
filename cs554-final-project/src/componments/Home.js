@@ -1,7 +1,13 @@
-import React from 'react';
-import app from "../base"
+import React, { useCallback, useContext } from "react";
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import { withRouter, Redirect } from "react-router";
+import { AuthContext } from "./auth/Auth";
+import app from "./auth/AuthBase"
 
 const Home = () => {
+
+    const { currentUser } = useContext(AuthContext);
+
 	// const [ loading, setLoading ] = useState(true);
 
     // if (loading) {
@@ -11,11 +17,29 @@ const Home = () => {
 	// 		</div>
 	// 	)
 	// }
-    
+
     return (
         <div className='App-body'>
             <h1 className='cap-first-letter'> Home </h1>
-            <button onClick={() => app.auth().signOut()}>Sign out</button>
+            {currentUser ? (
+                <div>
+                    <button onClick={() => app.auth().signOut()}>Sign out</button>
+                    <p>Welcome: {app.auth().currentUser.uid}</p>
+                    <p>Welcome: {app.auth().currentUser.email}</p>
+                    <li>
+                        <Link className='Accountlink' to='/account'>account</Link>
+                    </li>
+                </div>
+            ) : (
+              <div>
+                <li>
+                  <Link className='Loginlink' to='/login'>login</Link>
+                </li>
+                <li>
+                  <Link className='Signuplink' to='/signup'>signup</Link>
+                </li>
+              </div>
+            )}
         </div>
     );
 }

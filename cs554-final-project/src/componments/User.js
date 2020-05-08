@@ -27,11 +27,11 @@ class User extends Component{
         } else {
             return (
                 <div className='App-body'>
-                    <h1 className='cap-first-letter'> User </h1>
+                    <h1 className='cap-first-letter'> Account </h1>
                 </div>
             );
         }
     }
 }
 
-export default User;
+export default Account;
