@@ -1,4 +1,5 @@
-const taskRoutes = require('./tasks');
+const propertyRoutes = require('./property');
+const userRoutes = require('./user');
 
 const constructorMethod = (app) => {
   let counter = {}
@@ -12,22 +13,10 @@ const constructorMethod = (app) => {
     next();
   }
 
-  const logRequestCount = (req, res, next) => {
-    if (counter[req.originalUrl]) {
-      counter[req.originalUrl] = counter[req.originalUrl] + 1;
-    } else {
-      counter[req.originalUrl] = 1;
-    }
-    console.log(`URL: ${req.originalUrl} Requested Times: ${counter[req.originalUrl]}`)
-
-    next();
-  }
-
   app.use(logRequestDetail);
 
-  app.use(logRequestCount);
-
-  app.use('/api/tasks', taskRoutes);
+  app.use('/api/property', propertyRoutes);
+  app.use('/api/user', userRoutes);
 
   app.use('*', (req, res) => {
     res.status(404).json({error: 'Not found'});
