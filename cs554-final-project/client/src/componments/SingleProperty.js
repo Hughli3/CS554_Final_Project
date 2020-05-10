@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import serverController from '../serverController'
+import { Link } from 'react-router-dom';
+
 // import noImage from '../img/noImg.jpeg';
 
 const SingleProperty = (props) => {
@@ -50,13 +52,14 @@ const SingleProperty = (props) => {
 	return (
 		<div className='show-body'>
 			<h1 className='cap-first-letter'>{(propertyData && propertyData.title) || 'Not Provided'}</h1>
-
+            <Link to='/account/watchlist/add'>add watchlist</Link>
 			<h2 className='cap-first-letter'>Basic:</h2>
 			<dl>
 				<dt>Id</dt><dd>{(propertyData && propertyData._id) || 'Not Provided'}</dd>
 				<dt>Price</dt><dd>{(propertyData && propertyData.price) || 'Not Provided'}</dd>
 				<dt>Address</dt><dd>{(propertyData && propertyData.address) || 'Not Provided'}</dd>
 				<dt>area</dt><dd>{(propertyData && propertyData.area) || 'Not Provided'}</dd>
+                <dt>owner</dt><dd>{(propertyData && propertyData.owner) || 'Not Provided'}</dd>
 			</dl>
 		</div>
 	);

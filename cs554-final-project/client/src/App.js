@@ -24,7 +24,7 @@ function App() {
 
         <AuthProvider>
           <Router>
-            
+
             <div className="App-body">
               <Route path='/' component={Nav}/>
             </div>
@@ -36,7 +36,7 @@ function App() {
 
             <Route exact path='/login' component={Login}/>
             <Route exact path='/signup' component={Signup}/>
-            <PrivateRoute exact path='/account' component={Account}/>
+            <PrivateRoute path='/account' component={Account}/>
 
           </Router>
         </AuthProvider>

@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import WatchlistProperty from "./WatchlistProperty"
-
-
+import { AuthContext } from "../auth/Auth";
 
 export default function WatchList(props) {
-    const [currentUser, setCurrentUser] = useState(null);
+    const { currentUser } = useContext(AuthContext);
     const [pending, setPending] = useState(true);
     // TODO change below to props
-    const [properties, setProperty] = useState([]);
+    const [properties, setProperties] = useState([]);
 
     let myWatchList =  [
         {
@@ -35,12 +34,9 @@ export default function WatchList(props) {
 
     useEffect(() => {
         console.log("WatchList has ben called")
-        app.auth().onAuthStateChanged((user) => {
-          setCurrentUser(user);
-          setPending(false);
-          // TODO Change below to 
-          setProperty(myWatchList);
-        });
+        setPending(false);
+        // TODO Change below to 
+        setProperties(myWatchList);
       }, []);
 
     const watchlistComponents = properties.map(listProperty =>  <WatchlistProperty key={listProperty.uid} property = {listProperty} />)
