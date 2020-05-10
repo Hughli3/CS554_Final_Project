@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Redirect } from "react-router";
 import { AuthContext } from "./Auth.js";
 import app from "./AuthBase";
+import serverController from '../../serverController'
 
 const SignUp = () => {
 
@@ -9,11 +10,9 @@ const SignUp = () => {
     event.preventDefault();
     const { email, password } = event.target.elements;
     try {
-      await app.auth().createUserWithEmailAndPassword(email.value, password.value);
-      // import axios from 'axios';
-      // import server from '../../serverConfig'
-      // const auth = await signupInfo.user.getIdToken(true)
-      // await axios.post(server.baseUrl + "/api/user/", {uid: signupInfo.user.uid, auth: auth})
+      let signupInfo = await app.auth().createUserWithEmailAndPassword(email.value, password.value);
+      serverController.postUser(signupInfo.user)
+
     } catch (error) {
       alert(error);
     }

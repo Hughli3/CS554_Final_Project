@@ -10,14 +10,17 @@ admin.initializeApp({
 
 const checkAuth = async (req, res, next) => {
     try {
-      await admin.auth().verifyIdToken(req.body.auth)
-      let user = await admin.auth().getUser(req.body.uid)
-      if (user.uid != req.body.uid) throw "unauthorized"
+      const user = await admin.auth().verifyIdToken(req.headers.authorization)
+      res.locals.userUid = user.uid
       // if not exist, generate one
       try {
         await userData.getUser(user.uid)
       } catch(e) {
-        await userData.add(user.uid)
+        try {
+            await userData.add(user.uid)
+        } catch (e) {
+            console.log(e)
+        }
       }
       next()
     } catch (e) {
