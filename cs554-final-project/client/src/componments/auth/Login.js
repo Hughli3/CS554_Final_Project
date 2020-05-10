@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Redirect } from "react-router";
-import app from "./AuthBase.js";
+import { app, googleProvider } from "./AuthBase.js";
 import { AuthContext } from "./Auth.js";
 
 const Login = () => {
@@ -19,7 +19,7 @@ const Login = () => {
   if (currentUser) {
     return <Redirect to="/account" />;
   }
-
+  
   return (
     <div>
       <h1>Log in</h1>
@@ -34,6 +34,7 @@ const Login = () => {
         </label>
         <button type="submit">Log in</button>
       </form>
+      <button onClick={() => app.auth().signInWithPopup(googleProvider)}>Login as Google</button>
     </div>
   );
 };

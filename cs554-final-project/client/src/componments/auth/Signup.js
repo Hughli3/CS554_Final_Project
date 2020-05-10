@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Redirect } from "react-router";
 import { AuthContext } from "./Auth.js";
-import app from "./AuthBase";
+import { app } from "./AuthBase";
 import serverController from '../../serverController'
 
 const SignUp = () => {
