@@ -2,6 +2,7 @@ import React, {Component, useState, useContext} from 'react';
 import { AuthContext } from "../auth/Auth";
 import Watchlist from "./Watchlist";
 import Property from "./Property";
+import AddProperty from "./AddProperty";
 
 import PrivateRoute from "../auth/PrivateRoute";
 
@@ -29,6 +30,7 @@ export default function Account(){
                 <li><Link className='' to='/account/watchlist'>watchlist</Link></li>
                 <li><Link className='' to='/account/property'>my property</Link></li>
             </ul>
+            <PrivateRoute exact path='/account/property/add' component={AddProperty}/>
             <PrivateRoute exact path='/account/property' component={Property}/>
             <PrivateRoute exact path='/account/watchlist' component={Watchlist}/>
             <PrivateRoute exact path='/account/editProfile' component={Watchlist}/>

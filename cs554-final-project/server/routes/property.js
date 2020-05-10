@@ -3,6 +3,7 @@ const router = express.Router();
 const data = require('../data');
 const propertyData = data.property;
 const ObjectId = require('mongodb').ObjectID;
+const checkAuth = require('./checkAuth');
 
 router.get('/', async (req, res) => {
     let take = 20;
@@ -52,8 +53,9 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', checkAuth, async (req, res) => {
     let propertyInfo = req.body;
+    let owner = res.locals.userUid
     try {
         // if (taskInfo.title === undefined) throw "title is undefinded";
         // if (typeof taskInfo.title != "string") throw "title is not a string";
@@ -70,7 +72,7 @@ router.post('/', async (req, res) => {
     }
     
     try {
-        const property = await propertyData.add("aa", propertyInfo);
+        const property = await propertyData.add(owner, propertyInfo);
         res.json(property);
     } catch (e) {
         res.status(500).json({error: e});

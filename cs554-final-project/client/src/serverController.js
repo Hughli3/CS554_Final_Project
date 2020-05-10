@@ -12,6 +12,17 @@ const serverController = {
         return await axios.get(baseUrl + "/api/property/" + pid)
     },
 
+    async postProperty (user, property) {
+        const token = await user.getIdToken(true)
+        const {title, description, price} = property
+        const data = {
+            title: title.value,
+            description: description.value,
+            price: price.value
+        }
+        return await axios.post(baseUrl + "/api/property/", data, {headers: {'Authorization': token}})
+    },
+
     async postUser (user) {
         const token = await user.getIdToken(true)
         await axios.post(baseUrl + "/api/user/", null, {headers: {'Authorization': token}})
