@@ -1,8 +1,8 @@
 const propertyRoutes = require('./property');
 const userRoutes = require('./user');
+// const watchlistRoutes = require('./watchlist');
 
 const constructorMethod = (app) => {
-  let counter = {}
 
   const logRequestDetail = (req, res, next) => {
     if(Object.keys(req.body).length != 0) {

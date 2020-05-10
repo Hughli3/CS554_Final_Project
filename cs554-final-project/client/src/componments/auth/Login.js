@@ -1,24 +1,19 @@
-import React, { useCallback, useContext } from "react";
-import { withRouter, Redirect } from "react-router";
+import React, { useContext } from "react";
+import { Redirect } from "react-router";
 import app from "./AuthBase.js";
 import { AuthContext } from "./Auth.js";
 
-const Login = ({ history }) => {
-  const handleLogin = useCallback(
+const Login = () => {
+  const handleLogin = 
     async event => {
       event.preventDefault();
       const { email, password } = event.target.elements;
       try {
-        await app
-          .auth()
-          .signInWithEmailAndPassword(email.value, password.value);
-        history.push("/");
+        await app.auth().signInWithEmailAndPassword(email.value, password.value);
       } catch (error) {
         alert(error);
       }
-    },
-    [history]
-  );
+    };
 
   const { currentUser } = useContext(AuthContext);
   if (currentUser) {
@@ -43,4 +38,4 @@ const Login = ({ history }) => {
   );
 };
 
-export default withRouter(Login);
+export default Login;

@@ -10,7 +10,17 @@
   "author": "Xinyu Chen 10454941",
   "license": "MIT",
   "dependencies": {
+    "base64-img": "^1.0.4",
+    "cors": "^2.8.5",
     "express": "^4.16.2",
-    "mongodb": "^3.0.2"
+    "firebase-admin": "^8.12.1",
+    "image-size": "^0.8.3",
+    "imagemin": "^7.0.1",
+    "imagemin-mozjpeg": "^8.0.0",
+    "imagemin-pngquant": "^8.0.0",
+    "md5": "^2.2.1",
+    "mongodb": "^3.0.2",
+    "multer": "^1.4.2",
+    "resize-img": "^2.0.0"
   }
 }
