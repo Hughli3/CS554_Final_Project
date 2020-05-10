@@ -1,36 +1,13 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
+import Avatar from './Avatar';
 
-class Account extends Component{
-    constructor(props){
-        super(props)
-        this.state = {notFind:false, loading:true}
-    }
-
-    async getUser() {
-        try {
-            this.setState({loading:false})
-        } catch (e) {
-            this.setState({notFind:true})
-        }
-    }
-
-    componentDidMount() {
-        this.getUser();
-    }
-
-    render() {
-        if(this.state.loading){
-            return <div><p>Loading...</p></div>;
-        } else if(this.state.notFind){
-            return ""
-        } else {
-            return (
-                <div className='App-body'>
-                    <h1 className='cap-first-letter'> Account </h1>
-                </div>
-            );
-        }
-    }
+export default function Account(props){
+    const [account, setAccount] = useState();
+    
+    return(
+        <div>
+            <Avatar user={props.user} />
+            <p>User Name: {props.user.name}</p>
+        </div>
+    )
 }
-
-export default Account;
