@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link href="./public/vendor/font-awesome/css/all.min.css" rel="stylesheet">
+  <link type="text/css" href="./public/vendor/argon/css/argon.css" rel="stylesheet">
+  <link type="text/css" href="./public/css/main.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+<main>
+    <!-- <link type="text/css" href="/public/vendor/lightbox2/css/lightbox.min.css" rel="stylesheet"> -->
+    <!-- {{!-- Basic Info --}} -->
+
+    <section class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <div class="avatar-container">
+                    <img src="{{ Owner.avatar }}" class="img-fluid avatar" alt="Owner avatar">
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="dog-info-container">
+                        <h1><span id="Owner-name"></span>{{ Owner.name }}</span></h1>
+                        <h2>Owner email:</h2>
+                        <p id="Owner-email">{Owner.email}</p><br>
+                        <h2>Type:</h2>
+                        <p id="property-type">{property.type}</p><br>
+                        <h2>Size:</h2>
+                        <p id="property-type">{property.type}</p><br>
+                        <h2>Prize:</h2>
+                        <p id="property-type">{property.type}</p><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="m-4">
+        <div class="container">
+            <h1>Photos</h1>
+            <div id="photos" class="row">
+                <!-- photos -->
+                <div class="col-lg-3 col-6 my-3 dog-img-container">
+                    <a href="{{ photo }}" data-alt="dog photos" data-lightbox="photos">
+                        <img id="{{ id }}" src="{{ photo }}" class="dog-img img-fluid rounded w-100" alt="dog photos">
+                    </a>
+                </div>
+                <!-- photos end -->
+            </div>
+        </div>
+    </section>
+
+    <section class="m-4">
+        <div class="container">
+            <h1>Description</h1>
+            <div id="Description" class="row">
+                <div class="container">
+                    <a>Description<br>Description</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link href="./public/vendor/font-awesome/css/all.min.css" rel="stylesheet">
+  <link type="text/css" href="./public/vendor/argon/css/argon.css" rel="stylesheet">
+  <link type="text/css" href="./public/css/main.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+<main>
+
+
+    <section class="my-5">
+        <div class="container">    
+            <div class="row">
+                <div class="col-3">
+                    <div class="avatar-container">
+                        <img src="img.jpg" id="user-avatar" class="img-fluid avatar" alt="user avatar" width="300">                
+                    </div>
+                </div>
+                <div class="col-9">
+                    <h1>{{user.username}}</h1>
+                    <h2>Owner email:</h2>
+                    <p id="Owner-email">{Owner.email}</p><br>
+                    <div>
+                        <button class="btn btn-secondary my-3" data-toggle="modal" data-target="#update-avatar-modal">Change avatar</button>
+                        <button class="btn btn-secondary my-3" data-toggle="modal" data-target="#change-email-modal">Change email</button>
+                        <button class="btn btn-secondary my-3" data-toggle="modal" data-target="#change-password-modal">Change password</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary my-3" data-toggle="modal" data-target="#add-property-modal">Add a Property</button>
+                    </div>
+                </div>  
+            </div> 
+        </div>
+    </section>
+    
+    <!-- upload avatar  -->
+    <div class="modal fade" id="update-avatar-modal" tabindex="-1" role="dialog" aria-labelledby="modal-title-default" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="modal-title-default">Upload avatar</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+    
+                <form id="update-avatar-form" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="user-avatar-upload">Avatar</label>
+                            <button type="button" id="user-avatar-upload-btn" class="btn btn-primary">Choose file</button>
+                            <p id="uploaded-file-name" class="uploaded-file-name"></p>
+                            <input type="file" id="user-avatar-upload" class="btn btn-primary d-none" name="avatar" accept="image/*">
+                            <input type="hidden" id="user-id" name="user-id" value="{{user._id}}">
+                        </div>    
+                    </div>
+    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                        <button type="button" class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- add property  -->
+    <!-- <div class="modal fade show" id="add-property-modal" tabindex="-1" role="dialog" aria-labelledby="add-property-title" style="display: block; padding-right: 21px;" aria-modal="true"> -->
+    <div class="modal fade" id="add-property-modal" tabindex="-1" role="dialog" aria-labelledby="modal-title-add-property" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="modal-title-add-property">Add a property</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+    
+                <form id="add-property-form">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="add-property-form-address">Address</label>
+                            <input type="text" id="add-property-form-address" class="form-control" placeholder="address" name="address">
+                        </div>
+                        <div class="form-group">
+                            <label for="add-property-form-type">Type</label>
+                            <input type="text" id="add-property-form-type" class="form-control" placeholder="type" name="type">
+                        </div>
+                        <div class="form-group">
+                            <label for="add-property-form-prize">Prize</label>
+                            <input type="text" id="add-property-form-prize" class="form-control" placeholder="prize" name="prize">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-property-form-description">Description:</label>
+                            <textarea type="text" id="edit-property-form-description" rows = "7" cols = "80" class="form-control" placeholder="description" name="description"> 
+                                description
+                            </textarea>
+                        </div>
+
+                    </div>
+    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="button" class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- change password  -->
+    <div class="modal fade" id="change-password-modal" tabindex="-1" role="dialog" aria-labelledby="modal-title-change-password" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="modal-title-change-password">Change password</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+    
+                <form id="change-password-form">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="change-password-form-old-password">Old passowrd</label>
+                            <input type="password" id="change-password-form-old-password" class="form-control" placeholder="old password" name="old-password">
+                        </div>
+                        <div class="form-group">
+                            <label for="change-password-form-new-password">New password</label>
+                            <input type="password" id="change-password-form-new-password" class="form-control" placeholder="new password" name="new-passowrd" data-toggle="tooltip" data-placement="top" title="length must be greatter than or equal to 8">
+                        </div>
+                        <div class="form-group">
+                            <label for="change-password-form-confirm-new-password">Condirm new password</label>
+                            <input type="password" id="change-password-form-confirm-new-password" class="form-control" placeholder="new password" name="confirm-new-passowrd" data-toggle="tooltip" data-placement="top" title="must be same as the password you inputted">
+                        </div>
+                    </div>
+    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Change</button>
+                        <button type="button" class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- change email  -->
+    <!-- <div class="modal fade show" id="change-email-modal" tabindex="-1" role="dialog" aria-labelledby="change-property-email" style="display: block; padding-right: 21px;" aria-modal="true"> -->
+    <div class="modal fade" id="change-email-modal" tabindex="-1" role="dialog" aria-labelledby="modal-title-change-email" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="modal-title-change-email">Change email</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+    
+                <form id="change-email-form">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="change-email">New email</label>
+                            <input type="email" id="change-email" class="form-control" placeholder="new email" name="new-email">
+                        </div>
+                    </div>
+    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Change</button>
+                        <button type="button" class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <section class="my-5">
+        <div class="container">
+            <h1>Your propertys</h1>
+            <p {{#if user.propertys}}style="display: none"{{/if}} id="no-data-found-alert-dog" class="no-data-found-alert">No propertys found. Please add your propertys.</p>
+            <div id="propertys-container" class="row propertys-container">
+                <!-- propertys -->
+                <div class="col-lg-3 col-md-4 col-6 mb-4 dog-container">
+                    <button type="button" class="btn btn-danger btn-sm btn-round btn-shadow btn-delete-dog position-absolute">delete</button>
+                    <div>
+                        <div class="card">
+                            <a href="/Property/id" >
+                                <div class="card-body">
+                                    <img class="card-img" src="image.jpg" alt="address">
+            
+                                    <h2 class="display-4">Address</h2>
+                                    <p class="card-text">
+                                        owner, 
+                                        type
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div> 
+                </div>
+                <!-- propertys  -->
+            </div>
+        </div>   
+    </section>
+
+
+
+
+
+</main>
+
+
+</body>
+</html>

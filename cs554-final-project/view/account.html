@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link href="./public/vendor/font-awesome/css/all.min.css" rel="stylesheet">
+  <link type="text/css" href="./public/vendor/argon/css/argon.css" rel="stylesheet">
+  <link type="text/css" href="./public/css/main.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+<main>
+
+
+    <section class="my-5">
+        <div class="container">    
+            <div class="row">
+                <div class="col-3">
+                    <div class="avatar-container">
+                        <img src="img.jpg" id="user-avatar" class="img-fluid avatar" alt="user avatar" width="300">                
+                    </div>
+                </div>
+                <div class="col-9">
+                    <h1>{{user.username}}</h1>
+                    <h2>Owner email:</h2>
+                    <p id="Owner-email">{Owner.email}</p><br>
+                </div>  
+            </div> 
+        </div>
+    </section>
+    
+    
+    
+    <section class="my-5">
+        <div class="container">
+            <h1>All propertys</h1>
+            <p {{#if user.propertys}}style="display: none"{{/if}} id="no-data-found-alert-dog" class="no-data-found-alert">No propertys found. Please add your propertys.</p>
+            <div id="propertys-container" class="row propertys-container">
+                <!-- propertys -->
+                <div class="col-lg-3 col-md-4 col-6 mb-4 dog-container">
+                    <button type="button" class="btn btn-danger btn-sm btn-round btn-shadow btn-delete-dog position-absolute">delete</button>
+                    <div>
+                        <div class="card">
+                            <a href="/Property/id" >
+                                <div class="card-body">
+                                    <img class="card-img" src="image.jpg" alt="address">
+            
+                                    <h2 class="display-4">Address</h2>
+                                    <p class="card-text">
+                                        owner, 
+                                        type
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div> 
+                </div>
+                <!-- propertys  -->
+            </div>
+        </div>   
+    </section>
+
+
+
+
+
+</main>
+
+
+</body>
+</html>
