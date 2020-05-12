@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import serverController from '../serverController';
+import serverController from '../../serverController';
 import { Link } from 'react-router-dom';
 
 const Property = (props) => {
@@ -30,9 +30,9 @@ const Property = (props) => {
 		const propertyId = property._id
 		return (
 			<li key={propertyId}>
-				<Link to={`/property/${propertyId}`}>
-					{property.title}
-				</Link>
+				    <Link to={`/property/${propertyId}`}>{property.title}</Link>
+                    &nbsp;&nbsp;<Link to={`/account/property/${propertyId}`}>Edit</Link>
+                    &nbsp;&nbsp;<button>Delete</button>
 			</li>
 		);
 	};
@@ -63,8 +63,8 @@ const Property = (props) => {
 
 	return (
 		<div className='show-body'>
-            <h1 className='cap-first-letter'>Property</h1>
 			<ul className='list-unstyled'>{li}</ul>
+            <Link to='/account/property/add'>Add a new one</Link>
 		</div>
     );
     

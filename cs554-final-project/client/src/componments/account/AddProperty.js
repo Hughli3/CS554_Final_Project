@@ -1,37 +1,44 @@
-import React, {Component} from 'react';
-import NoMatch from "./NoMatch"
+import React, {Component, useContext, useState} from 'react';
+import { AuthContext } from "../auth/Auth";
+import serverController from '../../serverController';
+import { Redirect } from "react-router";
 
-class AccountAddProperty extends Component{
-    constructor(props){
-        super(props)
-        this.state = {notFind:false, loading:true}
-    }
+// import NoMatch from "./NoMatch"
 
-    async getUser() {
+const AddProperty = () => {
+    const { currentUser } = useContext(AuthContext);
+    const [isSuccess, setIsSuccess] = useState(false)
+
+    const addProperty = async (event) => {
+        event.preventDefault();
+        const data = event.target.elements;
+
         try {
-            this.setState({loading:false})
-        } catch (e) {
-            this.setState({notFind:true})
+          await serverController.postProperty(currentUser, data)
+          setIsSuccess(true)
+        } catch (error) {
+          alert(error);
         }
-    }
+    };
 
-    componentDidMount() {
-        this.getUser();
+    if (isSuccess) {
+        return <Redirect to="/account/property" />;
     }
-
-    render() {
-        if(this.state.loading){
-            return <div><p>Loading...</p></div>;
-        } else if(this.state.notFind){
-            return <NoMatch />
-        } else {
-            return (
-                <div className='App-body'>
-                    <h1 className='cap-first-letter'> AccountAddProperty </h1>
-                </div>
-            );
-        }
-    }
+       
+    return (
+    <div>
+        <h1>Add</h1>
+        <form onSubmit={addProperty}>
+        <label htmlFor="title">Title</label>
+        <input id="title" name="title" type="text" placeholder="title" />
+        <label htmlFor="desdcription">Description</label>
+        <input id="desdcription" name="description" type="text" placeholder="description" />
+        <label htmlFor="price">Price</label>
+        <input id="price" name="price" type="text" placeholder="price" />
+        <button type="submit">Post</button>
+        </form>
+    </div>
+    );
 }
 
-export default AccountAddProperty;
+export default AddProperty;

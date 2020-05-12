@@ -1,30 +1,25 @@
-import React, { useCallback, useContext } from "react";
-import { withRouter, Redirect } from "react-router";
-import app from "./AuthBase.js";
+import React, { useContext } from "react";
+import { Redirect } from "react-router";
+import { app, googleProvider } from "./AuthBase.js";
 import { AuthContext } from "./Auth.js";
 
-const Login = ({ history }) => {
-  const handleLogin = useCallback(
+const Login = () => {
+  const handleLogin = 
     async event => {
       event.preventDefault();
       const { email, password } = event.target.elements;
       try {
-        await app
-          .auth()
-          .signInWithEmailAndPassword(email.value, password.value);
-        history.push("/");
+        await app.auth().signInWithEmailAndPassword(email.value, password.value);
       } catch (error) {
         alert(error);
       }
-    },
-    [history]
-  );
+    };
 
   const { currentUser } = useContext(AuthContext);
   if (currentUser) {
     return <Redirect to="/account" />;
   }
-
+  
   return (
     <div>
       <h1>Log in</h1>
@@ -39,8 +34,9 @@ const Login = ({ history }) => {
         </label>
         <button type="submit">Log in</button>
       </form>
+      <button onClick={() => app.auth().signInWithPopup(googleProvider)}>Login as Google</button>
     </div>
   );
 };
 
-export default withRouter(Login);
+export default Login;

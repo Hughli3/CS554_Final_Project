@@ -1,8 +1,14 @@
-import React, { useEffect, useState } from "react"
-import WatchListProperty from "./WatchlistProperty"
+import React, { useEffect, useState, useContext } from "react"
+import WatchlistProperty from "./WatchlistProperty"
+import { AuthContext } from "../auth/Auth";
 
+export default function WatchList(props) {
+    const { currentUser } = useContext(AuthContext);
+    const [pending, setPending] = useState(true);
+    // TODO change below to props
+    const [properties, setProperties] = useState([]);
 
-let myWatchList =  [
+    let myWatchList =  [
         {
             uid:123456,
             title:"1125 Jefferson",
@@ -25,30 +31,18 @@ let myWatchList =  [
             contact:"email@gmail.com"
         }
     ]
-export default function WatchList() {
-    const [currentUser, setCurrentUser] = useState(null);
-    const [pending, setPending] = useState(true);
-    const [property, setProperty] = useState(props.WatchList);
 
     useEffect(() => {
         console.log("WatchList has ben called")
-        app.auth().onAuthStateChanged((user) => {
-          setCurrentUser(user);
-          setPending(false);
-          setProperty({
-            uid:123456,
-            title:"1125 Jefferson",
-            price:3600,
-            bedroom:3,
-            contact:"email@stevens.edu"
-          });
-        });
+        setPending(false);
+        // TODO Change below to 
+        setProperties(myWatchList);
       }, []);
 
-    const watchListComponents = watchList.map(listProperty =>  <WatchListProperty key={listProperty.uid} property = {listProperty} />)
+    const watchlistComponents = properties.map(listProperty =>  <WatchlistProperty key={listProperty.uid} property = {listProperty} />)
     return (
         <div>
-            {watchListComponents}
+            {watchlistComponents}
         </div>
     )
 }

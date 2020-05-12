@@ -1,7 +1,9 @@
-const taskData = require('./tasks');
-const commentData = require('./comments');
+const userData = require('./user');
+const propertyData = require('./property');
+// const watchlistData = require('./watchlist');
 
 module.exports = {
-    tasks: taskData,
-    comments: commentData
+    property: propertyData,
+    user: userData,
+    // watchList: watchlistData,
 };

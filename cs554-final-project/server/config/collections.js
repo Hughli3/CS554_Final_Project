@@ -1,8 +1,8 @@
-const dbConnection = require('./connection');
+const dbConnection = require("./connection");
 
 /* This will allow you to have one reference to each collection per app */
 /* Feel free to copy and paste this this */
-const getCollectionFn = (collection) => {
+const getCollectionFn = collection => {
   let _col = undefined;
 
   return async () => {
@@ -17,6 +17,8 @@ const getCollectionFn = (collection) => {
 
 /* Now, you can list your collections here: */
 module.exports = {
-    tasks: getCollectionFn('tasks'),
-    comments: getCollectionFn('comments')
+    user: getCollectionFn("user"),
+    property: getCollectionFn("property"),
+    fsFiles: getCollectionFn("fs.files"),
+    fsChunks: getCollectionFn("fs.chunks"),
 };

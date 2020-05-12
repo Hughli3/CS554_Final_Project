@@ -1,27 +1,22 @@
-import React, { useCallback, useContext } from "react";
-import { withRouter, Redirect } from "react-router";
+import React, { useContext } from "react";
+import { Redirect } from "react-router";
 import { AuthContext } from "./Auth.js";
-import app from "./AuthBase";
-import user from "../../data/user";
+import { app } from "./AuthBase";
+import serverController from '../../serverController'
 
-const SignUp = ({ history }) => {
-  const handleSignUp = useCallback(async (event, currentUser) => {
+const SignUp = () => {
+
+  const handleSignUp = async (event) => {
     event.preventDefault();
     const { email, password } = event.target.elements;
     try {
-      let signupInfo = await app
-        .auth()
-        .createUserWithEmailAndPassword(email.value, password.value);
-      history.push("/");
-      
-      user.addUser(signupInfo.user.uid, signupInfo.user.email)
-      // TODO init user in db
-      
+      let signupInfo = await app.auth().createUserWithEmailAndPassword(email.value, password.value);
+      serverController.postUser(signupInfo.user)
+
     } catch (error) {
       alert(error);
     }
-
-  }, [history]);
+  };
 
   const { currentUser } = useContext(AuthContext);
   if (currentUser) {
@@ -46,4 +41,4 @@ const SignUp = ({ history }) => {
   );
 };
 
-export default withRouter(SignUp);
+export default SignUp;
