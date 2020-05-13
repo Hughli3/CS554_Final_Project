@@ -1,0 +1,18 @@
+{
+  "name": "final",
+  "version": "1.0.0",
+  "description": "final for CS554",
+  "main": "index.js",
+  "scripts": {
+    "server": "npm start --prefix server",
+    "client": "npm start --prefix client",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm run server\" \" npm run client\" ",
+    "end": "concurrently --kill-other "
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^5.2.0"
+  }
+}
