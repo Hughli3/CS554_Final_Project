@@ -47,9 +47,9 @@ const Property = (props) => {
 		
 	if (loading) {
 		return (
-			<div className='show-body'>
+			// <div className='show-body'>
 				<p>loading...</p>
-			</div>
+			// </div>
 		);
 	}
 

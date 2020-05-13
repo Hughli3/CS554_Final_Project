@@ -1,0 +1,250 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+
+.footer.has-cards {
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.footer.has-cards:before {
+    display: none;
+}
+
+.btn-delete-photo {
+    display: none;
+    right: 15px;
+    top: 10px;
+    z-index: 99;
+}
+
+.dog-img-container:hover .btn-delete-photo{
+    display: block;
+}
+
+.btn-delete-dog {
+    display: none;
+    right: 15px;
+    top: 10px;
+    z-index: 99;
+}
+
+.dog-container:hover .btn-delete-dog{
+    display: block;
+}
+
+.avatar {
+    width: 100%;
+    height: auto;
+}
+
+.single-comment {
+    padding: 0 30px 0 10px;
+    margin: 30px 0;
+}
+
+.single-comment .comment-content {
+    margin-bottom: 8px;
+    padding: 20px 35px;
+    background: #e7f0ff;
+    border-radius: 15px;
+    margin-left: 16px;
+    word-break: break-word;
+}
+
+.single-comment .comment-content p {
+    color: #333;
+    padding : 0px;
+    margin: 0px;
+}
+
+.single-comment .comment-date {
+    font-size: 12px;
+}
+
+#comment-form textarea {
+    margin: 10px 0;
+}
+
+.dog-health-info h2, .dog-info-container h2{
+    font-size: 24px;
+    display: inline;
+}
+
+p.no-data-found-alert {
+    font-size: 24px;
+    color: #32315d;
+}
+
+.dog-health-info p, .dog-info-container p{
+    font-size: 30px;
+    font-weight: 400;
+    display: inline;
+    color: #475dda;
+    margin-left: 5px;
+    margin-right: 15px;
+}
+
+#comment-form label {
+    font-size: 24px;
+}
+
+.alert-message {
+    pointer-events: all;
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    margin-left: -150px;
+    width: 300px;
+    z-index: 9999;
+}
+
+.hide-chart {
+    height: 0 !important;
+    overflow: hidden;
+}
+
+.footer .nav .nav-item .nav-link {
+    color: #333 !important;
+}
+
+.avatar-container {
+    width: 100%;
+    padding-bottom: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.avatar-container img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+}
+
+.form-control {
+    color: #32315d !important;
+}
+
+.alert-danger {
+    background-color: #b73a51;
+}
+
+.alert-success {
+    background-color: #008b17;
+}
+
+.close {
+    opacity: .9;
+    color: #fff;
+    margin-left: 10px;
+}
+
+.close:hover, .close:focus {
+    color: #fff;
+}
+
+.close-dark {
+    opacity: .9;
+    color: #32315d;
+    margin-left: 10px;
+}
+
+.close-dark:hover, .close-dark:focus {
+    color: #32315d;
+}
+
+label {
+    color: #32315d;
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.signup-login-section {
+    height: 100vh;
+    min-height: 670px;
+}
+
+.tooltip-inner {
+    min-width: 50px;
+    max-width: 350px;
+    text-align: left;
+    padding: 10px 25px;
+}
+
+.uploaded-file-name {
+    font-size: 16px;
+    font-weight: 400;
+    color: #32315d;
+    word-break: break-word;
+    display: contents;
+}
+
+input[type='radio']:checked + label {
+    width: 100%;
+    background: #475dda;
+    color: #fff;
+    margin: 0px;
+    padding: 6px 0;
+}
+
+input[type='radio'] + label {
+    display: block;
+    margin: 6px 0;
+}
+
+.radio-group {
+    border: solid 1px #cad1d7;
+    display: block;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.radio-group div {
+    float: left;
+    border-left: 1px solid #cad1d7;
+}
+
+.radio-group div:first-child {
+    border: 0;
+}
+
+input[type=radio] {
+    position: absolute;
+    visibility: hidden;
+    display: none;
+}
+
+.custom-select {
+    box-shadow: none;
+}
+
+p.card-text {
+    font-size: 15px;
+    margin: 0px;
+    color: #475dda;
+    font-weight: 400;
+}
+
+.card-text-gender {
+    color: #32315d;
+}
+
+.user-description p {
+    font-size: 22px;
+    font-weight: 400;
+    color: #32315d;
+}
+
+.text-warning {
+    color: #c54000 !important;
+}
+
+.home-health-management-section h2{
+    font-size: 22px;
+}
+
+.page-link {
+    color: #32315d;
+}
