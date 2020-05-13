@@ -1,6 +1,5 @@
 import React from "react";
-import {BrowserRouter as Link} from "react-router-dom";
-import { app } from "./auth/AuthBase"
+
 const Footer = () => {
 
     return (
@@ -10,7 +9,7 @@ const Footer = () => {
           <div className="row align-items-center justify-content-md-between">
             <div className="col-md-6">
               <div className="copyright">
-                &copy; 2020 <Link to='/'>RentSIT</Link>.
+                &copy; 2020 RentSIT.
               </div>
             </div>
             <div className="col-md-6">
