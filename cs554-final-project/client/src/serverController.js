@@ -23,12 +23,38 @@ const serverController = {
         return await axios.post(baseUrl + "/api/property/", data, {headers: {'Authorization': token}})
     },
 
-    async postUser (user) {
+    async deleteProperty (pid, user) {
         const token = await user.getIdToken(true)
-        await axios.post(baseUrl + "/api/user/", null, {headers: {'Authorization': token}})
+        return await axios.delete(baseUrl + "/api/property/" + pid, {headers: {'Authorization': token}})
     },
 
+    async postUser (user) {
+        const token = await user.getIdToken(true)
+        return await axios.post(baseUrl + "/api/user/", null, {headers: {'Authorization': token}})
+    },
 
+    async getUser (user) {
+        const token = await user.getIdToken(true)
+        return await axios.get(baseUrl + "/api/user/", {headers: {'Authorization': token}})
+    },
+
+    async addWatchlist (propertyId, user) {
+        const token = await user.getIdToken(true)
+        const data = {
+            propertyId: propertyId
+        }
+        return await axios.post(baseUrl + "/api/user/watchlist", data, {headers: {'Authorization': token}})
+    },
+
+    async removeWatchlist (propertyId, user) {
+        const token = await user.getIdToken(true)
+        return await axios.delete(baseUrl + "/api/user/watchlist/" + propertyId, {headers: {'Authorization': token}})
+    },
+
+    async getWatchlist (user) {
+        const token = await user.getIdToken(true)
+        return await axios.get(baseUrl + "/api/user/watchlist", {headers: {'Authorization': token}})
+    },
     
 };
   

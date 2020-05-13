@@ -24,7 +24,7 @@ const checkAuth = async (req, res, next) => {
       }
       next()
     } catch (e) {
-      res.status(403).send('unauthorized')
+      res.status(401).send('authentication fail')
     }
 }
 

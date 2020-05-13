@@ -6,24 +6,6 @@ const userData = data.user;
 const ObjectId = require('mongodb').ObjectID;
 const checkAuth = require('./checkAuth')
 
-// router.get('/:uid', async (req, res) => {
-//     try {
-//         let uid = req.params.uid;
-//         if (uid === undefined)  throw "uid is undefinded";
-//         if (!ObjectId.isValid(uid)) throw "uid is invalid";
-//         if (typeof id != "string") id = id.toString();
-//     } catch (e) {
-//         res.status(400).json({error: e});
-//         return;
-//     }
-//     try {
-//         const task = await taskData.getById(req.params.id);
-//         res.json(task);
-//     } catch (e) {
-//         res.status(404).json({error: 'task not found'});
-//     }
-// });
-
 router.post('/', checkAuth, async (req, res) => {
     let userInfo = req.body;
     
@@ -50,6 +32,120 @@ router.post('/', checkAuth, async (req, res) => {
     }
 });
 
+router.get('/', checkAuth, async (req, res) => {
+    try {
+        const user = await userData.getUser(res.locals.userUid);
+        let propertyList = user.property
+        user.property = []
+        for (let pid of propertyList) {
+            user.property.push(await propertyData.getById(pid))
+        }
+
+        res.json(user)
+    } catch (e) {
+        res.status(500).json({error: e});
+    }
+});
+
+router.get('/watchlist', checkAuth, async (req, res) => {
+    try {
+        const user = await userData.getUser(res.locals.userUid);
+        let data = {
+            watchlist: user.watchlist,
+            details: []
+        }
+        for (let pid of user.watchlist) {
+            data.details.push(await propertyData.getById(pid))
+        }
+
+        res.json(data)
+    } catch (e) {
+        res.status(500).json({error: e});
+    }
+});
+
+router.get('/property', checkAuth, async (req, res) => {
+    try {
+        const user = await userData.getUser(res.locals.userUid);
+        let data = {
+            property: user.property,
+            details: []
+        }
+        for (let pid of user.property) {
+            data.details.push(await propertyData.getById(pid))
+        }
+
+        res.json(data)
+    } catch (e) {
+        res.status(500).json({error: e});
+    }
+});
+
+router.post('/watchlist', checkAuth, async (req, res) => {
+    let pid = req.body.propertyId;
+    // is property valid
+    try {
+        await propertyData.getById(pid);
+    } catch (e) {
+        res.status(404).json({error: 'property not found'});
+        return;
+    }
+
+    // add to watchlist
+    try {
+        const data = await userData.addWatchlist(pid, res.locals.userUid)
+        res.json({watchlist: data.watichlist});
+    } catch (e) {
+        res.status(500).json({error: e});
+    }
+});
+
+router.delete('/watchlist/:pid', checkAuth, async (req, res) => {
+    let pid = req.params.pid;
+    // is property valid
+    try {
+        await propertyData.getById(pid);
+    } catch (e) {
+        res.status(404).json({error: 'property not found'});
+        return;
+    }
+
+    // remove from watchlist
+    try {
+        const user = await userData.removeWatchlist(pid, res.locals.userUid)
+        let data = {
+            watchlist: user.watchlist,
+            details: []
+        }
+
+        for (let pid of user.watchlist) {
+            data.details.push(await propertyData.getById(pid))
+        }
+        console.log(data)
+
+        res.json(data)
+    } catch (e) {
+        res.status(500).json({error: e});
+    }
+});
+
+router.get('/:uid', async (req, res) => {
+    try {
+        let uid = req.params.uid;
+        if (uid === undefined)  throw "uid is undefinded";
+        if (!ObjectId.isValid(uid)) throw "uid is invalid";
+        if (typeof id != "string") id = id.toString();
+    } catch (e) {
+        res.status(400).json({error: e});
+        return;
+    }
+    try {
+        const task = await taskData.getById(req.params.id);
+        res.json(task);
+    } catch (e) {
+        res.status(404).json({error: 'task not found'});
+    }
+});
 
 // router.put('/:id', async (req, res) => {
 //     let taskInfo = req.body;

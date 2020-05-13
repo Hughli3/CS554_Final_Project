@@ -1,30 +1,69 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import serverController from '../serverController'
 import { Link } from 'react-router-dom';
+import { AuthContext } from "./auth/Auth";
 
 // import noImage from '../img/noImg.jpeg';
 
 const SingleProperty = (props) => {
 	const [ propertyData, setPropertyData ] = useState();
+	const [ isWatchlist, setIsWatchlist ] = useState();
 	const [ loading, setLoading ] = useState(true);
+	const { currentUser } = useContext(AuthContext);
 
 	useEffect(
 		() => {
-			async function fetchData() {
+			async function getPropertyData() {
 				try {
 					setLoading(true);
                     const {data: property}  = await serverController.getProperty(props.match.params.id)
                     console.log(property)
 					setPropertyData(property);
+				} catch (e) {
+					console.log(e)
+				}
+			}
+			async function checkWatchlist(currentUser) {
+				try {
+					const {data: watchlist}  = await serverController.getWatchlist(currentUser)
+					console.log(watchlist.watchlist)
+					if (watchlist.watchlist.includes(props.match.params.id)) {
+						setIsWatchlist(true)
+					} else {
+						setIsWatchlist(false)
+					}
 					setLoading(false);
 				} catch (e) {
 					setLoading(false);
+					console.log(e)
 				}
 			}
-			fetchData();
+
+			getPropertyData();
+			if (currentUser) {
+				checkWatchlist(currentUser, propertyData)
+			}
 		},
 		[ props.match.params.id ]
 	);
+
+	const addWatchlist = async () => {
+		try {
+			await serverController.addWatchlist(propertyData._id, currentUser)
+			setIsWatchlist(true)
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const removeWatchlist = async () => {
+		try {
+			await serverController.removeWatchlist(propertyData._id, currentUser)
+			setIsWatchlist(false)
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	// let img = null;
 	// if (pokemonData && pokemonData.sprites && pokemonData.sprites.front_default) {
@@ -49,10 +88,16 @@ const SingleProperty = (props) => {
 		)
 	}
 
+	let watchListButton = null
+	if (currentUser) {
+		watchListButton = isWatchlist ? (<button onClick={removeWatchlist}>Remove from Watchlist</button>) 
+		: (<button onClick={addWatchlist}>Add To Watchlist</button>)
+	}
+
 	return (
 		<div className='show-body'>
 			<h1 className='cap-first-letter'>{(propertyData && propertyData.title) || 'Not Provided'}</h1>
-            <Link to='/account/watchlist/add'>add watchlist</Link>
+			{watchListButton}
 			<h2 className='cap-first-letter'>Basic:</h2>
 			<dl>
 				<dt>Id</dt><dd>{(propertyData && propertyData._id) || 'Not Provided'}</dd>

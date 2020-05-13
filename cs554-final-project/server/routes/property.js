@@ -56,20 +56,20 @@ router.get('/:id', async (req, res) => {
 router.post('/', checkAuth, async (req, res) => {
     let propertyInfo = req.body;
     let owner = res.locals.userUid
-    try {
-        // if (taskInfo.title === undefined) throw "title is undefinded";
-        // if (typeof taskInfo.title != "string") throw "title is not a string";
-        // if (taskInfo.description === undefined) throw "description is undefinded";
-        // if (typeof taskInfo.description != "string") throw "description is not a string";
-        // if (taskInfo.hoursEstimated === undefined) throw "hoursEstimated is undefinded";
-        // if (typeof taskInfo.hoursEstimated != "number") throw "hoursEstimated is not of the proper type";
-        // if (taskInfo.hoursEstimated <= 0 ) throw "hoursEstimated is not a positive number";
-        // if (taskInfo.completed === undefined) throw "completed is undefinded";
-        // if (typeof taskInfo.completed != "boolean") throw "completed is not of the proper type";
-    } catch (e) {
-        res.status(400).json({error: e});
-        return;
-    }
+    // try {
+    //     if (propertyInfo.title === undefined) throw "title is undefinded";
+    //     if (typeof taskInfo.title != "string") throw "title is not a string";
+    //     if (taskInfo.description === undefined) throw "description is undefinded";
+    //     if (typeof taskInfo.description != "string") throw "description is not a string";
+    //     if (taskInfo.hoursEstimated === undefined) throw "hoursEstimated is undefinded";
+    //     if (typeof taskInfo.hoursEstimated != "number") throw "hoursEstimated is not of the proper type";
+    //     if (taskInfo.hoursEstimated <= 0 ) throw "hoursEstimated is not a positive number";
+    //     if (taskInfo.completed === undefined) throw "completed is undefinded";
+    //     if (typeof taskInfo.completed != "boolean") throw "completed is not of the proper type";
+    // } catch (e) {
+    //     res.status(400).json({error: e});
+    //     return;
+    // }
     
     try {
         const property = await propertyData.add(owner, propertyInfo);
@@ -189,55 +189,32 @@ router.post('/', checkAuth, async (req, res) => {
 //     }
 // });
 
-// router.delete('/:taskId/:commentId', async (req, res) => {
-//     try {
-//         let id = req.params.taskId;
-//         if (id === undefined)  throw "taskId is undefinded";
-//         if (!ObjectId.isValid(id)) throw "taskId is invalid";
-//         if (typeof id != "string") id = id.toString();
-//     } catch (e) {
-//         res.status(400).json({error: e});
-//         return;
-//     }
+router.delete('/:id', checkAuth, async (req, res) => {
+    let ownerId = res.locals.userUid
 
-//     try {
-//         let id = req.params.commentId;
-//         if (id === undefined)  throw "commentId is undefinded";
-//         if (!ObjectId.isValid(id)) throw "commentId is invalid";
-//         if (typeof id != "string") id = id.toString();
-//     } catch (e) {
-//         res.status(400).json({error: e});
-//         return;
-//     }
+    let property;
+    try {
+        property = await propertyData.getById(req.params.id);
+    } catch (e) {
+        res.status(404).json({error: "property not found"});
+        return;
+    }
 
-//     let task;
-//     let comment;
+    if (property.owner != ownerId) {
+        res.status(403).json({error: "unauthorized"});
+        return;
+    }
 
-//     try {
-//         task = await taskData.getById(req.params.taskId);
-//     } catch (e) {
-//         res.status(404).json({error: "task not found"});
-//         return;
-//     }
+    try {
+        const resData = await propertyData.delete(req.params.id, ownerId);
+        resData.data = property
+        res.json(resData);
+    } catch (e) {
+        console.log(e)
+        res.status(500).json({error: e});
+        return;
+    }
 
-//     try {
-//         comment = await commentData.getById(req.params.commentId);
-//     } catch (e) {
-//         res.status(404).json({error: "comment not found"});
-//         return;
-//     }
-
-//     if(!task.comments.some(e => e._id == req.params.commentId)) {
-//         res.status(400).json({error: "this comment doesn't belong to this task"});
-//         return;
-//     }
-    
-//     try {
-//         const task = await commentData.delete(req.params.commentId, req.params.taskId);
-//         res.json(task);
-//     } catch (e) {
-//         res.status(500).json({error: e});
-//     }
-// });
+});
 
 module.exports = router;

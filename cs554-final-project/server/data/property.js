@@ -1,7 +1,7 @@
 // ==================== Requires ====================
 const collections = require("../config/collections");
 const properties = collections.property;
-const users = collections.users;
+const users = collections.user;
 const imgData = require("./img");
 const ObjectId = require('mongodb').ObjectID;
 
@@ -25,38 +25,17 @@ let exportedMethods = {
         
         allProperty = allProperty.slice(skip);
         allProperty = allProperty.slice(0, take);
-    
-        // try {
-        //     // comment
-        //     let commentData = require('./comments');
-            
-        //     for (let i = 0; i < allTask.length; i++) {
-        //         let commentList = allTask[i].comments;
-        //         let comments = []
-                
-        //         for (let i = 0; i < commentList.length; i++) {
-        //             comment = await commentData.getById(commentList[i]);
-        //             comments.push(comment);
-        //         }
-        //         allTask[i].comments = comments;
-        //     }
-        // } catch (e) {
-        //     throw e;
-        // }
 
         return allProperty;
     },
 
     async add(owner, propertyInfo){
-        // TODO checker
-        // ifOwner(owner);
-        // checkPropertyInfo(propertyInfo);
         
         let data = {
             title: propertyInfo.title,
             description: propertyInfo.description,
             price: propertyInfo.price,
-            address: propertyInfo.address,
+            zipcode: propertyInfo.zipcode,
             type: propertyInfo.type,
             bedroom: propertyInfo.bedroom,
             bath: propertyInfo.bath,
@@ -70,6 +49,13 @@ let exportedMethods = {
         const insertInfo = await propertyCollection.insertOne(data);
         if (insertInfo.insertedCount === 0) throw "could not add property";
         const newId = insertInfo.insertedId;
+
+        const userCollection = await users();
+        const updateInfo = await userCollection.updateOne(
+          {_id: owner},
+          {$addToSet: {property: newId}}
+        );
+        if (!updateInfo.matchedCount && !updateInfo.modifiedCount) throw 'add to user info failed';
 
         return await this.getById(newId.toString());    
     },
@@ -107,90 +93,78 @@ let exportedMethods = {
     
     // },
 
-    // async delete(propertyId) {
-    //     if (commentId === undefined) throw "commentId is undefinded";
-    //     if (!ObjectId.isValid(commentId)) throw "commentId is invalid";
-    //     if (typeof commentId != "string") commentId = commentId.toString();
-    //     const commentIdObj = ObjectId.createFromHexString(commentId);
+    async delete(id, ownerId) {
+        if (id === undefined) throw "property id is undefinded";
+        if (!ObjectId.isValid(id)) throw "property id is invalid";
+        if (typeof id != "string") id = id.toString();
+        const idObj = ObjectId.createFromHexString(id);
     
-    //     if (taskId === undefined) throw "taskId is undefinded";
-    //     if (!ObjectId.isValid(taskId)) throw "taskId is invalid";
-    //     if (typeof taskId != "string") taskId = taskId.toString();
+        // delete property
+        const propertyCollection = await properties();
+        const deletionInfo = await propertyCollection.deleteOne({ _id: idObj });
+        if (deletionInfo.deletedCount === 0) throw "could not delete comment with that id";
     
-    //     // make sure author and post both valid
-    //     try {
-    //       let comment = await this.getById(commentId);
-    //       let task = await tasks.getById(taskId);
-    //       if(!task.comments.some(e => e._id == commentId)) {
-    //         throw "this comment doesn't belong to this task"
-    //       }
-    //     } catch (e) {
-    //       throw e;
-    //     }
-    
-    //     // delete post
-    //     const commentCollection = await comments();
-    //     const deletionInfo = await commentCollection.deleteOne({ _id: commentIdObj });
-    //     if (deletionInfo.deletedCount === 0) throw "could not delete comment with that id";
-    
-    //     // delete from animal
-    //     try {
-    //       await tasks.removeCommentFromTask(taskId, commentId);
-    //     } catch (e) {
-    //       throw e;
-    //     }
-    
-    //     const res = {
-    //         deleted: true,
-    //         data: comment
-    //     }
-    
-    //     return res;
-    // },
+        // delete from watchlist
+        const userCollection = await users();
+        await userCollection.updateMany({}, {$pull: {watchlist: id}});
 
-    // async addImage(peropertyId, imageId) {
-    //     if (taskId === undefined) throw "taskId is undefinded";
-    //     if (!ObjectId.isValid(taskId)) throw "taskId is invalid";
-    //     if (commentId === undefined) throw "commentId is undefinded";
-    //     if (!ObjectId.isValid(commentId)) throw "commentId is invalid";
+        // delete from owner's property list
+        const updateInfo = await userCollection.updateOne(
+          {_id: ownerId},
+          {$pull: {property: idObj}}
+        );
+        if (!updateInfo.matchedCount && !updateInfo.modifiedCount) throw 'remove from owner failed';
 
-    //     if (typeof taskId != "string") taskId = taskId.toString();
-    //     if (typeof commentId != "string") commentId = commentId.toString();
-    //     const taskIdObj = ObjectId.createFromHexString(taskId);
-    //     const commentIdObj = ObjectId.createFromHexString(commentId);
-
-    //     const taskCollection = await tasks();
-    //     const updateInfo = await taskCollection.updateOne(
-    //       {_id: taskIdObj},
-    //       {$addToSet: {comments: commentIdObj}}
-    //     );
+        const res = {
+            deleted: true
+        }
     
-    //     if (!updateInfo.matchedCount && !updateInfo.modifiedCount) throw 'update failed';
+        return res;
+    },
+
+    async addImage(propertyId, imageId) {
+        if (propertyId === undefined) throw "propertyId is undefinded";
+        if (!ObjectId.isValid(propertyId)) throw "propertyId is invalid";
+        if (imageId === undefined) throw "imageId is undefinded";
+        if (!ObjectId.isValid(imageId)) throw "imageId is invalid";
+
+        if (typeof propertyId != "string") propertyId = propertyId.toString();
+        if (typeof imageId != "string") imageId = imageId.toString();
+        const propertyIdObj = ObjectId.createFromHexString(propertyId);
+        const imageIdObj = ObjectId.createFromHexString(imageId);
+
+        const propertyCollection = await properties();
+        const updateInfo = await propertyCollection.updateOne(
+          {_id: propertyIdObj},
+          {$addToSet: {album: imageIdObj}}
+        );
     
-    //     return await this.getById(taskId);
-    // },
-
-    // async removeImage(propertyId, imageId) {
-    //     if (taskId === undefined) throw "taskId is undefinded";
-    //     if (!ObjectId.isValid(taskId)) throw "taskId is invalid";
-    //     if (commentId === undefined) throw "commentId is undefinded";
-    //     if (!ObjectId.isValid(commentId)) throw "commentId is invalid";
-
-    //     if (typeof taskId != "string") taskId = taskId.toString();
-    //     if (typeof commentId != "string") commentId = commentId.toString();
-    //     const taskIdObj = ObjectId.createFromHexString(taskId);
-    //     const commentIdObj = ObjectId.createFromHexString(commentId);
-
-    //     const taskCollection = await tasks();
-    //     const updateInfo = await taskCollection.updateOne({_id: taskIdObj}, {$pull: {comments: commentIdObj}});
-    //     if (!updateInfo.matchedCount && !updateInfo.modifiedCount) throw 'remove comment failed';
+        if (!updateInfo.matchedCount && !updateInfo.modifiedCount) throw 'update failed';
     
-    //     return;
-    // }
+        return await this.getById(propertyId);
+    },
+
+    async removeImage(propertyId, imageId) {
+        if (propertyId === undefined) throw "propertyId is undefinded";
+        if (!ObjectId.isValid(propertyId)) throw "propertyId is invalid";
+        if (imageId === undefined) throw "imageId is undefinded";
+        if (!ObjectId.isValid(imageId)) throw "imageId is invalid";
+
+        if (typeof propertyId != "string") propertyId = propertyId.toString();
+        if (typeof imageId != "string") imageId = imageId.toString();
+        const propertyIdObj = ObjectId.createFromHexString(propertyId);
+        const imageIdObj = ObjectId.createFromHexString(imageId);
+
+        const propertyCollection = await properties();
+        const updateInfo = await propertyCollection.updateOne(
+            {_id: propertyIdObj}, 
+            {$pull: {album: imageIdObj}}
+        );
+        if (!updateInfo.matchedCount && !updateInfo.modifiedCount) throw 'remove comment failed';
+    
+        return await this.getById(propertyId);
+    }
 }
-
-
-
 
 module.exports = exportedMethods;
 
