@@ -1,5 +1,6 @@
 const propertyRoutes = require('./property');
 const userRoutes = require('./user');
+const imageRoutes = require('./image');
 // const watchlistRoutes = require('./watchlist');
 
 const constructorMethod = (app) => {
