@@ -10,6 +10,8 @@ import Account from "./componments/account/Account"
 import Header from "./componments/Header"
 import Footer from "./componments/Footer"
 
+import Image from "./componments/Image"
+
 import Login from "./componments/auth/Login"
 import Signup from "./componments/auth/Signup"
 import { AuthProvider } from "./componments/auth/Auth";
