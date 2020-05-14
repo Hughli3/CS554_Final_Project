@@ -26,6 +26,7 @@ export default function Account(){
         <div>
             <h1 className='cap-first-letter'>Account</h1>
             <p>User Name: {currentUser.email}</p>
+            <p>Use Uid: {currentUser.uid}</p>
             <ul>
                 <li><Link className='' to='/account/watchlist'>watchlist</Link></li>
                 <li><Link className='' to='/account/property'>my property</Link></li>
