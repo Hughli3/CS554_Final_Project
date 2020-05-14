@@ -4,8 +4,10 @@ const baseUrl = "http://localhost:3001"
 
 const serverController = {
 
-    async getAllProperty () {
-        return await axios.get(baseUrl + "/api/property/")
+    async getAllProperty (take, skip) {
+        if (!take) take = 12;
+        if (!skip) skip = 0;
+        return await axios.get(baseUrl + "/api/property/?skip=" + skip + "&"+ "take=" + take)
     },
 
     async getProperty (pid) {

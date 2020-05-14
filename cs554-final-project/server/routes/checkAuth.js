@@ -17,9 +17,9 @@ const checkAuth = async (req, res, next) => {
         await userData.getUser(user.uid)
       } catch(e) {
         try {
-            await userData.add(user.uid)
+            await userData.add(user.uid, user.email)
         } catch (e) {
-            console.log(e)
+            throw(e)
         }
       }
       next()

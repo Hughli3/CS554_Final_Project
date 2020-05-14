@@ -23,6 +23,19 @@ let exportedMethods = {
         let allProperty = await propertyCollection.find({}).toArray();
         if (!allProperty) throw 'no property in system';
         
+        data = {}
+        if (allProperty.length - skip > take) {
+            data.next = {}
+            data.next.skip = skip + take
+            data.next.take = skip + take
+        }
+
+        if (allProperty.length - skip > take) {
+            data.next = {}
+            data.next.skip = skip + take
+            data.next.take = skip + take
+        }
+
         allProperty = allProperty.slice(skip);
         allProperty = allProperty.slice(0, take);
 
