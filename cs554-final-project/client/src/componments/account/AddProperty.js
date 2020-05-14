@@ -25,7 +25,7 @@ const AddProperty = () => {
         if (data.bath.value < 1|| data.bath.value > 10) throw "bath number invalid";
         if (data.price.value < 0) throw "price invalid";
         if (data.title.value.length > 30) throw "title too long";
-        if (data.zipcode.length != 5) throw "zipcode invalid"
+        if (data.zipcode.value.length != 5) throw "zipcode invalid"
         await serverController.postProperty(currentUser, data)
         setIsSuccess(true)
       } catch (error) {
