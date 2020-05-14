@@ -6,30 +6,22 @@ const ObjectId = require('mongodb').ObjectID;
 const checkAuth = require('./checkAuth');
 
 router.get('/', async (req, res) => {
-    let take = 20;
-    let skip = 0;
+    let page = 1;
     try {
-        if(req.query.take) {
-            if (req.query.take === undefined) throw "take is undefinded";
-            take = parseInt(req.query.take);
-            if(isNaN(take)) throw "take is not a valid number";
-            if (take < 0 ) throw "take is not a positive number";
-            if (take > 100 ) throw "take is too large, max is 100";
-        }
-        if(req.query.skip) {
-            if (req.query.skip === undefined) throw "skip is undefinded";
-            skip = parseInt(req.query.skip);
-            if(isNaN(skip)) throw "skip is not a valid number";
-            if (skip < 0 ) throw "skip is not a positive number";
+        if(req.query.page) {
+            if (req.query.page === undefined) throw "page is undefinded";
+            page = parseInt(req.query.page);
+            if(isNaN(page)) throw "page is not a valid number";
+            if (page < 1 ) throw "page is not a positive number";
         }
     } catch (e) {
-        res.status(400).json({error: e});
+        res.status(400).json({error: "invalid parameter"});
         return;
     }
     
     try {
-        const propertyList = await propertyData.getAll(skip, take);
-        res.json(propertyList);
+        const resData = await propertyData.getAll(page);
+        res.json(resData);
     } catch (e) {
         res.status(500).json({error: e});
     }

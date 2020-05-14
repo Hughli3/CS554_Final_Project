@@ -1,37 +1,80 @@
-import React, {Component} from 'react';
-import NoMatch from "./NoMatch"
+import React, {useEffect, useState, useContext} from 'react';
+// import { AuthContext } from "../auth/Auth";
+import serverController from "../serverController";
+import { useAlert } from 'react-alert'
+import { Link } from 'react-router-dom';
 
-class User extends Component{
-    constructor(props){
-        super(props)
-        this.state = {notFind:false, loading:true}
-    }
+export default function User(props){
+    
+    const alert = useAlert();
 
-    async getUser() {
-        try {
-            this.setState({loading:false})
-        } catch (e) {
-            this.setState({notFind:true})
-        }
-    }
+    const [ userData, setUserData ] = useState({});
+	const [ loading, setLoading ] = useState(true);
 
-    componentDidMount() {
-        this.getUser();
-    }
+	useEffect( () => {
+			async function fetchData() {
+				try {
+                    setLoading(true);
+                    const {data: resData} = await serverController.getUserId(props.match.params.id);
+					setUserData(resData);
+					setLoading(false);
+				} catch (e) {
+                    alert.error(e)
+					setLoading(false);
+				}
+			}
+			fetchData();
+		},
+		[ props.match.params.id ]
+    );
+    
+    let li = null;
+    
+    // build card
+	const buildListItem = (property) => {
+		const propertyId = property._id
+		return (
+			<li key={propertyId}>
+				    <Link to={`/property/${propertyId}`}>{property.title}</Link>
+			</li>
+		);
+	};
 
-    render() {
-        if(this.state.loading){
-            return <div><p>Loading...</p></div>;
-        } else if(this.state.notFind){
-            return <NoMatch />
-        } else {
-            return (
-                <div className='App-body'>
-                    <h1 className='cap-first-letter'> Account </h1>
-                </div>
-            );
-        }
+    if (userData && userData.property && !(Array.isArray(userData.property) && userData.property.length)) {
+        li = (
+			<div className='show-body'>
+				<p>No Property Under this user</p>
+			</div>
+        )
+    } else {
+        li = userData && userData.property && userData.property.map((property) => {
+            return buildListItem(property);
+        });
     }
+	
+	
+	if (loading) {
+		return (
+			<div className='show-body'>
+				<p>loading...</p>
+			</div>
+		);
+	}
+
+    return(
+        <div>
+            <h1 className='cap-first-letter'>User</h1>
+            <p>User Id: {userData._id}</p>
+            <p>User Avatar: {userData.avatar}</p>
+
+            <p>email: {userData.email}</p>
+            <p>phone: {userData.phone}</p>
+
+            <ul>
+                <h1>Property</h1>
+                {li}
+            </ul>
+        </div>
+        
+    )
 }
-
-export default Account;

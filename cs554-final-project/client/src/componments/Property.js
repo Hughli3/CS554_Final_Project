@@ -1,81 +1,129 @@
 import React, { useState, useEffect } from 'react';
 import serverController from '../serverController';
 import { Link } from 'react-router-dom';
+import { useAlert } from 'react-alert'
 
 const Property = (props) => {
+
 	const [ propertyData, setPropertyData ] = useState([]);
+	const [ pageData, setPageData ] = useState({});
 	const [ loading, setLoading ] = useState(true);
+
+	const alter = useAlert()
+	const urlParams = new URLSearchParams(props.location.search);
+	let page = urlParams.get('page') || 1;
+
 	let li = null;
+	let pagination = null;
 
 	useEffect(
 		() => {
 			async function fetchData() {
 				try {
 					setLoading(true);
-					// if (!props.match.params.page.match(/^\d+$/)) throw Error("invalid page id");
-					// const offset = parseInt(props.match.params.page) * 20;
-                    const {data: resData} = await serverController.getAllProperty(props.match.params.take, props.match.params.skip);
-					setPropertyData(resData);
+                    const {data: resData} = await serverController.getAllProperty(page);
+					setPropertyData(resData.properties);
+					setPageData({next: resData.next, prev: resData.prev});
 					setLoading(false);
 				} catch (e) {
+					alter.error(e)
 					setLoading(false);
 				}
 			}
 			fetchData();
 		},
-		[ props.match.params.take, props.match.params.skip ]
+		[props.location.search]
 	);
 
-	const buildListItem = (property) => {
-		const propertyId = property._id
+	li = propertyData && propertyData.map((property) => { 
 		return (
-			<li key={propertyId}>
-				<Link to={`/property/${propertyId}`}>
-					{property.title}
-				</Link>
-			</li>
-		);
-	};
+			<div class="col-lg-3 col-md-4 col-6 mb-4">
+				<div class="card">
+					<Link to={'/property/' + property._id}>
+						<div class="avatar-container">
+							{property.avatar ?
+							(<img src="{{ avatar }}" class="card-img-top" alt="dog avatar" />)
+							:
+							(<img src="/public/img/avatar/default-dog.png" class="card-img-top" alt="dog avatar" />)
+							}
+						</div>
+						<div class="card-body">
+							<h2 class="display-4">{property.title}</h2>
+							<p class="card-text"><span class="card-text-gender">{property.price}</span> {property.area}</p>
+						</div>
+					</Link>
+				</div>
+			</div>    
+		)
+	});
 
-	li = propertyData &&
-        propertyData.map((property) => { 
+	const buildPagination = (pageData) => {
+		let prev = null
+		let curr = null
+		let next = null
+		const currentPageNumber = parseInt(page)
+		const prevPageNumber = currentPageNumber - 1
+		const nextPageNumber = currentPageNumber + 1
+
+		if (pageData.prev) {
+			prev = (
+				<li class="page-item">
+					<Link to={"?page=" + prevPageNumber} className="page-link">
+						<i class="fa fa-angle-left"></i>
+						<span class="sr-only ">Previous page</span>
+					</Link>
+				</li> )
+		}
+
+		if (pageData.next) {
+			next = (
+				<li class="page-item">
+					<Link to={"?page=" + nextPageNumber} className="page-link">
+						<i class="fa fa-angle-right"></i>
+						<span class="sr-only">Next page</span>
+					</Link>
+				</li> )
+		}
+
+		if (pageData.next || pageData.prev) {
+			curr = (
+				<li class="page-item {{@active}}">
+					<Link to={"?page=" + currentPageNumber} className="page-link" aria-label={"go to page " + currentPageNumber}>
+						{currentPageNumber}
+					</Link>
+				</li>)
+		}
+
+		if (pageData.next || pageData.prev) {
 			return (
-				<div class="col-lg-3 col-md-4 col-6 mb-4">
-					<div class="card">
-						<Link to={'/property/' + property._id}>
-							<div class="avatar-container">
-								{property.avatar ?
-								(<img src="{{ avatar }}" class="card-img-top" alt="dog avatar" />)
-								:
-								(<img src="/public/img/avatar/default-dog.png" class="card-img-top" alt="dog avatar" />)
-								}
-							</div>
-							<div class="card-body">
-								<h2 class="display-4">{property.title}</h2>
-								<p class="card-text"><span class="card-text-gender">{property.price}</span> {property.area}</p>
-							</div>
-						</Link>
-					</div>
-				</div>    
+				<nav>
+					<ul class="pagination justify-content-center">
+						{prev}
+						{curr}
+						{next}
+					</ul>
+				</nav>
 			)
-		});
-	
-	// let preLink = linkData.preLink ? (<Link className='pre-link' to={(parseInt(props.match.params.page) - 1).toString()}> Previous </Link>) : "";
-	// let nextLink = linkData.nextLink ? (<Link className='next-link' to={(parseInt(props.match.params.page) + 1).toString()}> Next </Link>) : "";
-		
+		}
+	}
+
+	if (pageData) {
+		pagination = buildPagination(pageData)
+	}
+
 	if (loading) {
 		return (
-			// <div className='show-body'>
-				<p>loading...</p>
-			// </div>
+			<p>loading...</p>
 		);
 	}
 
 	if (!(Array.isArray(propertyData) && propertyData.length)) {
 		return (
-			<div className='show-body'>
-				<p>404 - Property List Not Found!</p>
-			</div>
+			<section class="section">
+				<div class="container">
+					<h1>No Property!</h1>
+				</div>
+			</section>
 		);
 	}
 
@@ -86,25 +134,7 @@ const Property = (props) => {
 				<div class="row">
 					{li}
 				</div>
-				<nav>
-					<ul class="pagination justify-content-center">
-					<li class="page-item">
-						<a class="page-link" href="?page={{@previousPage}}">
-						<i class="fa fa-angle-left"></i>
-						<span class="sr-only ">Previous page</span>
-						</a>
-					</li>
-
-					<li class="page-item {{@active}}"><a class="page-link" href="?page={{@page}}" aria-label="go to page {{@page}}"></a></li>
-
-					<li class="page-item">
-						<a class="page-link" href="?page={{@nextPage}}">
-						<i class="fa fa-angle-right"></i>
-						<span class="sr-only">Next page</span>
-						</a>
-					</li>
-					</ul>
-				</nav>
+				{pagination}
 			</div>
 		</section>
     );

@@ -4,10 +4,14 @@ const baseUrl = "http://localhost:3001"
 
 const serverController = {
 
-    async getAllProperty (take, skip) {
-        if (!take) take = 12;
-        if (!skip) skip = 0;
-        return await axios.get(baseUrl + "/api/property/?skip=" + skip + "&"+ "take=" + take)
+    async getAllProperty (page, take) {
+        if (!page) page = 1;
+        try {
+            return await axios.get(baseUrl + "/api/property/?page=" + page)
+        } catch (e) {
+            if (e.response.data.error) throw (e.response.data.error)
+            else throw (e.message)
+        }
     },
 
     async getProperty (pid) {
@@ -43,6 +47,14 @@ const serverController = {
     async getUser (user) {
         const token = await user.getIdToken(true)
         return await axios.get(baseUrl + "/api/user/", {headers: {'Authorization': token}})
+    },
+
+    async getUserId (userId) {
+        try {
+            return await axios.get(baseUrl + "/api/user/" + userId)
+        } catch (e) {
+            throw (e.response.data.error)
+        }
     },
 
     async addWatchlist (propertyId, user) {

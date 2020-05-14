@@ -7,39 +7,36 @@ const ObjectId = require('mongodb').ObjectID;
 
 let exportedMethods = {
 
-    async getAll(skip, take) {
-        if (skip === undefined) throw "skip is undefinded";
-        skip = parseInt(skip);
-        if(isNaN(skip)) throw "skip is not a valid number";
-        if (skip < 0 ) throw "skip is not a positive number";
+    async getAll(page) {
+        if (page === undefined) throw "page is undefinded";
+        page = parseInt(page);
+        if(isNaN(page)) throw "page is not a valid number";
+        if (page < 1 ) throw "page is not a positive number";
     
-        if (take === undefined) throw "take is undefinded";
-        take = parseInt(take);
-        if(isNaN(take)) throw "take is not a valid number";
-        if (take < 0 ) throw "take is not a positive number";
-        if (take > 100 ) throw "take is too large, max is 100";
+        let take = 8;
     
         const propertyCollection = await properties();
         let allProperty = await propertyCollection.find({}).toArray();
         if (!allProperty) throw 'no property in system';
-        
-        data = {}
-        if (allProperty.length - skip > take) {
-            data.next = {}
-            data.next.skip = skip + take
-            data.next.take = skip + take
+
+        let data = {
+            properties: null,
+            next: false,
+            prev: false,
+        }
+        if (allProperty.length - page * take > 0) {
+            data.next = true
         }
 
-        if (allProperty.length - skip > take) {
-            data.next = {}
-            data.next.skip = skip + take
-            data.next.take = skip + take
+        if (allProperty.length > take && page > 1) {
+            data.prev = true
         }
 
-        allProperty = allProperty.slice(skip);
+        allProperty = allProperty.slice((page - 1) * take);
         allProperty = allProperty.slice(0, take);
+        data.properties = allProperty
 
-        return allProperty;
+        return data;
     },
 
     async add(owner, propertyInfo){

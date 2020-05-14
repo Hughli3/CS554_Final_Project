@@ -129,21 +129,28 @@ router.delete('/watchlist/:pid', checkAuth, async (req, res) => {
     }
 });
 
-router.get('/:uid', async (req, res) => {
+router.get('/:id', async (req, res) => {
+    let user;
+    
     try {
-        let uid = req.params.uid;
-        if (uid === undefined)  throw "uid is undefinded";
-        if (!ObjectId.isValid(uid)) throw "uid is invalid";
-        if (typeof id != "string") id = id.toString();
+        let userId = req.params.id;
+        user = await userData.getUser(userId);
     } catch (e) {
-        res.status(400).json({error: e});
+        res.status(404).json({error: 'user not found'});
         return;
     }
+
     try {
-        const task = await taskData.getById(req.params.id);
-        res.json(task);
+        const propertyList = user.property
+        user.property = []
+        for (let pid of propertyList) {
+            user.property.push(await propertyData.getById(pid))
+        }
+        console.log(user)
+        res.json(user);
     } catch (e) {
-        res.status(404).json({error: 'task not found'});
+        res.status(500).json({error: e});
+        return;
     }
 });
 

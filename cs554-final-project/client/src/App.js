@@ -9,6 +9,7 @@ import SingleProperty from "./componments/SingleProperty"
 import Account from "./componments/account/Account"
 import Header from "./componments/Header"
 import Footer from "./componments/Footer"
+import User from "./componments/User"
 
 import Login from "./componments/auth/Login"
 import Signup from "./componments/auth/Signup"
@@ -34,6 +35,7 @@ function App() {
 
             <Route exact path='/property' component={Property}/>
             <Route exact path='/property/:id' component={SingleProperty}/>
+            <Route exact path='/user/:id' component={User}/>
 
             <PrivateRoute path='/account' component={Account}/>
             </main>
