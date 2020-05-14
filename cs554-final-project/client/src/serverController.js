@@ -62,7 +62,13 @@ const serverController = {
         const token = await user.getIdToken(true)
         return await axios.get(baseUrl + "/api/user/watchlist", {headers: {'Authorization': token}})
     },
-
+	
+	async addImage (imgs) {
+        const data = {
+            data: imgs
+        }
+        return await axios.post(baseUrl + "/image", data)
+    },
 };
   
 export default serverController;
