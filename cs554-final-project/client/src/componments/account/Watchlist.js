@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react"
-import WatchlistProperty from "./WatchlistProperty"
+// import WatchlistProperty from "./WatchlistProperty"
 import serverController from '../../serverController';
 import { AuthContext } from "../auth/Auth";
 

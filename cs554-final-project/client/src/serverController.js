@@ -14,11 +14,16 @@ const serverController = {
 
     async postProperty (user, property) {
         const token = await user.getIdToken(true)
-        const {title, description, price} = property
+        const {title, description, price, type, zipcode, bedroom, bath, date} = property
         const data = {
             title: title.value,
             description: description.value,
-            price: price.value
+            price: price.value,
+            type:type.value,
+            zipcode:zipcode.value,
+            bedroom:bedroom.value,
+            bath:bath.value,
+            date:date
         }
         return await axios.post(baseUrl + "/api/property/", data, {headers: {'Authorization': token}})
     },
