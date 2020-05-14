@@ -7,21 +7,21 @@ import ReactTooltip from "react-tooltip";
 import { useAlert } from 'react-alert'
 
 const SignUp = () => {
+
   const alert = useAlert()
+  const { currentUser } = useContext(AuthContext);
 
   const handleSignUp = async (event) => {
     event.preventDefault();
     const { email, password, confirmPassword} = event.target.elements;
     try {
-      if (password != confirmPassword) throw "different password"
-      let signupInfo = await app.auth().createUserWithEmailAndPassword(email.value, password.value);
-      serverController.postUser(signupInfo.user)
+      if (password.value != confirmPassword.value) throw "different password"
+      await app.auth().createUserWithEmailAndPassword(email.value, password.value);
+      alert.success('Signup sucessfully')
     } catch (error) {
-      alert.error(error)
+      alert.error(error.message)
     }
   };
-
-  const { currentUser } = useContext(AuthContext);
 
   if (currentUser) {
     return <Redirect to="/account" />;

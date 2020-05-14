@@ -3,16 +3,20 @@ import { Redirect } from "react-router";
 import { app, googleProvider } from "./AuthBase.js";
 import { AuthContext } from "./Auth.js";
 import ReactTooltip from "react-tooltip";
+import { useAlert } from 'react-alert'
 
 const Login = () => {
+  const alert = useAlert()
+
   const handleLogin = 
     async event => {
       event.preventDefault();
       const { email, password } = event.target.elements;
       try {
         await app.auth().signInWithEmailAndPassword(email.value, password.value);
+        alert.success("Welcome!");
       } catch (error) {
-        alert(error);
+        alert.error(error.message);
       }
     };
 

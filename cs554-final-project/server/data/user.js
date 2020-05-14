@@ -36,10 +36,10 @@ let exportedMethods = {
     return userInfo;
   },
 
-  async add(id) {
+  async add(id, email) {
       let user = {
           _id: id,
-          email: "",
+          email: email,
           avatar: null,
           watchlist: [],
           property: [],

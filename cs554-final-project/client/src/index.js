@@ -20,7 +20,7 @@ const AlertTemplate = ({ style, options, message, close }) => {
 
 ReactDOM.render(
   <React.StrictMode>
-    <AlertProvider template={AlertTemplate} transition='fade' timeout={300} position='top center'>
+    <AlertProvider template={AlertTemplate} transition='fade' timeout={3000} position='top center'>
       <App />
     </AlertProvider>  
   </React.StrictMode>,
