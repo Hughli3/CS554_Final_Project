@@ -17,6 +17,8 @@ const constructorMethod = (app) => {
 
   app.use('/api/property', propertyRoutes);
   app.use('/api/user', userRoutes);
+  
+  app.use('/image', imageRoutes);
 
   app.use('*', (req, res) => {
     res.status(404).json({error: 'Not found'});
