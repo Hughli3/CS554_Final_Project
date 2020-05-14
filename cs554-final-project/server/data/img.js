@@ -46,46 +46,85 @@ function chunkSubstr(str) {
   return chunks
 }
 
-async function createGridFS(file){
-  await validateImage(file);
+// async function createGridFS(file){
+//   await validateImage(file);
 
-  // read file
-  let imageRaw = fs.readFileSync(file.path);
-  // resize
-  var dimensions = sizeOf(imageRaw);
-  let image;
-  if (file.fieldname == "avatar")
-    image = await resizeImg(imageRaw, {width: 400});
-  else if (dimensions.width > 2000)
-    image = await resizeImg(imageRaw, {width: 2000});
-  else if (dimensions.height > 2000)
-    image = await resizeImg(imageRaw, {height: 2000});
-  else
-    image = imageRaw;
-  // compress
-  const buf = await imagemin.buffer(image, { plugins: [
-          imageminMozjpeg({quality: 70}),
-          imageminPngquant({quality: [0.6, 0.8]})]}
-  );
-  // write back
-  fs.writeFileSync(file.path, buf);
+//   // read file
+//   let imageRaw = fs.readFileSync(file.path);
+//   // resize
+//   var dimensions = sizeOf(imageRaw);
+//   let image;
+//   if (file.fieldname == "avatar")
+//     image = await resizeImg(imageRaw, {width: 400});
+//   else if (dimensions.width > 2000)
+//     image = await resizeImg(imageRaw, {width: 2000});
+//   else if (dimensions.height > 2000)
+//     image = await resizeImg(imageRaw, {height: 2000});
+//   else
+//     image = imageRaw;
+//   // compress
+//   const buf = await imagemin.buffer(image, { plugins: [
+//           imageminMozjpeg({quality: 70}),
+//           imageminPngquant({quality: [0.6, 0.8]})]}
+//   );
+//   // write back
+//   fs.writeFileSync(file.path, buf);
 
+//   const fsFilesCollection = await fsFiles();
+//   const fsChunksCollection = await fsChunks();
+
+//   let base64Data = base64Img.base64Sync(file.path);
+//   let newFiles = {
+//     length: base64Data.length,
+//     chunkSize: 261120,
+//     uploadDate: now,
+//     filename: file.filename,
+//     md5: md5(base64Data),
+//     contentType: file.mimetype,
+//   }
+
+//   const insertFilesInfo = await fsFilesCollection.insertOne(newFiles);  
+//   if (insertFilesInfo.insertedCount === 0){
+//     fs.unlinkSync(file.path);
+//     throw "could not create a new file";
+//   }
+  
+//   let chunks = chunkSubstr(base64Data);
+//   for (let i = 0; i < chunks.length; i++) {
+//     let buff = Buffer.from(chunks[i]);
+//     let newChunk = {
+//       files_id: insertFilesInfo.insertedId,
+//       n: i,
+//       data: buff,
+//     }
+
+//     let insertChunksInfo = await fsChunksCollection.insertOne(newChunk);
+//     if (insertChunksInfo.insertedCount === 0){
+//       deletePhoto(file.filename)      
+//       throw "Could not create a new Chunks";
+//     }    
+//   }
+
+//   fs.unlinkSync(file.path);
+//   return insertFilesInfo.insertedId;
+// }
+
+
+async function createGridFS(fileName, base64Data){
   const fsFilesCollection = await fsFiles();
   const fsChunksCollection = await fsChunks();
 
-  let base64Data = base64Img.base64Sync(file.path);
   let newFiles = {
     length: base64Data.length,
     chunkSize: 261120,
     uploadDate: now,
-    filename: file.filename,
+    filename: fileName,
     md5: md5(base64Data),
     contentType: file.mimetype,
   }
 
   const insertFilesInfo = await fsFilesCollection.insertOne(newFiles);  
   if (insertFilesInfo.insertedCount === 0){
-    fs.unlinkSync(file.path);
     throw "could not create a new file";
   }
   
@@ -105,7 +144,6 @@ async function createGridFS(file){
     }    
   }
 
-  fs.unlinkSync(file.path);
   return insertFilesInfo.insertedId;
 }
 
