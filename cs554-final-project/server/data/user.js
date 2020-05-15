@@ -74,6 +74,7 @@ let exportedMethods = {
     return await this.getUser(userId)
   },
 
+  
   async updateUser(id, phone, avatar) {
 
     let data = {
