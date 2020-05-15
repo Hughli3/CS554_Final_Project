@@ -79,7 +79,7 @@ const serverController = {
         const data = {
             data: imgs
         }
-        return await axios.post(baseUrl + "/image", data)
+        return await axios.post(baseUrl + "/api/image", data)
     },
 };
   
