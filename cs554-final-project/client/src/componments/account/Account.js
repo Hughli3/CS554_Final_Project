@@ -69,7 +69,7 @@ export default function Account(props){
                 <div className="row justify-content-center">
                     <div className="col-lg-3 col-md-4 col-6">
                         <div class="avatar-container">
-                            <img src="{{#if user.avatar}}{{user.avatar}}{{else}}/public/img/avatar/default-user.png{{/if}}" id="user-avatar" class="img-fluid avatar" alt="user avatar" />                
+                            <img src="{{#if user.avatar}}{{user.avatar}}{{else}}./home/default_user.png{{/if}}" id="user-avatar" class="img-fluid avatar" alt="user avatar" />                
                         </div>
                         {userData.email ? (
 					        <div class="icon-group mt-4">
