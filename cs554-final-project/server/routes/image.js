@@ -7,7 +7,7 @@ const ObjectId = require('mongodb').ObjectID;
 router.get('/:id', async (req, res) => {
     try {
         const image = await imageData.getPhotoDataId(req.params.id);
-        res.json(image);
+        res.json({data: image});
     } catch (e) {
         res.status(404).json({error: 'image not found'});
     }

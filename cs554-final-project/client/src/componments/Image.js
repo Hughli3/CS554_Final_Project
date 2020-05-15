@@ -21,7 +21,9 @@ const Image = (props) => {
         // console.log(acceptedFiles);
 
         let files = await getData(acceptedFiles);
-        const {data: property}  = await serverController.addImage(files)
+        const {data}  = await serverController.addImage(files)
+        console.log(data);
+        
     }, [])
 
     const {getRootProps, getInputProps, isDragActive} = useDropzone({
