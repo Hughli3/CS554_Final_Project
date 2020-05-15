@@ -100,7 +100,7 @@ const AddProperty = () => {
             <div class="col-md-3">
               <div class="form-group">
                 <label htmlFor="bath">Bath</label>
-                <input class="form-control" id="bath" name="bath" type="number" placeholder="1" data-tip="bedroom need to greater than 0 and less than 10"/>
+                <input class="form-control" id="bath" name="bath" type="number" placeholder="1" />
               </div>
             </div>
           </div>

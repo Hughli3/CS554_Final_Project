@@ -79,7 +79,8 @@ router.put("/:id", checkAuth, async(req, res) => {
         const property = await propertyData.update(pid, propertyInfo);
         res.json(property);
     }catch(e){
-        res.status(404).json({error: 'property not found'});
+        console.log(e);
+        res.status(404).json({error: e});
     }
 
 })

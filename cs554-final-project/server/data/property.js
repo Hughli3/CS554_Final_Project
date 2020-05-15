@@ -92,11 +92,12 @@ let exportedMethods = {
         if (!ObjectId.isValid(id)) throw "id is invalid";
         if (typeof id != "string") id = id.toString();
         const objId = ObjectId.createFromHexString(id);
+        if (!propertyInfo) throw 'property not found';
         checkPropertyInfo(propertyInfo);
         validateTitle(propertyInfo.title);
         validateDescription(propertyInfo.description);
         validateType(propertyInfo.type);
-        if (!propertyInfo) throw 'property not found';
+        
         let data = {
             title: propertyInfo.title,
             description: propertyInfo.description,
@@ -222,8 +223,7 @@ function checkPropertyInfo(propertyInfo){
         throw "property type not exist";
     }
     if (propertyInfo.type.constructor !== String) throw "type is not a string";
-    let types ={} // TODO
-    if (!(propertyInfo.type in types)) throw "invalid type";
+
     // ---------------------------------
     if(!propertyInfo.description){
         throw "property description not exist";
@@ -255,8 +255,7 @@ function validateType(type){
     if (!type) throw "type is undefinded";
     if (type.constructor !== String) throw "type is not a string";
 
-    let types = ["description", "house"]
-    if (!(type in types)) throw "invalid type";
+    if (!(type === "apartment" || type === "house")) throw "invalid type"
 }
 
 function validateTitle(title){
