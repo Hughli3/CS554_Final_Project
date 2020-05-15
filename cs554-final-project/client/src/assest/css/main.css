@@ -248,3 +248,59 @@ p.card-text {
 .page-link {
     color: #32315d;
 }
+
+.card-img-left {
+    width: 100%;
+    /* border-top-left-radius: calc(.25rem - .0625rem);
+    border-bottom-left-radius: calc(.25rem - .0625rem); */
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.property-card {
+    border: 1px solid #dcdcdc;
+}
+
+.property-card .description { 
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.property-card .title { 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.icon-group {
+    margin-left: -25px;
+}
+
+.icon-group .fas {
+    margin-right: 10px;
+    margin-left: 25px;
+}
+
+.icon-group .fas:first {
+    margin-left: 25px;
+}
+
+.icon-group p {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.single-property .description p{
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.property-card .description {
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: 14px;
+}

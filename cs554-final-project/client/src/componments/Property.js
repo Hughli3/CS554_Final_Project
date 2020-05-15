@@ -37,23 +37,41 @@ const Property = (props) => {
 
 	li = propertyData && propertyData.map((property) => { 
 		return (
-			<div class="col-lg-3 col-md-4 col-6 mb-4">
-				<div class="card">
-					<Link to={'/property/' + property._id}>
-						<div class="avatar-container">
-							{property.avatar ?
-							(<img src="{{ avatar }}" class="card-img-top" alt="dog avatar" />)
-							:
-							(<img src="/public/img/avatar/default-dog.png" class="card-img-top" alt="dog avatar" />)
-							}
-						</div>
-						<div class="card-body">
-							<h2 class="display-4">{property.title}</h2>
-							<p class="card-text"><span class="card-text-gender">{property.price}</span> {property.area}</p>
-						</div>
-					</Link>
+			<>
+				<div class="row property-card my-3">
+					<div class="col-lg-6 col-md-4 col-6 pl-0">
+						<Link to={'/property/' + property._id}>
+
+							{/* <div class="avatar-container"> */}
+								{property.avatar ?
+								(<img src="https://cdngeneral.rentcafe.com/dmslivecafe/3/509605/Avant-Apartments-Parking-Garage-Entrance-Carmel,-Indiana_WEB.jpg" class="card-img-left" alt="property image" />)
+								:
+								(<img src="https://cdngeneral.rentcafe.com/dmslivecafe/3/509605/Avant-Apartments-Parking-Garage-Entrance-Carmel,-Indiana_WEB.jpg" class="card-img-left" alt="property image" />)
+								}
+							</Link>
+							{/* </div> */}
+					</div>
+					<div class="col-lg-6 col-md-4 col-6 py-3">
+						<Link to={'/property/' + property._id}>
+
+							<h2 class="display-4" class="title">{property.title}</h2>
+							</Link>
+							{property.description ? (<p class="description">{property.description}</p>) : null}
+						
+							{ property.price || property.zipcode || property.type || property.bedroom || property.bath ?
+							(<div class="icon-group">
+								<p>
+									{property.price ? (<><i class="fas fa-dollar-sign"></i>{property.price}</>): null}
+									{property.zipcode ? (<><i class="fas fa-map-marker-alt"></i>{property.zipcode}</>): null}
+									{property.type ? (<><i class="fas fa-building"></i>{property.type}</>): null}
+									{property.bedroom ? (<><i class="fas fa-bed"></i>{property.bedroom}</>): null}
+									{property.bath ? (<><i class="fas fa-bath"></i>{property.bath}</>): null}
+								</p>
+							</div>) : null	
+							}												
+					</div>
 				</div>
-			</div>    
+			</>
 		)
 	});
 
@@ -131,9 +149,7 @@ const Property = (props) => {
 		<section class="section">
 			<div class="container">
 				<h1 class="mb-5">All Property</h1>
-				<div class="row">
-					{li}
-				</div>
+				{li}
 				{pagination}
 			</div>
 		</section>

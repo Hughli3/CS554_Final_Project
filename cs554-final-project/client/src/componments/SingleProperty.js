@@ -87,74 +87,85 @@ const SingleProperty = (props) => {
 	}
 
 	const constructDetail = (propertyData) => {
-		let price, zipcode, type, bedbath, area, owner;
+		let price, zipcode, type, bed, bath, owner;
 		console.log(propertyData)
 		if (propertyData.price) {
 			price = (
-				<p>
+				<>
 					<i class="fas fa-dollar-sign"></i>
-					Price {propertyData.price}
-				</p>)
+					{propertyData.price}
+				</>)
 		}
 		if (propertyData.zipcode) {
 			zipcode = (
-				<p>
+				<>
 					<i class="fas fa-map-marker-alt"></i>
-					zipcode {propertyData.zipcode}
-				</p>)
+					{propertyData.zipcode}
+				</>)
 		}
 		if (propertyData.type) {
 			type = (
-				<p>
+				<>
 					<i class="fas fa-building"></i>
-					Type {propertyData.type}
-				</p>)
+					{propertyData.type}
+				</>)
 		}
-		if (propertyData.bedroom && propertyData.bath) {
-			bedbath = (
-				<p>
+		if (propertyData.bedroom) {
+			bed = (
+				<>
 					<i class="fas fa-bed"></i>
-					Bedroom {propertyData.bedroom} 
-					<i class="fas fa-bath"></i>	
-					Bath {propertyData.bath}
-				</p>)
+					{propertyData.bedroom}
+				</>)
 		}
-		if (propertyData.area) {
-			area = (
-				<p>
-					<i class="fas fa-ruler-combined"></i>
-					Area {propertyData.area}
-				</p>)
+		if (propertyData.bath) {
+			bath = (
+				<>
+					<i class="fas fa-bath"></i>	
+					{propertyData.bath}
+				</>)
 		}
 		if (propertyData.owner) {
 			owner = (
-				<p>
+				<>
 					<i class="fas fa-user"></i>
-					Owner <Link to={"/user/" + propertyData.owner}>{propertyData.owner}</Link>
-				</p>)
+					<Link to={"/user/" + propertyData.owner}>{propertyData.owner}</Link>
+				</>)
 		}
 
 		return (
 			<>
-				{price}
-				{zipcode}
-				{type}
-				{bedbath}
-				{area}
-				{owner}
+				{price || bed || bath? (
+					<div class="icon-group">
+						<p>{price} {bed} {bath}</p>
+					</div>
+					) : null
+				}
+				
+				{zipcode || type ? (
+					<div class="icon-group">
+						<p>{zipcode}{type}</p>
+					</div>
+					) : null
+				}
+				<div class="icon-group">
+					<p>{owner}</p>
+				
+				</div>
 			</>
 		)
 	};
 
 	return (
-		<section class="section">
+		<section class="section single-property">
 			<div class="container">
 				{/* <h1 class="mb-5">All Property</h1> */}
 				<h1 className='cap-first-letter'>{(propertyData && propertyData.title) || 'Not Provided'}</h1>
-				<p><i class="fas fa-clock"></i>last update: {(propertyData && propertyData.date) || 'Not Provided'}</p>
-
+				<div class="icon-group">
+					<p><i class="fas fa-clock"></i> Last Update {(propertyData && propertyData.date) || 'Not Provided'}</p>
+				
+				</div>
 				<div class="row">
-					<div class='col-7'>
+					<div class='col-lg-7 col-12'>
 						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 							<ol class="carousel-indicators">
 								<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -182,13 +193,13 @@ const SingleProperty = (props) => {
 							</a>
 						</div>
 					</div>
-					<div class='col-5'>
+					<div class='col-lg-5 col-12 my-lg-0 my-4'>
 						{constructDetail(propertyData)}
 						{watchListButton}
 					</div>
 				</div>
 
-				<div>
+				<div class='my-3 description'>
 					<h2>Description</h2>
 					<p>{(propertyData && propertyData.description) || 'Not Provided'}</p>
 				</div>

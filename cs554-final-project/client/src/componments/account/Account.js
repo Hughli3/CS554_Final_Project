@@ -23,19 +23,33 @@ export default function Account(){
     // const [account, setAccount] = useState();
     
     return(
-        <div>
-            <h1 className='cap-first-letter'>Account</h1>
-            <p>User Name: {currentUser.email}</p>
-            <p>Use Uid: {currentUser.uid}</p>
-            <ul>
-                <li><Link className='' to='/account/watchlist'>watchlist</Link></li>
-                <li><Link className='' to='/account/property'>my property</Link></li>
-            </ul>
-            <PrivateRoute exact path='/account/property/add' component={AddProperty}/>
-            <PrivateRoute exact path='/account/property' component={Property}/>
-            <PrivateRoute exact path='/account/watchlist' component={Watchlist}/>
-            <PrivateRoute exact path='/account/editProfile' component={Watchlist}/>
-        </div>
-        
+        <section class="section account">
+            <div class="container">
+                {/* <h1 className='mb-5'>Account</h1> */}
+                <div className="row">
+                    <div className="col-md-4 col-12">
+                        <h1>{currentUser.email}</h1>
+                        <p>Use Uid: {currentUser.uid}</p>
+               
+                        <div>
+                            <Link className='' to='/account/watchlist'>
+                                <button className="btn m-3 w-100 btn-secondary">my watchlist</button>
+                            </Link>
+                        </div>
+                        <div>
+                            <Link className='' to='/account/property'>
+                                <button className="btn m-3 w-100 btn-secondary">my property</button>
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="col-md-8 col-12">
+                        <PrivateRoute exact path='/account/property/add' component={AddProperty}/>
+                        <PrivateRoute exact path='/account/property' component={Property}/>
+                        <PrivateRoute exact path='/account/watchlist' component={Watchlist}/>
+                        <PrivateRoute exact path='/account/editProfile' component={Watchlist}/>
+                    </div>
+                </div>
+            </div>
+        </section>
     )
 }
