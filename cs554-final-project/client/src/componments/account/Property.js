@@ -3,8 +3,6 @@ import { AuthContext } from "../auth/Auth";
 import serverController from '../../serverController';
 import { Link } from 'react-router-dom';
 
-import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
 const Property = (props) => {
 	const { currentUser } = useContext(AuthContext);
 	const [ propertyData, setPropertyData ] = useState([]);
