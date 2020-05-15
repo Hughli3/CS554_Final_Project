@@ -292,6 +292,10 @@ p.card-text {
 .icon-group p {
     font-weight: 500;
     font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 
 .single-property .description p{
