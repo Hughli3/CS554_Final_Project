@@ -15,11 +15,21 @@ const serverController = {
     },
 
     async getProperty (pid) {
-        return await axios.get(baseUrl + "/api/property/" + pid)
+        try {
+            return await axios.get(baseUrl + "/api/property/" + pid)
+        } catch (e) {
+            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
+            else throw (e.message)
+        }
     },
 
     async postProperty (user, property) {
-        const token = await user.getIdToken(true)
+        let token;
+        try {
+            token = await user.getIdToken(true)
+        } catch (e) {
+            throw "fail getting usertoken"
+        }
         const {title, description, price, type, zipcode, bedroom, bath, date} = property
         const data = {
             title: title.value,
@@ -31,11 +41,21 @@ const serverController = {
             bath:bath.value,
             date:date
         }
-        return await axios.post(baseUrl + "/api/property/", data, {headers: {'Authorization': token}})
+        try {
+            return await axios.post(baseUrl + "/api/property/", data, {headers: {'Authorization': token}})
+        } catch (e) {
+            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
+            else throw (e.message)
+        }
     },
 
     async editProperty (pid, user, property) {
-        const token = await user.getIdToken(true)
+        let token;
+        try {
+            token = await user.getIdToken(true)
+        } catch (e) {
+            throw "fail getting usertoken"
+        }
         const {title, description, price, type, zipcode, bedroom, bath, date} = property
         const data = {
             title: title.value,
@@ -47,55 +67,126 @@ const serverController = {
             bath:bath.value,
             date:date
         }
-        return await axios.put(baseUrl + "/api/property/" + pid, data, {headers: {'Authorization': token}})
+        try {
+            return await axios.put(baseUrl + "/api/property/" + pid, data, {headers: {'Authorization': token}})
+        } catch (e) {
+            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
+            else throw (e.message)
+        }
     },
     
     async deleteProperty (pid, user) {
-        const token = await user.getIdToken(true)
-        return await axios.delete(baseUrl + "/api/property/" + pid, {headers: {'Authorization': token}})
+        let token;
+        try {
+            token = await user.getIdToken(true)
+        } catch (e) {
+            throw "fail getting usertoken"
+        }
+        try {
+            return await axios.delete(baseUrl + "/api/property/" + pid, {headers: {'Authorization': token}})
+        } catch (e) {
+            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
+            else throw (e.message)
+        }
     },
 
     async postUser (user) {
-        const token = await user.getIdToken(true)
-        return await axios.post(baseUrl + "/api/user/", null, {headers: {'Authorization': token}})
+        let token;
+        try {
+            token = await user.getIdToken(true)
+        } catch (e) {
+            throw "fail getting usertoken"
+        }
+        try {
+            return await axios.post(baseUrl + "/api/user/", null, {headers: {'Authorization': token}})
+        } catch (e) {
+            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
+            else throw (e.message)
+        }
     },
 
     async getUser (user) {
-        const token = await user.getIdToken(true)
-        return await axios.get(baseUrl + "/api/user/", {headers: {'Authorization': token}})
+        let token;
+        try {
+            token = await user.getIdToken(true)
+        } catch (e) {
+            throw "fail getting usertoken"
+        }
+        try {
+            return await axios.get(baseUrl + "/api/user/", {headers: {'Authorization': token}})
+        } catch (e) {
+            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
+            else throw (e.message)
+        }
     },
 
     async getUserId (userId) {
         try {
             return await axios.get(baseUrl + "/api/user/" + userId)
         } catch (e) {
-            throw (e.response.data.error)
+            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
+            else throw (e.message)
         }
     },
 
     async addWatchlist (propertyId, user) {
-        const token = await user.getIdToken(true)
+        let token;
+        try {
+            token = await user.getIdToken(true)
+        } catch (e) {
+            throw "fail getting usertoken"
+        }
         const data = {
             propertyId: propertyId
         }
-        return await axios.post(baseUrl + "/api/user/watchlist", data, {headers: {'Authorization': token}})
+        try {
+            return await axios.post(baseUrl + "/api/user/watchlist", data, {headers: {'Authorization': token}})
+        } catch (e) {
+            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
+            else throw (e.message)
+        }
     },
 
     async removeWatchlist (propertyId, user) {
-        const token = await user.getIdToken(true)
-        return await axios.delete(baseUrl + "/api/user/watchlist/" + propertyId, {headers: {'Authorization': token}})
+        let token;
+        try {
+            token = await user.getIdToken(true)
+        } catch (e) {
+            throw "fail getting usertoken"
+        }
+        try {
+            return await axios.delete(baseUrl + "/api/user/watchlist/" + propertyId, {headers: {'Authorization': token}})
+        } catch (e) {
+            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
+            else throw (e.message)
+        }
     },
 
     async getWatchlist (user) {
-        const token = await user.getIdToken(true)
-        return await axios.get(baseUrl + "/api/user/watchlist", {headers: {'Authorization': token}})
+        let token;
+        try {
+            token = await user.getIdToken(true)
+        } catch (e) {
+            throw "fail getting usertoken"
+        }
+        try {
+            return await axios.get(baseUrl + "/api/user/watchlist", {headers: {'Authorization': token}})
+        } catch (e) {
+            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
+            else throw (e.message)
+        }
     },
 	
 	async addImage (imgs) {
         const data = {
             data: imgs
         }
-        return await axios.post(baseUrl + "/api/image", data)
+        try {
+            return await axios.post(baseUrl + "/api/image", data)
+        } catch (e) {
+            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
+            else throw (e.message)
+        }
     },
 };
   
