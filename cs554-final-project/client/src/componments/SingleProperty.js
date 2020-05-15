@@ -77,7 +77,7 @@ const SingleProperty = (props) => {
 	if (!propertyData) {
 		return (
 			<div className='show-body'>
-				<p>404 - Pokemon Not Found!</p>
+				<p>404 - Property Not Found!</p>
 			</div>
 		)
 	}

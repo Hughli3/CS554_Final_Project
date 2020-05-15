@@ -9,6 +9,7 @@ import PrivateRoute from "../auth/PrivateRoute";
 import serverController from "../../serverController"
 import { useAlert } from 'react-alert';
 import { Link, Switch } from 'react-router-dom';
+import ReactTooltip from "react-tooltip";
 
 export default function Account(props){
     const { currentUser } = useContext(AuthContext);
@@ -46,12 +47,15 @@ export default function Account(props){
         console.log("submitted")
         try{
             const data = event.target.elements;
+            if(!data.phone.value) throw "description not exist";
+            if (data.phone.value.length != 10) throw "phone number wrong format";
             // if (!data.phone.value) throw "phone not exist";
             // TODO avatar 
             let avatar = null;
-            await serverController.editUser(currentUser, data.phone.value, avatar);
+            const {data: resData} = await serverController.editUser(currentUser, data.phone.value, avatar);
+            setUserData(resData);
             // setIsSuccess(true);
-            props.history.push("/account")
+            // props.history.push("/account")
             alert.success('Edit sucessfully');
         }catch(error){
             alert.error(error)
@@ -123,7 +127,7 @@ export default function Account(props){
                                 </div>
                                 <div class="form-group">
                                     <label htmlFor="phone">Phone</label>
-                                    <input class="form-control" id="phone" name="phone" type="tel" placeholder="phone" defaultValue={userData.phone}/>    
+                                    <input class="form-control" id="phone" name="phone" type="tel" placeholder="phone" defaultValue={userData.phone} data-tip="please input a 10 digit phone number"/>    
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -133,7 +137,9 @@ export default function Account(props){
                         </form>
                     </div>
                 </div>
+            <ReactTooltip />
             </div>
+            
         </section>
     )
 }

@@ -3,7 +3,7 @@ import { AuthContext } from "../auth/Auth";
 import serverController from '../../serverController';
 import { Redirect } from "react-router";
 import { useAlert } from 'react-alert'
-// import Select from 'react-select';
+import ReactTooltip from "react-tooltip";
 
 const AddProperty = () => {
     const alert = useAlert()
@@ -52,13 +52,13 @@ const AddProperty = () => {
             <div class="col-md-12">
               <div class="form-group">
                 <label htmlFor="title">Title</label>
-                <input class="form-control" id="title" name="title" placeholder="title" />
+                <input class="form-control" id="title" name="title" placeholder="title" data-tip="title length must less than 70"/>
               </div>
             </div>
             <div class="col-md-12">
               <div class="form-group">
                 <label htmlFor="description">Description</label>
-                <textarea id="description" rows="10" class="form-control" name="description" type="text" placeholder="description"  />
+                <textarea id="description" rows="10" class="form-control" name="description" type="text" placeholder="description" data-tip="description length need to less than 200" />
               </div>
             </div>
 
@@ -70,7 +70,7 @@ const AddProperty = () => {
                     <label class="custom-control-label" for="type-apartment">Apartment</label>
                   </div>
                   <div class="custom-control col-3 custom-radio mb-3">
-                    <input name="type" value="house" class="custom-control-input" id="type-house" type="radio" />
+                    <input name="type" value="house" class="custom-control-input" id="type-house" type="radio"/>
                     <label class="custom-control-label" for="type-house">House</label>
                   </div>
                 </div>
@@ -79,7 +79,7 @@ const AddProperty = () => {
             <div class="col-md-3">
               <div class="form-group">
                 <label htmlFor="price">Price</label>
-                <input class="form-control" name="price" id="price" placeholder="price" type="number"/>
+                <input class="form-control" name="price" id="price" placeholder="price" type="number" data-tip="price need to greater than 0"/>
               </div>
             </div>
 
@@ -93,20 +93,21 @@ const AddProperty = () => {
             <div class="col-md-3">
               <div class="form-group">
                 <label htmlFor="bedroom">Bedroom</label>
-                <input class="form-control" id="bedroom" name="bedroom" type="number" placeholder="3" />
+                <input class="form-control" id="bedroom" name="bedroom" type="number" placeholder="3" data-tip="bedroom need to greater than 0 and less than 10"/>
               </div>
             </div>
 
             <div class="col-md-3">
               <div class="form-group">
                 <label htmlFor="bath">Bath</label>
-                <input class="form-control" id="bath" name="bath" type="number" placeholder="1" />
+                <input class="form-control" id="bath" name="bath" type="number" placeholder="1" data-tip="bedroom need to greater than 0 and less than 10"/>
               </div>
             </div>
           </div>
 
           <button className="btn btn-primary" type="submit">Post</button>
         </form>
+        <ReactTooltip />
     </div>
     );
 }

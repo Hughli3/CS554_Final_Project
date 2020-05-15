@@ -40,7 +40,11 @@ let exportedMethods = {
     },
 
     async add(owner, propertyInfo){
-        
+        isOwner(owner);
+        checkPropertyInfo(propertyInfo);
+        validateTitle(propertyInfo.title);
+        validateDescription(propertyInfo.description);
+        validateType(propertyInfo.type);
         let data = {
             title: propertyInfo.title,
             description: propertyInfo.description,
@@ -80,22 +84,6 @@ let exportedMethods = {
         const property = await propertyCollection.findOne({ _id: objId });
         if (!property) throw 'property not found';
 
-        // try {
-        //     // comment
-        //     let commentData = require('./comments');
-
-        //     let commentList = task.comments;
-
-        //     let comments = []
-        //     for (let i = 0; i < commentList.length; i++) {
-        //         comment = await commentData.getById(commentList[i]);
-        //         comments.push(comment);
-        //     }
-        //     task.comments = comments;
-        // } catch (e) {
-        //     throw e;
-        // }
-
         return property;
     },
     
@@ -104,8 +92,10 @@ let exportedMethods = {
         if (!ObjectId.isValid(id)) throw "id is invalid";
         if (typeof id != "string") id = id.toString();
         const objId = ObjectId.createFromHexString(id);
-
-
+        checkPropertyInfo(propertyInfo);
+        validateTitle(propertyInfo.title);
+        validateDescription(propertyInfo.description);
+        validateType(propertyInfo.type);
         if (!propertyInfo) throw 'property not found';
         let data = {
             title: propertyInfo.title,
@@ -240,18 +230,13 @@ function checkPropertyInfo(propertyInfo){
     }
 
     // ---------------------------------
-    if(!propertyInfo.address){
-        throw "property address not exist";
-    }
-
-    // ---------------------------------
     if(!propertyInfo.price){
         throw "property price not exist";
     }
 
     // ---------------------------------
-    if(!propertyInfo.publishedDate){
-        throw "property publishedData not exist";
+    if(!propertyInfo.date){
+        throw "property published date not exist";
     }
     
     // ---------------------------------
@@ -260,38 +245,28 @@ function checkPropertyInfo(propertyInfo){
     }
 
     // ---------------------------------
-    if(!propertyInfo.baths){
+    if(!propertyInfo.bath){
         throw "property baths not exist";
     }
 
-    // ---------------------------------
-    if(!propertyInfo.area){
-        throw "property area not exist";
-    }
-    // TODO not finished
 }
-
-async function validateOwner(owner){
-    if (!owner) throw "owner is undefinded";
-    if (owner.constructor !== String) throw "owner is not a string";
-  
-    const usersCollection = await users();
-    let parsedOwner = ObjectId.createFromHexString(owner);
-    const user = await usersCollection.find({_id:parsedOwner});
-    if (user == null) throw `owner with the id ${parsedOwner} is not exist`;
-  }
 
 function validateType(type){
     if (!type) throw "type is undefinded";
     if (type.constructor !== String) throw "type is not a string";
 
-    // TODO specify the types
-    let types ={}
+    let types = ["description", "house"]
     if (!(type in types)) throw "invalid type";
 }
 
-function validateName(name){
-    if (!name) throw "name is undefinded";
-    if (name.constructor !== String) throw "name is not a string";
-    if (name.length > 30) throw "length name is greater than 30";
+function validateTitle(title){
+    if (!title) throw "title is undefinded";
+    if (title.constructor !== String) throw "title is not a string";
+    if (title.length > 70) throw "title length is greater than 30";
+}
+
+function validateDescription(description){
+    if (!description) throw "title is undefinded";
+    if (description.constructor !== String) throw "title is not a string";
+    if (description.length > 200) throw "title length is greater than 200";
 }
