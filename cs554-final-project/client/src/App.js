@@ -11,7 +11,7 @@ import Header from "./componments/Header"
 import Footer from "./componments/Footer"
 import User from "./componments/User"
 
-// import Image from "./componments/Image"
+import Image from "./componments/Image"
 
 import Login from "./componments/auth/Login"
 import Signup from "./componments/auth/Signup"
@@ -21,6 +21,7 @@ import PrivateRoute from "./componments/auth/PrivateRoute";
 import "./assest/css/argon.css"
 import "./assest/vender/font-awesome/css/all.min.css"
 import "./assest/css/main.css"
+import GetImage from './componments/GetImage';
 
 function App() {
   
@@ -33,7 +34,8 @@ function App() {
             <main>
             <Route exact path='/' component={Home}/>
 			
-            {/* <Route exact path='/image' component={Image}/> */}
+            <Route exact path='/image' component={Image}/>
+            <Route exact path='/image/:id' component={GetImage}/>
 
             <Route exact path='/property' component={Property}/>
             <Route exact path='/property/:id' component={SingleProperty}/>

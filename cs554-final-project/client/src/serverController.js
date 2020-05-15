@@ -176,18 +176,6 @@ const serverController = {
             else throw (e.message)
         }
     },
-	
-	async addImage (imgs) {
-        const data = {
-            data: imgs
-        }
-        try {
-            return await axios.post(baseUrl + "/api/image", data)
-        } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
-            else throw (e.message)
-        }
-    },
 
     async editUser (user, phone, avatar) {
         let token;
@@ -202,6 +190,27 @@ const serverController = {
         }
         try {
             return await axios.patch(baseUrl + "/api/user/", data, {headers: {'Authorization': token}})
+        } catch (e) {
+            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
+            else throw (e.message)
+        }
+    },
+	
+	async addImage (imgs) {
+        const data = {
+            data: imgs
+        }
+        try {
+            return await axios.post(baseUrl + "/api/image", data)
+        } catch (e) {
+            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
+            else throw (e.message)
+        }
+    },
+	
+	async getImage (imgid) {
+        try {
+            return await axios.get(baseUrl + "/api/image/" + imgid)
         } catch (e) {
             if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
             else throw (e.message)

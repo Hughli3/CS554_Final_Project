@@ -113,6 +113,8 @@ function chunkSubstr(str) {
 async function createGridFS(fileName, base64Data){
   const fsFilesCollection = await fsFiles();
   const fsChunksCollection = await fsChunks();
+  let nameSplit = fileName.split(".")
+  let mimetype = nameSplit[nameSplit.length-1]
 
   let newFiles = {
     length: base64Data.length,
@@ -120,7 +122,7 @@ async function createGridFS(fileName, base64Data){
     uploadDate: now,
     filename: fileName,
     md5: md5(base64Data),
-    contentType: file.mimetype,
+    contentType: mimetype,
   }
 
   const insertFilesInfo = await fsFilesCollection.insertOne(newFiles);  
@@ -139,7 +141,7 @@ async function createGridFS(fileName, base64Data){
 
     let insertChunksInfo = await fsChunksCollection.insertOne(newChunk);
     if (insertChunksInfo.insertedCount === 0){
-      deletePhoto(file.filename)      
+      deletePhoto(fileName)      
       throw "Could not create a new Chunks";
     }    
   }
