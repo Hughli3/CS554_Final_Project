@@ -2,13 +2,15 @@ import React, { useState, useEffect, useContext } from 'react';
 import serverController from '../serverController'
 import { Link } from 'react-router-dom';
 import { AuthContext } from "./auth/Auth";
-// import noImage from '../img/noImg.jpeg';
+import { useAlert } from 'react-alert'
 
 const SingleProperty = (props) => {
 	const [ propertyData, setPropertyData ] = useState();
 	const [ isWatchlist, setIsWatchlist ] = useState();
 	const [ loading, setLoading ] = useState(true);
 	const { currentUser } = useContext(AuthContext);
+
+	const alter = useAlert();
 
 	useEffect(
 		() => {
@@ -50,8 +52,9 @@ const SingleProperty = (props) => {
 		try {
 			await serverController.addWatchlist(propertyData._id, currentUser)
 			setIsWatchlist(true)
-		} catch (error) {
-			console.log(error);
+			alter.success("successfully added to waitlist")
+		} catch (e) {
+			alter.error(e)
 		}
 	};
 
@@ -59,8 +62,9 @@ const SingleProperty = (props) => {
 		try {
 			await serverController.removeWatchlist(propertyData._id, currentUser)
 			setIsWatchlist(false)
-		} catch (error) {
-			console.log(error);
+			alter.success("successfully removed from waitlist")
+		} catch (e) {
+			alter.error(e)
 		}
 	};
 

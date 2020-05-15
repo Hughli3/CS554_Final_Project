@@ -27,10 +27,10 @@ export default function Account(){
         <section class="section account">
             <div class="container">
                 {/* <h1 className='mb-5'>Account</h1> */}
-                <div className="row">
-                    <div className="col-md-3 col-12">
+                <div className="row justify-content-center">
+                    <div className="col-lg-3 col-6">
                         <div class="avatar-container">
-                            <img src="{{#if user.avatar}}{{user.avatar}}{{else}}/public/img/avatar/default-user.png{{/if}}" id="user-avatar" class="img-fluid avatar" alt="user avatar" width="300" />                
+                            <img src="{{#if user.avatar}}{{user.avatar}}{{else}}/public/img/avatar/default-user.png{{/if}}" id="user-avatar" class="img-fluid avatar" alt="user avatar" />                
                         </div>
                         {currentUser.email ? (
 					        <div class="icon-group mt-4">
@@ -45,13 +45,13 @@ export default function Account(){
                             </p>
                         </div>) : null}
                         <div>
-                            <Link className='' to='/account/watchlist'>
-                                <button className="btn my-3 w-100 btn-secondary">My watchlist</button>
+                            <Link className='' to='/account'>
+                                <button className="btn my-3 w-100 btn-secondary">My property</button>
                             </Link>
                         </div>
                         <div>
-                            <Link className='' to='/account'>
-                                <button className="btn my-3 w-100 btn-secondary">My property</button>
+                            <Link className='' to='/account/watchlist'>
+                                <button className="btn my-3 w-100 btn-secondary">My watchlist</button>
                             </Link>
                         </div>
                         <div>
@@ -60,7 +60,7 @@ export default function Account(){
                             </Link>
                         </div>
                     </div>
-                    <div className="col-md-9 col-12">
+                    <div className="col-lg-9 col-12 pl-4">
                         <PrivateRoute exact path='/account/' component={Property}/>
                         <PrivateRoute exact path='/account/property/add' component={AddProperty}/>
                         <PrivateRoute exact path='/account/watchlist' component={Watchlist}/>

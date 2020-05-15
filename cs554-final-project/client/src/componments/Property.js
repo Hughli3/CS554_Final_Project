@@ -41,7 +41,6 @@ const Property = (props) => {
 				<div class="row property-card my-3">
 					<div class="col-lg-6 col-md-4 col-6 pl-0">
 						<Link to={'/property/' + property._id}>
-
 							{/* <div class="avatar-container"> */}
 								{property.avatar ?
 								(<img src="https://cdngeneral.rentcafe.com/dmslivecafe/3/509605/Avant-Apartments-Parking-Garage-Entrance-Carmel,-Indiana_WEB.jpg" class="card-img-left" alt="property image" />)

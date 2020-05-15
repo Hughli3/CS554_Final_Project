@@ -20,14 +20,25 @@
     display: block;
 }
 
-.btn-delete-dog {
+.btn-delete-property {
     display: none;
     right: 15px;
-    top: 10px;
+    top: 15px;
     z-index: 99;
 }
 
-.dog-container:hover .btn-delete-dog{
+.property-card:hover .btn-delete-property{
+    display: block;
+}
+
+.btn-edit-property {
+    display: none;
+    right: 95px;
+    top: 15px;
+    z-index: 99;
+}
+
+.property-card:hover .btn-edit-property{
     display: block;
 }
 
@@ -259,7 +270,7 @@ p.card-text {
 }
 
 .property-card {
-    border: 1px solid #dcdcdc;
+    border: 2px solid #ececec;
 }
 
 .property-card .description { 
@@ -307,4 +318,24 @@ p.card-text {
     font-weight: 600;
     line-height: 1.5;
     font-size: 14px;
+}
+
+.property-add, .property-watch-empty {
+    border: 2px dashed #ececec;
+    height: 200px;
+    align-items: center;
+}
+.property-add p, .property-watch-empty p {
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+    color: #525e7f;
+}
+.property-add p .fas, .property-watch-empty p .fas {
+    font-size: 60px;
+}
+.property-add a, .property-watch-empty a{
+    width: 100%;
+    height: 100%;
 }
