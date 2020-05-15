@@ -11,7 +11,7 @@ import Header from "./componments/Header"
 import Footer from "./componments/Footer"
 import User from "./componments/User"
 
-// import Image from "./componments/Image"
+import Image from "./componments/Image"
 
 import Login from "./componments/auth/Login"
 import Signup from "./componments/auth/Signup"
@@ -33,7 +33,7 @@ function App() {
             <main>
             <Route exact path='/' component={Home}/>
 			
-            {/* <Route exact path='/image' component={Image}/> */}
+            <Route exact path='/image' component={Image}/>
 
             <Route exact path='/property' component={Property}/>
             <Route exact path='/property/:id' component={SingleProperty}/>

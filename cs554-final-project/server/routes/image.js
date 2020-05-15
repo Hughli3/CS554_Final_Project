@@ -14,20 +14,18 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    console.log(req.body)
     let imagesInfo = req.body.data;
     
     try {
-        console.log(imagesInfo);
-        console.log('-------------');
-
-        let fileName = "req.body.data";
-        let fileBase64 = "req.body.data";
-        
-        
-        const image = await imageData.createGridFS(fileName, fileBase64);
-        res.json(image);
+        for(let i=0; i<imagesInfo.length; i++){
+            await imageData.createGridFS(imagesInfo[i][0], imagesInfo[i][1]);
+        }
+        // const image = await imageData.createGridFS(fileName, fileBase64);
+        // res.json(image);
+        res.json({accept: "accept"});
     } catch (e) {
+        console.log(e);
+        
         res.status(500).json({error: e});
     }
 });
