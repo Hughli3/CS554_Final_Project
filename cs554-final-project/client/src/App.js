@@ -33,7 +33,7 @@ function App() {
             <main>
             <Route exact path='/' component={Home}/>
 			
-            <Route exact path='/image' component={Image}/>
+            {/* <Route exact path='/image' component={Image}/> */}
 
             <Route exact path='/property' component={Property}/>
             <Route exact path='/property/:id' component={SingleProperty}/>

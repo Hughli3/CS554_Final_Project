@@ -4,12 +4,12 @@ const baseUrl = "http://localhost:3001"
 
 const serverController = {
 
-    async getAllProperty (page, take) {
+    async getAllProperty (page) {
         if (!page) page = 1;
         try {
             return await axios.get(baseUrl + "/api/property/?page=" + page)
         } catch (e) {
-            if (e.response.data.error) throw (e.response.data.error)
+            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
             else throw (e.message)
         }
     },
@@ -95,7 +95,7 @@ const serverController = {
         const data = {
             data: imgs
         }
-        return await axios.post(baseUrl + "/image", data)
+        return await axios.post(baseUrl + "/api/image", data)
     },
 };
   
