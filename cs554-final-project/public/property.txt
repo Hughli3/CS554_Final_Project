@@ -1,0 +1,11 @@
+1.
+title: Amazing extra spacious 3 bedroom apt prime Bedstuy location! No Fee!
+description: 
+postcode:
+price:2600,
+deposit:3600,
+publishedDate:"2020-03-04",
+bedroom:2,
+baths:2,
+area:1000
+--------------------
