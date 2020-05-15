@@ -49,9 +49,10 @@ export default function Account(props){
             // if (!data.phone.value) throw "phone not exist";
             // TODO avatar 
             let avatar = null;
-            await serverController.editUser(currentUser, data.phone.value, avatar);
+            const {data: resData} = await serverController.editUser(currentUser, data.phone.value, avatar);
+            setUserData(resData);
             // setIsSuccess(true);
-            props.history.push("/account")
+            // props.history.push("/account")
             alert.success('Edit sucessfully');
         }catch(error){
             alert.error(error)
