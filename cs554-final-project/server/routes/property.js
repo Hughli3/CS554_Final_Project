@@ -47,7 +47,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', checkAuth, async (req, res) => {
     let propertyInfo = req.body;
-    let owner = res.locals.userUid
+    let owner = res.locals.userUid;
     // try {
     //     if (propertyInfo.title === undefined) throw "title is undefinded";
     //     if (typeof taskInfo.title != "string") throw "title is not a string";
@@ -71,7 +71,18 @@ router.post('/', checkAuth, async (req, res) => {
     }
 });
 
+router.put("/:id", checkAuth, async(req, res) => {
+    try{
+        let propertyInfo = req.body;
+        let pid = req.params.id;
+        console.log("pid",pid);
+        const property = await propertyData.update(pid, propertyInfo);
+        res.json(property);
+    }catch(e){
+        res.status(404).json({error: 'property not found'});
+    }
 
+})
 // router.put('/:id', async (req, res) => {
 //     let taskInfo = req.body;
 //     try {

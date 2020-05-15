@@ -99,9 +99,30 @@ let exportedMethods = {
         return property;
     },
     
-    // async update(){
-    
-    // },
+    async update(id, propertyInfo){
+        if (id === undefined)  throw "id is undefinded";
+        if (!ObjectId.isValid(id)) throw "id is invalid";
+        if (typeof id != "string") id = id.toString();
+        const objId = ObjectId.createFromHexString(id);
+
+
+        if (!propertyInfo) throw 'property not found';
+        let data = {
+            title: propertyInfo.title,
+            description: propertyInfo.description,
+            zipcode: propertyInfo.zipcode,
+            bedroom: propertyInfo.bedroom,
+            bath: propertyInfo.bath,
+            area: propertyInfo.area,
+            date: propertyInfo.date
+        }
+        const propertyCollection = await properties();
+
+        const updateInfo = await propertyCollection.updateOne({_id: objId}, {$set: data});
+        if (updateInfo.modifiedCount === 0) throw "nothing changed";
+
+        return await this.getById(id.toString()); 
+    },
 
     async delete(id, ownerId) {
         if (id === undefined) throw "property id is undefinded";
@@ -173,9 +194,11 @@ let exportedMethods = {
         if (!updateInfo.matchedCount && !updateInfo.modifiedCount) throw 'remove comment failed';
     
         return await this.getById(propertyId);
-    }
+    },
+
 }
 
+    
 module.exports = exportedMethods;
 
 

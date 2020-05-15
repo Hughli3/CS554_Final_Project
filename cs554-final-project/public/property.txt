@@ -1,0 +1,110 @@
+1.
+title: 1 Bd/1Ba - Prime Hoboken Area - $100 Application Fee
+
+description: The Jordan in Hoboken, NJ offers condo style one- and two-bedroom apartments with six different floor plans to choose from. From the soaring 9 foot ceilings with expansive Pella Architect Series windows, to the natural oak hardwood floors and the Frigidaire washer/dryer set, your apartment offers plenty to love. Your home comes with 7-ft solid, wood doors and controlled central heating and air conditioning with programmable thermostats. In the gourmet style kitchen, you will notice Dal Torreon porcelain tiled floors with Nemo Metro gloss tiled backsplash, walnut cabinetry with soft-close features, Kohler chrome fixtures, andCaesarstone countertops. 
+
+postcode: 07030,
+price: 3059,
+deposit: 3059,
+publishedDate: "2020-04-17",
+bedroom:1,
+baths:1,
+area:837,
+type: apartment
+----------------------------------------
+2.
+title: 3/4 Bedroom house for rent
+
+description: 3/4 Bedroom Dutch Colonial. Very large master bedroom, pets ok, all hardwood and tile floors. 1.5 BATH. Formal Dining room , Full walk out Basement, New Central Air and Heat with Blue Tooth controls, new roof ,windows ,siding, bathrooms and more. Optional Private beach. Available Immediately.
+
+postcode: 07849,
+price: 2400,
+deposit: 2400,
+publishedDate: "2020-04-24",
+bedroom:3,
+baths:1.5,
+area:null,
+type: house
+----------------------------------------
+3.
+title: AWESOME 3 BEDROOM APT (FRANKLIN,NJ)
+
+description: 
+HUGE 3 BEDROOM APT..2200 sq ft
+ONLY 1 APT ABOVE A STORE .
+HARDWOOD FLOORS THROUGHOUT
+HUGE DECK OFF YOUR BACK DOOR
+WASHER & DRYER HOOKUP IN APT
+3 ZONES OF HEATING
+YOUR OWN GAS FED BOILER
+CEILING FANS IN EVERY ROOM
+CENTRAL AIR
+HUGE FAMILY ROOM PLUS LIVING ROOM
+
+postcode: 07416,
+price: 1850,
+deposit: 1850,
+publishedDate: "2020-05-01",
+bedroom:3,
+baths:1,
+area:2200,
+type: apartment
+----------------------------------------
+4.
+title: Journal Square Luxury 2 Bedroom. No fees (Journal Square, Jersey City)
+description: New Premium Rentals in Journal Square, Jersey City
+Studio, 1 to 3 bdrm units available for immediate move-in. Move-in costs covered by us.
+Sleek 16-story premium rental is intelligently designed, complemented by in-demand smart home features and unparalleled amenities.
+Exclusive indoor, outdoor and fitness amenities are paired with the luxuriously comfortable interiors in these exceptionally crafted apartments.
+Journal Square will entice you with its restaurants nightlife, shopping, and proximity to Manhattan. This charming community has a long history as the cultural center of Hudson County.
+
+postcode: 07047,
+price: 2950,
+deposit: 2950,
+publishedDate: "2020-05-14",
+bedroom:2,
+baths:1,
+area:805,
+type: apartment
+------------------------------------
+5.
+title: BEAUTIFUL, SUNNY, LG 4 BR!* LNDRY, ELEV, PETS OK! Off B’way/120th St (Upper West Side)
+description: 
+This large, 4 bedroom apartment features a huge, separate windowed kitchen with dishwasher, a large, windowed bathroom, high ceilings, gorgeous hardwood floors, closets and more! This is an elevator building with a laundry room, video intercom and is only two short blocks to the 1 train. Pets are welcome. Heat and water included. This is a beautiful, prewar building. The super lives on the premises. Perfect as a share or for a family. A must see!
+Fabulous location! Just steps to Riverside Park, Columbia University, shopping and transportation. Please call/text Ruth at (917) 592-3145 to schedule an appointment. Move-in date is flexible. **ONE MONTH FREE!**
+do NOT contact me with unsolicited services or offers
+
+postcode:
+price:10027,
+deposit:null,
+publishedDate:"2020-03-04",
+bedroom:4,
+baths:1,
+area:null
+type: apt
+
+address: W 120th St near off Broadway
+--------------------
+6.
+title: Spacious and unique 3 bed, next to 2 5 train No broker fee (Flatbush)
+description: 
+Renovated 3 bedroom apartment
+Lots of windows with natural light
+Stainless steel appliances
+No Broker Fee
+Only 1st month rent and One security deposit at lease signing
+Must have good credit and income
+NY guarantors are welcome
+Please contact Michael to view this apartment today! 7185012255 mobile
+do NOT contact me with unsolicited services or offers
+
+postcode:
+price:11226,
+deposit:null,
+publishedDate:"2020-03-04",
+bedroom:3,
+baths:1.5,
+area:null
+type: apt
+
+address: Flatbush ave near Bedford ave

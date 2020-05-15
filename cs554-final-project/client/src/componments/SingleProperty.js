@@ -16,7 +16,7 @@ const SingleProperty = (props) => {
 				try {
 					setLoading(true);
                     const {data: property}  = await serverController.getProperty(props.match.params.id)
-                    console.log(property)
+                    console.log(property);
 					setPropertyData(property);
 				} catch (e) {
 					console.log(e)
