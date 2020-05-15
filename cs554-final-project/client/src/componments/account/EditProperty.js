@@ -4,7 +4,7 @@ import serverController from '../../serverController';
 import { Redirect } from "react-router";
 import { useAlert } from 'react-alert'
 // import Select from 'react-select';
-
+import ReactTooltip from "react-tooltip";
 const EditProperty = (props) => {
     const alert = useAlert();
     // const [isSuccess, setIsSuccess] = useState(false);
@@ -110,6 +110,7 @@ const EditProperty = (props) => {
                 <button type="submit">Update</button>
                 </form>
             </div>
+            <ReactTooltip />
 		</div>
 	);
 }
