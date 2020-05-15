@@ -4,7 +4,6 @@ const cors = require('cors')
 const app = express();
 
 app.use(cors());
-
 const configRoutes = require('./routes');
 app.use(express.json());
 configRoutes(app);
