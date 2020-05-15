@@ -88,7 +88,7 @@ const SingleProperty = (props) => {
 
 	const constructDetail = (propertyData) => {
 		let price, zipcode, type, bedbath, area, owner;
-
+		console.log(propertyData)
 		if (propertyData.price) {
 			price = (
 				<p>
@@ -110,7 +110,7 @@ const SingleProperty = (props) => {
 					Type {propertyData.type}
 				</p>)
 		}
-		if (propertyData.bedbath && propertyData.bath) {
+		if (propertyData.bedroom && propertyData.bath) {
 			bedbath = (
 				<p>
 					<i class="fas fa-bed"></i>
@@ -151,9 +151,7 @@ const SingleProperty = (props) => {
 			<div class="container">
 				{/* <h1 class="mb-5">All Property</h1> */}
 				<h1 className='cap-first-letter'>{(propertyData && propertyData.title) || 'Not Provided'}</h1>
-				{watchListButton}
 				<p><i class="fas fa-clock"></i>last update: {(propertyData && propertyData.date) || 'Not Provided'}</p>
-
 
 				<div class="row">
 					<div class='col-7'>
@@ -186,6 +184,7 @@ const SingleProperty = (props) => {
 					</div>
 					<div class='col-5'>
 						{constructDetail(propertyData)}
+						{watchListButton}
 					</div>
 				</div>
 
