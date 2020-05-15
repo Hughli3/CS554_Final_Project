@@ -17,7 +17,7 @@ const SingleProperty = (props) => {
 				try {
 					setLoading(true);
                     const {data: property}  = await serverController.getProperty(props.match.params.id)
-                    console.log(property)
+                    console.log(property);
 					setPropertyData(property);
 				} catch (e) {
 					console.log(e)
@@ -102,8 +102,13 @@ const SingleProperty = (props) => {
 			<dl>
 				<dt>Id</dt><dd>{(propertyData && propertyData._id) || 'Not Provided'}</dd>
 				<dt>Price</dt><dd>{(propertyData && propertyData.price) || 'Not Provided'}</dd>
-				<dt>Address</dt><dd>{(propertyData && propertyData.address) || 'Not Provided'}</dd>
+				<dt>Description</dt><dd>{(propertyData && propertyData.description) || 'Not Provided'}</dd>
 				<dt>area</dt><dd>{(propertyData && propertyData.area) || 'Not Provided'}</dd>
+				<dt>Bedroom</dt><dd>{(propertyData && propertyData.bedroom) || 'Not Provided'}</dd>
+				<dt>Bath</dt><dd>{(propertyData && propertyData.bath) || 'Not Provided'}</dd>
+				<dt>Price</dt><dd>{(propertyData && propertyData.price) || 'Not Provided'}</dd>
+				<dt>Zipcode</dt><dd>{(propertyData && propertyData.zipcode) || 'Not Provided'}</dd>
+				
                 <dt>owner</dt><dd>{(propertyData && propertyData.owner) || 'Not Provided'}</dd>
 			</dl>
 		</div>

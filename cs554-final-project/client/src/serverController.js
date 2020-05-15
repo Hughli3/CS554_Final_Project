@@ -34,6 +34,22 @@ const serverController = {
         return await axios.post(baseUrl + "/api/property/", data, {headers: {'Authorization': token}})
     },
 
+    async editProperty (pid, user, property) {
+        const token = await user.getIdToken(true)
+        const {title, description, price, type, zipcode, bedroom, bath, date} = property
+        const data = {
+            title: title.value,
+            description: description.value,
+            price: price.value,
+            type:type.value,
+            zipcode:zipcode.value,
+            bedroom:bedroom.value,
+            bath:bath.value,
+            date:date
+        }
+        return await axios.put(baseUrl + "/api/property/" + pid, data, {headers: {'Authorization': token}})
+    },
+    
     async deleteProperty (pid, user) {
         const token = await user.getIdToken(true)
         return await axios.delete(baseUrl + "/api/property/" + pid, {headers: {'Authorization': token}})

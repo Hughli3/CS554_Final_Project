@@ -3,6 +3,7 @@ import { AuthContext } from "../auth/Auth";
 import Watchlist from "./Watchlist";
 import Property from "./Property";
 import AddProperty from "./AddProperty";
+import EditProperty from "./EditProperty";
 
 import PrivateRoute from "../auth/PrivateRoute";
 
@@ -34,7 +35,7 @@ export default function Account(){
             <PrivateRoute exact path='/account/property/add' component={AddProperty}/>
             <PrivateRoute exact path='/account/property' component={Property}/>
             <PrivateRoute exact path='/account/watchlist' component={Watchlist}/>
-            <PrivateRoute exact path='/account/editProfile' component={Watchlist}/>
+            <PrivateRoute exact path='/account/property/:id' component={EditProperty}/>
         </div>
         
     )

@@ -1,4 +1,4 @@
-import React, {Component, useContext, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import { AuthContext } from "../auth/Auth";
 import serverController from '../../serverController';
 import { Redirect } from "react-router";
@@ -17,23 +17,23 @@ const AddProperty = () => {
 
     
       let time = new Date()
-      data.date = time.toLocaleString("en", {hour12:false});
+      data.date = Date.parse(time);
       console.log(data);
       try {
         // TODO move these checker into function
         if (!data.title.value) throw "title not exist"
-        if (data.title.value.length > 30) throw "title too long";
+        if (data.title.value.length > 70) throw "title too long";
         if(!data.description.value) throw "description not exist"
         if (data.description.value.length > 200) throw "description too long";
         if (!data.bedroom.value) throw "bedroom not exist"
         if (data.bedroom.value < 1 || data.bedroom.value > 10 ) throw "bedroom number invalid";
         if (!data.bath.value) throw "bath not exist"
-        if (data.bath.value < 1|| data.bath.value > 10) throw "bath number invalid";
+        if (data.bath.value < 0|| data.bath.value > 10) throw "bath number invalid";
         if (!data.price.value) throw "price not exist"
         if (data.price.value < 0) throw "price invalid";
-        if (!data.zipcode.value) throw "zipcode not exist"
-        if (data.zipcode.value.length != 5) throw "zipcode invalid"
-        await serverController.postProperty(currentUser, data)
+        if (!data.zipcode.value) throw "zipcode not exist";
+        if (data.zipcode.value.length != 5) throw "zipcode invalid";
+        await serverController.postProperty(currentUser, data);
         setIsSuccess(true)
         alert.success('Signup sucessfully')
       } catch (error) {
