@@ -74,6 +74,19 @@ let exportedMethods = {
     return await this.getUser(userId)
   },
 
+  async updateUser(id, phone, avatar) {
+
+    let data = {
+        phone: phone,
+        avatar: avatar
+    }
+    const userCollection = await users();
+
+    const updateInfo = await userCollection.updateOne({_id: id}, {$set: data});
+    if (updateInfo.modifiedCount === 0) throw "nothing changed";
+
+    return await this.getUser(id); 
+  }
   // async function updateAvatar(uid, file){
   //     let photoId = await imgData.createGridFS(file);
       

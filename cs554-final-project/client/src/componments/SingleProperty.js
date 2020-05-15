@@ -10,7 +10,7 @@ const SingleProperty = (props) => {
 	const [ loading, setLoading ] = useState(true);
 	const { currentUser } = useContext(AuthContext);
 
-	const alter = useAlert();
+	const alert = useAlert();
 
 	useEffect(
 		() => {
@@ -52,9 +52,9 @@ const SingleProperty = (props) => {
 		try {
 			await serverController.addWatchlist(propertyData._id, currentUser)
 			setIsWatchlist(true)
-			alter.success("successfully added to waitlist")
+			alert.success("successfully added to waitlist")
 		} catch (e) {
-			alter.error(e)
+			alert.error(e)
 		}
 	};
 
@@ -62,9 +62,9 @@ const SingleProperty = (props) => {
 		try {
 			await serverController.removeWatchlist(propertyData._id, currentUser)
 			setIsWatchlist(false)
-			alter.success("successfully removed from waitlist")
+			alert.success("successfully removed from waitlist")
 		} catch (e) {
-			alter.error(e)
+			alert.error(e)
 		}
 	};
 

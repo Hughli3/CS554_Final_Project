@@ -9,7 +9,7 @@ const Property = (props) => {
 	const [ propertyData, setPropertyData ] = useState([]);
 	const [ loading, setLoading ] = useState(true);
 
-	const alter = useAlert();
+	const alert = useAlert();
 
 	useEffect(
 		() => {
@@ -28,7 +28,7 @@ const Property = (props) => {
 			}
 			fetchData();
 		},
-		[ props.match.params.page ]
+		[]
 	);
 
 	const handleDelete = async (event) => {
@@ -38,9 +38,9 @@ const Property = (props) => {
 			await serverController.deleteProperty(propertyId, currentUser)
 			const {data: resData} = await serverController.getUser(currentUser);
 			setPropertyData(resData.property);
-			alter.success('deleted')
+			alert.success('deleted')
 		} catch (e) {
-			alter.error(e)
+			alert.error(e)
 		}
 	};
 
@@ -65,7 +65,7 @@ const Property = (props) => {
 				<div class="col-lg-6 col-6 py-3">
 					<Link to={'/property/' + property._id}>
 
-						<h2 class="display-4" class="title">{property.title}</h2>
+						<h1 class="display-4" class="title">{property.title}</h1>
 						</Link>
 						{property.description ? (<p class="description">{property.description}</p>) : null}
 					

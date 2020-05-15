@@ -25,7 +25,18 @@ router.post('/', checkAuth, async (req, res) => {
     // }
     
     try {
-        const user = await userData.add(userInfo.uid);
+        const user = await userData.getUser(userInfo.uid);
+        res.json(user);
+    } catch (e) {
+        res.status(500).json({error: e});
+    }
+});
+
+router.patch('/', checkAuth, async (req, res) => {
+    let userInfo = req.body;
+    
+    try {
+        const user = await userData.updateUser(res.locals.userUid, userInfo.phone, userInfo.avatar);
         res.json(user);
     } catch (e) {
         res.status(500).json({error: e});
@@ -64,22 +75,22 @@ router.get('/watchlist', checkAuth, async (req, res) => {
     }
 });
 
-router.get('/property', checkAuth, async (req, res) => {
-    try {
-        const user = await userData.getUser(res.locals.userUid);
-        let data = {
-            property: user.property,
-            details: []
-        }
-        for (let pid of user.property) {
-            data.details.push(await propertyData.getById(pid))
-        }
+// router.get('/property', checkAuth, async (req, res) => {
+//     try {
+//         const user = await userData.getUser(res.locals.userUid);
+//         let data = {
+//             property: user.property,
+//             details: []
+//         }
+//         for (let pid of user.property) {
+//             data.details.push(await propertyData.getById(pid))
+//         }
 
-        res.json(data)
-    } catch (e) {
-        res.status(500).json({error: e});
-    }
-});
+//         res.json(data)
+//     } catch (e) {
+//         res.status(500).json({error: e});
+//     }
+// });
 
 router.post('/watchlist', checkAuth, async (req, res) => {
     let pid = req.body.propertyId;

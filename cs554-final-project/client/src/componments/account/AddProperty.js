@@ -33,7 +33,7 @@ const AddProperty = () => {
         if (data.zipcode.value.length != 5) throw "zipcode invalid";
         await serverController.postProperty(currentUser, data);
         setIsSuccess(true)
-        alert.success('Signup sucessfully')
+        alert.success('post sucessfully')
       } catch (error) {
         // console.log(error);
         alert.error(error)

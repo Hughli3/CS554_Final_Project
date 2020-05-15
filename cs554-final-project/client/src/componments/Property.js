@@ -9,7 +9,7 @@ const Property = (props) => {
 	const [ pageData, setPageData ] = useState({});
 	const [ loading, setLoading ] = useState(true);
 
-	const alter = useAlert()
+	const alert = useAlert()
 	const urlParams = new URLSearchParams(props.location.search);
 	let page = urlParams.get('page') || 1;
 
@@ -26,7 +26,7 @@ const Property = (props) => {
 					setPageData({next: resData.next, prev: resData.prev});
 					setLoading(false);
 				} catch (e) {
-					alter.error(e)
+					alert.error(e)
 					setLoading(false);
 				}
 			}
@@ -52,8 +52,7 @@ const Property = (props) => {
 					</div>
 					<div class="col-lg-6 col-md-4 col-6 py-3">
 						<Link to={'/property/' + property._id}>
-
-							<h2 class="display-4" class="title">{property.title}</h2>
+							<h1 class="display-4" class="title">{property.title}</h1>
 							</Link>
 							{property.description ? (<p class="description">{property.description}</p>) : null}
 						

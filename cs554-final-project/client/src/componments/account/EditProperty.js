@@ -7,7 +7,7 @@ import { useAlert } from 'react-alert'
 
 const EditProperty = (props) => {
     const alert = useAlert();
-    const [isSuccess, setIsSuccess] = useState(false);
+    // const [isSuccess, setIsSuccess] = useState(false);
 
 	const [ propertyData, setPropertyData ] = useState();
 	const [ loading, setLoading ] = useState(true);
@@ -56,7 +56,8 @@ const EditProperty = (props) => {
             if (data.zipcode.value.length != 5) throw "zipcode invalid";
 
             await serverController.editProperty(props.match.params.id,currentUser, data);
-            setIsSuccess(true);
+            // setIsSuccess(true);
+            props.history.push("/account")
             alert.success('Edit sucessfully');
         }catch(error){
             alert.error(error)
@@ -64,9 +65,9 @@ const EditProperty = (props) => {
 
     }
 
-    if (isSuccess) {
-        return <Redirect to="/account/property" />;
-    }
+    // if (isSuccess) {
+    //     return <Redirect to="/account/property" />;
+    // }
 
     if (loading) {
         return (
@@ -77,10 +78,11 @@ const EditProperty = (props) => {
     if (!propertyData) {
 		return (
 			<div className='show-body'>
-				<p>404 - Pokemon Not Found!</p>
+				<p>Property Not Found!</p>
 			</div>
 		)
-	}
+    }
+    
     return (
 		<div className='show-body'>
 

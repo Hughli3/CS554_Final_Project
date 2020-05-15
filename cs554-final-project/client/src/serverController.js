@@ -188,6 +188,25 @@ const serverController = {
             else throw (e.message)
         }
     },
+
+    async editUser (user, phone, avatar) {
+        let token;
+        try {
+            token = await user.getIdToken(true)
+        } catch (e) {
+            throw "fail getting usertoken"
+        }
+        const data = {
+            phone: phone,
+            avatar: avatar
+        }
+        try {
+            return await axios.patch(baseUrl + "/api/user/", data, {headers: {'Authorization': token}})
+        } catch (e) {
+            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
+            else throw (e.message)
+        }
+    },
 };
   
 export default serverController;

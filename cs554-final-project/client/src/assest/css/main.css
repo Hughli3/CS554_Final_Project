@@ -327,6 +327,9 @@ p.card-text {
     background-color: #e8e8e8;
 }
 
+.sr-only {
+    color: #333 !important;
+}
 
 /* Loading */
 
@@ -334,6 +337,7 @@ p.card-text {
     display: inline-block;
     position: absolute;
     left: 50%;
+    top: 40%;
     margin-left: -40px;
     width: 80px;
     height: 80px;
