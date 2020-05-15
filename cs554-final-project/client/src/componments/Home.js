@@ -66,7 +66,7 @@ const Home = () => {
                 <div className="col-12 col-lg-7">
                     <div className="pr-md-5">
                     <h1>Rent near Stevens Easily</h1>
-                    <p className="lead">RentSIT provies cool features for you to help you Provide features to help you quickly rent a house near Stevens Institute of Technology.</p>
+                    <p className="lead">RentSIT provies cool features for you to help you quickly rent a house near Stevens Institute of Technology.</p>
                     <ul className="list-unstyled mt-5">
                         <li className="py-2">
                         <div className="d-flex align-items-center">
@@ -137,7 +137,7 @@ const Home = () => {
                     </div>
                     <h2>Interested? Add to watchlist!</h2>
                     <p className="lead">Use watchlist to save rental information you are interested in. Quick comparison before making a decision</p>
-                    <a href="/dog" className="font-weight-bold text-warning mt-5">see all properties renting</a>
+                    <a href="/property" className="font-weight-bold text-warning mt-5">see all properties renting</a>
                     </div>
                 </div>
                 </div>
