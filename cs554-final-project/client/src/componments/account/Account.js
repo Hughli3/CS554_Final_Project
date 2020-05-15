@@ -61,6 +61,15 @@ export default function Account(props){
             alert.error(error)
         }
     }
+
+    /*
+    function getPict(){
+        var img = "./home/default_user.png";
+        if (userData.avatar){
+            const img = userData.avatar;
+        }
+        return img;
+    }*/
     
     return(
         <section class="section account">
