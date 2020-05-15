@@ -6,9 +6,9 @@ const imageRoutes = require('./image');
 const constructorMethod = (app) => {
 
   const logRequestDetail = (req, res, next) => {
-    if(Object.keys(req.body).length != 0) {
-      console.log("Request body is", req.body);
-    }
+    // if(Object.keys(req.body).length != 0) {
+    //   console.log("Request body is", req.body);
+    // }
     console.log(`${req.method} ${req.originalUrl}`)
 
     next();

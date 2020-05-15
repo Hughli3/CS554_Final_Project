@@ -3,7 +3,7 @@ const router = express.Router();
 const data = require('../data');
 const propertyData = data.property;
 const userData = data.user;
-const ObjectId = require('mongodb').ObjectID;
+// const ObjectId = require('mongodb').ObjectID;
 const checkAuth = require('./checkAuth')
 
 router.post('/', checkAuth, async (req, res) => {

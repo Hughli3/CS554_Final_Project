@@ -10,6 +10,7 @@ const imgData = require("../data/img");
 //==================== Main ====================
 let exportedMethods = {
   async getUser(id){
+
     const usersCollection = await users();
     const userInfo = await usersCollection.findOne({ _id: id });
 
@@ -76,7 +77,7 @@ let exportedMethods = {
 
   
   async updateUser(id, phone, avatar) {
-
+    validatePhone(phone);
     let data = {
         phone: phone,
         avatar: avatar
@@ -105,3 +106,12 @@ let exportedMethods = {
 }
 
 module.exports = exportedMethods;
+
+
+// ==================== Checker ====================
+function validatePhone(phone){
+  if (!phone) throw "phone is undefinded";
+  if (phone.constructor !== String) throw "phone is not a string";
+  if (phone.length != 10) throw "phone length is wrong"
+  
+}
