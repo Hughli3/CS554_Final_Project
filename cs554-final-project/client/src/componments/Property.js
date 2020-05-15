@@ -128,11 +128,11 @@ const Property = (props) => {
 		pagination = buildPagination(pageData)
 	}
 
-	if (loading) {
-		return (
-			<p>loading...</p>
-		);
-	}
+    if (loading) {
+        return (
+            <div class="lds-facebook"><div></div><div></div><div></div></div>
+        )
+    }
 
 	if (!(Array.isArray(propertyData) && propertyData.length)) {
 		return (
@@ -147,7 +147,60 @@ const Property = (props) => {
 	return (
 		<section class="section">
 			<div class="container">
-				<h1 class="mb-5">All Property</h1>
+				{/* <h1 class="mb-5">All Property</h1> */}
+				<div className="row mb-5">	
+					<div className="col-3 p-0">
+						<div class="dropdown w-100 pr-2">
+							<button class="btn btn-default dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								filter Days on RentSIT
+							</button>
+							<div class="dropdown-menu w-100 pr-2" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="#">In 3 Days</a>
+								<a class="dropdown-item" href="#">In 10 Days</a>
+								<a class="dropdown-item" href="#">In 30 Days</a>
+							</div>
+						</div>
+					</div>
+
+					<div className="col-3 p-0">
+						<div class="dropdown w-100 pr-2">
+							<button class="btn btn-default dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								filter price
+							</button>
+							<div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="#">Low to High</a>
+								<a class="dropdown-item" href="#">High to Low</a>
+								<a class="dropdown-item" href="#">Something else here</a>
+							</div>
+						</div>
+					</div>
+
+					<div className="col-3 p-0">
+						<div class="dropdown w-100 pr-2">
+							<button class="btn btn-primary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								sort price
+							</button>
+							<div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="#">Low to High</a>
+								<a class="dropdown-item" href="#">High to Low</a>
+								<a class="dropdown-item" href="#">Something else here</a>
+							</div>
+						</div>
+					</div>
+
+					<div className="col-3 p-0">
+						<div class="dropdown w-100">
+							<button class="btn btn-primary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								sort date
+							</button>
+							<div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="#">Low to High</a>
+								<a class="dropdown-item" href="#">High to Low</a>
+								<a class="dropdown-item" href="#">Something else here</a>
+							</div>
+						</div>
+					</div>
+				</div>
 				{li}
 				{pagination}
 			</div>

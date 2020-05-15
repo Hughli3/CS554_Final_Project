@@ -4,11 +4,12 @@ import Watchlist from "./Watchlist";
 import Property from "./Property";
 import AddProperty from "./AddProperty";
 import EditProperty from "./EditProperty";
+import EditProfile from "./EditProfile";
 
 import PrivateRoute from "../auth/PrivateRoute";
 
 import Avatar from './Avatar';
-import { Link } from 'react-router-dom';
+import { Link, Switch } from 'react-router-dom';
 
 export default function Account(){
     const { currentUser } = useContext(AuthContext);
@@ -28,7 +29,7 @@ export default function Account(){
             <div class="container">
                 {/* <h1 className='mb-5'>Account</h1> */}
                 <div className="row justify-content-center">
-                    <div className="col-lg-3 col-6">
+                    <div className="col-lg-3 col-md-4 col-6">
                         <div class="avatar-container">
                             <img src="{{#if user.avatar}}{{user.avatar}}{{else}}/public/img/avatar/default-user.png{{/if}}" id="user-avatar" class="img-fluid avatar" alt="user avatar" />                
                         </div>
@@ -61,10 +62,13 @@ export default function Account(){
                         </div>
                     </div>
                     <div className="col-lg-9 col-12 pl-4">
-                        <PrivateRoute exact path='/account/' component={Property}/>
-                        <PrivateRoute exact path='/account/property/add' component={AddProperty}/>
-                        <PrivateRoute exact path='/account/watchlist' component={Watchlist}/>
-                        <PrivateRoute exact path='/account/property/:id' component={EditProperty}/>
+                        <Switch>
+                            <PrivateRoute exact path='/account/' component={Property}/>
+                            <PrivateRoute exact path='/account/property/add' component={AddProperty}/>
+                            <PrivateRoute exact path='/account/watchlist' component={Watchlist}/>
+                            <PrivateRoute exact path='/account/property/:id' component={EditProperty}/>
+                            <PrivateRoute exact path='/account/edit' component={EditProfile}/>
+                        </Switch>
                     </div>
                 </div>
             </div>

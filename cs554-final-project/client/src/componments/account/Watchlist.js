@@ -38,11 +38,9 @@ export default function WatchList(props) {
 	};
 
     if (loading) {
-		return (
-			<div className='show-body'>
-				<p>loading...</p>
-			</div>
-		);
+        return (
+            <div class="lds-facebook"><div></div><div></div><div></div></div>
+        )
     }
     
     if (!properties) {

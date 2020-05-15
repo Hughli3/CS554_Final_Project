@@ -5,17 +5,18 @@ export const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [pending, setPending] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     app.auth().onAuthStateChanged((user) => {
       setCurrentUser(user)
-      setPending(false)
+      setLoading(false)
     });
   }, []);
 
-  if(pending){
-    return <>Loading...</>
+  if(loading){
+    return (
+			<div class="lds-facebook"><div></div><div></div><div></div></div>)
   }
 
   return (

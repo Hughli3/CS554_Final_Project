@@ -96,10 +96,8 @@ const Property = (props) => {
 
 	if (loading) {
 		return (
-			<div className='show-body'>
-				<p>loading...</p>
-			</div>
-		);
+			<div class="lds-facebook"><div></div><div></div><div></div></div>
+		)
 	}
 
 	return (

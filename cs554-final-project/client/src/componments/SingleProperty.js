@@ -68,13 +68,11 @@ const SingleProperty = (props) => {
 		}
 	};
 
-	if (loading) {
-		return (
-			<div className='show-body'>
-				<p>loading...</p>
-			</div>
-		)
-	}
+    if (loading) {
+        return (
+            <div class="lds-facebook"><div></div><div></div><div></div></div>
+        )
+    }
 
 	if (!propertyData) {
 		return (

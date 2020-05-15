@@ -5,7 +5,7 @@ import { Redirect } from "react-router";
 import { useAlert } from 'react-alert'
 // import Select from 'react-select';
 
-const EditProperty = (props) => {
+const EditProfile = (props) => {
     const alert = useAlert();
     const [isSuccess, setIsSuccess] = useState(false);
 
@@ -73,14 +73,15 @@ const EditProperty = (props) => {
             <div class="lds-facebook"><div></div><div></div><div></div></div>
         )
     }
-
+    
     if (!propertyData) {
 		return (
 			<div className='show-body'>
 				<p>404 - Pokemon Not Found!</p>
 			</div>
 		)
-	}
+    }
+    
     return (
 		<div className='show-body'>
 
@@ -111,4 +112,4 @@ const EditProperty = (props) => {
 		</div>
 	);
 }
-export default EditProperty;
+export default EditProfile;

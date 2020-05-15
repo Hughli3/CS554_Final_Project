@@ -10,12 +10,10 @@ const AddProperty = () => {
     const { currentUser } = useContext(AuthContext);
     const [isSuccess, setIsSuccess] = useState(false)
 
-
     const addProperty = async (event) => {
       event.preventDefault();
       const data = event.target.elements;
 
-    
       let time = new Date()
       data.date = Date.parse(time);
       console.log(data);
@@ -43,33 +41,71 @@ const AddProperty = () => {
     };
 
     if (isSuccess) {
-        return <Redirect to="/account/property" />;
+        return <Redirect to="/account" />;
     }
       
-  
     return (
     <div>
-        <h1>Add</h1>
+        <h1>Post Property</h1>
         <form onSubmit={addProperty}>
-        <label htmlFor="title">Title</label>
-        <input id="title" name="title" type="text" placeholder="title" />
-        <label htmlFor="description">Description</label>
-        <textarea id="description" name="description" type="text" placeholder="description"  />
-        <label htmlFor="type">Type</label>
-        <select defaultValue="apartment" id="type" name="type">
-          <option value="apartment">apartment</option>
-          <option value="house">house</option>
-        </select>
-        <label htmlFor="price">Price</label>
-        <input id="price" name="price" type="number" placeholder="price" />
-        <label htmlFor="zipcode">Zipcode</label>
-        <input id="zipcode" name="zipcode" type="text" placeholder="07030" data-tip="length must equal to 5"/>
-        <label htmlFor="bedroom">Bedroom</label>
-        <input id="bedroom" name="bedroom" type="number" placeholder="3" />
-        <label htmlFor="bath">Bath</label>
-        <input id="bath" name="bath" type="number" placeholder="1" />
+          <div className="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label htmlFor="title">Title</label>
+                <input class="form-control" id="title" name="title" placeholder="title" />
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label htmlFor="description">Description</label>
+                <textarea id="description" rows="10" class="form-control" name="description" type="text" placeholder="description"  />
+              </div>
+            </div>
 
-        <button type="submit">Post</button>
+            <div class="col-md-12">
+                <label>Type</label>
+                <div>
+                  <div class="custom-control col-3 custom-radio mb-3">
+                    <input name="type" value="apartment" class="custom-control-input" id="type-apartment" type="radio" />
+                    <label class="custom-control-label" for="type-apartment">Apartment</label>
+                  </div>
+                  <div class="custom-control col-3 custom-radio mb-3">
+                    <input name="type" value="house" class="custom-control-input" id="type-house" type="radio" />
+                    <label class="custom-control-label" for="type-house">House</label>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label htmlFor="price">Price</label>
+                <input class="form-control" name="price" id="price" placeholder="price" type="number"/>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label htmlFor="zipcode">Zipcode</label>
+                <input class="form-control" id="zipcode" name="zipcode" type="text" placeholder="07030" data-tip="length must equal to 5"/>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label htmlFor="bedroom">Bedroom</label>
+                <input class="form-control" id="bedroom" name="bedroom" type="number" placeholder="3" />
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label htmlFor="bath">Bath</label>
+                <input class="form-control" id="bath" name="bath" type="number" placeholder="1" />
+              </div>
+            </div>
+          </div>
+
+          <button className="btn btn-primary" type="submit">Post</button>
         </form>
     </div>
     );

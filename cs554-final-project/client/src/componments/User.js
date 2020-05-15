@@ -53,13 +53,11 @@ export default function User(props){
     }
 	
 	
-	if (loading) {
-		return (
-			<div className='show-body'>
-				<p>loading...</p>
-			</div>
-		);
-	}
+    if (loading) {
+        return (
+            <div class="lds-facebook"><div></div><div></div><div></div></div>
+        )
+    }
 
     return(
         <div>
