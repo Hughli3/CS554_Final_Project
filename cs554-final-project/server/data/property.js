@@ -81,7 +81,7 @@ let exportedMethods = {
             bath: propertyInfo.bath,
             area: propertyInfo.float,
             date: propertyInfo.date,
-            album: [],
+            album: propertyInfo.album ? propertyInfo.album : [],
             owner: owner,
         }
 
