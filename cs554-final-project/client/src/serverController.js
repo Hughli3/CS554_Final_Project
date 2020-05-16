@@ -47,13 +47,13 @@ const serverController = {
         }
         const {title, description, price, type, zipcode, bedroom, bath, date, album} = property
         const data = {
-            title: title.value,
-            description: description.value,
-            price: parseInt(price.value),
-            type:type.value,
-            zipcode:zipcode.value,
-            bedroom:parseInt(bedroom.value),
-            bath:parseInt(bath.value),
+            title: title,
+            description: description,
+            price: parseInt(price),
+            type:type,
+            zipcode:zipcode,
+            bedroom:parseInt(bedroom),
+            bath:parseInt(bath),
             date:date,
             album: album
         }

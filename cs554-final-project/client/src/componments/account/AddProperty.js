@@ -92,30 +92,41 @@ const AddProperty = (props) => {
     const addProperty = async (event) => {
       setLoading(true)
       event.preventDefault();
-      const data = event.target.elements;
+
+      let eventInfo = event.target.elements
+      
+      let data = {
+          title: eventInfo.title.value,
+          description: eventInfo.description.value,
+          bedroom: eventInfo.bedroom.value,
+          bath: eventInfo.bath.value,
+          price: eventInfo.price.value,
+          zipcode: eventInfo.zipcode.value,
+          type: eventInfo.type.value,
+      }
 
       let time = new Date()
       data.date = Date.parse(time);
-
+      console.log(data.album)
       data.album = imageData;
       
       try {
         // TODO move these checker into function
-        if (!data.title.value) throw "title not exist"
-        if (data.title.value.length > 70) throw "title too long";
-        if(!data.description.value) throw "description not exist";
-        if (data.description.value.length > 200) throw "description too long";
-        if (!data.bedroom.value) throw "bedroom not exist"
-        if (parseInt(data.bedroom.value) < 1 || parseInt(data.bedroom.value) > 10 ) throw "bedroom number invalid";
-        if (!data.bath.value) throw "bath not exist"
+        if (!data.title) throw "title not exist"
+        if (data.title.length > 70) throw "title too long";
+        if(!data.description) throw "description not exist";
+        if (data.description.length > 200) throw "description too long";
+        if (!data.bedroom) throw "bedroom not exist"
+        if (parseInt(data.bedroom) < 1 || parseInt(data.bedroom) > 10 ) throw "bedroom number invalid";
+        if (!data.bath) throw "bath not exist"
 
-        if (parseInt(data.bath.value) < 0|| parseInt(data.bath.value) > 10) throw "bath number invalid";
-        if (!data.price.value) throw "price not exist"
-        if (parseInt(data.price.value) < 0) throw "price invalid";
-        if (!data.zipcode.value) throw "zipcode not exist";
-        if (data.zipcode.value.length != 5) throw "zipcode invalid";
-        if (!data.type.value) throw "type is not exist";
-        if (data.type.value != "apartment" && data.type.value != "house" ) throw "type is invalid";
+        if (parseInt(data.bath) < 0|| parseInt(data.bath) > 10) throw "bath number invalid";
+        if (!data.price) throw "price not exist"
+        if (parseInt(data.price) < 0) throw "price invalid";
+        if (!data.zipcode) throw "zipcode not exist";
+        if (data.zipcode.length != 5) throw "zipcode invalid";
+        if (!data.type) throw "type is not exist";
+        if (data.type != "apartment" && data.type != "house" ) throw "type is invalid";
         // console.log(data);
         await serverController.postProperty(currentUser, data);
 

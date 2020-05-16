@@ -181,7 +181,6 @@ const Property = (props) => {
 							<div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
 							<Link to={"?page=" + page + "&filter=" + filter + "&sort=" + "priceUp"} className="dropdown-item">Low to High</Link>
 							<Link to={"?page=" + page + "&filter=" + filter + "&sort=" + "priceDown"} className="dropdown-item">High to Low</Link>
-							<Link to={"?page=" + page + "&filter=" + filter + "&sort=" + "date"} className="dropdown-item">Last Update</Link>
 							</div>
 						</div>
 					</div>
