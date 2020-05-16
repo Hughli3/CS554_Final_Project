@@ -7,7 +7,6 @@ const imageData = data.image;
 const base64Img = require('base64-img');
 // const ObjectId = require('mongodb').ObjectID;
 const checkAuth = require('./checkAuth')
-const base64Img = require('base64-img');
 
 
 router.post('/', checkAuth, async (req, res) => {
