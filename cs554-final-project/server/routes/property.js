@@ -16,7 +16,7 @@ bluebird.promisifyAll(redis.Multi.prototype);
 let allC = []
 
 // clear redis
-// client.FLUSHDB();
+client.FLUSHDB();
 
 router.get('/', async (req, res) => {
     let allSave = ""
@@ -43,7 +43,7 @@ router.get('/', async (req, res) => {
             filter = null;
         }
         
-        console.log(filter, sort)
+        // console.log(filter, sort)
         allSave = "all"+filter+sort        
     } catch (e) {
         res.status(400).json({error: "invalid parameter"});
