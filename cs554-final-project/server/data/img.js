@@ -40,7 +40,7 @@ async function validateImage(filePath) {
 
 function validateBase64(base64Str) {
   // let reg = /^data:image\/[A-Za-z]+;base64,([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{0,3}==)$/
-  let reg = /^data:image\/[A-Za-z]*;base64,[A-Za-z0-9+/]*[=]{0,2}$/
+  let reg = /^data:image\/[A-Za-z]+;base64,[A-Za-z0-9+/]*[=]{0,2}$/
   if(!reg.test(base64Str)){
     throw "it is not Base64 for image";
   }
