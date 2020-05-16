@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
 
+main {
+    min-height: 380px;
+}
+
 .footer.has-cards {
     margin-top: 0px;
     padding-top: 0px;
@@ -293,6 +297,7 @@ p.card-text {
 .single-property .description p{
     font-weight: 500;
     font-size: 18px;
+    word-wrap: break-word;
 }
 
 .property-card .description {
@@ -397,4 +402,65 @@ p.card-text {
     right: 15px;
     top: 15px;
     z-index: 99;
+}
+
+.carousel-item img{
+    max-height: 450px;
+    object-fit: contain;
+}
+
+.carousel {
+    background: #22262b;
+}
+
+.avatar-edit-container {
+    width: 50%;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.avatar-container:focus {
+    outline: 0;
+}
+
+.avatar-edit-container:hover .overlay {
+    opacity: 0.5;
+}
+  
+.avatar-edit-container .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .2s ease;
+    background-color: #122441;
+    border-radius: 50%;
+}
+
+.avatar-edit-container .text {
+  color: white;
+  font-size: 24px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.avatar-edit-container:hover .text {
+    color: white;
+    font-size: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
 }

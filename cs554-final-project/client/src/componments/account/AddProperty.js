@@ -10,7 +10,8 @@ const AddProperty = (props) => {
     const alert = useAlert()
     const { currentUser } = useContext(AuthContext);
     const [imageData, setImageData] = useState([]);
-        
+    const [ loading, setLoading ] = useState(false);
+
     const getbase64 = async(file) => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
@@ -27,7 +28,7 @@ const AddProperty = (props) => {
     const onDrop = useCallback(async(acceptedFiles, rejectedFiles) => {
         for (let file of rejectedFiles) {
           for (let error of file.errors) {
-            console.log(file.file.name + " : " + error.message)
+            alert.error(file.file.name + " : " + error.message)
           }
         }
 
@@ -57,9 +58,16 @@ const AddProperty = (props) => {
       })
     }
 
+    const {getRootProps, getInputProps} = useDropzone({
+        onDrop,
+        accept: 'image/jpeg, image/png',
+        minSize: 0,
+        maxSize: 5242880,
+    })
+
     let preview = imageData && imageData.length > 0 && imageData.map((key, idx) => {
       return (
-        <div className="col-3">
+        <div className="col-3 mb-2">
           <div className="img-preview-container avatar-container">
             <img class="img-fluid img-preview" src={key[2]} alt={key[0]} />
             <button type="button" onClick={() => removeImage(idx)} data-idx={idx} class="btn btn-danger btn-sm btn-round btn-shadow btn-delete-preview position-absolute">delete</button>
@@ -67,13 +75,6 @@ const AddProperty = (props) => {
         </div>
       ) || null;
     });
-
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({
-        onDrop,
-        accept: 'image/jpeg, image/png',
-        minSize: 0,
-        maxSize: 5242880,
-    })
 
     const uploadImage = (
       <>
@@ -89,11 +90,14 @@ const AddProperty = (props) => {
     );
 
     const addProperty = async (event) => {
+      setLoading(true)
       event.preventDefault();
       const data = event.target.elements;
 
       let time = new Date()
       data.date = Date.parse(time);
+
+      data.album = imageData;
       
       try {
         // TODO move these checker into function
@@ -116,15 +120,19 @@ const AddProperty = (props) => {
         await serverController.postProperty(currentUser, data);
 
         props.history.push("/account")
+        setLoading(false)
         alert.success('post sucessfully')
       } catch (error) {
+        setLoading(false)
         alert.error(error)
       }
     };
 
-    // if (isSuccess) {
-    //     return <Redirect to="/account" />;
-    // }
+    if (loading) {
+      return (
+          <div class="lds-facebook"><div></div><div></div><div></div></div>
+      )
+    }
       
     return (
     <div>

@@ -42,14 +42,12 @@ const Property = (props) => {
 				<div class="row property-card my-3">
 					<div class="col-lg-6 col-md-4 col-6 pl-0">
 						<Link to={'/property/' + property._id}>
-							{/* <div class="avatar-container"> */}
-								{property.avatar ?
-								(<img src="https://cdngeneral.rentcafe.com/dmslivecafe/3/509605/Avant-Apartments-Parking-Garage-Entrance-Carmel,-Indiana_WEB.jpg" class="card-img-left" alt="property image" />)
-								:
-								(<img src="https://cdngeneral.rentcafe.com/dmslivecafe/3/509605/Avant-Apartments-Parking-Garage-Entrance-Carmel,-Indiana_WEB.jpg" class="card-img-left" alt="property image" />)
-								}
-							</Link>
-							{/* </div> */}
+							{property.album.length == 0 ?
+							(<img src="/img/default_property.jpg" class="card-img-left" alt="property image" />)
+							:
+							(<img src={property.album[0]} class="card-img-left" alt="property image" />)
+							}
+						</Link>
 					</div>
 					<div class="col-lg-6 col-md-4 col-6 py-3">
 						<Link to={'/property/' + property._id}>
@@ -135,7 +133,7 @@ const Property = (props) => {
         )
     }
 
-	if (!(Array.isArray(propertyData) && propertyData.length)) {
+	if (!(Array.isArray(propertyData) && propertyData.length) && !(filter || sort)) {
 		return (
 			<section class="section">
 				<div class="container">
@@ -148,7 +146,6 @@ const Property = (props) => {
 	return (
 		<section class="section">
 			<div class="container">
-				{/* <h1 class="mb-5">All Property</h1> */}
 				<div className="row mb-5">	
 					<div className="col-3 p-0">
 						<div class="dropdown w-100 pr-2">

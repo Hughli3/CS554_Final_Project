@@ -1,20 +1,22 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext, useCallback, useEffect, createRef} from 'react';
 import { AuthContext } from "../auth/Auth";
 import Watchlist from "./Watchlist";
 import Property from "./Property";
 import AddProperty from "./AddProperty";
 import EditProperty from "./EditProperty";
-import EditProfile from "./EditProfile";
 import PrivateRoute from "../auth/PrivateRoute";
 import serverController from "../../serverController"
 import { useAlert } from 'react-alert';
 import { Link, Switch } from 'react-router-dom';
 import ReactTooltip from "react-tooltip";
+import {useDropzone} from 'react-dropzone'
 
 export default function Account(props){
     const { currentUser } = useContext(AuthContext);
     const [userData, setUserData] = useState({});
     const [loading, setLoading] = useState(true);
+    const colseModal = createRef();
+    const [imageData, setImageData] = useState([null, null, null]);
 
 	const alert = useAlert();
 	useEffect(
@@ -23,8 +25,7 @@ export default function Account(props){
 				try {
 					setLoading(true);
 					const {data: resData} = await serverController.getUser(currentUser);
-					console.log(resData)
-					setUserData(resData);
+                    setUserData(resData);
 					setLoading(false);
 				} catch (e) {
                     alert.error(e);
@@ -34,8 +35,40 @@ export default function Account(props){
 			fetchData();
 		},
 		[]
-	);
+    );
 
+    const getbase64 = async(file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (event) => resolve([file.name, "fieldName",event.target.result]);
+            reader.onerror = reject
+        })
+    }
+
+    const getData = async (Files) => {
+        return Promise.all(Files.map(file => getbase64(file)))
+    }
+
+    const onDrop = useCallback(async(acceptedFiles, rejectedFiles) => {
+        for (let file of rejectedFiles) {
+          for (let error of file.errors) {
+            alert.error(file.file.name + " : " + error.message)
+          }
+        }
+
+        let files = await getData(acceptedFiles);
+        setImageData(files[0])
+    }, [])
+
+    const {getRootProps, getInputProps} = useDropzone({
+        onDrop,
+        accept: 'image/jpeg, image/png',
+        minSize: 0,
+        maxSize: 5242880,
+        multiple: false
+    })
+        
     if (loading) {
         return (
             <div class="lds-facebook"><div></div><div></div><div></div></div>
@@ -43,33 +76,18 @@ export default function Account(props){
     }
 
     const editUser = async (event) => {
+        colseModal.current.click()
         event.preventDefault();
-        console.log("submitted")
         try{
             const data = event.target.elements;
-            if(!data.phone.value) throw "description not exist";
-            if (data.phone.value.length != 10) throw "phone number wrong format";
-            // if (!data.phone.value) throw "phone not exist";
-            // TODO avatar 
-            let avatar = null;
-            const {data: resData} = await serverController.editUser(currentUser, data.phone.value, avatar);
+            if (data.phone.value.length != 10 && data.phone.value.length != 0) throw "phone number wrong format";
+            const {data: resData} = await serverController.editUser(currentUser, data.phone.value, imageData);
             setUserData(resData);
-            // setIsSuccess(true);
-            // props.history.push("/account")
             alert.success('Edit sucessfully');
         }catch(error){
             alert.error(error)
         }
     }
-
-    /*
-    function getPict(){
-        var img = "./home/default_user.png";
-        if (userData.avatar){
-            const img = userData.avatar;
-        }
-        return img;
-    }*/
     
     return(
         <section class="section account">
@@ -78,7 +96,10 @@ export default function Account(props){
                 <div className="row justify-content-center">
                     <div className="col-lg-3 col-md-4 col-6">
                         <div class="avatar-container">
-                            <img src="{{#if user.avatar}}{{user.avatar}}{{else}}./home/default_user.png{{/if}}" id="user-avatar" class="img-fluid avatar" alt="user avatar" />                
+                            {userData.avatar ? 
+                            (<img src={userData.avatar} id="user-avatar" class="img-fluid avatar" alt="user avatar" />)
+                            : (<img src="/img/default_user.png" id="user-avatar" class="img-fluid avatar" alt="user avatar" /> )
+                            }
                         </div>
                         {userData.email ? (
 					        <div class="icon-group mt-4">
@@ -112,7 +133,6 @@ export default function Account(props){
                             <PrivateRoute exact path='/account/property/add' component={AddProperty}/>
                             <PrivateRoute exact path='/account/watchlist' component={Watchlist}/>
                             <PrivateRoute exact path='/account/property/:id' component={EditProperty}/>
-                            {/* <PrivateRoute exact path='/account/edit' component={EditProfile} />                             */}
                         </Switch>
                     </div>
                 </div>
@@ -130,6 +150,19 @@ export default function Account(props){
 
                         <form onSubmit={editUser}>
                             <div class="modal-body">
+                                <div class="avatar-edit-container">
+                                    <div class="avatar-container" {...getRootProps()}>
+                                        <input {...getInputProps()} />
+                                        {imageData[2] ? 
+                                        (<img src={imageData[2]} id="user-avatar" class="img-fluid avatar" alt="user avatar" />)
+                                        : (<img src={userData.avatar ? userData.avatar : "/img/default_user.png"} id="user-avatar" class="img-fluid avatar" alt="user avatar" /> )
+                                        }
+                                        <div class="overlay">
+                                            <div class="text">Edit</div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <label htmlFor="email">Email</label>
                                     <input type="email" class="form-control" id="email" placeholder="title" value={userData.email} disabled/>
@@ -141,7 +174,7 @@ export default function Account(props){
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Update</button>
-                                <button type="button" class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
+                                <button type="button" ref={colseModal} class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
                             </div>
                         </form>
                     </div>

@@ -28,7 +28,7 @@ const SingleProperty = (props) => {
                     console.log(property);
 					setPropertyData(property);
 				} catch (e) {
-					console.log(e)
+					alert.error(e)
 				}
 			}
 			async function checkWatchlist(currentUser) {
@@ -43,7 +43,7 @@ const SingleProperty = (props) => {
 					setLoading(false);
 				} catch (e) {
 					setLoading(false);
-					console.log(e)
+					alert.error(e)
 				}
 			}
 
@@ -83,9 +83,11 @@ const SingleProperty = (props) => {
 
 	if (!propertyData) {
 		return (
-			<div className='show-body'>
-				<p>404 - Property Not Found!</p>
-			</div>
+			<section class="section">
+				<div class="container">
+					<h1>404 - Property Not Found!</h1>
+				</div>
+			</section>
 		)
 	}
 
@@ -96,8 +98,7 @@ const SingleProperty = (props) => {
 	}
 
 	const constructDetail = (propertyData) => {
-		let price, zipcode, type, bed, bath, owner;
-		console.log(propertyData)
+		let price, zipcode, type, bed, bath, owner, phone;
 		if (propertyData.price) {
 			price = (
 				<>
@@ -133,11 +134,18 @@ const SingleProperty = (props) => {
 					{propertyData.bath}
 				</>)
 		}
-		if (propertyData.owner) {
+		if (propertyData.owner._id && propertyData.owner.email) {
 			owner = (
 				<>
 					<i class="fas fa-user"></i>
-					<Link to={"/user/" + propertyData.owner}>{propertyData.owner}</Link>
+					<Link to={"/user/" + propertyData.owner._id}>{propertyData.owner.email}</Link>
+				</>)
+		}
+		if (propertyData.owner.phone) {
+			phone = (
+				<>
+					<i class="fas fa-phone"></i>
+					{propertyData.owner.phone}
 				</>)
 		}
 
@@ -158,11 +166,37 @@ const SingleProperty = (props) => {
 				}
 				<div class="icon-group">
 					<p>{owner}</p>
-				
 				</div>
+				{phone ? (
+					<div class="icon-group">
+						<p>{phone}</p>
+					</div>
+					) : null
+				}
 			</>
 		)
 	};
+
+	const buildIndicator = (image, idx) => {
+		return <li data-target="#carouselExampleIndicators" data-slide-to={idx} class={idx == 0 ? ("active") : ""}></li>
+	}
+	const carouselIndicator = propertyData.album.length == 0 ? 
+			(<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>)
+			: propertyData.album.map( (image, idx) => buildIndicator(image, idx))
+
+	const buildCarouselImages = (image, idx) => {
+		console.log(image)
+		return (
+			<div class={idx == 0 ? ("carousel-item active") : "carousel-item"}>
+				<img class="d-block w-100" src={image} alt="property images"/>
+			</div>
+		)					
+	}
+	const carouselImages = propertyData.album.length == 0 ?
+		<div class="carousel-item active">
+			<img class="d-block w-100" src="/img/default_property.jpg" alt="property images"/>
+		</div>
+		 : propertyData.album.map( (image, idx) => buildCarouselImages(image, idx))
 
 	return (
 		<section class="section single-property">
@@ -177,20 +211,10 @@ const SingleProperty = (props) => {
 					<div class='col-lg-7 col-12'>
 						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 							<ol class="carousel-indicators">
-								<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-								<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-								<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+								{carouselIndicator}
 							</ol>
 							<div class="carousel-inner">
-								<div class="carousel-item active">
-								<img class="d-block w-100" src="https://cdngeneral.rentcafe.com/dmslivecafe/3/509605/Avant-Apartments-Parking-Garage-Entrance-Carmel,-Indiana_WEB.jpg" alt="First slide"/>
-								</div>
-								<div class="carousel-item">
-								<img class="d-block w-100" src="https://res.cloudinary.com/g5-assets-cld/image/upload/x_0,y_491,h_4413,w_7356,c_crop/q_auto,f_auto,fl_lossy,g_center,h_1200,w_2000/g5/g5-c-5g13txeqo-mark-taylor-companies-client/g5-cl-1j73ew2zby-the-core-scottsdale/uploads/DSC_7198-Edit-2_1_n06pxw.jpg" alt="Second slide" />
-								</div>
-								<div class="carousel-item">
-								<img class="d-block w-100" src="https://www.aveliving.com/AVE/media/Property_Images/Florham%20Park/hero/flor-apt-living-(2)-hero.jpg?ext=.jpg" alt="Third slide" />
-								</div>
+								{carouselImages}
 							</div>
 							<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 								<span class="carousel-control-prev-icon" aria-hidden="true"></span>

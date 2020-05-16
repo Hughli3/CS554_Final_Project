@@ -47,20 +47,17 @@ const Property = (props) => {
 	let li = null;
 	
 	const buildListItem = (property) => {
-		const propertyId = property._id
 		return (
 		<>
 			<div class="row property-card mb-4">
 				<div class="col-lg-6 col-6 pl-0">
 					<Link to={'/property/' + property._id}>
-						{/* <div class="avatar-container"> */}
-							{property.avatar ?
-							(<img src="https://cdngeneral.rentcafe.com/dmslivecafe/3/509605/Avant-Apartments-Parking-Garage-Entrance-Carmel,-Indiana_WEB.jpg" class="card-img-left" alt="property image" />)
+						{property.album.length == 0 ?
+							(<img src="/img/default_property.jpg" class="card-img-left" alt="property image" />)
 							:
-							(<img src="https://cdngeneral.rentcafe.com/dmslivecafe/3/509605/Avant-Apartments-Parking-Garage-Entrance-Carmel,-Indiana_WEB.jpg" class="card-img-left" alt="property image" />)
-							}
-						</Link>
-						{/* </div> */}
+							(<img src={property.album[0]} class="card-img-left" alt="property image" />)
+						}
+					</Link>
 				</div>
 				<div class="col-lg-6 col-6 py-3">
 					<Link to={'/property/' + property._id}>

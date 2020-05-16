@@ -45,7 +45,7 @@ const serverController = {
         } catch (e) {
             throw "fail getting usertoken"
         }
-        const {title, description, price, type, zipcode, bedroom, bath, date} = property
+        const {title, description, price, type, zipcode, bedroom, bath, date, album} = property
         const data = {
             title: title.value,
             description: description.value,
@@ -54,7 +54,8 @@ const serverController = {
             zipcode:zipcode.value,
             bedroom:parseInt(bedroom.value),
             bath:parseInt(bath.value),
-            date:date
+            date:date,
+            album: album
         }
         try {
             return await axios.post(baseUrl + "/api/property/", data, {headers: {'Authorization': token}})
@@ -71,7 +72,8 @@ const serverController = {
         } catch (e) {
             throw "fail getting usertoken"
         }
-        const {title, description, price, type, zipcode, bedroom, bath, date} = property
+  
+        const {title, description, price, type, zipcode, bedroom, bath, date, newImages, removedImages} = property
         const data = {
             title: title.value,
             description: description.value,
@@ -80,9 +82,11 @@ const serverController = {
             zipcode:zipcode.value,
             bedroom:parseInt(bedroom.value),
             bath:parseInt(bath.value),
-            date:date
+            date:date,
+            newImages: newImages,
+            removedImages: removedImages
         }
-        console.log(data)
+
         try {
             return await axios.put(baseUrl + "/api/property/" + pid, data, {headers: {'Authorization': token}})
         } catch (e) {
