@@ -72,8 +72,8 @@ router.get('/', async (req, res) => {
             }
 
             let jsonProperty = JSON.stringify(resData)
-            client.setAsync(allSave, jsonProperty);
-            client.setAsync(allSave+"c", true);
+            await client.setAsync(allSave, jsonProperty);
+            await client.setAsync(allSave+"c", true);
             allC.push(allSave+"c")
         }
     // } catch (e) {
@@ -147,7 +147,7 @@ router.get('/:id', async (req, res) => {
         }
 
         let jsonProperty = JSON.stringify(property)
-        client.setAsync("property"+req.params.id, jsonProperty);
+        await client.setAsync("property"+req.params.id, jsonProperty);
     }
     res.json(property);
 });
@@ -254,7 +254,7 @@ router.put("/:id", checkAuth, async(req, res) => {
         const property = await propertyData.update(pid, propertyBody);
 
         // reset property redis
-        client.delAsync("property"+pid);
+        await client.delAsync("property"+pid);
         for(let i=0; i<allC.length;i++){
             await client.delAsync(allC[i]);
         }

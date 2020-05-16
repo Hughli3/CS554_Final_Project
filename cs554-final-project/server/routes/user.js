@@ -8,6 +8,15 @@ const base64Img = require('base64-img');
 // const ObjectId = require('mongodb').ObjectID;
 const checkAuth = require('./checkAuth')
 
+const bluebird = require("bluebird");
+const redis = require("redis");
+const client = redis.createClient();
+bluebird.promisifyAll(redis.RedisClient.prototype);
+bluebird.promisifyAll(redis.Multi.prototype);
+
+// clear redis
+// client.FLUSHDB();
+
 router.post('/', checkAuth, async (req, res) => {
     let userInfo = req.body;
     
@@ -44,7 +53,8 @@ router.patch('/', checkAuth, async (req, res) => {
         //     avatar = [userInfo.avatar[0][0], "avatar", avatarFilePath]
         //     console.log(avatar);
         // }
-        const user = await userData.updateUser(res.locals.userUid, userInfo.phone, null);        
+        const user = await userData.updateUser(res.locals.userUid, userInfo.phone, null);
+        await client.delAsync("user"+res.locals.userUid)
         res.json(user);
     } catch (e) {
         console.log(e)
@@ -84,13 +94,24 @@ router.get('/', checkAuth, async (req, res) => {
 
 router.get('/watchlist', checkAuth, async (req, res) => {
     try {
-        const user = await userData.getUser(res.locals.userUid);
-        let data = {
-            watchlist: user.watchlist,
-            details: []
-        }
-        for (let pid of user.watchlist) {
-            data.details.push(await propertyData.getById(pid))
+        let data
+
+        let wlExist = await client.existsAsync(res.locals.userUid+"wl");
+        if(wlExist){            
+            let jsonWatchlist = await client.getAsync(res.locals.userUid+"wl");
+            data = JSON.parse(jsonWatchlist);
+        } else {
+            const user = await userData.getUser(res.locals.userUid);
+            data = {
+                watchlist: user.watchlist,
+                details: []
+            }
+            for (let pid of user.watchlist) {
+                data.details.push(await propertyData.getById(pid))
+            }
+
+            let jsonWatchlist = JSON.stringify(data)
+            await client.setAsync(res.locals.userUid+"wl", jsonWatchlist);
         }
 
         res.json(data)
@@ -129,6 +150,8 @@ router.post('/watchlist', checkAuth, async (req, res) => {
     // add to watchlist
     try {
         const data = await userData.addWatchlist(pid, res.locals.userUid)
+        await client.delAsync(res.locals.userUid+"wl")
+
         res.json({watchlist: data.watichlist});
     } catch (e) {
         res.status(500).json({error: e});
@@ -158,6 +181,8 @@ router.delete('/watchlist/:pid', checkAuth, async (req, res) => {
         }
         console.log(data)
 
+        await client.delAsync(res.locals.userUid+"wl")
+
         res.json(data)
     } catch (e) {
         res.status(500).json({error: e});
@@ -166,39 +191,49 @@ router.delete('/watchlist/:pid', checkAuth, async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     let user;
-    
-    try {
-        let userId = req.params.id;
-        user = await userData.getUser(userId);
-    } catch (e) {
-        res.status(404).json({error: 'user not found'});
-        return;
-    }
-
-    try {
-        const propertyList = user.property
-        user.property = []
-        for (let pid of propertyList) {
-            user.property.push(await propertyData.getById(pid))
+    let userExist = await client.existsAsync("user"+req.params.id);
+    if(userExist){
+        let jsonUser = await client.getAsync("user"+req.params.id);
+        user = JSON.parse(jsonUser);
+    } else {
+        try {
+            let userId = req.params.id;
+            user = await userData.getUser(userId);
+        } catch (e) {
+            res.status(404).json({error: 'user not found'});
+            return;
         }
-    } catch (e) {
-        res.status(500).json({error: e});
-        return;
-    }
 
-    // get images data
-    try {
-        for (let property of user.property) {
-            let albumIds = property.album
-            property.album = []
-            for (let imageId of albumIds) {
-                property.album.push(await imageData.getPhotoDataId(imageId));
+        try {
+            const propertyList = user.property
+            user.property = []
+            for (let pid of propertyList) {
+                user.property.push(await propertyData.getById(pid))
             }
+        } catch (e) {
+            res.status(500).json({error: e});
+            return;
         }
-        res.json(user);
-    } catch (e) {
-        res.status(500).json({error: e});
+
+        // get images data
+        try {
+            for (let property of user.property) {
+                let albumIds = property.album
+                property.album = []
+                for (let imageId of albumIds) {
+                    property.album.push(await imageData.getPhotoDataId(imageId));
+                }
+            }
+            // res.json(user);
+        } catch (e) {
+            res.status(500).json({error: e});
+        }
+
+        let jsonUser = JSON.stringify(user)
+        await client.setAsync("user"+req.params.id, jsonUser);
     }
+
+    res.json(user);
 });
 
 // router.put('/:id', async (req, res) => {
