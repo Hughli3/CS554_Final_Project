@@ -7,16 +7,45 @@ const ObjectId = require('mongodb').ObjectID;
 
 let exportedMethods = {
 
-    async getAll(page) {
+    async getAll(page, filter, sort) {
         if (page === undefined) throw "page is undefinded";
         page = parseInt(page);
         if(isNaN(page)) throw "page is not a valid number";
         if (page < 1 ) throw "page is not a positive number";
-    
+        
         let take = 8;
-    
+        if (sort && sort === "priceUp"){
+            sort = {price:1};
+        }else if (sort && sort === "priceDown"){
+            sort = {price:-1};
+        }else if(sort && sort === "date"){
+            sort = {date:-1}
+        }else{
+            sort = {};
+        }
+        
+        let date = new Date()
+        if(filter && filter === "3days"){
+            let filterDate = Date.parse(date) - 3*24*60*60*1000;
+            filter = {date: {$gt:filterDate}};
+        }else if (filter && filter === "10days"){
+            let filterDate = Date.parse(date) - 10*24*60*60*1000;
+            filter = {date: {$gt:filterDate}};
+        }else if (filter && filter === "30days"){
+            let filterDate = Date.parse(date) - 30*24*60*60*1000;
+            filter = {date: {$gt:filterDate}};
+        }else if(filter && filter === "price1"){
+            filter = {price: {$lt:1000}};
+        }else if (filter && filter === "price2"){
+            filter = {price: {$lt:2000, $gte:1000}};
+        }else if (filter && filter === "price3"){
+            filter = {price: {$gte:3000}};
+        }else{
+            
+            filter = {}
+        }
         const propertyCollection = await properties();
-        let allProperty = await propertyCollection.find({}).toArray();
+        let allProperty = await propertyCollection.find(filter).sort(sort).toArray();
         if (!allProperty) throw 'no property in system';
 
         let data = {
@@ -42,9 +71,6 @@ let exportedMethods = {
     async add(owner, propertyInfo){
         isOwner(owner);
         checkPropertyInfo(propertyInfo);
-        validateTitle(propertyInfo.title);
-        validateDescription(propertyInfo.description);
-        validateType(propertyInfo.type);
         let data = {
             title: propertyInfo.title,
             description: propertyInfo.description,
@@ -94,9 +120,6 @@ let exportedMethods = {
         const objId = ObjectId.createFromHexString(id);
         if (!propertyInfo) throw 'property not found';
         checkPropertyInfo(propertyInfo);
-        validateTitle(propertyInfo.title);
-        validateDescription(propertyInfo.description);
-        validateType(propertyInfo.type);
         
         let data = {
             title: propertyInfo.title,
@@ -104,7 +127,8 @@ let exportedMethods = {
             zipcode: propertyInfo.zipcode,
             bedroom: propertyInfo.bedroom,
             bath: propertyInfo.bath,
-            area: propertyInfo.area,
+            price:propertyInfo.price,
+            type:propertyInfo.type,
             date: propertyInfo.date
         }
         const propertyCollection = await properties();
@@ -217,23 +241,27 @@ function checkPropertyInfo(propertyInfo){
     if(!propertyInfo.title){
         throw "property title not exist";
     }
+    if (propertyInfo.title.constructor !== String) throw "title is not a string";
+    if (propertyInfo.title.length > 70) throw "title length is greater than 70";
 
     // ---------------------------------
     if(!propertyInfo.type){
         throw "property type not exist";
     }
     if (propertyInfo.type.constructor !== String) throw "type is not a string";
-
+    if (!(propertyInfo.type === "apartment" || propertyInfo.type === "house")) throw "invalid type"
     // ---------------------------------
     if(!propertyInfo.description){
         throw "property description not exist";
     }
-
+    if (propertyInfo.description.constructor !== String) throw "title is not a string";
+    if (propertyInfo.description.length > 200) throw "title length is greater than 200";
     // ---------------------------------
     if(!propertyInfo.price){
         throw "property price not exist";
     }
-
+    if (propertyInfo.price.constructor !== Number) throw "price is not a number";
+    if (propertyInfo.price < 0) throw "price is invalid"
     // ---------------------------------
     if(!propertyInfo.date){
         throw "property published date not exist";
@@ -243,29 +271,17 @@ function checkPropertyInfo(propertyInfo){
     if(!propertyInfo.bedroom){
         throw "property bedroom not exist";
     }
-
+    if(propertyInfo.bedroom.constructor != Number) throw "bedroom is not a number";
+    if (propertyInfo.bedroom < 0) throw "bedroom is invalid"
     // ---------------------------------
     if(!propertyInfo.bath){
         throw "property baths not exist";
     }
+    if(propertyInfo.bath.constructor != Number) throw "bath is not a number";
+    if (propertyInfo.bath < 0) throw "bath is invalid"
 
+    // TODO Add date checker
+    let today = new Date()
+    if (propertyInfo.date > Date.parse(today)) throw "Date invalid";
 }
 
-function validateType(type){
-    if (!type) throw "type is undefinded";
-    if (type.constructor !== String) throw "type is not a string";
-
-    if (!(type === "apartment" || type === "house")) throw "invalid type"
-}
-
-function validateTitle(title){
-    if (!title) throw "title is undefinded";
-    if (title.constructor !== String) throw "title is not a string";
-    if (title.length > 70) throw "title length is greater than 30";
-}
-
-function validateDescription(description){
-    if (!description) throw "title is undefinded";
-    if (description.constructor !== String) throw "title is not a string";
-    if (description.length > 200) throw "title length is greater than 200";
-}

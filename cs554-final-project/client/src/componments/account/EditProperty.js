@@ -41,19 +41,22 @@ const EditProperty = (props) => {
 
             let time = new Date();
             data.date = Date.parse(time);
-            console.log(data);
+            // console.log(data);
             if (!data.title.value) throw "title not exist"
             if (data.title.value.length > 70) throw "title too long";
-            if(!data.description.value) throw "description not exist"
+            if(!data.description.value) throw "description not exist";
             if (data.description.value.length > 200) throw "description too long";
             if (!data.bedroom.value) throw "bedroom not exist"
-            if (data.bedroom.value < 1 || data.bedroom.value > 10 ) throw "bedroom number invalid";
+            if (parseInt(data.bedroom.value) < 1 || parseInt(data.bedroom.value) > 10 ) throw "bedroom number invalid";
             if (!data.bath.value) throw "bath not exist"
-            if (data.bath.value < 0|| data.bath.value > 10) throw "bath number invalid";
+    
+            if (parseInt(data.bath.value) < 0|| parseInt(data.bath.value) > 10) throw "bath number invalid";
             if (!data.price.value) throw "price not exist"
-            if (data.price.value < 0) throw "price invalid";
-            if (!data.zipcode.value) throw "zipcode not exist"
+            if (parseInt(data.price.value) < 0) throw "price invalid";
+            if (!data.zipcode.value) throw "zipcode not exist";
             if (data.zipcode.value.length != 5) throw "zipcode invalid";
+            if (!data.type.value) throw "type is not exist";
+            if (data.type.value !== "apartment" && data.type.value !== "house" ) throw "type is invalid";
 
             await serverController.editProperty(props.match.params.id,currentUser, data);
             // setIsSuccess(true);
@@ -107,7 +110,7 @@ const EditProperty = (props) => {
                         <label>Type</label>
                         <div>
                         <div class="custom-control col-3 custom-radio mb-3">
-                            <input name="type" value="apartment" class="custom-control-input" id="type-apartment" type="radio" defaultChecked={propertyData.type === "description"}/>
+                            <input name="type" value="apartment" class="custom-control-input" id="type-apartment" type="radio" defaultChecked={propertyData.type === "apartment"}/>
                             <label class="custom-control-label" for="type-apartment">Apartment</label>
                         </div>
                         <div class="custom-control col-3 custom-radio mb-3">

@@ -12,7 +12,8 @@ const Property = (props) => {
 	const alert = useAlert()
 	const urlParams = new URLSearchParams(props.location.search);
 	let page = urlParams.get('page') || 1;
-
+	let filter = urlParams.get('filter') || "null" ;
+	let sort = urlParams.get('sort') || "null";
 	let li = null;
 	let pagination = null;
 
@@ -21,7 +22,7 @@ const Property = (props) => {
 			async function fetchData() {
 				try {
 					setLoading(true);
-                    const {data: resData} = await serverController.getAllProperty(page);
+                    const {data: resData} = await serverController.getAllProperty(page, filter, sort);
 					setPropertyData(resData.properties);
 					setPageData({next: resData.next, prev: resData.prev});
 					setLoading(false);
@@ -64,6 +65,7 @@ const Property = (props) => {
 									{property.type ? (<><i class="fas fa-building"></i>{property.type}</>): null}
 									{property.bedroom ? (<><i class="fas fa-bed"></i>{property.bedroom}</>): null}
 									{property.bath ? (<><i class="fas fa-bath"></i>{property.bath}</>): null}
+									{/* TODO add last update */}
 								</p>
 							</div>) : null	
 							}												
@@ -104,7 +106,7 @@ const Property = (props) => {
 		if (pageData.next || pageData.prev) {
 			curr = (
 				<li class="page-item {{@active}}">
-					<Link to={"?page=" + currentPageNumber} className="page-link" aria-label={"go to page " + currentPageNumber}>
+					<Link to={"?page=" + page} className="page-link" aria-label={"go to page " + currentPageNumber}>
 						{currentPageNumber}
 					</Link>
 				</li>)
@@ -154,9 +156,9 @@ const Property = (props) => {
 								filter Days on RentSIT
 							</button>
 							<div class="dropdown-menu w-100 pr-2" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#">In 3 Days</a>
-								<a class="dropdown-item" href="#">In 10 Days</a>
-								<a class="dropdown-item" href="#">In 30 Days</a>
+							<Link to={"?page=" + page + "&filter=" + "3days" + "&sort=" + sort} className="dropdown-item">In 3 Days</Link>
+							<Link to={"?page=" + page + "&filter=" + "10days" + "&sort=" + sort} className="dropdown-item">In 10 Days</Link>
+							<Link to={"?page=" + page + "&filter=" + "30days" + "&sort=" + sort} className="dropdown-item">In 30 Days</Link>
 							</div>
 						</div>
 					</div>
@@ -167,9 +169,9 @@ const Property = (props) => {
 								filter price
 							</button>
 							<div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#">Low to High</a>
-								<a class="dropdown-item" href="#">High to Low</a>
-								<a class="dropdown-item" href="#">Something else here</a>
+							<Link to={"?page=" + page + "&filter=" + "price1" + "&sort=" + sort} className="dropdown-item">$ 0 - 1000</Link>
+							<Link to={"?page=" + page + "&filter=" + "price2" + "&sort=" + sort} className="dropdown-item">$ 1000 - 2000</Link>
+							<Link to={"?page=" + page + "&filter=" + "price3" + "&sort=" + sort} className="dropdown-item">$ 2000 +</Link>
 							</div>
 						</div>
 					</div>
@@ -180,24 +182,15 @@ const Property = (props) => {
 								sort price
 							</button>
 							<div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#">Low to High</a>
-								<a class="dropdown-item" href="#">High to Low</a>
-								<a class="dropdown-item" href="#">Something else here</a>
+							<Link to={"?page=" + page + "&filter=" + filter + "&sort=" + "priceUp"} className="dropdown-item">Low to High</Link>
+							<Link to={"?page=" + page + "&filter=" + filter + "&sort=" + "pric"} className="dropdown-item">High to Low</Link>
+							<Link to={"?page=" + page + "&filter=" + filter + "&sort=" + "date"} className="dropdown-item">Last Update</Link>
 							</div>
 						</div>
 					</div>
 
 					<div className="col-3 p-0">
-						<div class="dropdown w-100">
-							<button class="btn btn-primary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								sort date
-							</button>
-							<div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#">Low to High</a>
-								<a class="dropdown-item" href="#">High to Low</a>
-								<a class="dropdown-item" href="#">Something else here</a>
-							</div>
-						</div>
+							<Link  className="btn btn-secondary w-100" aria-haspopup="true" aria-expanded="false" to={"?page=" + page + "&filter=" + "null" + "&sort=" + "null"} >Reset</Link>
 					</div>
 				</div>
 				{li}
