@@ -37,10 +37,26 @@ router.get('/', async (req, res) => {
         return;
     }
 
+    let resData;
     try {
         // console.log("I'm hrere, check me!!!!!!!!!")
-        const resData = await propertyData.getAll(page, filter, sort);
+        resData = await propertyData.getAll(page, filter, sort);
         // console.log("I'm hrere, check me, again!!!!!!!!!")
+        // res.json(resData);
+    } catch (e) {
+        res.status(500).json({error: e});
+        return
+    }
+
+    // get images data
+    try {
+        for (let property of resData.properties) {
+            let albumIds = property.album
+            property.album = []
+            for (let imageId of albumIds) {
+                property.album.push(await imageData.getPhotoDataId(imageId));
+            }
+        }
         res.json(resData);
     } catch (e) {
         res.status(500).json({error: e});
@@ -57,11 +73,26 @@ router.get('/:id', async (req, res) => {
         res.status(400).json({error: e});
         return;
     }
+
+    let property
     try {
-        const property = await propertyData.getById(req.params.id);
-        res.json(property);
+        property = await propertyData.getById(req.params.id);
     } catch (e) {
         res.status(404).json({error: 'property not found'});
+        return;
+    }
+
+    // get images data
+    try {
+        let albumIds = property.album
+        property.album = []
+        for (let imageId of albumIds) {
+            property.album.push(await imageData.getPhotoDataId(imageId));
+        }
+
+        res.json(property);
+    } catch (e) {
+        res.status(500).json({error: e});
     }
 });
 
@@ -94,7 +125,6 @@ router.post('/', checkAuth, async (req, res) => {
             propertyInfo.album.push(id);
         }
     } catch (e) {
-        console.log(e)
         res.status(500).json({error: "fail handling uploaded images"});
         return
     }

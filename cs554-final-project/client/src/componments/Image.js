@@ -48,7 +48,7 @@ const Image = (props) => {
           return array
         })
 
-        const {data} = await serverController.addImage(files)        
+        // const {data} = await serverController.addImage(files)        
     }, [])
 
     const removeImage = (idx) => {
