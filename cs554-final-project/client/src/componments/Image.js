@@ -4,20 +4,7 @@ import {useDropzone} from 'react-dropzone'
 
 const Image = (props) => {
     const [imageData, setImageData] = useState([]);
-
-    let preview = imageData && imageData.map(key => {
-      console.log("trya")
-      // console.log(imageData[key])
-      return (<img src={key[2]} alt="test" />);
-    });
-
-    // useEffect(
-    //   () => {
-    //     console.log("a")
-          
-    //   },
-    //   [imageData]
-    // );
+    const maxSize = 16777216;
 
     const getbase64 = async(file) => {
         return new Promise((resolve, reject) => {
@@ -49,19 +36,18 @@ const Image = (props) => {
           return array
         })
 
-        function removeDuplicates(array) {
-          return 
-        };
-        console.log(imageData)
-        
-
-
-        // const {data} = await serverController.addImage(files)
+        // const {data} = await serverController.addImage(files)        
     }, [])
+
+    let preview = imageData && imageData.map(key => {
+      return (<img src={key[2]} alt="test" />);
+    });
 
     const {getRootProps, getInputProps, isDragActive} = useDropzone({
         onDrop,
-        accept: 'image/jpeg, image/png'
+        accept: 'image/jpeg, image/png',
+        minSize: 0,
+        maxSize,
     })
 
     return (
