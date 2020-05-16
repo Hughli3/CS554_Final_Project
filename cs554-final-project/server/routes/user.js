@@ -250,6 +250,7 @@ router.delete('/watchlist/:pid', checkAuth, async (req, res) => {
 router.get('/:id', async (req, res) => {
     let user;
     let userExist = await client.existsAsync("user"+req.params.id);
+    
     if(userExist){
         let jsonUser = await client.getAsync("user"+req.params.id);
         user = JSON.parse(jsonUser);
@@ -285,6 +286,17 @@ router.get('/:id', async (req, res) => {
             // res.json(user);
         } catch (e) {
             res.status(500).json({error: e});
+            return
+        }
+
+        // get avatar
+        try {
+            if (user.avatar) {
+                user.avatar = await imageData.getPhotoDataId(user.avatar)
+            }
+        } catch (e) {
+            res.status(500).json({error: e});
+            return;
         }
 
         let jsonUser = JSON.stringify(user)
