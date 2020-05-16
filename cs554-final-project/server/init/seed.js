@@ -5,7 +5,7 @@ const user = require("../data/user");
 //  ==================== User and Property data ====================
 
 user1 = {
-    username: "seedseed1",
+    _id: "seedseed1",
     password:"password1",
     photo:"../img/", //TODO
     phone:"1029784458",
@@ -26,7 +26,7 @@ property1 = {
 }
 // ------------------------------------------------------------
 user2 = {
-    username: "seedseed2",
+    _id: "seedseed2",
     password:"password2",
     photo:"../img/", //TODO
     phone:"1538649479",
@@ -47,7 +47,7 @@ property2 = {
 
 // ------------------------------------------------------------
 user3 = {
-    username: "seedseed3",
+    _id: "seedseed3",
     password:"password3",
     photo:"../img/", //TODO
     phone:"8489798468",
@@ -67,7 +67,7 @@ property3 = {
 }
 // ------------------------------------------------------------
 user4 = {
-    username: "seedseed4",
+    _id: "seedseed4",
     password:"password4",
     photo:"../img/", //TODO
     phone:"6458859931",
@@ -87,7 +87,7 @@ property4 = {
 }
 // ------------------------------------------------------------
 user5 = {
-    username: "seedseed5",
+    _id: "seedseed5",
     password:"password5",
     photo:"../img/", //TODO
     phone:"1147895642",
