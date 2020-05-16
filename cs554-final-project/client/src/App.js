@@ -36,14 +36,14 @@ function App() {
             <Route exact path='/user/:id' component={User}/>
 
             <PrivateRoute path='/account' component={Account}/>
-            </main>
+            
 
             <Switch>
               <Route exact path='/login' component={Login}/>
               <Route exact path='/signup' component={Signup}/>
               <Route path='/' component={Footer}/>
             </Switch>
-            
+            </main>
           </Router>
         </AuthProvider>
   );
