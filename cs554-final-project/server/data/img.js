@@ -15,7 +15,7 @@ var sizeOf = require('image-size');
 
 //========================================
 // Validate functions
-async function validateImage(image) {
+async function validateImage(name) {
   if(!image) throw "image is undefinded";
   const imageType = new Set(['jpg', 'jpeg','png']);
   const fileType = image.mimetype.split("/");
@@ -32,8 +32,14 @@ async function validateImage(image) {
   }
 }
 
-async function validateBase64(base64Str) {
-  
+function validateBase64(base64Str) {
+  let reg = /^data:image\/[A-Za-z]+;base64,([A-Za-z0-9+/]{4})*[A-Za-z0-9+/]{1,2}([A-Za-z0-9+/]{2}==)$/
+  console.log(reg.test(base64Str));
+  if(reg.test(base64Str)){
+    return true
+  } else {
+    throw "it is not Base64 for image";
+  }
 }
 
 //========================================
@@ -116,46 +122,6 @@ async function createGridFS(fileName, fieldName, filePath){
   return insertFilesInfo.insertedId;
 }
 
-
-// async function createGridFS(fileName, base64Data){
-//   const fsFilesCollection = await fsFiles();
-//   const fsChunksCollection = await fsChunks();
-//   let nameSplit = fileName.split(".")
-//   let mimetype = nameSplit[nameSplit.length-1]
-
-//   let newFiles = {
-//     length: base64Data.length,
-//     chunkSize: 261120,
-//     uploadDate: now,
-//     filename: fileName,
-//     md5: md5(base64Data),
-//     contentType: mimetype,
-//   }
-
-//   const insertFilesInfo = await fsFilesCollection.insertOne(newFiles);  
-//   if (insertFilesInfo.insertedCount === 0){
-//     throw "could not create a new file";
-//   }
-  
-//   let chunks = chunkSubstr(base64Data);
-//   for (let i = 0; i < chunks.length; i++) {
-//     let buff = Buffer.from(chunks[i]);
-//     let newChunk = {
-//       files_id: insertFilesInfo.insertedId,
-//       n: i,
-//       data: buff,
-//     }
-
-//     let insertChunksInfo = await fsChunksCollection.insertOne(newChunk);
-//     if (insertChunksInfo.insertedCount === 0){
-//       deletePhoto(fileName)      
-//       throw "Could not create a new Chunks";
-//     }    
-//   }
-
-//   return insertFilesInfo.insertedId;
-// }
-
 async function deletePhoto(id){
   if (!id) throw "Your input is not exist.";
   let nid = ObjectID(id)
@@ -196,6 +162,7 @@ async function getPhotoDataId(id){
 }
 
 module.exports = {
+  validateBase64,
   createGridFS,
   deletePhoto,
   getPhotoDataId,
