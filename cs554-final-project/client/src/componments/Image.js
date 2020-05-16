@@ -19,6 +19,7 @@ const Image = (props) => {
     }
 
     const onDrop = useCallback(async(acceptedFiles, rejectedFiles) => {
+        console.log(acceptedFiles);
         
         for (let file of rejectedFiles) {
           for (let error of file.errors) {
@@ -27,9 +28,14 @@ const Image = (props) => {
         }
 
         let files = await getData(acceptedFiles);
+        console.log(files[0][2]);
+        
+        
         // set state: add to previous state
         setImageData(prevState => {
           let array = prevState.concat(files)
+        //   console.log(array);
+          
           // remove duplicate
           let set = new Set()
           for (let i = array.length - 1; i >= 0 ; i--) {
@@ -54,6 +60,14 @@ const Image = (props) => {
       })
     }
 
+    const sunmitImage = async() => {
+        setImageData(prevState => {
+            let array = [...prevState]
+            console.log("在这里上传");
+            // const {data} = await serverController.addImage(array)
+          })
+    }
+
     let preview = imageData && imageData.map((key, idx) => {
       return (
         <>
@@ -68,6 +82,7 @@ const Image = (props) => {
         accept: 'image/jpeg, image/png',
         minSize: 0,
         maxSize: 5242880,
+        multiple: false
     })
 
     return (
@@ -81,6 +96,8 @@ const Image = (props) => {
             }
             </div>
             {preview}
+            
+            <button  className="btn btn-primary" type="submit" onClick={() => sunmitImage()}>submit</button>
         </div>
     );
 };

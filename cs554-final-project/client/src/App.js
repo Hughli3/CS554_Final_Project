@@ -21,7 +21,6 @@ import PrivateRoute from "./componments/auth/PrivateRoute";
 import "./assest/css/argon.css"
 import "./assest/vender/font-awesome/css/all.min.css"
 import "./assest/css/main.css"
-import GetImage from './componments/GetImage';
 
 function App() {
   
@@ -35,7 +34,6 @@ function App() {
             <Route exact path='/' component={Home}/>
 			
             <Route exact path='/image' component={Image}/>
-            <Route exact path='/image/:id' component={GetImage}/>
 
             <Route exact path='/property' component={Property}/>
             <Route exact path='/property/:id' component={SingleProperty}/>
