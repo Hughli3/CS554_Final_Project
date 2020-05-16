@@ -43,7 +43,7 @@ let exportedMethods = {
         }
 
         sort.date = -1;
-
+        console.log(sort);
         const propertyCollection = await properties();
         let allProperty = await propertyCollection.find(filter).sort(sort).toArray();
         if (!allProperty) throw 'no property in system';

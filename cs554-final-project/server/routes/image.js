@@ -5,6 +5,22 @@ const imageData = data.image;
 const base64Img = require('base64-img');
 const ObjectId = require('mongodb').ObjectID;
 
+const bluebird = require("bluebird");
+const redis = require("redis");
+const client = redis.createClient();
+bluebird.promisifyAll(redis.RedisClient.prototype);
+bluebird.promisifyAll(redis.Multi.prototype);
+
+router.get('/someimages/:id', async (req, res) => {
+    try {
+        let n = parseInt(req.params.id)
+        let imgs = await client.lrangeAsync("imgIdList", 0, n-1).map(JSON.parse)
+        res.json({data: imgs});
+    } catch (e) {
+        res.status(404).json({error: 'image not found'});
+    }
+});
+
 router.get('/:id', async (req, res) => {
     try {
         const image = await imageData.getPhotoDataId(req.params.id);

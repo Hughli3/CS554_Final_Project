@@ -107,7 +107,7 @@ const AddProperty = (props) => {
 
       let time = new Date()
       data.date = Date.parse(time);
-
+      console.log(data.album)
       data.album = imageData;
       
       try {
