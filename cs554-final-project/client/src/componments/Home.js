@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {BrowserRouter as Link} from "react-router-dom";
+import {BrowserRouter as Router, Link} from "react-router-dom";
 import { Helmet } from 'react-helmet'
 import serverController from '../serverController';
 
@@ -7,7 +7,6 @@ import serverController from '../serverController';
 const Home = () => {
     const [loading, setLoading] = useState(true);
     const [propertyData, setPropertyData] = useState([]);
-
 
     useEffect(
 		 () => {
@@ -89,13 +88,13 @@ const Home = () => {
                         </p>
                     <div className="btn-wrapper">
                         <Link to="/property" className="btn btn-white btn-icon mb-3 mb-sm-0">
-                        <span className="btn-inner--icon"><i className="ni ni-cloud-download-95"></i></span>
-                        <span className="btn-inner--text">View all properties</span>
+                            <span className="btn-inner--icon"><i className="ni ni-cloud-download-95"></i></span>
+                            <span className="btn-inner--text">View all properties</span>
                         </Link>
                     </div>
                     </div>
                     <div className="col-lg-6 d-none d-lg-block">
-                    <img src= "./home/1.jpg" className="img-fluid rounded" alt="an apartment photo" />
+                    <img src= "./img/home/1.jpg" className="img-fluid rounded" alt="an apartment photo" />
                     </div>
                 </div>
             </div>
@@ -161,8 +160,8 @@ const Home = () => {
                     </ul>
                     </div>
                 </div>
-                <div className="col-md-4 d-none d-lg-block">
-                    <img src="./home/2.jpg" className="img-fluid floating" alt="an apartment photo" />
+                <div className="col-md-5 d-none d-lg-block">
+                    <img src="./img/home/2.jpg" className="img-fluid floating" alt="an apartment photo" />
                 </div>
                 </div>
             </div>
@@ -173,7 +172,7 @@ const Home = () => {
                 <div className="row row-grid align-items-center">
                 <div className="col-12 col-lg-6">
                     <div className="card bg-default shadow border-0">
-                    <img src="/public/img/brand/home-community.jpg" className="card-img-top" alt="a dog image" />
+                    <img src="./img/home/3.jpg" className="card-img-top" alt="a dog image" />
                     <blockquote className="card-blockquote">
                         <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" className="svg-bg">
                         <polygon points="0,52 583,95 0,95" className="fill-default" />
