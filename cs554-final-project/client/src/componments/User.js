@@ -3,6 +3,8 @@ import React, {useEffect, useState, useContext} from 'react';
 import serverController from "../serverController";
 import { useAlert } from 'react-alert'
 import { Link} from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+
 export default function User(props){
     
     const alert = useAlert();
@@ -85,6 +87,9 @@ export default function User(props){
 	if (Object.keys(userData).length === 0) {
 		return (
 			<section class="section">
+            <Helmet>
+              <title> User  - RentSIT</title>
+            </Helmet>
 				<div class="container">
 					<h1>404 - User Not Found!</h1>
 				</div>
@@ -93,6 +98,9 @@ export default function User(props){
 
     return(
         <section class="section account">
+            <Helmet>
+              <title>{userData.email} - RentSIT</title>
+            </Helmet>
             <div class="container">
                 {/* <h1 className='mb-5'>Account</h1> */}
                 <div className="row justify-content-center">

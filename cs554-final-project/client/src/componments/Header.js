@@ -1,6 +1,6 @@
-import React, { useCallback, useContext } from "react";
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
-import { withRouter, Redirect } from "react-router";
+import React, { useContext } from "react";
+import {BrowserRouter as Router, Link} from "react-router-dom";
+
 import { AuthContext } from "./auth/Auth";
 import { app } from "./auth/AuthBase"
 // import PropertyList from './properties/PropertyList'

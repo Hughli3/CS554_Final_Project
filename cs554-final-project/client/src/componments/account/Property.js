@@ -2,7 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from "../auth/Auth";
 import serverController from '../../serverController';
 import { Link } from 'react-router-dom';
-import { useAlert } from 'react-alert'
+import { useAlert } from 'react-alert';
+import { Helmet } from 'react-helmet';
 
 const Property = (props) => {
 	const { currentUser } = useContext(AuthContext);
@@ -49,6 +50,9 @@ const Property = (props) => {
 	const buildListItem = (property) => {
 		return (
 		<>
+		<Helmet>
+              <title>My property - RentSIT</title>
+        </Helmet>
 			<div class="row property-card mb-4">
 				<div class="col-lg-6 col-6 pl-0">
 					<Link to={'/property/' + property._id}>

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import {BrowserRouter as Link} from "react-router-dom";
 import { Helmet } from 'react-helmet'
 import serverController from '../serverController';
 
-const TITLE = 'Home'
 
 const Home = () => {
     const [loading, setLoading] = useState(true);
@@ -77,10 +76,11 @@ const Home = () => {
 
     return (
         <>
+            <Helmet>
+                <title>Home - RentSIT</title>
+            </Helmet>
             <section className="section bg-default">
-                        <Helmet>
-                            <title>{ TITLE }</title>
-                        </Helmet>
+
             <div className="container d-flex">
                 <div className="row">
                     <div className="col-lg-6 py-sm">

@@ -4,6 +4,7 @@ import serverController from '../../serverController';
 import {useDropzone} from 'react-dropzone'
 import { useAlert } from 'react-alert'
 import ReactTooltip from "react-tooltip";
+import { Helmet } from 'react-helmet';
 
 const EditProperty = (props) => {
     const alert = useAlert();
@@ -187,6 +188,9 @@ const EditProperty = (props) => {
     if (!propertyData) {
 		return (
 			<div className='show-body'>
+        <Helmet>
+              <title>Edit property - RentSIT</title>
+        </Helmet>
 				<p>Property Not Found!</p>
 			</div>
 		)
@@ -194,6 +198,9 @@ const EditProperty = (props) => {
 
     return (
         <div>
+	    	<Helmet>
+              <title>Edit property - RentSIT</title>
+        </Helmet>
             <h1>Edit</h1>
             <form onSubmit={editProperty}>
                 <div className="row">
