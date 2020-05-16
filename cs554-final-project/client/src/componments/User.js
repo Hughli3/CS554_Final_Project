@@ -17,10 +17,10 @@ export default function User(props){
                     setLoading(true);
                     const {data: resData} = await serverController.getUserId(props.match.params.id);
 					setUserData(resData);
-					setLoading(false);
+                    setLoading(false);
 				} catch (e) {
                     alert.error(e)
-					setLoading(false);
+                    setLoading(false);
 				}
 			}
 			fetchData();
@@ -85,7 +85,7 @@ export default function User(props){
                         </div>) : null}
                     </div>
                     <div className="col-lg-9 col-12 pl-4">
-                        <div class="icon-group mt-4">property: {li}</div>
+                        <div class="icon-group mt-4">Properties: {li}</div>
                     </div>
                 </div>
             </div>
