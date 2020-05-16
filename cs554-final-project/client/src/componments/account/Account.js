@@ -97,7 +97,7 @@ export default function Account(props){
                     <div className="col-lg-3 col-md-4 col-6">
                         <div class="avatar-container">
                             {userData.avatar ? 
-                              (<img src={userData.avatar} id="user-avatar" class="img-fluid avatar" alt="user avatar" />)
+                            (<img src={userData.avatar} id="user-avatar" class="img-fluid avatar" alt="user avatar" />)
                             : (<img src="/img/default_user.png" id="user-avatar" class="img-fluid avatar" alt="user avatar" /> )
                             }
                         </div>
@@ -150,12 +150,17 @@ export default function Account(props){
 
                         <form onSubmit={editUser}>
                             <div class="modal-body">
-                                <div class="avatar-container" {...getRootProps()}>
-                                    <input {...getInputProps()} />
-                                    {imageData[2] ? 
-                                    (<img src={imageData[2]} id="user-avatar" class="img-fluid avatar" alt="user avatar" />)
-                                    : (<img src={userData.avatar ? userData.avatar : "/img/default_user.png"} id="user-avatar" class="img-fluid avatar" alt="user avatar" /> )
-                                    }
+                                <div class="avatar-edit-container">
+                                    <div class="avatar-container" {...getRootProps()}>
+                                        <input {...getInputProps()} />
+                                        {imageData[2] ? 
+                                        (<img src={imageData[2]} id="user-avatar" class="img-fluid avatar" alt="user avatar" />)
+                                        : (<img src={userData.avatar ? userData.avatar : "/img/default_user.png"} id="user-avatar" class="img-fluid avatar" alt="user avatar" /> )
+                                        }
+                                        <div class="overlay">
+                                            <div class="text">Edit</div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
