@@ -72,7 +72,7 @@ export default function Account(props){
         
     if (loading) {
         return (
-            <div class="lds-facebook"><div></div><div></div><div></div></div>
+            <div className="lds-facebook"><div></div><div></div><div></div></div>
         )
     }
 
@@ -91,30 +91,30 @@ export default function Account(props){
     }
     
     return(
-        <section class="section account">
+        <section className="section account">
         <Helmet>
               <title>Account - RentSIT</title>
         </Helmet>
-            <div class="container">
+            <div className="container">
                 {/* <h1 className='mb-5'>Account</h1> */}
                 <div className="row justify-content-center">
                     <div className="col-lg-3 col-md-4 col-6">
-                        <div class="avatar-container">
+                        <div className="avatar-container">
                             {userData.avatar ? 
-                            (<img src={userData.avatar} id="user-avatar" class="img-fluid avatar" alt="user avatar" />)
-                            : (<img src="/img/default_user.png" id="user-avatar" class="img-fluid avatar" alt="user avatar" /> )
+                            (<img src={userData.avatar} id="user-avatar" className="img-fluid avatar" alt="user avatar" />)
+                            : (<img src="/img/default_user.png" id="user-avatar" className="img-fluid avatar" alt="user avatar" /> )
                             }
                         </div>
                         {userData.email ? (
-					        <div class="icon-group mt-4">
+					        <div className="icon-group mt-4">
                                 <p>
-                                    <i class="fas fa-user"></i>{userData.email} 
+                                    <i className="fas fa-user"></i>{userData.email} 
                                 </p>
                             </div>) : null}
                         {userData.phone ? (
-                        <div class="icon-group my-3">
+                        <div className="icon-group my-3">
                             <p>
-                                <i class="fas fa-phone"></i>{userData.phone}
+                                <i className="fas fa-phone"></i>{userData.phone}
                             </p>
                         </div>) : null}
                         <div>
@@ -142,43 +142,43 @@ export default function Account(props){
                 </div>
             </div>
             {/* modal for edit profile */}
-            <div class= "modal fade" id="edit-profile-modal" tabindex="-1" role="dialog" aria-labelledby="modal-title-edit-profile" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h2 class="modal-title display-4" id="modal-title-edit-profile">Edit Profile</h2>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div className= "modal fade" id="edit-profile-modal" tabindex="-1" role="dialog" aria-labelledby="modal-title-edit-profile" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h2 className="modal-title display-4" id="modal-title-edit-profile">Edit Profile</h2>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
 
                         <form onSubmit={editUser}>
-                            <div class="modal-body">
-                                <div class="avatar-edit-container">
-                                    <div class="avatar-container" {...getRootProps()}>
+                            <div className="modal-body">
+                                <div className="avatar-edit-container">
+                                    <div className="avatar-container" {...getRootProps()}>
                                         <input {...getInputProps()} />
                                         {imageData[2] ? 
-                                        (<img src={imageData[2]} id="user-avatar" class="img-fluid avatar" alt="user avatar" />)
-                                        : (<img src={userData.avatar ? userData.avatar : "/img/default_user.png"} id="user-avatar" class="img-fluid avatar" alt="user avatar" /> )
+                                        (<img src={imageData[2]} id="user-avatar" className="img-fluid avatar" alt="user avatar" />)
+                                        : (<img src={userData.avatar ? userData.avatar : "/img/default_user.png"} id="user-avatar" className="img-fluid avatar" alt="user avatar" /> )
                                         }
-                                        <div class="overlay">
-                                            <div class="text">Edit</div>
+                                        <div className="overlay">
+                                            <div className="text">Edit</div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label htmlFor="email">Email</label>
-                                    <input type="email" class="form-control" id="email" placeholder="title" value={userData.email} disabled/>
+                                    <input type="email" className="form-control" id="email" placeholder="title" value={userData.email} disabled/>
                                 </div>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label htmlFor="phone">Phone</label>
-                                    <input class="form-control" id="phone" name="phone" type="tel" placeholder="phone" defaultValue={userData.phone} data-tip="please input a 10 digit phone number"/>    
+                                    <input className="form-control" id="phone" name="phone" type="tel" placeholder="phone" defaultValue={userData.phone} data-tip="please input a 10 digit phone number"/>    
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Update</button>
-                                <button type="button" ref={colseModal} class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
+                            <div className="modal-footer">
+                                <button type="submit" className="btn btn-primary">Update</button>
+                                <button type="button" ref={colseModal} className="btn btn-link ml-auto" data-dismiss="modal">Close</button>
                             </div>
                         </form>
                     </div>

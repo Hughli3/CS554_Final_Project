@@ -40,7 +40,7 @@ export default function WatchList(props) {
 
     if (loading) {
         return (
-            <div class="lds-facebook"><div></div><div></div><div></div></div>
+            <div className="lds-facebook"><div></div><div></div><div></div></div>
         )
     }
     
@@ -56,10 +56,10 @@ export default function WatchList(props) {
     }
 
     const watchlistComponents = properties.length == 0 ? (
-            <div class="row property-card property-watch-empty mb-3">
-                <Link class="align-self-center d-flex align-items-center justify-content-center" to='/property'>
+            <div className="row property-card property-watch-empty mb-3">
+                <Link className="align-self-center d-flex align-items-center justify-content-center" to='/property'>
                     <div>
-                        <p><i class="fas fa-eye"></i></p>
+                        <p><i className="fas fa-eye"></i></p>
                         <p>Your Watchlist is Empty</p>
                     </div>
                 </Link>
@@ -70,35 +70,35 @@ export default function WatchList(props) {
         <Helmet>
               <title>WatchList - RentSIT</title>
         </Helmet>
-			<div class="row property-card mb-4">
-				<div class="col-lg-6 col-md-4 col-6 pl-0">
+			<div className="row property-card mb-4">
+				<div className="col-lg-6 col-md-4 col-6 pl-0">
                     <Link to={'/property/' + property._id}>
                         {property.avatar ?
-                        (<img src="https://cdngeneral.rentcafe.com/dmslivecafe/3/509605/Avant-Apartments-Parking-Garage-Entrance-Carmel,-Indiana_WEB.jpg" class="card-img-left" alt="property image" />)
+                        (<img src="https://cdngeneral.rentcafe.com/dmslivecafe/3/509605/Avant-Apartments-Parking-Garage-Entrance-Carmel,-Indiana_WEB.jpg" className="card-img-left" alt="property image" />)
                         :
-                        (<img src="https://cdngeneral.rentcafe.com/dmslivecafe/3/509605/Avant-Apartments-Parking-Garage-Entrance-Carmel,-Indiana_WEB.jpg" class="card-img-left" alt="property image" />)
+                        (<img src="https://cdngeneral.rentcafe.com/dmslivecafe/3/509605/Avant-Apartments-Parking-Garage-Entrance-Carmel,-Indiana_WEB.jpg" className="card-img-left" alt="property image" />)
                         }
                     </Link>
 				</div>
-				<div class="col-lg-6 col-md-4 col-6 py-3">
+				<div className="col-lg-6 col-md-4 col-6 py-3">
 					<Link to={'/property/' + property._id}>
 
-						<h2 class="display-4" class="title">{property.title}</h2>
+						<h2 className="display-4" className="title">{property.title}</h2>
 						</Link>
-						{property.description ? (<p class="description">{property.description}</p>) : null}
+						{property.description ? (<p className="description">{property.description}</p>) : null}
 					
 						{ property.price || property.zipcode || property.type || property.bedroom || property.bath ?
-						(<div class="icon-group">
+						(<div className="icon-group">
 							<p>
-								{property.price ? (<><i class="fas fa-dollar-sign"></i>{property.price}</>): null}
-								{property.zipcode ? (<><i class="fas fa-map-marker-alt"></i>{property.zipcode}</>): null}
-								{property.type ? (<><i class="fas fa-building"></i>{property.type}</>): null}
-								{property.bedroom ? (<><i class="fas fa-bed"></i>{property.bedroom}</>): null}
-								{property.bath ? (<><i class="fas fa-bath"></i>{property.bath}</>): null}
+								{property.price ? (<><i className="fas fa-dollar-sign"></i>{property.price}</>): null}
+								{property.zipcode ? (<><i className="fas fa-map-marker-alt"></i>{property.zipcode}</>): null}
+								{property.type ? (<><i className="fas fa-building"></i>{property.type}</>): null}
+								{property.bedroom ? (<><i className="fas fa-bed"></i>{property.bedroom}</>): null}
+								{property.bath ? (<><i className="fas fa-bath"></i>{property.bath}</>): null}
 							</p>
 						</div>) : null	
 						}
-                    <button type="button" onClick={handleDelete} data-property={property._id} class="btn btn-danger btn-sm btn-round btn-shadow btn-delete-property position-absolute">delete</button>
+                    <button type="button" onClick={handleDelete} data-property={property._id} className="btn btn-danger btn-sm btn-round btn-shadow btn-delete-property position-absolute">delete</button>
 				</div>
 			</div>
 		</>

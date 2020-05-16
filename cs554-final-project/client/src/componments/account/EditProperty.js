@@ -107,8 +107,8 @@ const EditProperty = (props) => {
         return (
           <div className="col-3 mb-2">
             <div className="img-preview-container avatar-container">
-              <img class="img-fluid img-preview" src={image} alt="property image" />
-              <button type="button" onClick={() => removeExistingImage(image)} class="btn btn-danger btn-sm btn-round btn-shadow btn-delete-preview position-absolute">delete</button>
+              <img className="img-fluid img-preview" src={image} alt="property image" />
+              <button type="button" onClick={() => removeExistingImage(image)} className="btn btn-danger btn-sm btn-round btn-shadow btn-delete-preview position-absolute">delete</button>
             </div>
           </div>
         ) || null;
@@ -118,8 +118,8 @@ const EditProperty = (props) => {
       return (
         <div className="col-3 mb-2">
           <div className="img-preview-container avatar-container">
-            <img class="img-fluid img-preview" src={key[2]} alt={key[0]} />
-            <button type="button" onClick={() => removeImage(idx)} data-idx={idx} class="btn btn-danger btn-sm btn-round btn-shadow btn-delete-preview position-absolute">delete</button>
+            <img className="img-fluid img-preview" src={key[2]} alt={key[0]} />
+            <button type="button" onClick={() => removeImage(idx)} data-idx={idx} className="btn btn-danger btn-sm btn-round btn-shadow btn-delete-preview position-absolute">delete</button>
           </div>
         </div>
       ) || null;
@@ -128,10 +128,10 @@ const EditProperty = (props) => {
     const uploadImage = (
       <>
         <label htmlFor="album">Album</label>
-        <div {...getRootProps()} class="image-upload property-card property-add align-self-center d-flex align-items-center justify-content-center mb-3">
+        <div {...getRootProps()} className="image-upload property-card property-add align-self-center d-flex align-items-center justify-content-center mb-3">
           <input id="album" {...getInputProps()} />
           <div>
-            <p><i class="fas fa-file-image"></i></p>
+            <p><i className="fas fa-file-image"></i></p>
             <p>Click here or drop to upload photos!</p>
           </div>
         </div>
@@ -181,7 +181,7 @@ const EditProperty = (props) => {
 
     if (loading) {
         return (
-            <div class="lds-facebook"><div></div><div></div><div></div></div>
+            <div className="lds-facebook"><div></div><div></div><div></div></div>
         )
     }
 
@@ -204,63 +204,63 @@ const EditProperty = (props) => {
             <h1>Edit</h1>
             <form onSubmit={editProperty}>
                 <div className="row">
-                <div class="col-md-12">
-                <div class="form-group">
+                <div className="col-md-12">
+                <div className="form-group">
                     <label htmlFor="title">Title</label>
-                    <input class="form-control" id="title" name="title" placeholder="title" data-tip="title length must less than 70" defaultValue={(propertyData && propertyData.title) || 'Not Provided'}/>
+                    <input className="form-control" id="title" name="title" placeholder="title" data-tip="title length must less than 70" defaultValue={(propertyData && propertyData.title) || 'Not Provided'}/>
                 </div>
                 </div>
-                <div class="col-md-12">
-                <div class="form-group">
+                <div className="col-md-12">
+                <div className="form-group">
                     <label htmlFor="description">Description</label>
-                    <textarea id="description" rows="10" class="form-control" name="description" type="text" placeholder="description" data-tip="description length need to less than 200" defaultValue={(propertyData && propertyData.description) || 'Not Provided'}  />
+                    <textarea id="description" rows="10" className="form-control" name="description" type="text" placeholder="description" data-tip="description length need to less than 200" defaultValue={(propertyData && propertyData.description) || 'Not Provided'}  />
                 </div>
                 </div>
 
-                <div class="col-md-12">
+                <div className="col-md-12">
                     {uploadImage}
                     {preview || existing_preview ? <div className="row mb-2">{existing_preview}{preview}</div> : null}
                 </div>
 
-                <div class="col-md-12">
+                <div className="col-md-12">
                     <label>Type</label>
                     <div>
-                    <div class="custom-control col-3 custom-radio mb-3">
-                        <input name="type" value="apartment" class="custom-control-input" id="type-apartment" type="radio" defaultChecked={propertyData.type === "apartment"}/>
-                        <label class="custom-control-label" htmlFor="type-apartment">Apartment</label>
+                    <div className="custom-control col-3 custom-radio mb-3">
+                        <input name="type" value="apartment" className="custom-control-input" id="type-apartment" type="radio" defaultChecked={propertyData.type === "apartment"}/>
+                        <label className="custom-control-label" htmlFor="type-apartment">Apartment</label>
                     </div>
-                    <div class="custom-control col-3 custom-radio mb-3">
-                        <input name="type" value="house" class="custom-control-input" id="type-house" type="radio" defaultChecked={propertyData.type === "house"} />
-                        <label class="custom-control-label" htmlFor="type-house">House</label>
+                    <div className="custom-control col-3 custom-radio mb-3">
+                        <input name="type" value="house" className="custom-control-input" id="type-house" type="radio" defaultChecked={propertyData.type === "house"} />
+                        <label className="custom-control-label" htmlFor="type-house">House</label>
                     </div>
                     </div>
                 </div>
 
-                <div class="col-md-3">
-                <div class="form-group">
+                <div className="col-md-3">
+                <div className="form-group">
                     <label htmlFor="price">Price</label>
-                    <input class="form-control" name="price" id="price" placeholder="price" type="number" data-tip="price need to greater than 0" defaultValue={propertyData.price}/>
+                    <input className="form-control" name="price" id="price" placeholder="price" type="number" data-tip="price need to greater than 0" defaultValue={propertyData.price}/>
                 </div>
                 </div>
 
-                <div class="col-md-3">
-                <div class="form-group">
+                <div className="col-md-3">
+                <div className="form-group">
                     <label htmlFor="zipcode">Zipcode</label>
-                    <input class="form-control" id="zipcode" name="zipcode" type="text" placeholder="07030" data-tip="length must equal to 5" defaultValue={ propertyData.zipcode}/>
+                    <input className="form-control" id="zipcode" name="zipcode" type="text" placeholder="07030" data-tip="length must equal to 5" defaultValue={ propertyData.zipcode}/>
                 </div>
                 </div>
 
-                <div class="col-md-3">
-                <div class="form-group">
+                <div className="col-md-3">
+                <div className="form-group">
                     <label htmlFor="bedroom">Bedroom</label>
-                    <input class="form-control" id="bedroom" name="bedroom" type="number" placeholder="3" data-tip="bedroom need to greater than 0 and less than 10" defaultValue={ propertyData.bedroom}/>
+                    <input className="form-control" id="bedroom" name="bedroom" type="number" placeholder="3" data-tip="bedroom need to greater than 0 and less than 10" defaultValue={ propertyData.bedroom}/>
                 </div>
                 </div>
 
-                <div class="col-md-3">
-                <div class="form-group">
+                <div className="col-md-3">
+                <div className="form-group">
                     <label htmlFor="bath">Bath</label>
-                    <input class="form-control" id="bath" name="bath" type="number" placeholder="1" data-tip="bedroom need to greater than 0 and less than 10" defaultValue={ propertyData.bath}/>
+                    <input className="form-control" id="bath" name="bath" type="number" placeholder="1" data-tip="bedroom need to greater than 0 and less than 10" defaultValue={ propertyData.bath}/>
                 </div>
                 </div>
             </div>

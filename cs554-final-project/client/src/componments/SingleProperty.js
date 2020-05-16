@@ -28,7 +28,9 @@ const SingleProperty = (props) => {
                     const {data: property}  = await serverController.getProperty(props.match.params.id)
                     console.log(property);
 					setPropertyData(property);
+					setLoading(false);
 				} catch (e) {
+					setLoading(false);
 					alert.error(e)
 				}
 			}
@@ -78,17 +80,17 @@ const SingleProperty = (props) => {
 
     if (loading) {
         return (
-            <div class="lds-facebook"><div></div><div></div><div></div></div>
+            <div className="lds-facebook"><div></div><div></div><div></div></div>
         )
     }
 
 	if (!propertyData) {
 		return (
-			<section class="section">
+			<section className="section">
 			<Helmet>
                 <title>Property - RentSIT</title>
             </Helmet>
-				<div class="container">
+				<div className="container">
 					<h1>404 - Property Not Found!</h1>
 				</div>
 			</section>
@@ -96,6 +98,7 @@ const SingleProperty = (props) => {
 	}
 
 	let watchListButton = null
+
 	if (currentUser) {
 		watchListButton = isWatchlist ? (<button className="btn btn-secondary btn-icon" onClick={removeWatchlist}>Remove from Watchlist</button>) 
 		: (<button className="btn btn-primary" onClick={addWatchlist}>Add To Watchlist</button>)
@@ -106,49 +109,49 @@ const SingleProperty = (props) => {
 		if (propertyData.price) {
 			price = (
 				<>
-					<i class="fas fa-dollar-sign"></i>
+					<i className="fas fa-dollar-sign"></i>
 					{propertyData.price}
 				</>)
 		}
 		if (propertyData.zipcode) {
 			zipcode = (
 				<>
-					<i class="fas fa-map-marker-alt"></i>
+					<i className="fas fa-map-marker-alt"></i>
 					{propertyData.zipcode}
 				</>)
 		}
 		if (propertyData.type) {
 			type = (
 				<>
-					<i class="fas fa-building"></i>
+					<i className="fas fa-building"></i>
 					{propertyData.type}
 				</>)
 		}
 		if (propertyData.bedroom) {
 			bed = (
 				<>
-					<i class="fas fa-bed"></i>
+					<i className="fas fa-bed"></i>
 					{propertyData.bedroom}
 				</>)
 		}
 		if (propertyData.bath) {
 			bath = (
 				<>
-					<i class="fas fa-bath"></i>	
+					<i className="fas fa-bath"></i>	
 					{propertyData.bath}
 				</>)
 		}
 		if (propertyData.owner._id && propertyData.owner.email) {
 			owner = (
 				<>
-					<i class="fas fa-user"></i>
+					<i className="fas fa-user"></i>
 					<Link to={"/user/" + propertyData.owner._id}>{propertyData.owner.email}</Link>
 				</>)
 		}
 		if (propertyData.owner.phone) {
 			phone = (
 				<>
-					<i class="fas fa-phone"></i>
+					<i className="fas fa-phone"></i>
 					{propertyData.owner.phone}
 				</>)
 		}
@@ -156,23 +159,23 @@ const SingleProperty = (props) => {
 		return (
 			<>
 				{price || bed || bath? (
-					<div class="icon-group">
+					<div className="icon-group">
 						<p>{price} {bed} {bath}</p>
 					</div>
 					) : null
 				}
 				
 				{zipcode || type ? (
-					<div class="icon-group">
+					<div className="icon-group">
 						<p>{zipcode}{type}</p>
 					</div>
 					) : null
 				}
-				<div class="icon-group">
+				<div className="icon-group">
 					<p>{owner}</p>
 				</div>
 				{phone ? (
-					<div class="icon-group">
+					<div className="icon-group">
 						<p>{phone}</p>
 					</div>
 					) : null
@@ -182,64 +185,64 @@ const SingleProperty = (props) => {
 	};
 
 	const buildIndicator = (image, idx) => {
-		return <li data-target="#carouselExampleIndicators" data-slide-to={idx} class={idx == 0 ? ("active") : ""}></li>
+		return <li data-target="#carouselExampleIndicators" data-slide-to={idx} className={idx == 0 ? ("active") : ""}></li>
 	}
 	const carouselIndicator = propertyData.album.length == 0 ? 
-			(<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>)
+			(<li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>)
 			: propertyData.album.map( (image, idx) => buildIndicator(image, idx))
 
 	const buildCarouselImages = (image, idx) => {
 		console.log(image)
 		return (
-			<div class={idx == 0 ? ("carousel-item active") : "carousel-item"}>
-				<img class="d-block w-100" src={image} alt="property images"/>
+			<div className={idx == 0 ? ("carousel-item active") : "carousel-item"}>
+				<img className="d-block w-100" src={image} alt="property images"/>
 			</div>
 		)					
 	}
 	const carouselImages = propertyData.album.length == 0 ?
-		<div class="carousel-item active">
-			<img class="d-block w-100" src="/img/default_property.jpg" alt="property images"/>
+		<div className="carousel-item active">
+			<img className="d-block w-100" src="/img/default_property.jpg" alt="property images"/>
 		</div>
 		 : propertyData.album.map( (image, idx) => buildCarouselImages(image, idx))
 
 	return (
-		<section class="section single-property">
+		<section className="section single-property">
 			<Helmet>
                 <title>{(propertyData && propertyData.title)} - RentSIT</title>
             </Helmet>
-			<div class="container">
-				{/* <h1 class="mb-5">All Property</h1> */}
+			<div className="container">
+				{/* <h1 className="mb-5">All Property</h1> */}
 				<h1 className='cap-first-letter'>{(propertyData && propertyData.title) || 'Not Provided'}</h1>
-				<div class="icon-group">
-					<p><i class="fas fa-clock"></i> Last Update {lastUpdate || 'Not Provided'}</p>
+				<div className="icon-group">
+					<p><i className="fas fa-clock"></i> Last Update {lastUpdate || 'Not Provided'}</p>
 				
 				</div>
-				<div class="row">
-					<div class='col-lg-7 col-12'>
-						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-							<ol class="carousel-indicators">
+				<div className="row">
+					<div className='col-lg-7 col-12'>
+						<div id="carouselIndicators" className="carousel slide" data-ride="carousel">
+							<ol className="carousel-indicators">
 								{carouselIndicator}
 							</ol>
-							<div class="carousel-inner">
+							<div className="carousel-inner">
 								{carouselImages}
 							</div>
-							<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-								<span class="sr-only">Previous</span>
+							<a className="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+								<span className="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span className="sr-only">Previous</span>
 							</a>
-							<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-								<span class="carousel-control-next-icon" aria-hidden="true"></span>
-								<span class="sr-only">Next</span>
+							<a className="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+								<span className="carousel-control-next-icon" aria-hidden="true"></span>
+								<span className="sr-only">Next</span>
 							</a>
 						</div>
 					</div>
-					<div class='col-lg-5 col-12 my-lg-0 my-4'>
+					<div className='col-lg-5 col-12 my-lg-0 my-4'>
 						{constructDetail(propertyData)}
 						{watchListButton}
 					</div>
 				</div>
 
-				<div class='my-3 description'>
+				<div className='my-3 description'>
 					<h2>Description</h2>
 					<p>{(propertyData && propertyData.description) || 'Not Provided'}</p>
 				</div>
