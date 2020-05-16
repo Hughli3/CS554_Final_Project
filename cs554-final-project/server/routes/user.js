@@ -8,6 +8,7 @@ const base64Img = require('base64-img');
 // const ObjectId = require('mongodb').ObjectID;
 const checkAuth = require('./checkAuth')
 
+
 router.post('/', checkAuth, async (req, res) => {
     let userInfo = req.body;
     
@@ -34,11 +35,17 @@ router.post('/', checkAuth, async (req, res) => {
     }
 });
 
-router.patch('/', checkAuth, async (req, res) => {
+router.patch('/', checkAuth, async (req, res) => {    
     let userInfo = req.body;
     
     try {
-        const user = await userData.updateUser(res.locals.userUid, userInfo.phone, userInfo.avatar);
+        let avatar = null
+        if(userInfo.avatar != null){
+            let avatarFilePath = await base64Img.imgSync(userInfo.avatar[0][2], './public/img', userInfo.avatar[0][0].split(".")[0]);
+            avatar = [userInfo.avatar[0][0], "avatar", avatarFilePath]
+            console.log(avatar);
+        }        
+        const user = await userData.updateUser(res.locals.userUid, userInfo.phone, avatar);        
         res.json(user);
     } catch (e) {
         res.status(500).json({error: e});

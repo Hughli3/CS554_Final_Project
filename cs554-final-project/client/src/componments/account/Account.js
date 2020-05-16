@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext, useCallback, useEffect} from 'react';
 import { AuthContext } from "../auth/Auth";
 import Watchlist from "./Watchlist";
 import Property from "./Property";
@@ -10,11 +10,15 @@ import serverController from "../../serverController"
 import { useAlert } from 'react-alert';
 import { Link, Switch } from 'react-router-dom';
 import ReactTooltip from "react-tooltip";
+import {useDropzone} from 'react-dropzone'
 
 export default function Account(props){
     const { currentUser } = useContext(AuthContext);
     const [userData, setUserData] = useState({});
     const [loading, setLoading] = useState(true);
+
+    const [avatarData, setAvatarData] = useState([]);
+    const [imageData, setImageData] = useState([]);
 
 	const alert = useAlert();
 	useEffect(
@@ -23,8 +27,14 @@ export default function Account(props){
 				try {
 					setLoading(true);
 					const {data: resData} = await serverController.getUser(currentUser);
-					console.log(resData)
-					setUserData(resData);
+                    setUserData(resData);
+                    
+                    if(resData.avatar != null){
+                        let {data: aData} = await serverController.getImage(resData.avatar)
+                        setAvatarData(prevState => {
+                            return [aData]
+                        })
+                    }
 					setLoading(false);
 				} catch (e) {
                     alert.error(e);
@@ -34,7 +44,35 @@ export default function Account(props){
 			fetchData();
 		},
 		[]
-	);
+    );
+    
+    const getbase64 = async(file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (event) => resolve([file.name, "avatar",event.target.result]);
+            reader.onerror = reject
+        })
+    }
+
+    const getData = async (Files) => {
+        return Promise.all(Files.map(file => getbase64(file)))
+    }
+
+    const onDrop = useCallback(async(acceptedFiles, rejectedFiles) => {
+        let avatar = await getData(acceptedFiles);
+        setImageData(prevState => {
+          return avatar
+        })
+    }, [])
+
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({
+        onDrop,
+        accept: 'image/jpeg, image/png',
+        minSize: 0,
+        maxSize: 5242880,
+        multiple: false
+    })
 
     if (loading) {
         return (
@@ -51,16 +89,36 @@ export default function Account(props){
             if (data.phone.value.length != 10) throw "phone number wrong format";
             // if (!data.phone.value) throw "phone not exist";
             // TODO avatar 
-            let avatar = null;
-            const {data: resData} = await serverController.editUser(currentUser, data.phone.value, avatar);
+            // let avatar = null;            
+            const {data: resData} = await serverController.editUser(currentUser, data.phone.value, imageData);
             setUserData(resData);
             // setIsSuccess(true);
             // props.history.push("/account")
             alert.success('Edit sucessfully');
+
+            setImageData(prevState => {
+                return []
+            })
         }catch(error){
             alert.error(error)
         }
     }
+
+    let preview = imageData && imageData.map((key) => {
+        return (
+          <div>
+            <img src={key[2]} width="40%" alt={key[0]} />
+          </div>
+        );
+    });
+
+    let avatarD = avatarData && avatarData.map((key) => {
+        return (
+          <div>
+            <img src={key.data} id="user-avatar" class="img-fluid avatar" alt={userData.email} />
+          </div>
+        );
+    });
 
     /*
     function getPict(){
@@ -78,7 +136,9 @@ export default function Account(props){
                 <div className="row justify-content-center">
                     <div className="col-lg-3 col-md-4 col-6">
                         <div class="avatar-container">
-                            <img src="/img/default_user.png" id="user-avatar" class="img-fluid avatar" alt="user avatar" />                
+                            {/* <img src="{{#if avatarData}}{{avatarData}}{{else}}./home/default_user.png{{/if}}" id="user-avatar" class="img-fluid avatar" alt="user avatar" />           */}
+                            {/* <img src={avatarData ? avatarData: "./home/default_user.png"} id="user-avatar" class="img-fluid avatar" alt={userData.email} /> */}
+                            {avatarD}
                         </div>
                         {userData.email ? (
 					        <div class="icon-group mt-4">
@@ -138,6 +198,17 @@ export default function Account(props){
                                     <label htmlFor="phone">Phone</label>
                                     <input class="form-control" id="phone" name="phone" type="tel" placeholder="phone" defaultValue={userData.phone} data-tip="please input a 10 digit phone number"/>    
                                 </div>
+                                
+                                <div class="form-group" {...getRootProps()}>
+                                    <label htmlFor="avatar">Avatar</label>
+                                    <input {...getInputProps()} />
+                                    {
+                                        isDragActive ?
+                                        <p>Drop the files here ...</p> :
+                                        <p>Click here or drop files to upload!</p>
+                                    }
+                                </div>
+                                {preview}
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Update</button>
