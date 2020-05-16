@@ -6,37 +6,50 @@ import serverController from '../serverController';
 const TITLE = 'Home'
 
 const Home = () => {
-    // const [loading, setLoading] = useState(true);
-    // const [propertyData, setPropertyData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [propertyData, setPropertyData] = useState([]);
 
 
-    // useEffect(
-	// 	async () => {
-	// 		async function fetchData() {
-	// 			try {
-	// 				setLoading(true);
-	// 				const {data: resData} = await serverController.getAllProperty()
-    //                 // TODO get property with album not empty
-    //                 console.log(resData);
-                    
-    //                 // TODO get random 4 / 5
-    //                // setPropertyData(//Filtered property)
+    useEffect(
+		async () => {
+			async function fetchData() {
+				try {
+					setLoading(true);
+					const {data: resData} = await serverController.getAllProperty()
+                    // TODO get property with album not empty
+                    let imageL = []
+                    for(let i=0; i<resData.properties.length; i++){                        
+                        for(let j=0; j<resData.properties[i].album.length; j++){
+                            imageL.push(resData.properties[i].album[j]);
+                        }
+                    }
+                    // TODO get random 4
+                    let imageRL = []
+                    for(let i=0; i<4; i++){
+                        let rn =  parseInt(Math.random()*(imageL.length-1) )
+                        imageRL.push(imageL[rn])
+                    }
+                   // setPropertyData(//Filtered property)
+                   setPropertyData(imageRL)
+
+                   console.log(propertyData);
+                   
                   
-	// 				setLoading(false);
-	// 			} catch (e) {
-	// 				setLoading(false);
-	// 			}
-	// 		}
-    //         fetchData();            
-	// 	},
-	// 	[]
-    // );
+					setLoading(false);
+				} catch (e) {
+					setLoading(false);
+				}
+			}
+            fetchData();            
+		},
+		[]
+    );
     
-    // if (loading) {
-    //     return (
-    //         <div class="lds-facebook"><div></div><div></div><div></div></div>
-    //     )
-    // }
+    if (loading) {
+        return (
+            <div class="lds-facebook"><div></div><div></div><div></div></div>
+        )
+    }
 
     return (
         <>
