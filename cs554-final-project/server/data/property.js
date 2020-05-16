@@ -18,8 +18,6 @@ let exportedMethods = {
             sort = {price:1};
         }else if (sort && sort === "priceDown"){
             sort = {price:-1};
-        }else if(sort && sort === "date"){
-            sort = {date:-1}
         }else{
             sort = {};
         }
@@ -41,9 +39,11 @@ let exportedMethods = {
         }else if (filter && filter === "price3"){
             filter = {price: {$gte:3000}};
         }else{
-            
             filter = {}
         }
+
+        sort.date = -1;
+
         const propertyCollection = await properties();
         let allProperty = await propertyCollection.find(filter).sort(sort).toArray();
         if (!allProperty) throw 'no property in system';
