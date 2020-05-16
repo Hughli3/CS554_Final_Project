@@ -17,10 +17,10 @@ export default function User(props){
                     setLoading(true);
                     const {data: resData} = await serverController.getUserId(props.match.params.id);
 					setUserData(resData);
-					setLoading(false);
+                    setLoading(false);
 				} catch (e) {
                     alert.error(e)
-					setLoading(false);
+                    setLoading(false);
 				}
 			}
 			fetchData();
@@ -29,16 +29,6 @@ export default function User(props){
     );
     
     let li = null;
-    
-    // build card
-	const buildListItem = (property) => {
-		const propertyId = property._id
-		return (
-			<li key={propertyId}>
-				    <Link to={`/property/${propertyId}`}>{property.title}</Link>
-			</li>
-		);
-	};
 
     if (userData && userData.property && !(Array.isArray(userData.property) && userData.property.length)) {
         li = (
@@ -47,8 +37,42 @@ export default function User(props){
 			</div>
         )
     } else {
-        li = userData && userData.property && userData.property.map((property) => {
-            return buildListItem(property);
+        li = userData && userData.property && userData.property.map((property) => { 
+            return (
+                <>
+                    <div class="row property-card my-3">
+                        <div class="col-lg-6 col-md-4 col-6 pl-0">
+                            <Link to={'/property/' + property._id}>
+                                {/* <div class="avatar-container"> */}
+                                    {property.avatar ?
+                                    (<img src="https://cdngeneral.rentcafe.com/dmslivecafe/3/509605/Avant-Apartments-Parking-Garage-Entrance-Carmel,-Indiana_WEB.jpg" class="card-img-left" alt="property image" />)
+                                    :
+                                    (<img src="https://cdngeneral.rentcafe.com/dmslivecafe/3/509605/Avant-Apartments-Parking-Garage-Entrance-Carmel,-Indiana_WEB.jpg" class="card-img-left" alt="property image" />)
+                                    }
+                                </Link>
+                                {/* </div> */}
+                        </div>
+                        <div class="col-lg-6 col-md-4 col-6 py-3">
+                            <Link to={'/property/' + property._id}>
+                                <h1 class="display-4" class="title">{property.title}</h1>
+                                </Link>
+                                {property.description ? (<p class="description">{property.description}</p>) : null}
+                            
+                                { property.price || property.zipcode || property.type || property.bedroom || property.bath ?
+                                (<div class="icon-group">
+                                    <p>
+                                        {property.price ? (<><i class="fas fa-dollar-sign"></i>{property.price}</>): null}
+                                        {property.zipcode ? (<><i class="fas fa-map-marker-alt"></i>{property.zipcode}</>): null}
+                                        {property.type ? (<><i class="fas fa-building"></i>{property.type}</>): null}
+                                        {property.bedroom ? (<><i class="fas fa-bed"></i>{property.bedroom}</>): null}
+                                        {property.bath ? (<><i class="fas fa-bath"></i>{property.bath}</>): null}
+                                    </p>
+                                </div>) : null	
+                                }												
+                        </div>
+                    </div>
+                </>
+            )
         });
     }
 	
@@ -85,7 +109,7 @@ export default function User(props){
                         </div>) : null}
                     </div>
                     <div className="col-lg-9 col-12 pl-4">
-                        <div class="icon-group mt-4">property: {li}</div>
+                        <div class="icon-group mt-4">Properties: {li}</div>
                     </div>
                 </div>
             </div>
