@@ -77,11 +77,11 @@ let exportedMethods = {
 
   
   async updateUser(id, phone, avatar) {
-    let avatarid = await this.updateAvatar(id, avatar)
+    // let avatarid = await this.updateAvatar(id, avatar)
     validatePhone(phone);
     let data = {
         phone: phone,
-        avatar: avatarid
+        avatar: null
     }
     const userCollection = await users();
 
@@ -91,17 +91,17 @@ let exportedMethods = {
     return await this.getUser(id); 
   },
 
-  async updateAvatar(uid, avatar){
-      let photoId = await imgData.createGridFS(avatar[0], avatar[1], avatar[2]);
+  // async updateAvatar(uid, avatar){
+  //     let photoId = await imgData.createGridFS(avatar[0], avatar[1], avatar[2]);
       
-      const userCollection = await users();
-      let oldUser = await userCollection.findOne({ _id: uid })
+  //     const userCollection = await users();
+  //     let oldUser = await userCollection.findOne({ _id: uid })
 
-      if(oldUser.avatar !== null)
-        await imgData.deletePhoto(oldUser.avatar)
+  //     if(oldUser.avatar !== null)
+  //       await imgData.deletePhoto(oldUser.avatar)
     
-      return photoId;
-  }  
+  //     return photoId;
+  // }  
 
 }
 
@@ -110,8 +110,6 @@ module.exports = exportedMethods;
 
 // ==================== Checker ====================
 function validatePhone(phone){
-  if (!phone) throw "phone is undefinded";
-  if (phone.constructor !== String) throw "phone is not a string";
-  if (phone.length != 10) throw "phone length is wrong"
-  
+  if (phone && phone.constructor !== String) throw "phone is not a string";
+  if (phone && phone.length != 10) throw "phone length is wrong";
 }

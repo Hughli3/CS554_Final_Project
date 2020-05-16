@@ -1,10 +1,9 @@
-import React, {useState, useContext, useCallback, useEffect} from 'react';
+import React, {useState, useContext, useCallback, useEffect, createRef} from 'react';
 import { AuthContext } from "../auth/Auth";
 import Watchlist from "./Watchlist";
 import Property from "./Property";
 import AddProperty from "./AddProperty";
 import EditProperty from "./EditProperty";
-import EditProfile from "./EditProfile";
 import PrivateRoute from "../auth/PrivateRoute";
 import serverController from "../../serverController"
 import { useAlert } from 'react-alert';
@@ -16,9 +15,8 @@ export default function Account(props){
     const { currentUser } = useContext(AuthContext);
     const [userData, setUserData] = useState({});
     const [loading, setLoading] = useState(true);
-
-    const [avatarData, setAvatarData] = useState([]);
-    const [imageData, setImageData] = useState([]);
+    const colseModal = createRef();
+    const [imageData, setImageData] = useState();
 
 	const alert = useAlert();
 	useEffect(
@@ -28,13 +26,8 @@ export default function Account(props){
 					setLoading(true);
 					const {data: resData} = await serverController.getUser(currentUser);
                     setUserData(resData);
-                    
-                    if(resData.avatar != null){
-                        let {data: aData} = await serverController.getImage(resData.avatar)
-                        setAvatarData(prevState => {
-                            return [aData]
-                        })
-                    }
+                    setImageData(resData.avatar)
+
 					setLoading(false);
 				} catch (e) {
                     alert.error(e);
@@ -45,12 +38,12 @@ export default function Account(props){
 		},
 		[]
     );
-    
+
     const getbase64 = async(file) => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.onload = (event) => resolve([file.name, "avatar",event.target.result]);
+            reader.onload = (event) => resolve([file.name, "fieldName",event.target.result]);
             reader.onerror = reject
         })
     }
@@ -60,20 +53,28 @@ export default function Account(props){
     }
 
     const onDrop = useCallback(async(acceptedFiles, rejectedFiles) => {
-        let avatar = await getData(acceptedFiles);
-        setImageData(prevState => {
-          return avatar
-        })
+        for (let file of rejectedFiles) {
+          for (let error of file.errors) {
+            alert.error(file.file.name + " : " + error.message)
+          }
+        }
+
+        let files = await getData(acceptedFiles);
+        setImageData(files[0][2])
     }, [])
 
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({
+    const removeImage = (idx) => {
+      setImageData(null)
+    }
+
+    const {getRootProps, getInputProps} = useDropzone({
         onDrop,
         accept: 'image/jpeg, image/png',
         minSize: 0,
         maxSize: 5242880,
         multiple: false
     })
-
+        
     if (loading) {
         return (
             <div class="lds-facebook"><div></div><div></div><div></div></div>
@@ -81,53 +82,23 @@ export default function Account(props){
     }
 
     const editUser = async (event) => {
+        colseModal.current.click()
         event.preventDefault();
-        console.log("submitted")
+
         try{
             const data = event.target.elements;
-            if(!data.phone.value) throw "description not exist";
-            if (data.phone.value.length != 10) throw "phone number wrong format";
-            // if (!data.phone.value) throw "phone not exist";
-            // TODO avatar 
-            // let avatar = null;            
-            const {data: resData} = await serverController.editUser(currentUser, data.phone.value, imageData);
-            setUserData(resData);
-            // setIsSuccess(true);
-            // props.history.push("/account")
-            alert.success('Edit sucessfully');
 
-            setImageData(prevState => {
-                return []
-            })
+            if (data.phone.value.length != 10 && data.phone.value.length != 0) throw "phone number wrong format";
+
+            // let avatar = null;
+            const {data: resData} = await serverController.editUser(currentUser, data.phone.value, imageData);
+            
+            setUserData(resData);
+            alert.success('Edit sucessfully');
         }catch(error){
             alert.error(error)
         }
     }
-
-    let preview = imageData && imageData.map((key) => {
-        return (
-          <div>
-            <img src={key[2]} width="40%" alt={key[0]} />
-          </div>
-        );
-    });
-
-    let avatarD = avatarData && avatarData.map((key) => {
-        return (
-          <div>
-            <img src={key.data} id="user-avatar" class="img-fluid avatar" alt={userData.email} />
-          </div>
-        );
-    });
-
-    /*
-    function getPict(){
-        var img = "./home/default_user.png";
-        if (userData.avatar){
-            const img = userData.avatar;
-        }
-        return img;
-    }*/
     
     return(
         <section class="section account">
@@ -136,9 +107,10 @@ export default function Account(props){
                 <div className="row justify-content-center">
                     <div className="col-lg-3 col-md-4 col-6">
                         <div class="avatar-container">
-                            {/* <img src="{{#if avatarData}}{{avatarData}}{{else}}./home/default_user.png{{/if}}" id="user-avatar" class="img-fluid avatar" alt="user avatar" />           */}
-                            {/* <img src={avatarData ? avatarData: "./home/default_user.png"} id="user-avatar" class="img-fluid avatar" alt={userData.email} /> */}
-                            {avatarD}
+                            {userData.avatar ? 
+                              (<img src={userData.avatar} id="user-avatar" class="img-fluid avatar" alt="user avatar" />)
+                            : (<img src="/img/default_user.png" id="user-avatar" class="img-fluid avatar" alt="user avatar" /> )
+                            }
                         </div>
                         {userData.email ? (
 					        <div class="icon-group mt-4">
@@ -172,7 +144,6 @@ export default function Account(props){
                             <PrivateRoute exact path='/account/property/add' component={AddProperty}/>
                             <PrivateRoute exact path='/account/watchlist' component={Watchlist}/>
                             <PrivateRoute exact path='/account/property/:id' component={EditProperty}/>
-                            {/* <PrivateRoute exact path='/account/edit' component={EditProfile} />                             */}
                         </Switch>
                     </div>
                 </div>
@@ -190,6 +161,15 @@ export default function Account(props){
 
                         <form onSubmit={editUser}>
                             <div class="modal-body">
+                                <div class="avatar-container" {...getRootProps()}>
+                                    <input {...getInputProps()} />
+                                    {imageData ? 
+                                    (<img src={imageData} id="user-avatar" class="img-fluid avatar" alt="user avatar" />)
+                                    : (<img src={userData.avatar ? userData.avatar : "/img/default_user.png"} id="user-avatar" class="img-fluid avatar" alt="user avatar" /> )
+                                    }
+                                </div>
+                                <button type="button" onClick={removeImage}>remove</button>
+
                                 <div class="form-group">
                                     <label htmlFor="email">Email</label>
                                     <input type="email" class="form-control" id="email" placeholder="title" value={userData.email} disabled/>
@@ -198,21 +178,10 @@ export default function Account(props){
                                     <label htmlFor="phone">Phone</label>
                                     <input class="form-control" id="phone" name="phone" type="tel" placeholder="phone" defaultValue={userData.phone} data-tip="please input a 10 digit phone number"/>    
                                 </div>
-                                
-                                <div class="form-group" {...getRootProps()}>
-                                    <label htmlFor="avatar">Avatar</label>
-                                    <input {...getInputProps()} />
-                                    {
-                                        isDragActive ?
-                                        <p>Drop the files here ...</p> :
-                                        <p>Click here or drop files to upload!</p>
-                                    }
-                                </div>
-                                {preview}
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Update</button>
-                                <button type="button" class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
+                                <button type="button" ref={colseModal} class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
                             </div>
                         </form>
                     </div>
