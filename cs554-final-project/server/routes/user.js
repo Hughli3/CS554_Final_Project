@@ -3,6 +3,8 @@ const router = express.Router();
 const data = require('../data');
 const propertyData = data.property;
 const userData = data.user;
+const imageData = data.image;
+const base64Img = require('base64-img');
 // const ObjectId = require('mongodb').ObjectID;
 const checkAuth = require('./checkAuth')
 
@@ -44,15 +46,30 @@ router.patch('/', checkAuth, async (req, res) => {
 });
 
 router.get('/', checkAuth, async (req, res) => {
+    let user;
     try {
-        const user = await userData.getUser(res.locals.userUid);
+        user = await userData.getUser(res.locals.userUid);
         let propertyList = user.property
         user.property = []
         for (let pid of propertyList) {
             user.property.push(await propertyData.getById(pid))
         }
+    } catch (e) {
+        res.status(500).json({error: e});
+        return;
+    }
 
-        res.json(user)
+    // get images data
+    try {
+        for (let property of user.property) {
+            console.log(property)
+            let albumIds = property.album
+            property.album = []
+            for (let imageId of albumIds) {
+                property.album.push(await imageData.getPhotoDataId(imageId));
+            }
+        }
+        res.json(user);
     } catch (e) {
         res.status(500).json({error: e});
     }
@@ -157,11 +174,23 @@ router.get('/:id', async (req, res) => {
         for (let pid of propertyList) {
             user.property.push(await propertyData.getById(pid))
         }
-        console.log(user)
-        res.json(user);
     } catch (e) {
         res.status(500).json({error: e});
         return;
+    }
+
+    // get images data
+    try {
+        for (let property of user.property) {
+            let albumIds = property.album
+            property.album = []
+            for (let imageId of albumIds) {
+                property.album.push(await imageData.getPhotoDataId(imageId));
+            }
+        }
+        res.json(user);
+    } catch (e) {
+        res.status(500).json({error: e});
     }
 });
 

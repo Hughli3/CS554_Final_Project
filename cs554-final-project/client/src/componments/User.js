@@ -40,14 +40,14 @@ export default function User(props){
         li = userData && userData.property && userData.property.map((property) => { 
             return (
                 <>
-                    <div class="row property-card my-3">
+                    <div class="row property-card mb-4">
                         <div class="col-lg-6 col-md-4 col-6 pl-0">
                             <Link to={'/property/' + property._id}>
                                 {/* <div class="avatar-container"> */}
-                                    {property.avatar ?
-                                    (<img src="https://cdngeneral.rentcafe.com/dmslivecafe/3/509605/Avant-Apartments-Parking-Garage-Entrance-Carmel,-Indiana_WEB.jpg" class="card-img-left" alt="property image" />)
+                                    {property.album.length == 0 ?
+                                    (<img src="/img/default_property.jpg" class="card-img-left" alt="property image" />)
                                     :
-                                    (<img src="https://cdngeneral.rentcafe.com/dmslivecafe/3/509605/Avant-Apartments-Parking-Garage-Entrance-Carmel,-Indiana_WEB.jpg" class="card-img-left" alt="property image" />)
+                                    (<img src={property.album[0]} class="card-img-left" alt="property image" />)
                                     }
                                 </Link>
                                 {/* </div> */}
@@ -89,28 +89,27 @@ export default function User(props){
                 {/* <h1 className='mb-5'>Account</h1> */}
                 <div className="row justify-content-center">
                     <div className="col-lg-3 col-md-4 col-6">
-                        <div><h1 className='cap-first-letter'>User</h1></div>
                         <div class="avatar-container">
-                            <img src="{{#if user.avatar}}{{user.avatar}}{{else}}./home/default_user.png{{/if}}" id="user-avatar" class="img-fluid avatar" alt="user avatar" />                
-                        </div>
-                        <div class="icon-group mt-4">
-                        <p>User Id: {userData._id}</p>
-                        </div>
-                        
+							{userData.avatar ?
+								<img src={userData.avatar} id="user-avatar" class="img-fluid avatar" alt="user avatar" />                
+							: 	<img src="/img/default_user.png" id="user-avatar" class="img-fluid avatar" alt="user avatar" />                
+							}
+						</div>      
                         {userData.email ? (
 					        <div class="icon-group mt-4">
-                                <p>Email: {userData.email} 
-                                </p>
+								<p>
+									<i class="fas fa-envelope"></i>{userData.email} 
+                            	</p>
                             </div>) : null}
                         {userData.phone ? (
                         <div class="icon-group my-3">
-                            <p>Phone: {userData.phone}
+							<p>
+                                <i class="fas fa-phone"></i>{userData.phone}
                             </p>
                         </div>) : null}
                     </div>
 
                     <div className="col-lg-9 col-12 pl-4">
-                    <h1 className='cap-first-letter'>Properties: </h1>
                     {li}
                     </div>
                 </div>
