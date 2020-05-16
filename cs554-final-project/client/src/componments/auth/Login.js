@@ -4,6 +4,7 @@ import { app, googleProvider } from "./AuthBase.js";
 import { AuthContext } from "./Auth.js";
 import ReactTooltip from "react-tooltip";
 import { useAlert } from 'react-alert'
+import { Helmet } from 'react-helmet'
 
 const Login = () => {
   const alert = useAlert()
@@ -27,6 +28,9 @@ const Login = () => {
   
   return (
     <section className="section bg-default signup-login-section">
+          <Helmet>
+              <title>Login - RentSIT</title>
+          </Helmet>
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-5">

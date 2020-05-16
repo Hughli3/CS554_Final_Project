@@ -3,6 +3,7 @@ import React, { useEffect, useState, useContext } from "react"
 import serverController from '../../serverController';
 import { AuthContext } from "../auth/Auth";
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet'
 
 export default function WatchList(props) {
     const { currentUser } = useContext(AuthContext);
@@ -46,6 +47,9 @@ export default function WatchList(props) {
     if (!properties) {
         return (
             <div className='show-body'>
+            <Helmet>
+                <title>WatchList - RentSIT</title>
+            </Helmet>
                 <p>empty</p>
             </div>
         )
@@ -63,6 +67,9 @@ export default function WatchList(props) {
         ) : properties.map(property => {
         return (
         <>
+        <Helmet>
+              <title>WatchList - RentSIT</title>
+        </Helmet>
 			<div class="row property-card mb-4">
 				<div class="col-lg-6 col-md-4 col-6 pl-0">
                     <Link to={'/property/' + property._id}>

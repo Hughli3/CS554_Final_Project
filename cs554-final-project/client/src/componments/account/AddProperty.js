@@ -4,7 +4,8 @@ import serverController from '../../serverController';
 // import { Redirect } from "react-router";
 import { useAlert } from 'react-alert'
 import ReactTooltip from "react-tooltip";
-import {useDropzone} from 'react-dropzone'
+import {useDropzone} from 'react-dropzone';
+import { Helmet } from 'react-helmet';
 
 const AddProperty = (props) => {
     const alert = useAlert()
@@ -147,6 +148,9 @@ const AddProperty = (props) => {
       
     return (
     <div>
+      	<Helmet>
+              <title>Create property - RentSIT</title>
+        </Helmet>
         <h1>Post Property</h1>
         <form onSubmit={addProperty}>
           <div className="row">

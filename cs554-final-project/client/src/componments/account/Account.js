@@ -10,6 +10,7 @@ import { useAlert } from 'react-alert';
 import { Link, Switch } from 'react-router-dom';
 import ReactTooltip from "react-tooltip";
 import {useDropzone} from 'react-dropzone'
+import { Helmet } from 'react-helmet';
 
 export default function Account(props){
     const { currentUser } = useContext(AuthContext);
@@ -91,6 +92,9 @@ export default function Account(props){
     
     return(
         <section class="section account">
+        <Helmet>
+              <title>Account - RentSIT</title>
+        </Helmet>
             <div class="container">
                 {/* <h1 className='mb-5'>Account</h1> */}
                 <div className="row justify-content-center">

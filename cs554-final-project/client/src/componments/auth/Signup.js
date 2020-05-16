@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Redirect } from "react-router";
 import { AuthContext } from "./Auth.js";
 import { app } from "./AuthBase";
-import serverController from '../../serverController'
+import { Helmet } from 'react-helmet'
 import ReactTooltip from "react-tooltip";
 import { useAlert } from 'react-alert'
 
@@ -28,7 +28,11 @@ const SignUp = () => {
   }
 
   return (
+    
     <section className="section bg-default signup-login-section">
+          <Helmet>
+              <title>SignUp - RentSIT</title>
+          </Helmet>
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-5">

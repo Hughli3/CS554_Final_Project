@@ -3,6 +3,7 @@ import serverController from '../serverController'
 import { Link } from 'react-router-dom';
 import { AuthContext } from "./auth/Auth";
 import { useAlert } from 'react-alert'
+import { Helmet } from 'react-helmet'
 
 const SingleProperty = (props) => {
 	const [ propertyData, setPropertyData ] = useState();
@@ -84,6 +85,9 @@ const SingleProperty = (props) => {
 	if (!propertyData) {
 		return (
 			<section class="section">
+			<Helmet>
+                <title>Property - RentSIT</title>
+            </Helmet>
 				<div class="container">
 					<h1>404 - Property Not Found!</h1>
 				</div>
@@ -200,6 +204,9 @@ const SingleProperty = (props) => {
 
 	return (
 		<section class="section single-property">
+			<Helmet>
+                <title>{(propertyData && propertyData.title)} - RentSIT</title>
+            </Helmet>
 			<div class="container">
 				{/* <h1 class="mb-5">All Property</h1> */}
 				<h1 className='cap-first-letter'>{(propertyData && propertyData.title) || 'Not Provided'}</h1>

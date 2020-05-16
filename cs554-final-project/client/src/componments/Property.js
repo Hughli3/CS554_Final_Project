@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import serverController from '../serverController';
 import { Link } from 'react-router-dom';
 import { useAlert } from 'react-alert'
+import { Helmet } from 'react-helmet'
 
 const Property = (props) => {
 
@@ -39,6 +40,9 @@ const Property = (props) => {
 	li = propertyData && propertyData.map((property) => { 
 		return (
 			<>
+			<Helmet>
+                <title>Property - RentSIT</title>
+            </Helmet>
 				<div class="row property-card my-3">
 					<div class="col-lg-6 col-md-4 col-6 pl-0">
 						<Link to={'/property/' + property._id}>
