@@ -1,7 +1,7 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import { AuthContext } from "../auth/Auth";
 import serverController from '../../serverController';
-import { Redirect } from "react-router";
+// import { Redirect } from "react-router";
 import { useAlert } from 'react-alert'
 import ReactTooltip from "react-tooltip";
 
