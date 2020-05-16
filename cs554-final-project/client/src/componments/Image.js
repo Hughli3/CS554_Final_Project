@@ -4,7 +4,6 @@ import {useDropzone} from 'react-dropzone'
 
 const Image = (props) => {
     const [imageData, setImageData] = useState([]);
-    const maxSize = 16777216;
 
     const getbase64 = async(file) => {
         return new Promise((resolve, reject) => {
@@ -19,7 +18,14 @@ const Image = (props) => {
         return Promise.all(Files.map(file => getbase64(file)))
     }
 
-    const onDrop = useCallback(async(acceptedFiles) => {
+    const onDrop = useCallback(async(acceptedFiles, rejectedFiles) => {
+        
+        for (let file of rejectedFiles) {
+          for (let error of file.errors) {
+            console.log(file.file.name + " : " + error.message)
+          }
+        }
+
         let files = await getData(acceptedFiles);
         // set state: add to previous state
         setImageData(prevState => {
@@ -47,7 +53,7 @@ const Image = (props) => {
         onDrop,
         accept: 'image/jpeg, image/png',
         minSize: 0,
-        maxSize,
+        maxSize: 5242880,
     })
 
     return (
