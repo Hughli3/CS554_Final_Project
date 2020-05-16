@@ -373,4 +373,28 @@ p.card-text {
     }
   }
   
-  
+/* image */
+.img-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.img-preview {
+    border: 2px solid #ececec;
+}
+
+.img-preview-container:hover .btn-delete-preview {
+    display: block;
+}
+
+.image-upload:focus {
+    outline: 0;
+}
+
+.btn-delete-preview {
+    display: none;
+    right: 15px;
+    top: 15px;
+    z-index: 99;
+}
