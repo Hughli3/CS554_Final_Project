@@ -8,7 +8,18 @@ const base64Img = require('base64-img');
 const ObjectId = require('mongodb').ObjectID;
 const checkAuth = require('./checkAuth');
 
+const bluebird = require("bluebird");
+const redis = require("redis");
+const client = redis.createClient();
+bluebird.promisifyAll(redis.RedisClient.prototype);
+bluebird.promisifyAll(redis.Multi.prototype);
+let allC = []
+
+// clear redis
+// client.FLUSHDB();
+
 router.get('/', async (req, res) => {
+    let allSave = ""
     let page = 1;
     let sort;
     let filter;
@@ -33,6 +44,7 @@ router.get('/', async (req, res) => {
         }
         
         console.log(filter, sort)
+        allSave = "all"+filter+sort        
     } catch (e) {
         res.status(400).json({error: "invalid parameter"});
         return;
@@ -40,24 +52,44 @@ router.get('/', async (req, res) => {
 
     let resData;
     try {
-        // console.log("I'm hrere, check me!!!!!!!!!")
-        resData = await propertyData.getAll(page, filter, sort);
-        // console.log("I'm hrere, check me, again!!!!!!!!!")
-        // res.json(resData);
-    } catch (e) {
-        res.status(500).json({error: e});
-        return
-    }
+        let allCExist = await client.existsAsync(allSave+"c");
+        let allExist = await client.existsAsync(allSave);
+        if(allCExist&&allExist){            
+            let jsonProperty = await client.getAsync(allSave);
+            resData = JSON.parse(jsonProperty);
+        } else {            
+            // console.log("I'm hrere, check me!!!!!!!!!")
+            resData = await propertyData.getAll(page, filter, sort);
+            // console.log("I'm hrere, check me, again!!!!!!!!!")
+            // res.json(resData);
+
+            for (let property of resData.properties) {
+                let albumIds = property.album
+                property.album = []
+                for (let imageId of albumIds) {
+                    property.album.push(await imageData.getPhotoDataId(imageId));
+                }
+            }
+
+            let jsonProperty = JSON.stringify(resData)
+            client.setAsync(allSave, jsonProperty);
+            client.setAsync(allSave+"c", true);
+            allC.push(allSave+"c")
+        }
+    // } catch (e) {
+    //     res.status(500).json({error: e});
+    //     return
+    // }
 
     // get images data
-    try {
-        for (let property of resData.properties) {
-            let albumIds = property.album
-            property.album = []
-            for (let imageId of albumIds) {
-                property.album.push(await imageData.getPhotoDataId(imageId));
-            }
-        }
+    // try {
+        // for (let property of resData.properties) {
+        //     let albumIds = property.album
+        //     property.album = []
+        //     for (let imageId of albumIds) {
+        //         property.album.push(await imageData.getPhotoDataId(imageId));
+        //     }
+        // }
         res.json(resData);
     } catch (e) {
         res.status(500).json({error: e});
@@ -76,33 +108,48 @@ router.get('/:id', async (req, res) => {
     }
 
     let property
-    try {
-        property = await propertyData.getById(req.params.id);
-    } catch (e) {
-        res.status(404).json({error: 'property not found'});
-        return;
-    }
 
-    // get images data
-    try {
-        let albumIds = property.album
-        property.album = []
-        for (let imageId of albumIds) {
-            property.album.push(await imageData.getPhotoDataId(imageId));
+    let propertyExist = await client.existsAsync("property"+req.params.id);
+    if(propertyExist){
+        console.log(1);
+        
+        let jsonProperty = await client.getAsync("property"+req.params.id);
+        property = JSON.parse(jsonProperty);
+    } else {
+        console.log(2);
+        
+        try {
+            property = await propertyData.getById(req.params.id);
+        } catch (e) {
+            res.status(404).json({error: 'property not found'});
+            return;
         }
-    } catch (e) {
-        res.status(500).json({error: e});
-        return;
-    }
 
-    // get owner data
-    try {
-        let ownerId = property.owner
-        property.owner = await userData.getUser(ownerId);
-        res.json(property);
-    } catch (e) {
-        res.status(500).json({error: e});
+        // get images data
+        try {
+            let albumIds = property.album
+            property.album = []
+            for (let imageId of albumIds) {
+                property.album.push(await imageData.getPhotoDataId(imageId));
+            }
+        } catch (e) {
+            res.status(500).json({error: e});
+            return;
+        }
+
+        // get owner data
+        try {
+            let ownerId = property.owner
+            property.owner = await userData.getUser(ownerId);
+            // res.json(property);
+        } catch (e) {
+            res.status(500).json({error: e});
+        }
+
+        let jsonProperty = JSON.stringify(property)
+        client.setAsync("property"+req.params.id, jsonProperty);
     }
+    res.json(property);
 });
 
 router.post('/', checkAuth, async (req, res) => {
@@ -140,13 +187,20 @@ router.post('/', checkAuth, async (req, res) => {
     
     try {
         const property = await propertyData.add(owner, propertyInfo);
+
+        // reset all property redis
+        for(let i=0; i<allC.length;i++){
+            await client.delAsync(allC[i]);
+        }
+        allC = []
+
         res.json(property);
     } catch (e) {
         res.status(500).json({error: e});
     }
 });
 
-router.put("/:id", checkAuth, async(req, res) => {  
+router.put("/:id", checkAuth, async(req, res) => {
     let propertyBody = req.body;
 
     // get property  
@@ -196,8 +250,16 @@ router.put("/:id", checkAuth, async(req, res) => {
 
     try{
         let pid = req.params.id;
-        console.log("pid", propertyBody);
+        // console.log("pid", propertyBody);
         const property = await propertyData.update(pid, propertyBody);
+
+        // reset property redis
+        client.delAsync("property"+pid);
+        for(let i=0; i<allC.length;i++){
+            await client.delAsync(allC[i]);
+        }
+        allC = []
+
         res.json(property);
     }catch(e){
         res.status(500).json({error: e});
@@ -234,6 +296,13 @@ router.delete('/:id', checkAuth, async (req, res) => {
     try {
         const resData = await propertyData.delete(req.params.id, ownerId);
         resData.data = property
+
+        // reset all property redis
+        for(let i=0; i<allC.length;i++){
+            await client.delAsync(allC[i]);
+        }
+        allC = []
+
         res.json(resData);
     } catch (e) {
         console.log(e)
