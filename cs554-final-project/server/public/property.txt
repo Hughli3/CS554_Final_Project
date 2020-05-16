@@ -103,7 +103,7 @@ price:11226,
 deposit:null,
 publishedDate:"2020-03-04",
 bedroom:3,
-baths:1.5,
+baths:1,
 area:null
 type: apt
 
