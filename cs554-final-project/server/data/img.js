@@ -33,12 +33,9 @@ async function validateImage(name) {
 }
 
 function validateBase64(base64Str) {
-  console.log(typeof base64Str);
-  
-  let reg = /^data:image\/[A-Za-z]+;base64,([A-Za-z0-9+/]{4})*[A-Za-z0-9+/]{0,1,2,3}==$/
-  if(reg.test(base64Str)){
-    return true
-  } else {
+  let reg = /^data:image\/[A-Za-z]+;base64,([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{0,3}==)$/
+  // let reg = /^data:image\/[A-Za-z]+;base64,[A-Za-z0-9+/]*==$/
+  if(!reg.test(base64Str)){
     throw "it is not Base64 for image";
   }
 }
