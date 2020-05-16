@@ -6,7 +6,7 @@ import serverController from '../serverController';
 
 const Home = () => {
     const [loading, setLoading] = useState(true);
-    const [imgList, setImgList] = useState([]);
+    const [propertyData, setPropertyData] = useState([]);
 
 
     useEffect(
@@ -14,9 +14,26 @@ const Home = () => {
 			async function fetchData() {
 				try {
 					setLoading(true);
-					const {data: resData} = await serverController.getSomeImages(4)
-                    let il = await getImages(resData)
-                    console.log(il);                    
+					const {data: resData} = await serverController.getAllProperty()
+                    // TODO get property with album not empty
+                    let imageL = []
+                    for(let i=0; i<resData.properties.length; i++){                        
+                        for(let j=0; j<resData.properties[i].album.length; j++){
+                            imageL.push(resData.properties[i].album[j]);
+                        }
+                    }
+                    // TODO get random 4
+                    let imageRL = []
+                    for(let i=0; i<4; i++){
+                        let rn =  parseInt(Math.random()*(imageL.length-1) )
+                        imageRL.push(imageL[rn])
+                    }
+                   // setPropertyData(//Filtered property)
+                   setPropertyData(imageRL)
+
+                   console.log(propertyData);
+                   
+                  
 					setLoading(false);
 				} catch (e) {
 					setLoading(false);
@@ -26,20 +43,6 @@ const Home = () => {
 		},
 		[]
     );
-
-    const getImages = async (resData) => {
-        let il = []
-        for(let i=0; i<resData.data.length; i++) {
-            const {data: imgData} = await serverController.getImage(resData.data[i])                        
-            await il.push(imgData.data)
-        }
-
-        setImgList(prevState => {
-            let array = il
-            return array
-        })
-        return il
-    }
     
     if (loading) {
         return (
