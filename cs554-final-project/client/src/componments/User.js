@@ -85,6 +85,7 @@ export default function User(props){
                         </div>) : null}
                     </div>
                     <div className="col-lg-9 col-12 pl-4">
+                        <div class="icon-group mt-4">property: {li}</div>
                     </div>
                 </div>
             </div>
