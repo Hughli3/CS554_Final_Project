@@ -1,10 +1,52 @@
-import React, { useCallback, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import { Helmet } from 'react-helmet'
+import serverController from '../serverController';
 
 const TITLE = 'Home'
 
 const Home = () => {
+    const [loading, setLoading] = useState(true);
+    const [imgList, setImgList] = useState([]);
+
+
+    useEffect(
+		async () => {
+			async function fetchData() {
+				try {
+					setLoading(true);
+					const {data: resData} = await serverController.getSomeImages(4)
+                    let il = await getImages(resData)
+                    console.log(il);                    
+					setLoading(false);
+				} catch (e) {
+					setLoading(false);
+				}
+			}
+            fetchData();            
+		},
+		[]
+    );
+
+    const getImages = async (resData) => {
+        let il = []
+        for(let i=0; i<resData.data.length; i++) {
+            const {data: imgData} = await serverController.getImage(resData.data[i])                        
+            await il.push(imgData.data)
+        }
+
+        setImgList(prevState => {
+            let array = il
+            return array
+        })
+        return il
+    }
+    
+    if (loading) {
+        return (
+            <div class="lds-facebook"><div></div><div></div><div></div></div>
+        )
+    }
 
     return (
         <>
@@ -17,7 +59,7 @@ const Home = () => {
                     <div className="col-lg-6 py-sm">
                     <h1 className="display-3  text-white">Rent A Place Easily<span>by using RentSIT</span></h1>
                     <p className="lead text-white">RentSIT is a rental platform for Stevens students. This site allows property owners to post properties near Stevens for SIT students. Students can quickly browse all the properties and contact the owners.
-</p>
+                        </p>
                     <div className="btn-wrapper">
                         <Link to="/property" className="btn btn-white btn-icon mb-3 mb-sm-0">
                         <span className="btn-inner--icon"><i className="ni ni-cloud-download-95"></i></span>

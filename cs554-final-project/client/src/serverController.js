@@ -216,21 +216,30 @@ const serverController = {
         }
     },
 	
-	async addImage (imgs) {
-        const data = {
-            data: imgs
-        }
+	// async addImage (imgs) {
+    //     const data = {
+    //         data: imgs
+    //     }
+    //     try {
+    //         return await axios.post(baseUrl + "/api/image", data)
+    //     } catch (e) {
+    //         if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
+    //         else throw (e.message)
+    //     }
+    // },
+	
+	async getImage (imgid) {
         try {
-            return await axios.post(baseUrl + "/api/image", data)
+            return await axios.get(baseUrl + "/api/image/" + imgid)
         } catch (e) {
             if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
             else throw (e.message)
         }
     },
-	
-	async getImage (imgid) {
+
+	async getSomeImages(n) {
         try {
-            return await axios.get(baseUrl + "/api/image/" + imgid)
+            return await axios.get(baseUrl + "/api/image/someimages/" + n)
         } catch (e) {
             if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
             else throw (e.message)

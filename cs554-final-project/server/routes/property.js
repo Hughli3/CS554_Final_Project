@@ -110,14 +110,10 @@ router.get('/:id', async (req, res) => {
     let property
 
     let propertyExist = await client.existsAsync("property"+req.params.id);
-    if(propertyExist){
-        console.log(1);
-        
+    if(propertyExist){        
         let jsonProperty = await client.getAsync("property"+req.params.id);
         property = JSON.parse(jsonProperty);
-    } else {
-        console.log(2);
-        
+    } else {        
         try {
             property = await propertyData.getById(req.params.id);
         } catch (e) {
@@ -178,6 +174,7 @@ router.post('/', checkAuth, async (req, res) => {
             imageData.validateBase64(imagesInfo[i][2])
             let filepath = await base64Img.imgSync(imagesInfo[i][2], './public/img', imagesInfo[i][0].split(".")[0]);            
             let id = await imageData.createGridFS(imagesInfo[i][0], imagesInfo[i][1], filepath);
+            await client.lpushAsync("imgIdList", JSON.stringify(id))
             propertyInfo.album.push(id);
         }
     } catch (e) {
@@ -297,7 +294,8 @@ router.delete('/:id', checkAuth, async (req, res) => {
         const resData = await propertyData.delete(req.params.id, ownerId);
         resData.data = property
 
-        // reset all property redis
+        // reset property redis
+        await client.delAsync("property"+pid);
         for(let i=0; i<allC.length;i++){
             await client.delAsync(allC[i]);
         }
