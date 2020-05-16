@@ -3,8 +3,7 @@ import React, {useEffect, useState, useContext} from 'react';
 import serverController from "../serverController";
 import { useAlert } from 'react-alert'
 import Property from "./Property";
-import PrivateRoute from "./auth/PrivateRoute";
-import { Link, Switch } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 export default function User(props){
     
     const alert = useAlert();
