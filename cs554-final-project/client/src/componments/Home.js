@@ -11,31 +11,20 @@ const Home = () => {
 
 
     useEffect(
-		async () => {
+		 () => {
 			async function fetchData() {
 				try {
 					setLoading(true);
 					const {data: resData} = await serverController.getAllProperty()
                     // TODO get property with album not empty
-                    let imageL = []
-                    for(let i=0; i<resData.properties.length; i++){                        
-                        for(let j=0; j<resData.properties[i].album.length; j++){
-                            imageL.push(resData.properties[i].album[j]);
+                    let filteredProperty = []
+                    for(let i = 0; i < resData.properties.length && filteredProperty.length < 5; i++){                        
+                        if (resData.properties[i].album && resData.properties[i].album.length > 0) {
+                            filteredProperty.push(resData.properties[i]);
                         }
                     }
-                    // TODO get random 4
-                    let imageRL = []
-                    for(let i=0; i<4; i++){
-                        let rn =  parseInt(Math.random()*(imageL.length-1) )
-                        imageRL.push(imageL[rn])
-                    }
-                   // setPropertyData(//Filtered property)
-                   setPropertyData(imageRL)
-
-                   console.log(propertyData);
-                   
-                  
-					setLoading(false);
+                    setPropertyData(filteredProperty)                   
+                    setLoading(false);
 				} catch (e) {
 					setLoading(false);
 				}
@@ -44,6 +33,41 @@ const Home = () => {
 		},
 		[]
     );
+    
+    const buildSelectedProperty = (img, name, id) => {
+        return (
+        <div className="col-6 col-md-3 mb-5 mb-lg-0 home-selected-property">
+            <div className="px-4">
+            <Link to={"/property/" + id}>
+                <div className="avatar-container">
+                    <img src={img} className="img-fluid avatar" alt="property" />                
+                </div>
+                <div className="pt-3 text-center">
+                <h2 className="title">{name ? name : "property"}</h2>
+                </div>
+            </Link>
+            </div>
+        </div>
+    )}
+
+    const buildSelectedProperties = (propertyData) => {
+        let li = [];
+        for (let i = 0; i < 4; i++) {
+            if (i < propertyData.length) {
+                li.push(buildSelectedProperty(propertyData[i].album[0], propertyData[i].title, propertyData[i]._id))
+            } else {
+                li.push(buildSelectedProperty("/img/default_property.jpg", null, ""))
+            }
+        }
+
+		return (
+		<>
+            {li}
+		</>
+		);
+    };
+
+    const selectedProperties = buildSelectedProperties(propertyData)
     
     if (loading) {
         return (
@@ -80,27 +104,12 @@ const Home = () => {
             <section className="section section-md">
             <div className="container">
                 <div className="row justify-content-center text-center mb-sm">
-                <div className="col-lg-8">
-                    <h1>Renting property</h1>
-                </div>
-                </div>
-                <div className="row justify-content-center">
-                {/* {{#each popularDogs}} */}
-                <div className="col-6 col-md-3 mb-5 mb-lg-0">
-                    <div className="px-4">
-                    <a href="/property">
-                        <div className="avatar-container">
-                            <img src="{{avatar}}" className="img-fluid avatar" alt="property" />                
-                        </div>
-                        <div className="pt-3 text-center">
-                        <h2 className="title">
-                            {/* <span className="d-block mb-1">{{name}}</span> */}
-                        </h2>
-                        </div>
-                    </a>
+                    <div className="col-lg-8">
+                        <h1>Renting property</h1>
                     </div>
                 </div>
-                {/* {{/each}} */}
+                <div className="row justify-content-center">
+                    {selectedProperties}
                 </div>
             </div>
             </section>
