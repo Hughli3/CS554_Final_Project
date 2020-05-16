@@ -3,6 +3,7 @@ const router = express.Router();
 const data = require('../data');
 const propertyData = data.property;
 const imageData = data.image;
+const userData = data.user;
 const base64Img = require('base64-img');
 const ObjectId = require('mongodb').ObjectID;
 const checkAuth = require('./checkAuth');
@@ -89,7 +90,15 @@ router.get('/:id', async (req, res) => {
         for (let imageId of albumIds) {
             property.album.push(await imageData.getPhotoDataId(imageId));
         }
+    } catch (e) {
+        res.status(500).json({error: e});
+        return;
+    }
 
+    // get owner data
+    try {
+        let ownerId = property.owner
+        property.owner = await userData.getUser(ownerId);
         res.json(property);
     } catch (e) {
         res.status(500).json({error: e});
@@ -137,18 +146,62 @@ router.post('/', checkAuth, async (req, res) => {
     }
 });
 
-router.put("/:id", checkAuth, async(req, res) => {
-    try{
-        let propertyInfo = req.body;
-        let pid = req.params.id;
-        console.log("pid",propertyInfo);
-        const property = await propertyData.update(pid, propertyInfo);
-        res.json(property);
-    }catch(e){
-        console.log(e);
-        res.status(404).json({error: e});
+router.put("/:id", checkAuth, async(req, res) => {  
+    let propertyBody = req.body;
+
+    // get property  
+    let property
+    try {
+        property = await propertyData.getById(req.params.id);
+    } catch (e) {
+        res.status(404).json({error: 'property not found'});
+        return;
     }
 
+    propertyBody.album = property.album
+
+    // handle removed images
+    try {
+        let removedImages = propertyBody.removedImages
+        let albumIds = propertyBody.album
+        for (let imageId of albumIds) {
+            let imgData = await imageData.getPhotoDataId(imageId)
+            if (removedImages.includes(imgData)) {
+                var index = propertyBody.album.indexOf(imageId);
+                if (index > -1) {
+                    propertyBody.album.splice(index, 1);
+                    await imageData.deletePhoto(imageId)
+                }                
+            }
+        }
+    } catch (e) {
+        console.log(e)
+        res.status(500).json({error: "fail handling removed images"});
+        return
+    }
+
+    // handle new added images
+    try {
+        let newImages = propertyBody.newImages
+        for (let i = 0; i < newImages.length; i++) {
+            imageData.validateBase64(newImages[i][2])
+            let filepath = await base64Img.imgSync(newImages[i][2], './public/img', newImages[i][0].split(".")[0]);            
+            let id = await imageData.createGridFS(newImages[i][0], newImages[i][1], filepath);
+            propertyBody.album.push(id);
+        }
+    } catch (e) {
+        res.status(500).json({error: "fail handling uploaded images"});
+        return
+    }
+
+    try{
+        let pid = req.params.id;
+        console.log("pid", propertyBody);
+        const property = await propertyData.update(pid, propertyBody);
+        res.json(property);
+    }catch(e){
+        res.status(500).json({error: e});
+    }
 })
 
 router.delete('/:id', checkAuth, async (req, res) => {
@@ -167,6 +220,17 @@ router.delete('/:id', checkAuth, async (req, res) => {
         return;
     }
 
+    // remove images
+    try {
+        let albumIds = property.album
+        for (let imageId of albumIds) {
+            await imageData.deletePhoto(imageId)
+        }                
+    } catch (e) {
+        res.status(500).json({error: "fail removing images"});
+        return
+    }
+
     try {
         const resData = await propertyData.delete(req.params.id, ownerId);
         resData.data = property
@@ -176,7 +240,6 @@ router.delete('/:id', checkAuth, async (req, res) => {
         res.status(500).json({error: e});
         return;
     }
-
 });
 
 module.exports = router;

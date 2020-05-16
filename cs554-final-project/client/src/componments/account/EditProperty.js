@@ -1,17 +1,18 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useContext, useState, useEffect, useCallback} from 'react';
 import { AuthContext } from "../auth/Auth";
 import serverController from '../../serverController';
-import { Redirect } from "react-router";
+import {useDropzone} from 'react-dropzone'
 import { useAlert } from 'react-alert'
 import ReactTooltip from "react-tooltip";
 
 const EditProperty = (props) => {
     const alert = useAlert();
-    // const [isSuccess, setIsSuccess] = useState(false);
 
 	const [ propertyData, setPropertyData ] = useState();
 	const [ loading, setLoading ] = useState(true);
 	const { currentUser } = useContext(AuthContext);
+    const [imageData, setImageData] = useState([]);
+    const [removedImage, setRemovedImage] = useState([]);
 
 	useEffect(
 		() => {
@@ -29,9 +30,115 @@ const EditProperty = (props) => {
             getPropertyData();
 		},
 		[ props.match.params.id ]
-	);
+    );
+    
+    const getbase64 = async(file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (event) => resolve([file.name, "fieldName",event.target.result]);
+            reader.onerror = reject
+        })
+    }
+
+    const getData = async (Files) => {
+        return Promise.all(Files.map(file => getbase64(file)))
+    }
+
+    const onDrop = useCallback(async(acceptedFiles, rejectedFiles) => {
+        for (let file of rejectedFiles) {
+          for (let error of file.errors) {
+            alert.error(file.file.name + " : " + error.message)
+          }
+        }
+
+        let files = await getData(acceptedFiles);
+        // set state: add to previous state
+        setImageData(prevState => {
+          let array = prevState.concat(files)
+          // remove duplicate
+          let set = new Set()
+          for (let i = array.length - 1; i >= 0 ; i--) {
+            if (set.has(array[i][2])){
+              array.splice(i, 1);
+            } else {
+              set.add(array[i][2])
+            }
+          }
+          return array
+        })
+    }, [])
+
+    const removeImage = (idx) => {
+        setImageData(prevState => {
+            let array = [...prevState]
+            array.splice(idx, 1);
+            return array;
+        })
+    }
+
+    const removeExistingImage = (image) => {
+        setPropertyData(prevState => {
+            let data = {...prevState}
+            let album = data.album
+            var index = album.indexOf(image);
+            if (index > -1) {
+                album.splice(index, 1);
+            }
+            data.album = album;
+            return data;
+        })
+        setRemovedImage(prevState => {
+            let array = [...prevState]
+            array.push(image);
+            return array;
+        })
+    }
+
+    const {getRootProps, getInputProps} = useDropzone({
+        onDrop,
+        accept: 'image/jpeg, image/png',
+        minSize: 0,
+        maxSize: 5242880,
+    })
+
+    let existing_preview = propertyData && propertyData.album && propertyData.album.length > 0 && propertyData.album.map((image, idx) => {
+        return (
+          <div className="col-3 mb-2">
+            <div className="img-preview-container avatar-container">
+              <img class="img-fluid img-preview" src={image} alt="property image" />
+              <button type="button" onClick={() => removeExistingImage(image)} class="btn btn-danger btn-sm btn-round btn-shadow btn-delete-preview position-absolute">delete</button>
+            </div>
+          </div>
+        ) || null;
+    });
+
+    let preview = imageData && imageData.length > 0 && imageData.map((key, idx) => {
+      return (
+        <div className="col-3 mb-2">
+          <div className="img-preview-container avatar-container">
+            <img class="img-fluid img-preview" src={key[2]} alt={key[0]} />
+            <button type="button" onClick={() => removeImage(idx)} data-idx={idx} class="btn btn-danger btn-sm btn-round btn-shadow btn-delete-preview position-absolute">delete</button>
+          </div>
+        </div>
+      ) || null;
+    });
+
+    const uploadImage = (
+      <>
+        <label htmlFor="album">Album</label>
+        <div {...getRootProps()} class="image-upload property-card property-add align-self-center d-flex align-items-center justify-content-center mb-3">
+          <input id="album" {...getInputProps()} />
+          <div>
+            <p><i class="fas fa-file-image"></i></p>
+            <p>Click here or drop to upload photos!</p>
+          </div>
+        </div>
+      </>
+    );
 
     const editProperty = async (event) => {
+        setLoading(true)
         event.preventDefault();
 
         try{
@@ -39,6 +146,10 @@ const EditProperty = (props) => {
 
             let time = new Date();
             data.date = Date.parse(time);
+
+            data.newImages = imageData;
+            data.removedImages = removedImage;
+
             // console.log(data);
             if (!data.title.value) throw "title not exist"
             if (data.title.value.length > 70) throw "title too long";
@@ -59,8 +170,10 @@ const EditProperty = (props) => {
             await serverController.editProperty(props.match.params.id,currentUser, data);
             // setIsSuccess(true);
             props.history.push("/account")
+            setLoading(false)
             alert.success('Edit sucessfully');
         }catch(error){
+            setLoading(false)
             alert.error(error)
         }
     }
@@ -78,7 +191,7 @@ const EditProperty = (props) => {
 			</div>
 		)
     }
-    
+
     return (
         <div>
             <h1>Edit</h1>
@@ -95,6 +208,11 @@ const EditProperty = (props) => {
                     <label htmlFor="description">Description</label>
                     <textarea id="description" rows="10" class="form-control" name="description" type="text" placeholder="description" data-tip="description length need to less than 200" defaultValue={(propertyData && propertyData.description) || 'Not Provided'}  />
                 </div>
+                </div>
+
+                <div class="col-md-12">
+                    {uploadImage}
+                    {preview || existing_preview ? <div className="row mb-2">{existing_preview}{preview}</div> : null}
                 </div>
 
                 <div class="col-md-12">

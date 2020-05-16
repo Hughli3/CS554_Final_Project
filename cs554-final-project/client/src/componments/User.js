@@ -81,7 +81,16 @@ export default function User(props){
         return (
             <div class="lds-facebook"><div></div><div></div><div></div></div>
         )
-    }
+	}
+	
+	if (Object.keys(userData).length === 0) {
+		return (
+			<section class="section">
+				<div class="container">
+					<h1>404 - User Not Found!</h1>
+				</div>
+			</section>)	
+	}
 
     return(
         <section class="section account">

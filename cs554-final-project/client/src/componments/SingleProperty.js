@@ -28,7 +28,7 @@ const SingleProperty = (props) => {
                     console.log(property);
 					setPropertyData(property);
 				} catch (e) {
-					console.log(e)
+					alert.error(e)
 				}
 			}
 			async function checkWatchlist(currentUser) {
@@ -43,7 +43,7 @@ const SingleProperty = (props) => {
 					setLoading(false);
 				} catch (e) {
 					setLoading(false);
-					console.log(e)
+					alert.error(e)
 				}
 			}
 
@@ -83,9 +83,11 @@ const SingleProperty = (props) => {
 
 	if (!propertyData) {
 		return (
-			<div className='show-body'>
-				<p>404 - Property Not Found!</p>
-			</div>
+			<section class="section">
+				<div class="container">
+					<h1>404 - Property Not Found!</h1>
+				</div>
+			</section>
 		)
 	}
 
@@ -96,8 +98,7 @@ const SingleProperty = (props) => {
 	}
 
 	const constructDetail = (propertyData) => {
-		let price, zipcode, type, bed, bath, owner;
-		console.log(propertyData)
+		let price, zipcode, type, bed, bath, owner, phone;
 		if (propertyData.price) {
 			price = (
 				<>
@@ -133,11 +134,18 @@ const SingleProperty = (props) => {
 					{propertyData.bath}
 				</>)
 		}
-		if (propertyData.owner) {
+		if (propertyData.owner._id && propertyData.owner.email) {
 			owner = (
 				<>
 					<i class="fas fa-user"></i>
-					<Link to={"/user/" + propertyData.owner}>{propertyData.owner}</Link>
+					<Link to={"/user/" + propertyData.owner._id}>{propertyData.owner.email}</Link>
+				</>)
+		}
+		if (propertyData.owner.phone) {
+			phone = (
+				<>
+					<i class="fas fa-phone"></i>
+					{propertyData.owner.phone}
 				</>)
 		}
 
@@ -158,8 +166,13 @@ const SingleProperty = (props) => {
 				}
 				<div class="icon-group">
 					<p>{owner}</p>
-				
 				</div>
+				{phone ? (
+					<div class="icon-group">
+						<p>{phone}</p>
+					</div>
+					) : null
+				}
 			</>
 		)
 	};

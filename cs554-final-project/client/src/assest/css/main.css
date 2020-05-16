@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
 
+main {
+    min-height: 380px;
+}
+
 .footer.has-cards {
     margin-top: 0px;
     padding-top: 0px;
@@ -293,6 +297,7 @@ p.card-text {
 .single-property .description p{
     font-weight: 500;
     font-size: 18px;
+    word-wrap: break-word;
 }
 
 .property-card .description {
@@ -400,6 +405,10 @@ p.card-text {
 }
 
 .carousel-item img{
-    max-height: 360px;
+    max-height: 450px;
     object-fit: contain;
+}
+
+.carousel {
+    background: #22262b;
 }

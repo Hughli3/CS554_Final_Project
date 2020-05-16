@@ -133,7 +133,7 @@ const Property = (props) => {
         )
     }
 
-	if (!(Array.isArray(propertyData) && propertyData.length)) {
+	if (!(Array.isArray(propertyData) && propertyData.length) && !(filter || sort)) {
 		return (
 			<section class="section">
 				<div class="container">
@@ -146,7 +146,6 @@ const Property = (props) => {
 	return (
 		<section class="section">
 			<div class="container">
-				{/* <h1 class="mb-5">All Property</h1> */}
 				<div className="row mb-5">	
 					<div className="col-3 p-0">
 						<div class="dropdown w-100 pr-2">

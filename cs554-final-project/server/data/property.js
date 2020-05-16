@@ -129,8 +129,10 @@ let exportedMethods = {
             bath: propertyInfo.bath,
             price:propertyInfo.price,
             type:propertyInfo.type,
-            date: propertyInfo.date
+            date: propertyInfo.date,
+            album: propertyInfo.album
         }
+
         const propertyCollection = await properties();
 
         const updateInfo = await propertyCollection.updateOne({_id: objId}, {$set: data});

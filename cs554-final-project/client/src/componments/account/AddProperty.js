@@ -10,7 +10,8 @@ const AddProperty = (props) => {
     const alert = useAlert()
     const { currentUser } = useContext(AuthContext);
     const [imageData, setImageData] = useState([]);
-        
+    const [ loading, setLoading ] = useState(false);
+
     const getbase64 = async(file) => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
@@ -89,6 +90,7 @@ const AddProperty = (props) => {
     );
 
     const addProperty = async (event) => {
+      setLoading(true)
       event.preventDefault();
       const data = event.target.elements;
 
@@ -118,11 +120,19 @@ const AddProperty = (props) => {
         await serverController.postProperty(currentUser, data);
 
         props.history.push("/account")
+        setLoading(false)
         alert.success('post sucessfully')
       } catch (error) {
+        setLoading(false)
         alert.error(error)
       }
     };
+
+    if (loading) {
+      return (
+          <div class="lds-facebook"><div></div><div></div><div></div></div>
+      )
+    }
       
     return (
     <div>
