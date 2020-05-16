@@ -13,26 +13,7 @@ let exportedMethods = {
 
     const usersCollection = await users();
     const userInfo = await usersCollection.findOne({ _id: id });
-
     if (userInfo == null) throw "Could not find user successfully";
-  
-    // TODO Check propertylist and watchList
-    // let propertylist = [];
-    // for (let property of userInfo.properties) {
-    //   propertylist.push(await propertyData.getProperty(property));
-    // }
-    // userInfo.properties = propertylist;
-  
-    // let watchList = [];
-    // for (let watch of userInfo.watchList) {
-    //   watchList.push(await propertyData.getProperty(watch));
-    // }
-    // userInfo.properties = propertylist;
-  
-    // if (userInfo.avatar) {
-    //   let avatar = await imgData.getPhotoDataId(userInfo.avatar);
-    //   userInfo.avatar = avatar;
-    // }
     
     return userInfo;
   },
@@ -80,8 +61,10 @@ let exportedMethods = {
     // let avatarid = await this.updateAvatar(id, avatar)
     validatePhone(phone);
     let data = {
-        phone: phone,
-        avatar: null
+      phone: phone
+    }
+    if (avatar) {
+      data.avatar = avatar
     }
     const userCollection = await users();
 
@@ -90,18 +73,6 @@ let exportedMethods = {
 
     return await this.getUser(id); 
   },
-
-  // async updateAvatar(uid, avatar){
-  //     let photoId = await imgData.createGridFS(avatar[0], avatar[1], avatar[2]);
-      
-  //     const userCollection = await users();
-  //     let oldUser = await userCollection.findOne({ _id: uid })
-
-  //     if(oldUser.avatar !== null)
-  //       await imgData.deletePhoto(oldUser.avatar)
-    
-  //     return photoId;
-  // }  
 
 }
 

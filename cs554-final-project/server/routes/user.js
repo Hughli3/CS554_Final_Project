@@ -35,20 +35,57 @@ router.post('/', checkAuth, async (req, res) => {
 });
 
 router.patch('/', checkAuth, async (req, res) => {    
-    let userInfo = req.body;
-    
+    let userBody = req.body;
+    let skipAdd = false;
+    // remove avatar
     try {
-        // let avatar = null
-        // if(userInfo.avatar != null){
-        //     let avatarFilePath = await base64Img.imgSync(userInfo.avatar[0][2], './public/img', userInfo.avatar[0][0].split(".")[0]);
-        //     avatar = [userInfo.avatar[0][0], "avatar", avatarFilePath]
-        //     console.log(avatar);
-        // }
-        const user = await userData.updateUser(res.locals.userUid, userInfo.phone, null);        
-        res.json(user);
+        let user = await userData.getUser(res.locals.userUid);
+        if (user.avatar) {
+            let avatarData = await imageData.getPhotoDataId(user.avatar)
+            if (avatarData == userBody.avatar[2]) {
+                userBody.avatar = null;
+                skipAdd = true;
+            } else {
+                await imageData.deletePhoto(user.avatar)
+            }
+        }
     } catch (e) {
-        console.log(e)
+        res.status(500).json({error: "fail removing avatar"});
+        return
+    }
+
+    // add avatar
+    if (!skipAdd) {
+        try {
+            let image = userBody.avatar
+            imageData.validateBase64(image[2])
+            let filepath = await base64Img.imgSync(image[2], './public/img', image[0].split(".")[0]);            
+            let id = await imageData.createGridFS(image[0], image[1], filepath);
+            userBody.avatar = id;
+        } catch (e) {
+            res.status(500).json({error: "fail handling uploaded avatar"});
+            return
+        }
+    }
+
+    // update
+    let userRes;
+    try {
+        userRes = await userData.updateUser(res.locals.userUid, userBody.phone, userBody.avatar);  
+    } catch (e) {
         res.status(500).json({error: e});
+        return;
+    }
+
+    // get avatar
+    try {
+        if (userRes.avatar) {
+            userRes.avatar = await imageData.getPhotoDataId(userRes.avatar)
+        }
+        res.json(userRes);
+    } catch (e) {
+        res.status(500).json({error: e});
+        return;
     }
 });
 
@@ -76,9 +113,20 @@ router.get('/', checkAuth, async (req, res) => {
                 property.album.push(await imageData.getPhotoDataId(imageId));
             }
         }
+    } catch (e) {
+        res.status(500).json({error: e});
+        return;
+    }
+
+    // get avatar
+    try {
+        if (user.avatar) {
+            user.avatar = await imageData.getPhotoDataId(user.avatar)
+        }
         res.json(user);
     } catch (e) {
         res.status(500).json({error: e});
+        return;
     }
 });
 

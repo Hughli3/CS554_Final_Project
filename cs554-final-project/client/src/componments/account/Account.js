@@ -16,7 +16,7 @@ export default function Account(props){
     const [userData, setUserData] = useState({});
     const [loading, setLoading] = useState(true);
     const colseModal = createRef();
-    const [imageData, setImageData] = useState();
+    const [imageData, setImageData] = useState([null, null, null]);
 
 	const alert = useAlert();
 	useEffect(
@@ -26,8 +26,6 @@ export default function Account(props){
 					setLoading(true);
 					const {data: resData} = await serverController.getUser(currentUser);
                     setUserData(resData);
-                    setImageData(resData.avatar)
-
 					setLoading(false);
 				} catch (e) {
                     alert.error(e);
@@ -60,11 +58,11 @@ export default function Account(props){
         }
 
         let files = await getData(acceptedFiles);
-        setImageData(files[0][2])
+        setImageData(files[0])
     }, [])
 
     const removeImage = (idx) => {
-      setImageData(null)
+        setImageData([null, null, null])
     }
 
     const {getRootProps, getInputProps} = useDropzone({
@@ -84,15 +82,10 @@ export default function Account(props){
     const editUser = async (event) => {
         colseModal.current.click()
         event.preventDefault();
-
         try{
             const data = event.target.elements;
-
             if (data.phone.value.length != 10 && data.phone.value.length != 0) throw "phone number wrong format";
-
-            // let avatar = null;
             const {data: resData} = await serverController.editUser(currentUser, data.phone.value, imageData);
-            
             setUserData(resData);
             alert.success('Edit sucessfully');
         }catch(error){
@@ -163,8 +156,8 @@ export default function Account(props){
                             <div class="modal-body">
                                 <div class="avatar-container" {...getRootProps()}>
                                     <input {...getInputProps()} />
-                                    {imageData ? 
-                                    (<img src={imageData} id="user-avatar" class="img-fluid avatar" alt="user avatar" />)
+                                    {imageData[2] ? 
+                                    (<img src={imageData[2]} id="user-avatar" class="img-fluid avatar" alt="user avatar" />)
                                     : (<img src={userData.avatar ? userData.avatar : "/img/default_user.png"} id="user-avatar" class="img-fluid avatar" alt="user avatar" /> )
                                     }
                                 </div>
