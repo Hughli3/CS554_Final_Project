@@ -46,36 +46,45 @@ router.post('/', checkAuth, async (req, res) => {
 router.patch('/', checkAuth, async (req, res) => {    
     let userBody = req.body;
     let skipAdd = false;
-    // remove avatar
-    try {
-        let user = await userData.getUser(res.locals.userUid);
-        if (user.avatar) {
-            let avatarData = await imageData.getPhotoDataId(user.avatar)
-            if (avatarData == userBody.avatar[2]) {
-                userBody.avatar = null;
-                skipAdd = true;
-            } else {
-                await imageData.deletePhoto(user.avatar)
-            }
-        }
-    } catch (e) {
-        res.status(500).json({error: "fail removing avatar"});
-        return
+    let skipImage = true;
+    for (let i of userBody.avatar) {
+        if (i) skipImage = false
     }
-
-    // add avatar
-    if (!skipAdd) {
+    if (skipImage) {userBody.avatar = null}
+    if (!skipImage) {
+        // remove avatar
         try {
-            let image = userBody.avatar
-            imageData.validateBase64(image[2])
-            let filepath = await base64Img.imgSync(image[2], './public/img', image[0].split(".")[0]);            
-            let id = await imageData.createGridFS(image[0], image[1], filepath);
-            userBody.avatar = id;
+            let user = await userData.getUser(res.locals.userUid);
+
+            if (user.avatar) {
+                let avatarData = await imageData.getPhotoDataId(user.avatar)
+                if (avatarData == userBody.avatar[2]) {
+                    userBody.avatar = null;
+                    skipAdd = true;
+                } else {
+                    await imageData.deletePhoto(user.avatar)
+                }
+            }
         } catch (e) {
-            res.status(500).json({error: "fail handling uploaded avatar"});
+            res.status(500).json({error: e});
             return
         }
+
+        // add avatar
+        if (!skipAdd) {
+            try {
+                let image = userBody.avatar
+                imageData.validateBase64(image[2])
+                let filepath = await base64Img.imgSync(image[2], './public/img', image[0].split(".")[0]);            
+                let id = await imageData.createGridFS(image[0], image[1], filepath);
+                userBody.avatar = id;
+            } catch (e) {
+                res.status(500).json({error: "fail handling uploaded avatar"});
+                return
+            }
+        }
     }
+
 
     // update
     let userRes;
