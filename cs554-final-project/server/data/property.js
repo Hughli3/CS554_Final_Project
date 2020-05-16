@@ -102,7 +102,7 @@ let exportedMethods = {
     
     async getById(id){
         if (id === undefined)  throw "id is undefinded";
-        if (!ObjectId.isValid(id)) throw "id is invalid";
+        if (!ObjectId.isValid(id)) throw "id is invalid 2";
         if (typeof id != "string") id = id.toString();
         const objId = ObjectId.createFromHexString(id);
 
