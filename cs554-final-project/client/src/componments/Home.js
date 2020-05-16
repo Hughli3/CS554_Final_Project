@@ -104,7 +104,7 @@ const Home = () => {
             <div className="container">
                 <div className="row justify-content-center text-center mb-sm">
                     <div className="col-lg-8">
-                        <h1>Renting property</h1>
+                        <h1>Renting Property</h1>
                     </div>
                 </div>
                 <div className="row justify-content-center">
