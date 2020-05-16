@@ -4,10 +4,25 @@ const baseUrl = "http://localhost:3001"
 
 const serverController = {
 
-    async getAllProperty (page) {
+    async getAllProperty (page, filter, sort) {
         if (!page) page = 1;
+        // console.log(filter);
+        // console.log(sort);
+        // console.log(typeof(sort));
+        // console.log((filter  !== "null" && sort === "null"))
         try {
-            return await axios.get(baseUrl + "/api/property/?page=" + page)
+            if(filter !== "null" && sort !== "null"){
+                return await axios.get(baseUrl + "/api/property/?page=" + page + "&filter=" + filter + "&sort=" + sort)
+            }
+            else if ((filter  !== "null" && sort === "null") || (filter !== "null" && !sort)){
+                return await axios.get(baseUrl + "/api/property/?page=" + page + "&filter=" + filter)
+            }
+            else if((filter === "null" && sort !== "null") || (sort !== "null" && !filter) ){
+                return await axios.get(baseUrl + "/api/property/?page=" + page + "&sort=" + sort)
+            }else{
+                return await axios.get(baseUrl + "/api/property/?page=" + page)
+            }
+            
         } catch (e) {
             if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
             else throw (e.message)
@@ -34,11 +49,11 @@ const serverController = {
         const data = {
             title: title.value,
             description: description.value,
-            price: price.value,
+            price: parseInt(price.value),
             type:type.value,
             zipcode:zipcode.value,
-            bedroom:bedroom.value,
-            bath:bath.value,
+            bedroom:parseInt(bedroom.value),
+            bath:parseInt(bath.value),
             date:date
         }
         try {
@@ -60,13 +75,14 @@ const serverController = {
         const data = {
             title: title.value,
             description: description.value,
-            price: price.value,
+            price: parseInt(price.value),
             type:type.value,
             zipcode:zipcode.value,
-            bedroom:bedroom.value,
-            bath:bath.value,
+            bedroom:parseInt(bedroom.value),
+            bath:parseInt(bath.value),
             date:date
         }
+        console.log(data)
         try {
             return await axios.put(baseUrl + "/api/property/" + pid, data, {headers: {'Authorization': token}})
         } catch (e) {

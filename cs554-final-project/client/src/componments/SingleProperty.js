@@ -11,7 +11,14 @@ const SingleProperty = (props) => {
 	const { currentUser } = useContext(AuthContext);
 
 	const alert = useAlert();
-
+	let lastUpdate;
+	if (propertyData && propertyData.date){
+		let newDate = new Date();
+		newDate.setTime(propertyData.date);
+		lastUpdate = newDate.toLocaleString()
+		// console.log(lastUpdate)
+	}
+	 
 	useEffect(
 		() => {
 			async function getPropertyData() {
@@ -163,7 +170,7 @@ const SingleProperty = (props) => {
 				{/* <h1 class="mb-5">All Property</h1> */}
 				<h1 className='cap-first-letter'>{(propertyData && propertyData.title) || 'Not Provided'}</h1>
 				<div class="icon-group">
-					<p><i class="fas fa-clock"></i> Last Update {(propertyData && propertyData.date) || 'Not Provided'}</p>
+					<p><i class="fas fa-clock"></i> Last Update {lastUpdate || 'Not Provided'}</p>
 				
 				</div>
 				<div class="row">

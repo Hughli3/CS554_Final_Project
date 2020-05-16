@@ -7,20 +7,38 @@ const checkAuth = require('./checkAuth');
 
 router.get('/', async (req, res) => {
     let page = 1;
+    let sort;
+    let filter;
     try {
         if(req.query.page) {
             if (req.query.page === undefined) throw "page is undefinded";
             page = parseInt(req.query.page);
             if(isNaN(page)) throw "page is not a valid number";
             if (page < 1 ) throw "page is not a positive number";
+            
         }
+        
+        if(req.query.sort && req.query.sort !== "null"){
+            sort = req.query.sort; 
+        }else{
+            sort = null;
+        }
+        if (req.query.filter && req.query.filter !== "null"){
+            filter = req.query.filter;
+        }else{
+            filter = null;
+        }
+        
+        console.log(filter, sort)
     } catch (e) {
         res.status(400).json({error: "invalid parameter"});
         return;
     }
-    
+
     try {
-        const resData = await propertyData.getAll(page);
+        // console.log("I'm hrere, check me!!!!!!!!!")
+        const resData = await propertyData.getAll(page, filter, sort);
+        // console.log("I'm hrere, check me, again!!!!!!!!!")
         res.json(resData);
     } catch (e) {
         res.status(500).json({error: e});
@@ -75,7 +93,7 @@ router.put("/:id", checkAuth, async(req, res) => {
     try{
         let propertyInfo = req.body;
         let pid = req.params.id;
-        console.log("pid",pid);
+        console.log("pid",propertyInfo);
         const property = await propertyData.update(pid, propertyInfo);
         res.json(property);
     }catch(e){
