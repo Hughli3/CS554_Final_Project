@@ -4,6 +4,7 @@ import {useDropzone} from 'react-dropzone'
 
 const Image = (props) => {
     const [imageData, setImageData] = useState({});
+    const maxSize = 16777216;
 
     const getbase64 = async(file) => {
         return new Promise((resolve, reject) => {
@@ -29,7 +30,9 @@ const Image = (props) => {
 
     const {getRootProps, getInputProps, isDragActive} = useDropzone({
                             onDrop,
-                            accept: 'image/jpeg, image/png'
+                            accept: 'image/jpeg, image/png',
+                            minSize: 0,
+                            maxSize,
                         })
 
 

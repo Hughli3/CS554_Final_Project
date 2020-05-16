@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
         // console.log(imagesInfo);
         
         for(let i=0; i<imagesInfo.length; i++){
-            imageData.validateBase64(imagesInfo[i][2])
+            // imageData.validateBase64(imagesInfo[i][2])
             let filepath = await base64Img.imgSync(imagesInfo[i][2], './public/img', imagesInfo[i][0].split(".")[0]);
             console.log(filepath);
             
