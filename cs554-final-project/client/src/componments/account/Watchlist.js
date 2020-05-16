@@ -36,7 +36,7 @@ export default function WatchList(props) {
             setProperties(resData.details)
             alert.success("successfully removed from watchlist")
 		} catch (error) {
-			alert.error(error)
+			alert.error(error.message)
 		}
 	};
 

@@ -21,8 +21,8 @@ const serverController = {
             }
             
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
-            else throw (e.message)
+            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            throw e
         }
     },
 
@@ -30,8 +30,8 @@ const serverController = {
         try {
             return await axios.get(baseUrl + "/api/property/" + pid)
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
-            else throw (e.message)
+            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            throw e
         }
     },
 
@@ -40,7 +40,8 @@ const serverController = {
         try {
             token = await user.getIdToken(true)
         } catch (e) {
-            throw "fail getting usertoken"
+            throw e
+            // throw "fail getting usertoken"
         }
         const {title, description, price, type, zipcode, bedroom, bath, date, album} = property
         const data = {
@@ -57,8 +58,8 @@ const serverController = {
         try {
             return await axios.post(baseUrl + "/api/property/", data, {headers: {'Authorization': token}})
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
-            else throw (e.message)
+            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            throw e
         }
     },
 
@@ -67,7 +68,8 @@ const serverController = {
         try {
             token = await user.getIdToken(true)
         } catch (e) {
-            throw "fail getting usertoken"
+            throw e
+            // throw Error("fail getting usertoken")
         }
   
         const {title, description, price, type, zipcode, bedroom, bath, date, newImages, removedImages} = property
@@ -87,8 +89,8 @@ const serverController = {
         try {
             return await axios.put(baseUrl + "/api/property/" + pid, data, {headers: {'Authorization': token}})
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
-            else throw (e.message)
+            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            throw e
         }
     },
     
@@ -97,13 +99,14 @@ const serverController = {
         try {
             token = await user.getIdToken(true)
         } catch (e) {
-            throw "fail getting usertoken"
+            throw e
+            // throw Error("fail getting usertoken")
         }
         try {
             return await axios.delete(baseUrl + "/api/property/" + pid, {headers: {'Authorization': token}})
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
-            else throw (e.message)
+            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            throw e
         }
     },
 
@@ -112,13 +115,14 @@ const serverController = {
         try {
             token = await user.getIdToken(true)
         } catch (e) {
-            throw "fail getting usertoken"
+            throw e
+            // throw Error("fail getting usertoken")
         }
         try {
             return await axios.post(baseUrl + "/api/user/", null, {headers: {'Authorization': token}})
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
-            else throw (e.message)
+            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            throw e
         }
     },
 
@@ -127,13 +131,14 @@ const serverController = {
         try {
             token = await user.getIdToken(true)
         } catch (e) {
-            throw "fail getting usertoken"
+            throw e
         }
+        
         try {
             return await axios.get(baseUrl + "/api/user/", {headers: {'Authorization': token}})
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
-            else throw (e.message)
+            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            throw e
         }
     },
 
@@ -141,8 +146,8 @@ const serverController = {
         try {
             return await axios.get(baseUrl + "/api/user/" + userId)
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
-            else throw (e.message)
+            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            throw e
         }
     },
 
@@ -151,7 +156,8 @@ const serverController = {
         try {
             token = await user.getIdToken(true)
         } catch (e) {
-            throw "fail getting usertoken"
+            throw e
+            // throw Error("fail getting usertoken")
         }
         const data = {
             propertyId: propertyId
@@ -159,8 +165,8 @@ const serverController = {
         try {
             return await axios.post(baseUrl + "/api/user/watchlist", data, {headers: {'Authorization': token}})
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
-            else throw (e.message)
+            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            throw e
         }
     },
 
@@ -169,13 +175,14 @@ const serverController = {
         try {
             token = await user.getIdToken(true)
         } catch (e) {
-            throw "fail getting usertoken"
+            throw e
+            // throw Error("fail getting usertoken")
         }
         try {
             return await axios.delete(baseUrl + "/api/user/watchlist/" + propertyId, {headers: {'Authorization': token}})
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
-            else throw (e.message)
+            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            throw e
         }
     },
 
@@ -184,13 +191,14 @@ const serverController = {
         try {
             token = await user.getIdToken(true)
         } catch (e) {
-            throw "fail getting usertoken"
+            throw e
+            // throw Error("fail getting usertoken")
         }
         try {
             return await axios.get(baseUrl + "/api/user/watchlist", {headers: {'Authorization': token}})
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
-            else throw (e.message)
+            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            throw e
         }
     },
 
@@ -199,7 +207,7 @@ const serverController = {
         try {
             token = await user.getIdToken(true)
         } catch (e) {
-            throw "fail getting usertoken"
+            throw e
         }
         const data = {
             phone: phone,
@@ -208,8 +216,8 @@ const serverController = {
         try {
             return await axios.patch(baseUrl + "/api/user/", data, {headers: {'Authorization': token}})
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
-            else throw (e.message)
+            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            throw e
         }
     },
 	
@@ -217,10 +225,10 @@ const serverController = {
         try {
             return await axios.get(baseUrl + "/api/image/" + imgid)
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
-            else throw (e.message)
+            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            throw e
         }
     },
 };
-  
+
 export default serverController;

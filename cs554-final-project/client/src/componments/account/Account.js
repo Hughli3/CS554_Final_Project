@@ -29,8 +29,8 @@ export default function Account(props){
                     setUserData(resData);
 					setLoading(false);
 				} catch (e) {
-                    alert.error(e);
-					setLoading(false);
+                    setLoading(false);
+                    alert.error(e.message);
 				}
 			}
 			fetchData();
@@ -81,12 +81,12 @@ export default function Account(props){
         event.preventDefault();
         try{
             const data = event.target.elements;
-            if (data.phone.value.length != 10 && data.phone.value.length != 0) throw "phone number wrong format";
+            if (data.phone.value.length != 10 && data.phone.value.length != 0) throw {code: null, message:"phone number wrong format"};
             const {data: resData} = await serverController.editUser(currentUser, data.phone.value, imageData);
             setUserData(resData);
             alert.success('Edit sucessfully');
         }catch(error){
-            alert.error(error)
+            alert.error(error.message)
         }
     }
     

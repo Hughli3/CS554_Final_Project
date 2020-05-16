@@ -20,8 +20,8 @@ export default function User(props){
 					setUserData(resData);
                     setLoading(false);
 				} catch (e) {
-                    alert.error(e)
                     setLoading(false);
+                    alert.error(e.message)
 				}
 			}
 			fetchData();

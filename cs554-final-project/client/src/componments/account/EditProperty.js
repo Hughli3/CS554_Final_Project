@@ -19,16 +19,16 @@ const EditProperty = (props) => {
 		() => {
 			async function getPropertyData() {
 				try {
-                    setLoading(true);
-                    const {data: property}  = await serverController.getProperty(props.match.params.id)
-                    setPropertyData(property);
-                    setLoading(false);
+          setLoading(true);
+          const {data: property}  = await serverController.getProperty(props.match.params.id)
+          setPropertyData(property);
+          setLoading(false);
 				} catch (e) {
-                    setLoading(false);
-					alert.error(e)
+          setLoading(false);
+					alert.error(e.message)
 				}
-            }
-            getPropertyData();
+      }
+      getPropertyData();
 		},
 		[ props.match.params.id ]
     );
@@ -151,21 +151,21 @@ const EditProperty = (props) => {
             data.newImages = imageData;
             data.removedImages = removedImage;
 
-            if (!data.title.value) throw "title not exist"
-            if (data.title.value.length > 70) throw "title too long";
-            if (!data.description.value) throw "description not exist";
-            if (data.description.value.length > 200) throw "description too long";
-            if (!data.bedroom.value) throw "bedroom not exist"
-            if (parseInt(data.bedroom.value) < 1 || parseInt(data.bedroom.value) > 10 ) throw "bedroom number invalid";
-            if (!data.bath.value) throw "bath not exist"
+            if (!data.title.value) throw {code: null, message:"title not exist"} 
+            if (data.title.value.length > 70) throw {code: null, message:"title too long"};
+            if (!data.description.value) throw {code: null, message:"description not exist"};
+            if (data.description.value.length > 200) throw {code: null, message:"description too long"};
+            if (!data.bedroom.value) throw {code: null, message:"bedroom not exist"}
+            if (parseInt(data.bedroom.value) < 1 || parseInt(data.bedroom.value) > 10 ) throw {code: null, message:"bedroom number invalid"};
+            if (!data.bath.value) throw {code: null, message:"bath not exist"}
     
-            if (parseInt(data.bath.value) < 0|| parseInt(data.bath.value) > 10) throw "bath number invalid";
-            if (!data.price.value) throw "price not exist"
-            if (parseInt(data.price.value) < 0) throw "price invalid";
-            if (!data.zipcode.value) throw "zipcode not exist";
-            if (data.zipcode.value.length != 5) throw "zipcode invalid";
-            if (!data.type.value) throw "type is not exist";
-            if (data.type.value !== "apartment" && data.type.value !== "house" ) throw "type is invalid";
+            if (parseInt(data.bath.value) < 0|| parseInt(data.bath.value) > 10) throw {code: null, message:"bath number invalid"};
+            if (!data.price.value) throw {code: null, message:"price not exist"}
+            if (parseInt(data.price.value) < 0) throw {code: null, message:"price invalid"};
+            if (!data.zipcode.value) throw {code: null, message:"zipcode not exist"};
+            if (data.zipcode.value.length != 5) throw {code: null, message:"zipcode invalid"};
+            if (!data.type.value) throw {code: null, message:"type is not exist"};
+            if (data.type.value !== "apartment" && data.type.value !== "house" ) throw {code: null, message:"type is invalid"};
 
             await serverController.editProperty(props.match.params.id,currentUser, data);
             // setIsSuccess(true);
@@ -174,7 +174,7 @@ const EditProperty = (props) => {
             alert.success('Edit sucessfully');
         }catch(error){
             setLoading(false)
-            alert.error(error)
+            alert.error(error.message)
         }
     }
 

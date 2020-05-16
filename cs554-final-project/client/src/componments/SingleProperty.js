@@ -29,7 +29,7 @@ const SingleProperty = (props) => {
 					setLoading(false);
 				} catch (e) {
 					setLoading(false);
-					alert.error(e)
+					alert.error(e.message)
 				}
 			}
 			async function checkWatchlist(currentUser) {
@@ -43,7 +43,7 @@ const SingleProperty = (props) => {
 					setLoading(false);
 				} catch (e) {
 					setLoading(false);
-					alert.error(e)
+					alert.error(e.message)
 				}
 			}
 
@@ -61,7 +61,7 @@ const SingleProperty = (props) => {
 			setIsWatchlist(true)
 			alert.success("successfully added to waitlist")
 		} catch (e) {
-			alert.error(e)
+			alert.error(e.message)
 		}
 	};
 
@@ -71,7 +71,7 @@ const SingleProperty = (props) => {
 			setIsWatchlist(false)
 			alert.success("successfully removed from waitlist")
 		} catch (e) {
-			alert.error(e)
+			alert.error(e.message)
 		}
 	};
 
@@ -182,20 +182,20 @@ const SingleProperty = (props) => {
 	};
 
 	const buildIndicator = (image, idx) => {
-		return <li data-target="#carouselExampleIndicators" data-slide-to={idx} className={idx == 0 ? ("active") : ""}></li>
+		return <li data-target="#carouselExampleIndicators" data-slide-to={idx} className={idx === 0 ? ("active") : ""}></li>
 	}
-	const carouselIndicator = propertyData.album.length == 0 ? 
+	const carouselIndicator = propertyData.album.length === 0 ? 
 			(<li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>)
 			: propertyData.album.map( (image, idx) => buildIndicator(image, idx))
 
 	const buildCarouselImages = (image, idx) => {
 		return (
-			<div className={idx == 0 ? ("carousel-item active") : "carousel-item"}>
+			<div className={idx === 0 ? ("carousel-item active") : "carousel-item"}>
 				<img className="d-block w-100" src={image} alt="property images"/>
 			</div>
 		)					
 	}
-	const carouselImages = propertyData.album.length == 0 ?
+	const carouselImages = propertyData.album.length === 0 ?
 		<div className="carousel-item active">
 			<img className="d-block w-100" src="/img/default_property.jpg" alt="property images"/>
 		</div>
