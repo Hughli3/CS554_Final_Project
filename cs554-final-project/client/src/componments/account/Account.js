@@ -61,10 +61,6 @@ export default function Account(props){
         setImageData(files[0])
     }, [])
 
-    const removeImage = (idx) => {
-        setImageData([null, null, null])
-    }
-
     const {getRootProps, getInputProps} = useDropzone({
         onDrop,
         accept: 'image/jpeg, image/png',
@@ -161,7 +157,6 @@ export default function Account(props){
                                     : (<img src={userData.avatar ? userData.avatar : "/img/default_user.png"} id="user-avatar" class="img-fluid avatar" alt="user avatar" /> )
                                     }
                                 </div>
-                                <button type="button" onClick={removeImage}>remove</button>
 
                                 <div class="form-group">
                                     <label htmlFor="email">Email</label>
