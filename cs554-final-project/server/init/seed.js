@@ -5,107 +5,103 @@ const user = require("../data/user");
 //  ==================== User and Property data ====================
 
 user1 = {
-    username: "seed1",
-    password:"mypass321",
+    username: "seedseed1",
+    password:"password1",
     photo:"../img/", //TODO
     phone:"1029784458",
-    email:"hill@stevens.edu"
+    email:"seedseed1@gmail.com"
 }
 
 property1 = {
     ownerid:null,
-    title:"1B1B house",
-    decsription:"If you're moving to Weehawken, NJ, this great property could be your new address. Located at 25 Hackensack Plank Rd in Weehawken, this property is perfectly situated for work or play. End your search and get moving. To learn more about this property, schedule a showing.",
-    postcode:"07086",
-    price:2600,
+    title:"1 Bd/1Ba - Prime Hoboken Area - $100 Application Fee",
+    decsription:"The Jordan in Hoboken, NJ offers condo style one- and two-bedroom apartments with six different floor plans to choose from. From the soaring 9 foot ceilings with expansive Pella Architect Series windows, to the natural oak hardwood floors and the Frigidaire washer/dryer set, your apartment offers plenty to love. Your home comes with 7-ft solid, wood doors and controlled central heating and air conditioning with programmable thermostats. In the gourmet style kitchen, you will notice Dal Torreon porcelain tiled floors with Nemo Metro gloss tiled backsplash, walnut cabinetry with soft-close features, Kohler chrome fixtures, andCaesarstone countertops. ",
+    postcode:"07030",
+    price:3059,
     deposit:3600,
-    publishedDate:"2020-03-04",
-    bedroom:2,
-    baths:2,
-    area:1000
+    publishedDate:"2020-04-17",
+    bedroom:1,
+    baths:1,
+    type: "apartment"
 }
 // ------------------------------------------------------------
 user2 = {
-    username: "zheng",
-    password:"test3321",
+    username: "seedseed2",
+    password:"password2",
     photo:"../img/", //TODO
     phone:"1538649479",
-    email:"zheng@me.com"
+    email:"seedseed2@gmail.com"
 }
 
 property2 = {
     ownerid:null,
-    title:"Little house",
-    decsription:"In the heart of Jersey City Greenville ! Beautiful 3 bedroom home for rent, renovated kitchens, baths and ceramic tiled floors!. Nice size bathrooms, high ceilings, all new appliances. 1.5 Month Security deposit. ALL UTILITIES ARE SEPARATE.",
-    zipcode:"07305",
-    price:1800,
-    date:"2020-03-06",
-    bedroom:2,
-    bath:2,
-    area:1200,
-    type: "apartment"
+    title:"3/4 Bedroom house for rent",
+    decsription:"3/4 Bedroom Dutch Colonial. Very large master bedroom, pets ok, all hardwood and tile floors. 1.5 BATH. Formal Dining room , Full walk out Basement, New Central Air and Heat with Blue Tooth controls, new roof ,windows ,siding, bathrooms and more. Optional Private beach. Available Immediately.",
+    zipcode:"07849",
+    price:2400,
+    date:"2020-04-24",
+    bedroom:3,
+    bath:1,
+    type: "house"
 }
 
 // ------------------------------------------------------------
 user3 = {
-    username: "yong",
-    password:"testtest",
+    username: "seedseed3",
+    password:"password3",
     photo:"../img/", //TODO
     phone:"8489798468",
-    email:"yongyongyong@qq.com"
+    email:"seedseed1@gmail.com"
 }
 
 property3 = {
     ownerid:null,
-    title:"1708 West St",
-    decsription:"If you're moving to Union City, NJ, this great property could be your new rental. You'll enjoy this great location at 1708 West St in Union City and the attractions nearby. Stop your search and find your new home. Reach out to schedule a personal showing.",
-    zipcode:"07087",
-    price:2100,
+    title:"AWESOME 3 BEDROOM APT (FRANKLIN,NJ)",
+    decsription:"HUGE 3 BEDROOM APT..2200 sq ft \n ONLY 1 APT ABOVE A STORE . \n HARDWOOD FLOORS THROUGHOUT \n HUGE DECK OFF YOUR BACK DOOR \n WASHER & DRYER HOOKUP IN APT \n 3 ZONES OF HEATING \n YOUR OWN GAS FED BOILER \n CEILING FANS IN EVERY ROOM \n CENTRAL AIR \n HUGE FAMILY ROOM PLUS LIVING ROOM",
+    zipcode:"07416",
+    price:1850,
     date:"2020-03-04",
-    bedroom:2,
-    bath:2,
-    area:800,
-    type: "apartment"
+    bedroom:3,
+    bath:1,
+    type: "house"
 }
 // ------------------------------------------------------------
 user4 = {
-    username: "zhezhe",
-    password:"mypass323",
+    username: "seedseed4",
+    password:"password4",
     photo:"../img/", //TODO
     phone:"6458859931",
-    email:"zhe@gmail.com"
+    email:"seedseed4@gmail.com"
 }
 
 property4 = {
     ownerid:null,
-    title:"Little house",
-    decsription:"If you're moving to Weehawken, NJ, this great property could be your new address. Located at 25 Hackensack Plank Rd in Weehawken, this property is perfectly situated for work or play. End your search and get moving. To learn more about this property, schedule a showing.",
-    zipcode:"07304",
-    price:2500,
-    date:"2020-01-04",
+    title:"Journal Square Luxury 2 Bedroom. No fees (Journal Square, Jersey City)",
+    decsription:"New Premium Rentals in Journal Square, Jersey City \n Studio, 1 to 3 bdrm units available for immediate move-in. Move-in costs covered by us. \n Sleek 16-story premium rental is intelligently designed, complemented by in-demand smart home features and unparalleled amenities. \n Exclusive indoor, outdoor and fitness amenities are paired with the luxuriously comfortable interiors in these exceptionally crafted apartments. \n Journal Square will entice you with its restaurants nightlife, shopping, and proximity to Manhattan. This charming community has a long history as the cultural center of Hudson County.",
+    zipcode:"07047",
+    price:2950,
+    date:"2020-05-161",
     bedroom:2,
-    bath:2,
-    area:1000,
+    bath:1,
     type: "house"
 }
 // ------------------------------------------------------------
 user5 = {
-    username: "nealnealnealnealneal",
-    password:"iamaverylonglonglonglonglongpassword",
+    username: "seedseed5",
+    password:"password5",
     photo:"../img/", //TODO
     phone:"1147895642",
-    email:"neal@live.com"
+    email:"seedseed5@gmail.com"
 }
 
 property5 = {
     ownerid:null,
-    title:"Willow View",
-    decsription:"NO BROKER FEE!! An easy walk to vibrant Hoboken shopping and nightlife...Beautifully landscaped urban buildings...Friendly small-town living environment of Hoboken. Our property is conveniently located near bus and ferry to NYC, stores, bars and restaurants. Units include the following great amenities...heat, cooking gas and hot water included in rent. Please call or e-mail to schedule a viewing today!",
+    title:"BEAUTIFUL, SUNNY, LG 4 BR!* LNDRY, ELEV, PETS OK! Off B’way/120th St (Upper West Side)",
+    decsription:"This large, 4 bedroom apartment features a huge, separate windowed kitchen with dishwasher, a large, windowed bathroom, high ceilings, gorgeous hardwood floors, closets and more! This is an elevator building with a laundry room, video intercom and is only two short blocks to the 1 train. Pets are welcome. Heat and water included. This is a beautiful, prewar building. The super lives on the premises. Perfect as a share or for a family. A must see! \n Fabulous location! Just steps to Riverside Park, Columbia University, shopping and transportation. Please call/text Ruth at (917) 592-3145 to schedule an appointment. Move-in date is flexible. **ONE MONTH FREE!** \n do NOT contact me with unsolicited services or offers",
     postcode:"07030",
     price:2970,
     publishedDate:"2019-06-29",
     bedroom:3,
     bath:1,
-    area:1402,
-    type: "house"
+    type: "apartment"
 }
