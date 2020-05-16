@@ -108,8 +108,10 @@ export default function User(props){
                             </p>
                         </div>) : null}
                     </div>
+
                     <div className="col-lg-9 col-12 pl-4">
-                        <div class="icon-group mt-4">Properties: {li}</div>
+                    <h1 className='cap-first-letter'>Properties: </h1>
+                    {li}
                     </div>
                 </div>
             </div>

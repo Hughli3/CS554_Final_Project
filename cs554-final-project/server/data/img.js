@@ -12,29 +12,35 @@ const imageminMozjpeg = require('imagemin-mozjpeg');
 const imageminPngquant = require('imagemin-pngquant');
 const resizeImg = require('resize-img');
 var sizeOf = require('image-size');
+const FileType = require('file-type');
 
 //========================================
 // Validate functions
-async function validateImage(name) {
-  if(!image) throw "image is undefinded";
+async function validateImage(filePath) {
+  let stream = fs.createReadStream(filePath);
+  let mimetype = await FileType.fromStream(stream);
+
+  if(!filePath) throw "image is undefinded";
   const imageType = new Set(['jpg', 'jpeg','png']);
-  const fileType = image.mimetype.split("/");
+  const fileType = mimetype.mime.split("/");
   
   if(fileType[0] != "image" || ! imageType.has(fileType[1]) ) {
-    fs.unlinkSync(image.path);
+    fs.unlinkSync(filePath);
     throw "file is not in proper type image, jpg jpeg png are accepted";
   }
 
-  let base64Data = base64Img.base64Sync(image.path);
+  let base64Data = base64Img.base64Sync(filePath);
   if (base64Data.length > 16777216) {
-    fs.unlinkSync(image.path);
+    fs.unlinkSync(filePath);
     throw "size is larger than 16MB";
   }
+
+  return mimetype.mime
 }
 
 function validateBase64(base64Str) {
-  let reg = /^data:image\/[A-Za-z]+;base64,([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{0,3}==)$/
-  // let reg = /^data:image\/[A-Za-z]+;base64,[A-Za-z0-9+/]*==$/
+  // let reg = /^data:image\/[A-Za-z]+;base64,([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{0,3}==)$/
+  let reg = /^data:image\/[A-Za-z]+;base64,[A-Za-z0-9+/]*==$/
   if(!reg.test(base64Str)){
     throw "it is not Base64 for image";
   }
@@ -55,10 +61,7 @@ function chunkSubstr(str) {
 }
 
 async function createGridFS(fileName, fieldName, filePath){
-  // await validateImage(file);
-
-  let nameSplit = fileName.split(".")
-  let mimetype = nameSplit[nameSplit.length-1]
+  let mimetype = await validateImage(filePath);
 
   // read file
   let imageRaw = fs.readFileSync(filePath);
