@@ -22,11 +22,11 @@ const Imagetast = (props) => {
             _canvas.getContext("2d").drawImage(this, 0, 0, w, h);
             var base64 = _canvas.toDataURL("image/jpeg");
             _canvas.toBlob(function(blob) {
-                if(blob.size > 750*1334){        //如果还大，继续压缩
-                    compress(base64, rate, callback);
-                }else{
+                // if(blob.size > 750*1334){        //如果还大，继续压缩
+                //     compress(base64, rate, callback);
+                // }else{
                     callback(base64);
-                }
+                // }
             }, "image/jpeg");
         }
     }
@@ -48,14 +48,7 @@ const Imagetast = (props) => {
         console.log(acceptedFiles);
 
         let files = await getData(acceptedFiles);
-
-        // compress(files[0][1], 0.5, function(base64){
-        //     console.log(base64);
-            
-        // })
-
-        console.log(files.toString());
-        
+        // console.log(files.toString());
         
         // // 分个上传
         // let datas = []
@@ -66,8 +59,8 @@ const Imagetast = (props) => {
         // console.log(datas);
         
         // 一起上传
-        // const {data}  = await serverController.addImage(files)
-        // console.log(data);
+        const {data}  = await serverController.addImage(acceptedFiles)
+        console.log(data);
         
     }, [])
 

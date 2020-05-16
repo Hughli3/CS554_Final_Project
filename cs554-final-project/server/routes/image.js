@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const data = require('../data');
 const imageData = data.image;
+const base64Img = require('base64-img');
 const ObjectId = require('mongodb').ObjectID;
 
 router.get('/:id', async (req, res) => {
@@ -17,8 +18,13 @@ router.post('/', async (req, res) => {
     let imagesInfo = req.body.data;
     
     try {
+        // console.log(imagesInfo);
+        
         for(let i=0; i<imagesInfo.length; i++){
-            await imageData.createGridFS(imagesInfo[i][0], imagesInfo[i][1]);
+            let filepath = await base64Img.imgSync(imagesInfo[i][2], './public/img', imagesInfo[i][0].split(".")[0]);
+            console.log(filepath);
+            
+            await imageData.createGridFS(imagesInfo[i][0], imagesInfo[i][1], filepath);
         }
         // const image = await imageData.createGridFS(fileName, fileBase64);
         // res.json(image);
