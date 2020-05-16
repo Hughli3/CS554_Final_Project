@@ -19,7 +19,7 @@ const SignUp = () => {
       await app.auth().createUserWithEmailAndPassword(email.value, password.value);
       alert.success('Signup sucessfully')
     } catch (error) {
-      alert.error(error)
+      alert.error(error.message)
     }
   };
 
