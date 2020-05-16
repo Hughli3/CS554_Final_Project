@@ -23,6 +23,8 @@ const Image = (props) => {
         // console.log(acceptedFiles);
 
         let files = await getData(acceptedFiles);
+        // console.log(files);
+        
         const {data} = await serverController.addImage(files)
         console.log(data);
         
