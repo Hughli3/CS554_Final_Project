@@ -1,10 +1,9 @@
-import React, {useState, useCallback } from 'react';
+import React, {useState, useCallback, useEffect } from 'react';
 import serverController from '../serverController';
 import {useDropzone} from 'react-dropzone'
 
 const Image = (props) => {
-    const [imageData, setImageData] = useState({});
-    const maxSize = 16777216;
+    const [imageData, setImageData] = useState([]);
 
     const getbase64 = async(file) => {
         return new Promise((resolve, reject) => {
@@ -19,25 +18,43 @@ const Image = (props) => {
         return Promise.all(Files.map(file => getbase64(file)))
     }
 
-    const onDrop = useCallback(async(acceptedFiles) => {
-        // console.log(acceptedFiles);
+    const onDrop = useCallback(async(acceptedFiles, rejectedFiles) => {
+        
+        for (let file of rejectedFiles) {
+          for (let error of file.errors) {
+            console.log(file.file.name + " : " + error.message)
+          }
+        }
 
         let files = await getData(acceptedFiles);
-        // console.log(files);
-        
-        const {data} = await serverController.addImage(files)
-        console.log(data);
-        
+        // set state: add to previous state
+        setImageData(prevState => {
+          let array = prevState.concat(files)
+          // remove duplicate
+          let set = new Set()
+          for (let i = array.length - 1; i >= 0 ; i--) {
+            if (set.has(array[i][2])){
+              array.splice(i, 1);
+            } else {
+              set.add(array[i][2])
+            }
+          }
+          return array
+        })
+
+        // const {data} = await serverController.addImage(files)        
     }, [])
 
+    let preview = imageData && imageData.map(key => {
+      return (<img src={key[2]} alt="test" />);
+    });
+
     const {getRootProps, getInputProps, isDragActive} = useDropzone({
-                            onDrop,
-                            accept: 'image/jpeg, image/png',
-                            minSize: 0,
-                            maxSize,
-                        })
-
-
+        onDrop,
+        accept: 'image/jpeg, image/png',
+        minSize: 0,
+        maxSize: 5242880,
+    })
 
     return (
         <div className="text-center mt-5">
@@ -49,7 +66,7 @@ const Image = (props) => {
                 <p>Click here or drop files to upload!</p>
             }
             </div>
-            <img src={{imageData}} alt="test" />
+            {preview}
         </div>
     );
 };

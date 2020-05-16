@@ -5,10 +5,10 @@ import { Redirect } from "react-router";
 import { useAlert } from 'react-alert'
 import ReactTooltip from "react-tooltip";
 
-const AddProperty = () => {
+const AddProperty = (props) => {
     const alert = useAlert()
     const { currentUser } = useContext(AuthContext);
-    const [isSuccess, setIsSuccess] = useState(false)
+    // const [isSuccess, setIsSuccess] = useState(false)
 
     const addProperty = async (event) => {
       event.preventDefault();
@@ -32,7 +32,8 @@ const AddProperty = () => {
         if (!data.zipcode.value) throw "zipcode not exist";
         if (data.zipcode.value.length != 5) throw "zipcode invalid";
         await serverController.postProperty(currentUser, data);
-        setIsSuccess(true)
+        // setIsSuccess(true)
+        props.history.push("/account")
         alert.success('post sucessfully')
       } catch (error) {
         // console.log(error);
@@ -40,9 +41,9 @@ const AddProperty = () => {
       }
     };
 
-    if (isSuccess) {
-        return <Redirect to="/account" />;
-    }
+    // if (isSuccess) {
+    //     return <Redirect to="/account" />;
+    // }
       
     return (
     <div>
@@ -61,6 +62,7 @@ const AddProperty = () => {
                 <textarea id="description" rows="10" class="form-control" name="description" type="text" placeholder="description" data-tip="description length need to less than 200" />
               </div>
             </div>
+            
 
             <div class="col-md-12">
                 <label>Type</label>
