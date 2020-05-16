@@ -6,47 +6,37 @@ import serverController from '../serverController';
 const TITLE = 'Home'
 
 const Home = () => {
-    const [loading, setLoading] = useState(true);
-    const [imgList, setImgList] = useState([]);
+    // const [loading, setLoading] = useState(true);
+    // const [propertyData, setPropertyData] = useState([]);
 
 
-    useEffect(
-		async () => {
-			async function fetchData() {
-				try {
-					setLoading(true);
-					const {data: resData} = await serverController.getSomeImages(4)
-                    let il = await getImages(resData)
-                    console.log(il);                    
-					setLoading(false);
-				} catch (e) {
-					setLoading(false);
-				}
-			}
-            fetchData();            
-		},
-		[]
-    );
-
-    const getImages = async (resData) => {
-        let il = []
-        for(let i=0; i<resData.data.length; i++) {
-            const {data: imgData} = await serverController.getImage(resData.data[i])                        
-            await il.push(imgData.data)
-        }
-
-        setImgList(prevState => {
-            let array = il
-            return array
-        })
-        return il
-    }
+    // useEffect(
+	// 	async () => {
+	// 		async function fetchData() {
+	// 			try {
+	// 				setLoading(true);
+	// 				const {data: resData} = await serverController.getAllProperty()
+    //                 // TODO get property with album not empty
+    //                 console.log(resData);
+                    
+    //                 // TODO get random 4 / 5
+    //                // setPropertyData(//Filtered property)
+                  
+	// 				setLoading(false);
+	// 			} catch (e) {
+	// 				setLoading(false);
+	// 			}
+	// 		}
+    //         fetchData();            
+	// 	},
+	// 	[]
+    // );
     
-    if (loading) {
-        return (
-            <div class="lds-facebook"><div></div><div></div><div></div></div>
-        )
-    }
+    // if (loading) {
+    //     return (
+    //         <div class="lds-facebook"><div></div><div></div><div></div></div>
+    //     )
+    // }
 
     return (
         <>

@@ -6,10 +6,7 @@ const serverController = {
 
     async getAllProperty (page, filter, sort) {
         if (!page) page = 1;
-        // console.log(filter);
-        // console.log(sort);
-        // console.log(typeof(sort));
-        // console.log((filter  !== "null" && sort === "null"))
+
         try {
             if(filter !== "null" && sort !== "null"){
                 return await axios.get(baseUrl + "/api/property/?page=" + page + "&filter=" + filter + "&sort=" + sort)
@@ -216,30 +213,9 @@ const serverController = {
         }
     },
 	
-	// async addImage (imgs) {
-    //     const data = {
-    //         data: imgs
-    //     }
-    //     try {
-    //         return await axios.post(baseUrl + "/api/image", data)
-    //     } catch (e) {
-    //         if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
-    //         else throw (e.message)
-    //     }
-    // },
-	
 	async getImage (imgid) {
         try {
             return await axios.get(baseUrl + "/api/image/" + imgid)
-        } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
-            else throw (e.message)
-        }
-    },
-
-	async getSomeImages(n) {
-        try {
-            return await axios.get(baseUrl + "/api/image/someimages/" + n)
         } catch (e) {
             if (e.response && e.response.data && e.response.data.error) throw (e.response.data.error)
             else throw (e.message)
