@@ -151,7 +151,6 @@ const EditProperty = (props) => {
             data.newImages = imageData;
             data.removedImages = removedImage;
 
-            // console.log(data);
             if (!data.title.value) throw "title not exist"
             if (data.title.value.length > 70) throw "title too long";
             if (!data.description.value) throw "description not exist";

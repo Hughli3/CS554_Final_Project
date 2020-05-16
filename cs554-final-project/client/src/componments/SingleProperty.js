@@ -17,7 +17,6 @@ const SingleProperty = (props) => {
 		let newDate = new Date();
 		newDate.setTime(propertyData.date);
 		lastUpdate = newDate.toLocaleString()
-		// console.log(lastUpdate)
 	}
 	 
 	useEffect(
@@ -26,7 +25,6 @@ const SingleProperty = (props) => {
 				try {
 					setLoading(true);
                     const {data: property}  = await serverController.getProperty(props.match.params.id)
-                    console.log(property);
 					setPropertyData(property);
 					setLoading(false);
 				} catch (e) {
@@ -37,7 +35,6 @@ const SingleProperty = (props) => {
 			async function checkWatchlist(currentUser) {
 				try {
 					const {data: watchlist}  = await serverController.getWatchlist(currentUser)
-					console.log(watchlist.watchlist)
 					if (watchlist.watchlist.includes(props.match.params.id)) {
 						setIsWatchlist(true)
 					} else {
@@ -192,7 +189,6 @@ const SingleProperty = (props) => {
 			: propertyData.album.map( (image, idx) => buildIndicator(image, idx))
 
 	const buildCarouselImages = (image, idx) => {
-		console.log(image)
 		return (
 			<div className={idx == 0 ? ("carousel-item active") : "carousel-item"}>
 				<img className="d-block w-100" src={image} alt="property images"/>

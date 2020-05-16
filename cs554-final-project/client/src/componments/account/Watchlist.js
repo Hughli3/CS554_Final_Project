@@ -1,15 +1,16 @@
 import React, { useEffect, useState, useContext } from "react"
-// import WatchlistProperty from "./WatchlistProperty"
 import serverController from '../../serverController';
 import { AuthContext } from "../auth/Auth";
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet'
+import { useAlert } from 'react-alert';
 
 export default function WatchList(props) {
     const { currentUser } = useContext(AuthContext);
     const [loading, setLoading] = useState(true);
     // TODO change below to props
     const [properties, setProperties] = useState([]);
+	const alert = useAlert();
 
     useEffect(() => {
         async function fetchData() {
@@ -32,9 +33,10 @@ export default function WatchList(props) {
         let propertyId = event.target.getAttribute('data-property')
 		try {
 			const {data: resData} = await serverController.removeWatchlist(propertyId, currentUser)
-			setProperties(resData.details)
+            setProperties(resData.details)
+            alert.success("successfully removed from watchlist")
 		} catch (error) {
-			console.log(error);
+			alert.error(error)
 		}
 	};
 

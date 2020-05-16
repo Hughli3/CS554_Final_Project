@@ -51,7 +51,6 @@ const AddProperty = (props) => {
     }, [])
 
     const removeImage = (idx) => {
-      console.log(idx)
       setImageData(prevState => {
         let array = [...prevState]
         array.splice(idx, 1);
@@ -108,7 +107,6 @@ const AddProperty = (props) => {
 
       let time = new Date()
       data.date = Date.parse(time);
-      console.log(data.album)
       data.album = imageData;
       
       try {
@@ -128,7 +126,7 @@ const AddProperty = (props) => {
         if (data.zipcode.length != 5) throw "zipcode invalid";
         if (!data.type) throw "type is not exist";
         if (data.type != "apartment" && data.type != "house" ) throw "type is invalid";
-        // console.log(data);
+
         await serverController.postProperty(currentUser, data);
 
         props.history.push("/account")

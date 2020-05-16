@@ -20,7 +20,6 @@ const Property = (props) => {
 					// if (!props.match.params.page.match(/^\d+$/)) throw Error("invalid page id");
 					// const offset = parseInt(props.match.params.page) * 20;
 					const {data: resData} = await serverController.getUser(currentUser);
-					console.log(resData)
 					setPropertyData(resData.property);
 					setLoading(false);
 				} catch (e) {
