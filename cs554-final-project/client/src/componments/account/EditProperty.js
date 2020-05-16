@@ -220,11 +220,11 @@ const EditProperty = (props) => {
                     <div>
                     <div class="custom-control col-3 custom-radio mb-3">
                         <input name="type" value="apartment" class="custom-control-input" id="type-apartment" type="radio" defaultChecked={propertyData.type === "apartment"}/>
-                        <label class="custom-control-label" for="type-apartment">Apartment</label>
+                        <label class="custom-control-label" htmlFor="type-apartment">Apartment</label>
                     </div>
                     <div class="custom-control col-3 custom-radio mb-3">
                         <input name="type" value="house" class="custom-control-input" id="type-house" type="radio" defaultChecked={propertyData.type === "house"} />
-                        <label class="custom-control-label" for="type-house">House</label>
+                        <label class="custom-control-label" htmlFor="type-house">House</label>
                     </div>
                     </div>
                 </div>

@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import { withRouter, Redirect } from "react-router";
 import { AuthContext } from "./auth/Auth";
 import { app } from "./auth/AuthBase"
-import PropertyList from './properties/PropertyList'
+// import PropertyList from './properties/PropertyList'
 const Header = () => {
 
     const { currentUser } = useContext(AuthContext);
