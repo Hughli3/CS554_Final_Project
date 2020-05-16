@@ -1,4 +1,4 @@
-# CS554_Fincal_Project
+# CS554_Final_Project
 
 ## Group Name 
 FirstLast
