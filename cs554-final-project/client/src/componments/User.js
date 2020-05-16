@@ -2,7 +2,6 @@ import React, {useEffect, useState, useContext} from 'react';
 // import { AuthContext } from "../auth/Auth";
 import serverController from "../serverController";
 import { useAlert } from 'react-alert'
-import Property from "./Property";
 import { Link} from 'react-router-dom';
 export default function User(props){
     
