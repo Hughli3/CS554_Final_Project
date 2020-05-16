@@ -45,8 +45,22 @@ const Image = (props) => {
         // const {data} = await serverController.addImage(files)        
     }, [])
 
-    let preview = imageData && imageData.map(key => {
-      return (<img src={key[2]} alt="test" />);
+    const removeImage = (idx) => {
+      console.log(idx)
+      setImageData(prevState => {
+        let array = [...prevState]
+        array.splice(idx, 1);
+        return array;
+      })
+    }
+
+    let preview = imageData && imageData.map((key, idx) => {
+      return (
+        <>
+          <img src={key[2]} alt={key[0]} />
+          <button data-idx={idx} onClick={() => removeImage(idx)}>remove</button>
+        </>
+      );
     });
 
     const {getRootProps, getInputProps, isDragActive} = useDropzone({
