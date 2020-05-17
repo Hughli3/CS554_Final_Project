@@ -21,3 +21,11 @@ Client: http://localhost:5000
 Server: http://localhost:3000
 
 ## How to use 
+Here are some seed user you could use, their username and password are listed as follow:
+|      Username     |    Password   | 
+|-------------------|:-------------:|
+|seedseed1@gmail.com|   password1   | 
+|seedseed2@gmail.com|   password2   | 
+|seedseed3@gmail.com|   password3   | 
+|seedseed4@gmail.com|   password4   | 
+|seedseed5@gmail.com|   password5   | 
