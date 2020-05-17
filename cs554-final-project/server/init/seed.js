@@ -2,20 +2,8 @@ const dbConnection = require('../config/connection');
 const userData = require("../data/user");
 const propertyData = require("../data/property")
 const imageData = require("../data/img")
-
-const ObjectId = require('mongodb').ObjectID;
 const fs = require('fs');
 
-async function uploadDogAvatar(filepath){
-    let imgPath = filepath.split('.')[0]
-    let file = getFile(filepath)
-    fs.writeFileSync(imgPath, fs.readFileSync(filepath));
-    let photo = await dogData.updateAvatar(id, file)
-    fs.rename(imgPath, filepath, function(err) {
-        if (err) console.log(err);
-        console.log('successfully set dog avatar');
-    });
-}
 
 //  ==================== User and Property data ====================
 const main = async () => {
