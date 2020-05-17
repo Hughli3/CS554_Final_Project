@@ -113,7 +113,6 @@ export default function Account(props){
         closeChangePasswordModal.current.click();
 
         try {
-            console.log(currentPassword.value)
             let credential = emailProvider.credential(
                 currentUser.email,
                 currentPassword.value

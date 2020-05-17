@@ -25,7 +25,6 @@ const Property = (props) => {
 					setLoading(true);
                     const {data: resData} = await serverController.getAllProperty(page, filter, sort);
 					setPropertyData(resData.properties);
-					console.log({next: resData.next, prev: resData.prev})
 					setPageData({next: resData.next, prev: resData.prev});
 					setLoading(false);
 				} catch (e) {
