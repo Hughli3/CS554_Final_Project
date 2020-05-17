@@ -57,7 +57,7 @@ property2 = {
     type: "house"
 }
 
-let propertyTwo = await propertyData.add("gGGZfLVBFuTzVFY74cNJ0uRHYr02", property1)
+let propertyTwo = await propertyData.add("gGGZfLVBFuTzVFY74cNJ0uRHYr02", property2)
 console.log("property2 created")
 
 // ------------------------------------------------------------
@@ -85,7 +85,7 @@ property3 = {
     type: "house"
 }
 
-let propertyThree = await propertyData.add("gba8X9WshQPpYWyr5kzag18kfL73", property1)
+let propertyThree = await propertyData.add("gba8X9WshQPpYWyr5kzag18kfL73", property3)
 console.log("property3 created")
 
 // ------------------------------------------------------------
@@ -113,7 +113,7 @@ property4 = {
     type: "house"
 }
 
-let propertyFour = await propertyData.add("EBf4QO4DNqSCrYg2Sye5ae2Bft22", property1)
+let propertyFour = await propertyData.add("EBf4QO4DNqSCrYg2Sye5ae2Bft22", property4)
 console.log("property4 created")
 
 // ------------------------------------------------------------
@@ -140,7 +140,7 @@ property5 = {
     bath:1,
     type: "apartment"
 }
-let propertyFive = await propertyData.add("6T4h2MaNfzbtKxojCQn5dMAhsoq2", property1)
+let propertyFive = await propertyData.add("6T4h2MaNfzbtKxojCQn5dMAhsoq2", property5)
 console.log("property5 created")
 
 await db.serverConfig.close();
