@@ -97,14 +97,17 @@ export default function Account(props){
 
     const handleChangePassword = async event => {
         event.preventDefault();
-        const {currentPassword, newPasswordOne,newPasswordTwo} = event.target.elements;
-
+        let {currentPassword, newPasswordOne,newPasswordTwo} = event.target.elements;
+        currentPassword = currentPassword.value
+        newPasswordOne = newPasswordOne.value
+        newPasswordTwo = newPasswordTwo.value
+        
         if (currentUser.providerData[0].providerId !== 'password') {
             alert.current.error('socal login is not allowed to change password');
             return;
         }
 
-        if (newPasswordOne.value !== newPasswordTwo.value) {
+        if (newPasswordOne !== newPasswordTwo) {
             alert.current.error('new passwords do not match');
             return;
         }
@@ -115,11 +118,11 @@ export default function Account(props){
         try {
             let credential = emailProvider.credential(
                 currentUser.email,
-                currentPassword.value
+                currentPassword
             );
             
             await app.auth().currentUser.reauthenticateWithCredential(credential);
-            await app.auth().currentUser.updatePassword(newPasswordOne.value);
+            await app.auth().currentUser.updatePassword(newPasswordOne);
 
             alert.current.success('password has been changed');
         } catch (e) {
