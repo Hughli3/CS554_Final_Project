@@ -13,7 +13,7 @@
     "server-install": "cd server && npm install",
     "install-all": "concurrently \"npm run server-install\" \"npm run client-install\""
   },
-  "author": "",
+  "author": "Xinyu Chen, Yanzhe Wu, Yong Que, Zheng Li",
   "license": "MIT",
   "dependencies": {
     "concurrently": "^5.2.0"

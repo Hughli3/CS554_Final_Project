@@ -330,6 +330,7 @@ user5 = {
     console.log("property13 created")
 
     await db.serverConfig.close();
+    console.log("closed")
 }
 
 main().catch(console.log);
