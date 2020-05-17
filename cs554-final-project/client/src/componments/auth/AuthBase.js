@@ -12,3 +12,4 @@ export const app = firebase.initializeApp({
 });
 
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
+export const emailProvider = firebase.auth.EmailAuthProvider;

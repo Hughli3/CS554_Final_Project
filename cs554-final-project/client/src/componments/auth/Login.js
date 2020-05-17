@@ -22,6 +22,7 @@ const Login = () => {
     };
 
   const { currentUser } = useContext(AuthContext);
+
   if (currentUser) {
     return <Redirect to="/account" />;
   }
