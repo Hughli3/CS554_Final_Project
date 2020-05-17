@@ -102,7 +102,7 @@ let exportedMethods = {
     
     async getById(id){
         if (id === undefined)  throw "id is undefinded";
-        if (!ObjectId.isValid(id)) throw "id is invalid";
+        if (!ObjectId.isValid(id)) throw "property id is invalid";
         if (typeof id != "string") id = id.toString();
         const objId = ObjectId.createFromHexString(id);
 
@@ -227,11 +227,9 @@ async function isOwner(owner){
 
     if (!owner) throw "id is undefinded";
     if (owner.constructor !== String) throw "id is not a string";
-    if (!ObjectId.isValid(owner)) throw "id is invalid";
     const usersCollection = await users();
-    let parsedOwner = ObjectId.createFromHexString(owner);
-    const user = await usersCollection.find({_id:parsedOwner});
-    if (user == null) throw `owner with the id ${parsedOwner} is not exist`;
+    const user = await usersCollection.find({_id:owner});
+    if (user == null) throw `owner with the id ${owner} is not exist`;
 }
 
 function checkPropertyInfo(propertyInfo){
