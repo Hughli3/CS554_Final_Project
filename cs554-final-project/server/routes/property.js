@@ -16,7 +16,7 @@ bluebird.promisifyAll(redis.Multi.prototype);
 let allC = []
 
 // clear redis
-// client.FLUSHDB();
+client.FLUSHDB();
 
 router.get('/', async (req, res) => {
     let allSave = ""
