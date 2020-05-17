@@ -51,7 +51,7 @@ const SignUp = () => {
                   </div>
                   <div className="form-group">
                     <label htmlFor="password">Password</label>
-                    <div className="input-group input-group-alternative" data-tip="length must be greater than or equal to 8">
+                    <div className="input-group input-group-alternative" data-tip="length must be greater than or equal to 6">
                       <div className="input-group-prepend">
                         <span className="input-group-text"><i className="fa fa-lock"></i></span>
                       </div>
