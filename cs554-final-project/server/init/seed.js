@@ -18,7 +18,7 @@ const main = async () => {
     await userData.add(user1.id, user1.email)
     await userData.updateUser(user1.id, user1.phone, user1.photo);
     console.log("user1 created");
-    
+     
     property1 = {
         title:"1 Bd/1Ba - Prime Hoboken Area - $100 Application Fee",
         description:"The Jordan in Hoboken, NJ offers condo style one- and two-bedroom apartments with six different floor plans to choose from. From the soaring 9 foot ceilings with expansive Pella Architect Series windows, to the natural oak hardwood floors and the Frigidaire washer/dryer set, your apartment offers plenty to love. Your home comes with 7-ft solid, wood doors and controlled central heating and air conditioning with programmable thermostats. In the gourmet style kitchen, you will notice Dal Torreon porcelain tiled floors with Nemo Metro gloss tiled backsplash, walnut cabinetry with soft-close features, Kohler chrome fixtures, and Caesarstone countertops. ",
