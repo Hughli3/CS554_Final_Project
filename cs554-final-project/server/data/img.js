@@ -82,7 +82,7 @@ async function createGridFS(fileName, fieldName, filePath){
           imageminPngquant({quality: [0.6, 0.8]})]}
   );
   // write back
-  if(filePath.includes("./public/img/")){
+  if(filePath.includes("public/img/")||filePath.includes("public\\img\\")){
     fs.writeFileSync(filePath, buf);
   }
 
@@ -101,7 +101,7 @@ async function createGridFS(fileName, fieldName, filePath){
 
   const insertFilesInfo = await fsFilesCollection.insertOne(newFiles);  
   if (insertFilesInfo.insertedCount === 0){
-    if(filePath.includes("./public/img/")){
+    if(filePath.includes("public/img/"||filePath.includes("public\\img\\"))){
       fs.unlinkSync(filePath);
     }
     throw "could not create a new file";
@@ -123,7 +123,7 @@ async function createGridFS(fileName, fieldName, filePath){
     }    
   }
 
-  if(filePath.includes("./public/img/")){
+  if(filePath.includes("public/img/")||filePath.includes("public\\img\\")){
     fs.unlinkSync(filePath);
   }
   return insertFilesInfo.insertedId;
