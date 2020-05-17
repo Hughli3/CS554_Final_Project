@@ -10,25 +10,25 @@ let user1 = {
     id: "bCWDxwln7cMUYLvofdBRiaT5sZh1",
     email:"seedseed1@gmail.com",
     password:"password1",
-    photo:"../public/user/user_1.png", //TODO
+    photo:"public/user/user_1.png", //TODO
     phone:"1029784458"
 }
 await userData.add(user1.id, user1.email)
 await userData.updateUser(user1.id, user1.phone, user1.photo);
 console.log("user1 created");
 
-// property1 = {
-//     ownerid:"bCWDxwln7cMUYLvofdBRiaT5sZh1",
-//     title:"1 Bd/1Ba - Prime Hoboken Area - $100 Application Fee",
-//     decsription:"The Jordan in Hoboken, NJ offers condo style one- and two-bedroom apartments with six different floor plans to choose from. From the soaring 9 foot ceilings with expansive Pella Architect Series windows, to the natural oak hardwood floors and the Frigidaire washer/dryer set, your apartment offers plenty to love. Your home comes with 7-ft solid, wood doors and controlled central heating and air conditioning with programmable thermostats. In the gourmet style kitchen, you will notice Dal Torreon porcelain tiled floors with Nemo Metro gloss tiled backsplash, walnut cabinetry with soft-close features, Kohler chrome fixtures, andCaesarstone countertops. ",
-//     postcode:"07030",
-//     price:3059,
-//     deposit:3600,
-//     publishedDate:"2020-04-17",
-//     bedroom:1,
-//     baths:1,
-//     type: "apartment"
-// }
+property1 = {
+    ownerid:"bCWDxwln7cMUYLvofdBRiaT5sZh1",
+    title:"1 Bd/1Ba - Prime Hoboken Area - $100 Application Fee",
+    decsription:"The Jordan in Hoboken, NJ offers condo style one- and two-bedroom apartments with six different floor plans to choose from. From the soaring 9 foot ceilings with expansive Pella Architect Series windows, to the natural oak hardwood floors and the Frigidaire washer/dryer set, your apartment offers plenty to love. Your home comes with 7-ft solid, wood doors and controlled central heating and air conditioning with programmable thermostats. In the gourmet style kitchen, you will notice Dal Torreon porcelain tiled floors with Nemo Metro gloss tiled backsplash, walnut cabinetry with soft-close features, Kohler chrome fixtures, andCaesarstone countertops. ",
+    postcode:"07030",
+    price:3059,
+    deposit:3600,
+    publishedDate:"2020-04-17",
+    bedroom:1,
+    baths:1,
+    type: "apartment"
+}
 // // ------------------------------------------------------------
 // user2 = {
 //     _id: "gGGZfLVBFuTzVFY74cNJ0uRHYr02",
