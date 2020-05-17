@@ -15,6 +15,7 @@ RentSIT is a rental platform for Stevens students. This site allows property own
    1. go to client folder run `npm install`
    2. go to server folder run `npm install`
    3. go to cs554-final-project folder run `npm install`
-3. run `npm start`
+3. run `npm run seed`
+4. run `npm start`
 
 ## How to use 
