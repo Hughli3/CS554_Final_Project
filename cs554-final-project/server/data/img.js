@@ -67,9 +67,6 @@ function chunkSubstr(str) {
 }
 
 async function createGridFS(fileName, fieldName, filePath){
-  console.log(filePath);
-  console.log(filePath.includes("./public/img/"));
-  
   let mimetype = await validateImage(filePath);
 
   // read file
