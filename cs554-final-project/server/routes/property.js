@@ -262,7 +262,7 @@ router.delete('/:id', checkAuth, async (req, res) => {
         resData.data = property
 
         // reset property redis
-        await client.delAsync("property"+pid);
+        await client.delAsync("property"+req.params.id);
         for(let i=0; i<allC.length;i++){
             await client.delAsync(allC[i]);
         }
