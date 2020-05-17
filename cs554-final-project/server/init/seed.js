@@ -22,8 +22,8 @@ const main = async () => {
     // imagesInfo8 = ["property8-1.jpg", "property8-2.jpg", "property8-3.jpg", "property8-4.jpg"]
     
     let user1 = {
-        id: "BXLknbeyvYX200Ewj8fsQUqarzi1",
-        email: "seedseed1@gmail.com",
+        id: "bCWDxwln7cMUYLvofdBRiaT5sZh1",
+        email:"seedseed1@gmail.com",
         password:"password1",
         photo: "user_1.jpg",
         phone:"1029784458"
@@ -51,7 +51,7 @@ const main = async () => {
     //     property1.album.push(id);
     // }
     
-    await propertyData.add("BXLknbeyvYX200Ewj8fsQUqarzi1", property1)
+    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property1)
     console.log("property1 created")
 
     property6 = {
@@ -65,7 +65,7 @@ const main = async () => {
         date: 1588578388387
     }
     
-    await propertyData.add("BXLknbeyvYX200Ewj8fsQUqarzi1", property6)
+    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property6)
     console.log("property6 created")
 
     property7 = {
@@ -79,7 +79,7 @@ const main = async () => {
         date: 1588200928841
     }
     
-    await propertyData.add("BXLknbeyvYX200Ewj8fsQUqarzi1", property7)
+    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property7)
     console.log("property7 created")
 
     property8 = {
@@ -93,7 +93,7 @@ const main = async () => {
         date: 1587784342374
     }
     
-    await propertyData.add("BXLknbeyvYX200Ewj8fsQUqarzi1", property8)
+    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property8)
     console.log("property8 created")
 
     property9 = {
@@ -107,7 +107,7 @@ const main = async () => {
         date: 1589687942111
     }
     
-    await propertyData.add("BXLknbeyvYX200Ewj8fsQUqarzi1", property9)
+    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property9)
     console.log("property9 created")
 
     property10 = {
@@ -121,7 +121,7 @@ const main = async () => {
         date: 1589646134199
     }
     
-    await propertyData.add("BXLknbeyvYX200Ewj8fsQUqarzi1", property10)
+    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property10)
     console.log("property10 created")
 
     property11 = {
@@ -135,7 +135,7 @@ const main = async () => {
         date: 1587145064491
     }
     
-    await propertyData.add("BXLknbeyvYX200Ewj8fsQUqarzi1", property11)
+    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property11)
     console.log("property11 created")
 
     property12 = {
@@ -149,7 +149,7 @@ const main = async () => {
         date: 1589146280000
     }
     
-    await propertyData.add("BXLknbeyvYX200Ewj8fsQUqarzi1", property12)
+    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property12)
     console.log("property12 created")
 
     property13 = {
@@ -163,17 +163,17 @@ const main = async () => {
         date: 1585387207100
     }
     
-    await propertyData.add("BXLknbeyvYX200Ewj8fsQUqarzi1", property13)
+    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property13)
     console.log("property13 created")
     
 
 // ------------------------------------------------------------
 user2 = {
-    id: "lPaabnTW4VbDuTQ3KURLn5DjtgY2",
+    id: "gGGZfLVBFuTzVFY74cNJ0uRHYr02",
     password:"password2",
     photo: "user_2.jpg", //TODO
     phone:"1538649479",
-    email: "seedseed2@gmail.com"
+    email:"seedseed2@gmail.com"
     }   
 
     let userTwo = await imageData.createGridFS(user2.photo, "avatar", "./public/user/"+user2.photo);
@@ -184,7 +184,7 @@ user2 = {
     
 
     property2 = {
-        ownerid:"lPaabnTW4VbDuTQ3KURLn5DjtgY2",
+        ownerid:"gGGZfLVBFuTzVFY74cNJ0uRHYr02",
         title:"3/4 Bedroom house for rent",
         description:"3/4 Bedroom Dutch Colonial. Very large master bedroom, pets ok, all hardwood and tile floors. 1.5 BATH. Formal Dining room , Full walk out Basement, New Central Air and Heat with Blue Tooth controls, new roof ,windows ,siding, bathrooms and more. Optional Private beach. Available Immediately.",
         zipcode:"07849",
@@ -195,16 +195,16 @@ user2 = {
         type: "house"
     }
 
-    await propertyData.add("lPaabnTW4VbDuTQ3KURLn5DjtgY2", property2)
+    await propertyData.add("gGGZfLVBFuTzVFY74cNJ0uRHYr02", property2)
     console.log("property2 created")
 
 // ------------------------------------------------------------
 user3 = {
-    id: "0s2C7Gdl6AZl7Jz6UeHSMZZCCK33",
+    id: "gba8X9WshQPpYWyr5kzag18kfL73",
     password:"password3",
     photo:"user_3.jpg", //TODO
     phone:"8489798468",
-    email: "seedseed3@gmail.com"
+    email:"seedseed3@gmail.com"
     }
 
     let userThree = await imageData.createGridFS(user3.photo, "avatar", "./public/user/"+user3.photo);
@@ -213,7 +213,7 @@ user3 = {
     console.log("user3 created");
 
     property3 = {
-        ownerid:"0s2C7Gdl6AZl7Jz6UeHSMZZCCK33",
+        ownerid:"gba8X9WshQPpYWyr5kzag18kfL73",
         title:"AWESOME 3 BEDROOM APT (FRANKLIN,NJ)",
         description:"HUGE 3 BEDROOM APT..2200 sq ft \n ONLY 1 APT ABOVE A STORE . \n HARDWOOD FLOORS THROUGHOUT \n HUGE DECK OFF YOUR BACK DOOR \n WASHER & DRYER HOOKUP IN APT \n 3 ZONES OF HEATING \n YOUR OWN GAS FED BOILER \n CEILING FANS IN EVERY ROOM \n CENTRAL AIR \n HUGE FAMILY ROOM PLUS LIVING ROOM",
         zipcode:"07416",
@@ -224,16 +224,16 @@ user3 = {
         type: "house"
     }
 
-    await propertyData.add("0s2C7Gdl6AZl7Jz6UeHSMZZCCK33", property3)
+    await propertyData.add("gba8X9WshQPpYWyr5kzag18kfL73", property3)
     console.log("property3 created")
 
 // ------------------------------------------------------------
 user4 = {
-    id: "W35jI2trL3h4j0l8OUuOqGjT7hv1",
+    id: "EBf4QO4DNqSCrYg2Sye5ae2Bft22",
     password:"password4",
     photo:"user_4.jpg", //TODO
     phone:"6458859931",
-    email: "seedseed4@gmail.com"
+    email:"seedseed4@gmail.com"
 }   
     let userFour = await imageData.createGridFS(user4.photo, "avatar", "./public/user/"+user4.photo);
     await userData.add(user4.id, user4.email)
@@ -241,7 +241,7 @@ user4 = {
     console.log("user4 created")
 
     property4 = {
-        ownerid:"W35jI2trL3h4j0l8OUuOqGjT7hv1",
+        ownerid:"EBf4QO4DNqSCrYg2Sye5ae2Bft22",
         title:"Journal Square Luxury 2 Bedroom. No fees (Journal Square, Jersey City)",
         description:"New Premium Rentals in Journal Square, Jersey City \n Studio, 1 to 3 bdrm units available for immediate move-in. Move-in costs covered by us. \n Sleek 16-story premium rental is intelligently designed, complemented by in-demand smart home features and unparalleled amenities. \n Exclusive indoor, outdoor and fitness amenities are paired with the luxuriously comfortable interiors in these exceptionally crafted apartments. \n Journal Square will entice you with its restaurants nightlife, shopping, and proximity to Manhattan. This charming community has a long history as the cultural center of Hudson County.",
         zipcode:"07047",
@@ -252,16 +252,16 @@ user4 = {
         type: "house"
     }
 
-    await propertyData.add("W35jI2trL3h4j0l8OUuOqGjT7hv1", property4)
+    await propertyData.add("EBf4QO4DNqSCrYg2Sye5ae2Bft22", property4)
     console.log("property4 created")
 
 // ------------------------------------------------------------
 user5 = {
-    id: "m17QqRBX2eTQOyRg3nnZneBFDxp2",
+    id: "6T4h2MaNfzbtKxojCQn5dMAhsoq2",
     password:"password5",
     photo:"user_5.jpg", //TODO
     phone:"1147895642",
-    email: "seedseed5@gmail.com"
+    email:"seedseed5@gmail.com"
 }
     let userFive = await imageData.createGridFS(user5.photo, "avatar", "./public/user/"+user5.photo);
     await userData.add(user5.id, user5.email)
@@ -269,7 +269,7 @@ user5 = {
     console.log("user5 created")
 
     property5 = {
-        ownerid:"m17QqRBX2eTQOyRg3nnZneBFDxp2",
+        ownerid:"6T4h2MaNfzbtKxojCQn5dMAhsoq2",
         title:"BEAUTIFUL, SUNNY, LG 4 BR!* LNDRY, ELEV, PETS OK!",
         description:"This large, 4 bedroom apartment features a huge, separate windowed kitchen with dishwasher, a large, windowed bathroom, high ceilings, gorgeous hardwood floors, closets and more! This is an elevator building with a laundry room, video intercom and is only two short blocks to the 1 train. Pets are welcome. Heat and water included. This is a beautiful, prewar building. The super lives on the premises. Perfect as a share or for a family. A must see! \n Fabulous location! Just steps to Riverside Park, Columbia University, shopping and transportation. Please call/text Ruth at (917) 592-3145 to schedule an appointment. Move-in date is flexible. **ONE MONTH FREE!** \n do NOT contact me with unsolicited services or offers",
         zipcode:"07030",
@@ -279,7 +279,7 @@ user5 = {
         bath:1,
         type: "apartment"
     }
-    await propertyData.add("m17QqRBX2eTQOyRg3nnZneBFDxp2", property5)
+    await propertyData.add("6T4h2MaNfzbtKxojCQn5dMAhsoq2", property5)
     console.log("property5 created")
 
     await db.serverConfig.close();
