@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import serverController from '../serverController';
 import { Link } from 'react-router-dom';
 import { useAlert } from 'react-alert'
@@ -9,8 +9,8 @@ const Property = (props) => {
 	const [ propertyData, setPropertyData ] = useState([]);
 	const [ pageData, setPageData ] = useState({});
 	const [ loading, setLoading ] = useState(true);
+	const alert = useRef(useAlert());
 
-	const alert = useAlert()
 	const urlParams = new URLSearchParams(props.location.search);
 	let page = urlParams.get('page') || 1;
 	let filter = urlParams.get('filter') || "null" ;
@@ -28,13 +28,13 @@ const Property = (props) => {
 					setPageData({next: resData.next, prev: resData.prev});
 					setLoading(false);
 				} catch (e) {
-					alert.error(e.message)
+					alert.current.error(e.message)
 					setLoading(false);
 				}
 			}
 			fetchData();
 		},
-		[props.location.search]
+		[props.location.search, filter, page, sort]
 	);
 
 	li = propertyData && propertyData.map((property) => { 

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 // import { AuthContext } from "../auth/Auth";
 import serverController from "../serverController";
 import { useAlert } from 'react-alert'
@@ -6,11 +6,10 @@ import { Link} from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 export default function User(props){
-    
-    const alert = useAlert();
 
     const [ userData, setUserData ] = useState({});
 	const [ loading, setLoading ] = useState(true);
+	const alert = useRef(useAlert());
 
 	useEffect( () => {
 			async function fetchData() {
@@ -21,7 +20,7 @@ export default function User(props){
                     setLoading(false);
 				} catch (e) {
                     setLoading(false);
-                    alert.error(e.message)
+                    alert.current.error(e.message)
 				}
 			}
 			fetchData();
@@ -55,7 +54,7 @@ export default function User(props){
                         </div>
                         <div className="col-lg-6 col-md-4 col-6 py-3">
                             <Link to={'/property/' + property._id}>
-                                <h1 className="display-4" className="title">{property.title}</h1>
+                                <h1 className="display-4 title">{property.title}</h1>
                                 </Link>
                                 {property.description ? (<p className="description">{property.description}</p>) : null}
                             

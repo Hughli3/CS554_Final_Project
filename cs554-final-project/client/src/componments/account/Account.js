@@ -1,4 +1,4 @@
-import React, {useState, useContext, useCallback, useEffect, createRef} from 'react';
+import React, {useState, useContext, useCallback, useEffect, createRef, useRef} from 'react';
 import { AuthContext } from "../auth/Auth";
 import Watchlist from "./Watchlist";
 import Property from "./Property";
@@ -19,7 +19,8 @@ export default function Account(props){
     const colseModal = createRef();
     const [imageData, setImageData] = useState([null, null, null]);
 
-	const alert = useAlert();
+    const alert = useRef(useAlert());
+
 	useEffect(
 		() => {
 			async function fetchData() {
@@ -30,12 +31,12 @@ export default function Account(props){
 					setLoading(false);
 				} catch (e) {
                     setLoading(false);
-                    alert.error(e.message);
+                    alert.current.error(e.message);
 				}
 			}
 			fetchData();
 		},
-		[]
+		[currentUser]
     );
 
     const getbase64 = async(file) => {
@@ -47,14 +48,15 @@ export default function Account(props){
         })
     }
 
-    const getData = async (Files) => {
-        return Promise.all(Files.map(file => getbase64(file)))
-    }
 
     const onDrop = useCallback(async(acceptedFiles, rejectedFiles) => {
+        const getData = async (Files) => {
+            return Promise.all(Files.map(file => getbase64(file)))
+        }
+
         for (let file of rejectedFiles) {
           for (let error of file.errors) {
-            alert.error(file.file.name + " : " + error.message)
+            alert.current.error(file.file.name + " : " + error.message)
           }
         }
 
@@ -84,9 +86,9 @@ export default function Account(props){
             if (data.phone.value.length !== 10 && data.phone.value.length !== 0) throw Object.assign(new Error("phone number wrong format"),{ code: null });
             const {data: resData} = await serverController.editUser(currentUser, data.phone.value, imageData);
             setUserData(resData);
-            alert.success('Edit sucessfully');
+            alert.current.success('Edit sucessfully');
         }catch(error){
-            alert.error(error.message)
+            alert.current.error(error.message)
         }
     }
     

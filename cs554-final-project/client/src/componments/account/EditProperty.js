@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect, useCallback} from 'react';
+import React, {useContext, useState, useEffect, useCallback, useRef} from 'react';
 import { AuthContext } from "../auth/Auth";
 import serverController from '../../serverController';
 import {useDropzone} from 'react-dropzone'
@@ -7,13 +7,13 @@ import ReactTooltip from "react-tooltip";
 import { Helmet } from 'react-helmet';
 
 const EditProperty = (props) => {
-    const alert = useAlert();
+	const alert = useRef(useAlert());
 
-	const [ propertyData, setPropertyData ] = useState();
-	const [ loading, setLoading ] = useState(true);
-	const { currentUser } = useContext(AuthContext);
-    const [imageData, setImageData] = useState([]);
-    const [removedImage, setRemovedImage] = useState([]);
+  const [ propertyData, setPropertyData ] = useState();
+  const [ loading, setLoading ] = useState(true);
+  const { currentUser } = useContext(AuthContext);
+  const [imageData, setImageData] = useState([]);
+  const [removedImage, setRemovedImage] = useState([]);
 
 	useEffect(
 		() => {
@@ -25,7 +25,7 @@ const EditProperty = (props) => {
           setLoading(false);
 				} catch (e) {
           setLoading(false);
-					alert.error(e.message)
+					alert.current.error(e.message)
 				}
       }
       getPropertyData();
@@ -42,14 +42,16 @@ const EditProperty = (props) => {
         })
     }
 
-    const getData = async (Files) => {
-        return Promise.all(Files.map(file => getbase64(file)))
-    }
+
 
     const onDrop = useCallback(async(acceptedFiles, rejectedFiles) => {
+        const getData = async (Files) => {
+          return Promise.all(Files.map(file => getbase64(file)))
+        }
+    
         for (let file of rejectedFiles) {
           for (let error of file.errors) {
-            alert.error(file.file.name + " : " + error.message)
+            alert.current.error(file.file.name + " : " + error.message)
           }
         }
 
@@ -171,10 +173,10 @@ const EditProperty = (props) => {
             // setIsSuccess(true);
             props.history.push("/account")
             setLoading(false)
-            alert.success('Edit sucessfully');
+            alert.current.success('Edit sucessfully');
         }catch(error){
             setLoading(false)
-            alert.error(error.message)
+            alert.current.error(error.message)
         }
     }
 

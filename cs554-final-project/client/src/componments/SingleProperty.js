@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import serverController from '../serverController'
 import { Link } from 'react-router-dom';
 import { AuthContext } from "./auth/Auth";
@@ -10,8 +10,8 @@ const SingleProperty = (props) => {
 	const [ isWatchlist, setIsWatchlist ] = useState();
 	const [ loading, setLoading ] = useState(true);
 	const { currentUser } = useContext(AuthContext);
+	const alert = useRef(useAlert());
 
-	const alert = useAlert();
 	let lastUpdate;
 	if (propertyData && propertyData.date){
 		let newDate = new Date();
@@ -24,12 +24,13 @@ const SingleProperty = (props) => {
 			async function getPropertyData() {
 				try {
 					setLoading(true);
-                    const {data: property}  = await serverController.getProperty(props.match.params.id)
+					const {data: property}  = await serverController.getProperty(props.match.params.id)
+					resPropertyData = property;
 					setPropertyData(property);
 					setLoading(false);
 				} catch (e) {
 					setLoading(false);
-					alert.error(e.message)
+					alert.current.error(e.message)
 				}
 			}
 			async function checkWatchlist(currentUser) {
@@ -43,25 +44,25 @@ const SingleProperty = (props) => {
 					setLoading(false);
 				} catch (e) {
 					setLoading(false);
-					alert.error(e.message)
+					alert.current.error(e.message)
 				}
 			}
-
+			let resPropertyData = null
 			getPropertyData();
 			if (currentUser) {
-				checkWatchlist(currentUser, propertyData)
+				checkWatchlist(currentUser, resPropertyData)
 			}
 		},
-		[ props.match.params.id ]
+		[ props.match.params.id, currentUser]
 	);
 
 	const addWatchlist = async () => {
 		try {
 			await serverController.addWatchlist(propertyData._id, currentUser)
 			setIsWatchlist(true)
-			alert.success("successfully added to waitlist")
+			alert.current.success("successfully added to waitlist")
 		} catch (e) {
-			alert.error(e.message)
+			alert.current.error(e.message)
 		}
 	};
 
@@ -69,9 +70,9 @@ const SingleProperty = (props) => {
 		try {
 			await serverController.removeWatchlist(propertyData._id, currentUser)
 			setIsWatchlist(false)
-			alert.success("successfully removed from waitlist")
+			alert.current.success("successfully removed from waitlist")
 		} catch (e) {
-			alert.error(e.message)
+			alert.current.error(e.message)
 		}
 	};
 

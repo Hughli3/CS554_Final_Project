@@ -1,4 +1,4 @@
-import React, {useContext, useState, useCallback} from 'react';
+import React, {useContext, useState, useCallback, useRef} from 'react';
 import { AuthContext } from "../auth/Auth";
 import serverController from '../../serverController';
 // import { Redirect } from "react-router";
@@ -8,7 +8,7 @@ import {useDropzone} from 'react-dropzone';
 import { Helmet } from 'react-helmet';
 
 const AddProperty = (props) => {
-    const alert = useAlert()
+    const alert = useRef(useAlert());
     const { currentUser } = useContext(AuthContext);
     const [imageData, setImageData] = useState([]);
     const [ loading, setLoading ] = useState(false);
@@ -17,19 +17,19 @@ const AddProperty = (props) => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.onload = (event) => resolve([file.name, "fieldName",event.target.result]);
+            reader.onload = (event) => resolve([file.name, "fieldName", event.target.result]);
             reader.onerror = reject
         })
     }
 
-    const getData = async (Files) => {
-        return Promise.all(Files.map(file => getbase64(file)))
-    }
-
     const onDrop = useCallback(async(acceptedFiles, rejectedFiles) => {
+        const getData = async (Files) => {
+            return Promise.all(Files.map(file => getbase64(file)))
+        }
+
         for (let file of rejectedFiles) {
           for (let error of file.errors) {
-            alert.error(file.file.name + " : " + error.message)
+            alert.current.error(file.file.name + " : " + error.message)
           }
         }
 
@@ -131,10 +131,10 @@ const AddProperty = (props) => {
 
         props.history.push("/account")
         setLoading(false)
-        alert.success('post sucessfully')
+        alert.current.success('post sucessfully')
       } catch (error) {
         setLoading(false)
-        alert.error(error.message)
+        alert.current.error(error.message)
       }
     };
 

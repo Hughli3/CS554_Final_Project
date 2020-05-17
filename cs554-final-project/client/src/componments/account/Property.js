@@ -27,7 +27,7 @@ const Property = (props) => {
 				}
 			}
 			fetchData();
-		}, []
+		}, [currentUser]
 	);
 
 	const handleDelete = async (event) => {

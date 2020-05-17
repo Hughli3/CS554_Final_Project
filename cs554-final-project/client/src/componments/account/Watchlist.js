@@ -17,7 +17,6 @@ export default function WatchList(props) {
             try {
                 setLoading(true);
                 const {data: resData} = await serverController.getWatchlist(currentUser)
-                console.log(resData.details)
                 setProperties(resData.details)
                 setLoading(false);
             } catch (e) {
@@ -26,7 +25,7 @@ export default function WatchList(props) {
         }
         fetchData();
     },
-    []);
+    [currentUser]);
 
     const handleDelete = async (event) => {
         event.preventDefault();
