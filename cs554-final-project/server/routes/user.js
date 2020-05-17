@@ -194,11 +194,16 @@ router.delete('/watchlist/:pid', checkAuth, async (req, res) => {
             watchlist: user.watchlist,
             details: []
         }
-
+        
         for (let pid of user.watchlist) {
-            data.details.push(await propertyData.getById(pid))
+            let property = await propertyData.getById(pid)
+            let albumIds = property.album
+            property.album = []
+            for (let imageId of albumIds) {
+                property.album.push(await imageData.getPhotoDataId(imageId));
+            }
+            data.details.push(property)
         }
-        // console.log(data)
 
         res.json(data)
     } catch (e) {
