@@ -12,7 +12,7 @@ const main = async () => {
         id: "bCWDxwln7cMUYLvofdBRiaT5sZh1",
         email:"seedseed1@gmail.com",
         password:"password1",
-        photo:"../public/user/user_1.png", //TODO
+        photo:null,
         phone:"1029784458"
     }
     await userData.add(user1.id, user1.email)
@@ -37,7 +37,7 @@ const main = async () => {
     user2 = {
         id: "gGGZfLVBFuTzVFY74cNJ0uRHYr02",
         password:"password2",
-        photo:"../public/user/user_2.png", //TODO
+        photo:null,
         phone:"1538649479",
         email:"seedseed2@gmail.com"
     }
@@ -65,7 +65,7 @@ const main = async () => {
     user3 = {
         id: "gba8X9WshQPpYWyr5kzag18kfL73",
         password:"password3",
-        photo:"../public/user/user_3.png", //TODO
+        photo:null,
         phone:"8489798468",
         email:"seedseed1@gmail.com"
     }
@@ -92,8 +92,8 @@ const main = async () => {
     // ------------------------------------------------------------
     user4 = {
         id: "EBf4QO4DNqSCrYg2Sye5ae2Bft22",
-        password:"../public/user/user_4.png",
-        photo:"../public/user/user_4.png", //TODO
+        password:"password4",
+        photo:null,
         phone:"6458859931",
         email:"seedseed4@gmail.com"
     }
@@ -121,7 +121,7 @@ const main = async () => {
     user5 = {
         id: "6T4h2MaNfzbtKxojCQn5dMAhsoq2",
         password:"password5",
-        photo:"../public/user/user_5.png", //TODO
+        photo:null,
         phone:"1147895642",
         email:"seedseed5@gmail.com"
     }
