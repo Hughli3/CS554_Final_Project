@@ -1,7 +1,6 @@
 const dbConnection = require('../config/connection');
 const userData = require("../data/user");
 const propertyData = require("../data/property")
-const ObjectId = require('mongodb').ObjectID;
 
 //  ==================== User and Property data ====================
 const main = async () => {
@@ -15,6 +14,7 @@ const main = async () => {
         photo: null, //TODO
         phone:"1029784458"
     }
+
     await userData.add(user1.id, user1.email)
     await userData.updateUser(user1.id, user1.phone, user1.photo);
     console.log("user1 created");
@@ -105,7 +105,7 @@ user4 = {
         description:"New Premium Rentals in Journal Square, Jersey City \n Studio, 1 to 3 bdrm units available for immediate move-in. Move-in costs covered by us. \n Sleek 16-story premium rental is intelligently designed, complemented by in-demand smart home features and unparalleled amenities. \n Exclusive indoor, outdoor and fitness amenities are paired with the luxuriously comfortable interiors in these exceptionally crafted apartments. \n Journal Square will entice you with its restaurants nightlife, shopping, and proximity to Manhattan. This charming community has a long history as the cultural center of Hudson County.",
         zipcode:"07047",
         price:2950,
-        date:"2020-05-161",
+        date:"2020-05-16",
         bedroom:2,
         bath:1,
         type: "house"
