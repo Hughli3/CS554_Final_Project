@@ -37,7 +37,7 @@ let exportedMethods = {
         }else if (filter && filter === "price2"){
             filter = {price: {$lt:2000, $gte:1000}};
         }else if (filter && filter === "price3"){
-            filter = {price: {$gte:3000}};
+            filter = {price: {$gte:2000}};
         }else{
             filter = {}
         }

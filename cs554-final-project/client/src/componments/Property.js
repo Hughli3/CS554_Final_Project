@@ -156,9 +156,9 @@ const Property = (props) => {
 								filter Days on RentSIT
 							</button>
 							<div className="dropdown-menu w-100 pr-2" aria-labelledby="dropdownMenuButton">
-							<Link to={"?page=" + page + "&filter=3days&sort=" + sort} className="dropdown-item">In 3 Days</Link>
-							<Link to={"?page=" + page + "&filter=10days&sort=" + sort} className="dropdown-item">In 10 Days</Link>
-							<Link to={"?page=" + page + "&filter=30days&sort=" + sort} className="dropdown-item">In 30 Days</Link>
+							<Link to={"?page=" + 1 + "&filter=3days&sort=" + sort} className="dropdown-item">In 3 Days</Link>
+							<Link to={"?page=" + 1 + "&filter=10days&sort=" + sort} className="dropdown-item">In 10 Days</Link>
+							<Link to={"?page=" + 1 + "&filter=30days&sort=" + sort} className="dropdown-item">In 30 Days</Link>
 							</div>
 						</div>
 					</div>
@@ -169,9 +169,9 @@ const Property = (props) => {
 								filter price
 							</button>
 							<div className="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-							<Link to={"?page=" + page + "&filter=price1&sort=" + sort} className="dropdown-item">$ 0 - 1000</Link>
-							<Link to={"?page=" + page + "&filter=price2&sort=" + sort} className="dropdown-item">$ 1000 - 2000</Link>
-							<Link to={"?page=" + page + "&filter=price3&sort=" + sort} className="dropdown-item">$ 2000 +</Link>
+							<Link to={"?page=" + 1 + "&filter=price1&sort=" + sort} className="dropdown-item">$ 0 - 1000</Link>
+							<Link to={"?page=" + 1 + "&filter=price2&sort=" + sort} className="dropdown-item">$ 1000 - 2000</Link>
+							<Link to={"?page=" + 1 + "&filter=price3&sort=" + sort} className="dropdown-item">$ 2000 +</Link>
 							</div>
 						</div>
 					</div>
@@ -182,8 +182,8 @@ const Property = (props) => {
 								sort price
 							</button>
 							<div className="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-							<Link to={"?page=" + page + "&filter=" + filter + "&sort=priceUp"} className="dropdown-item">Low to High</Link>
-							<Link to={"?page=" + page + "&filter=" + filter + "&sort=priceDown"} className="dropdown-item">High to Low</Link>
+							<Link to={"?page=" + 1 + "&filter=" + filter + "&sort=priceUp"} className="dropdown-item">Low to High</Link>
+							<Link to={"?page=" + 1 + "&filter=" + filter + "&sort=priceDown"} className="dropdown-item">High to Low</Link>
 							</div>
 						</div>
 					</div>
