@@ -2,20 +2,8 @@ const dbConnection = require('../config/connection');
 const userData = require("../data/user");
 const propertyData = require("../data/property")
 const imageData = require("../data/img")
-
-const ObjectId = require('mongodb').ObjectID;
 const fs = require('fs');
 
-async function uploadDogAvatar(filepath){
-    let imgPath = filepath.split('.')[0]
-    let file = getFile(filepath)
-    fs.writeFileSync(imgPath, fs.readFileSync(filepath));
-    let photo = await dogData.updateAvatar(id, file)
-    fs.rename(imgPath, filepath, function(err) {
-        if (err) console.log(err);
-        console.log('successfully set dog avatar');
-    });
-}
 
 //  ==================== User and Property data ====================
 const main = async () => {
@@ -33,9 +21,9 @@ const main = async () => {
         phone:"1029784458"
     }
 
-    await fs.copyFile("./public/user/"+user1.photo, "./public/img/"+user1.photo, (err) => {
-        if (err!=null) console.log(err);});
-    let userOne = await imageData.createGridFS(user1.photo, "avatar", "./public/img/"+user1.photo);
+    // await fs.copyFile("./public/user/"+user1.photo, "./public/img/"+user1.photo, (err) => {
+    //     if (err!=null) console.log(err);});
+    let userOne = await imageData.createGridFS(user1.photo, "avatar", "./public/user/"+user1.photo);
 
 
     await userData.add(user1.id, user1.email)
