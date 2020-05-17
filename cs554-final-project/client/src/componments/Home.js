@@ -74,7 +74,7 @@ const Home = () => {
     }
 
     return (
-        <>
+        <main>
             <Helmet>
                 <title>Home - RentSIT</title>
             </Helmet>
@@ -196,8 +196,7 @@ const Home = () => {
                 </div>
             </div>
             </section>
-            </>
-  
+        </main>
     );
 }
 

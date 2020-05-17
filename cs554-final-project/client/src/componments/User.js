@@ -96,6 +96,7 @@ export default function User(props){
 	}
 
     return(
+    <main>
         <section className="section account">
             <Helmet>
               <title>{userData.email} - RentSIT</title>
@@ -130,5 +131,6 @@ export default function User(props){
                 </div>
             </div>
         </section>
+    </main>
     )
 }

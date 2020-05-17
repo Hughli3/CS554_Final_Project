@@ -48,9 +48,6 @@ const Property = (props) => {
 	const buildListItem = (property) => {
 		return (
 		<>
-		<Helmet>
-              <title>My property - RentSIT</title>
-        </Helmet>
 			<div className="row property-card mb-4">
 				<div className="col-lg-6 col-6 pl-0">
 					<Link to={'/property/' + property._id}>
@@ -101,6 +98,9 @@ const Property = (props) => {
 
 	return (
 		<>
+			<Helmet>
+				<title>My property - RentSIT</title>
+			</Helmet>
 			<div className="row property-card property-add mb-3">
 				<Link className="align-self-center d-flex align-items-center justify-content-center" to='/account/property/add'>
 					<div>

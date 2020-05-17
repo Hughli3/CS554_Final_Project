@@ -128,6 +128,7 @@ export default function Account(props){
     };
     
     return(
+    <main>
         <section className="section account">
         <Helmet>
               <title>Account - RentSIT</title>
@@ -183,7 +184,7 @@ export default function Account(props){
                 </div>
             </div>
             {/* modal for edit profile */}
-            <div className= "modal fade" id="edit-profile-modal" tabindex="-1" role="dialog" aria-labelledby="modal-title-edit-profile" aria-hidden="true">
+            <div className= "modal fade" id="edit-profile-modal" tabIndex="-1" role="dialog" aria-labelledby="modal-title-edit-profile" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -239,7 +240,7 @@ export default function Account(props){
                 
                 {/* modal for change password */}
                 { currentUser.providerData[0].providerId === 'password' ?
-                (<div className= "modal fade" id="change-password-modal" tabindex="-1" role="dialog" aria-labelledby="modal-change-password" aria-hidden="true">
+                (<div className= "modal fade" id="change-password-modal" tabIndex="-1" role="dialog" aria-labelledby="modal-change-password" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -289,5 +290,6 @@ export default function Account(props){
                 <ReactTooltip />
             </div>) : null }
         </section>
+    </main>
     )
 }

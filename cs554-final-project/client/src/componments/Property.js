@@ -148,6 +148,7 @@ const Property = (props) => {
 	}
 
 	return (
+	<main>
 		<section className="section">
 			<div className="container">
 				<div className="row mb-5">	
@@ -197,6 +198,7 @@ const Property = (props) => {
 				{pagination}
 			</div>
 		</section>
+	</main>
     );
 };
 

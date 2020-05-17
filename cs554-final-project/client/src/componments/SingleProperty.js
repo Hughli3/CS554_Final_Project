@@ -211,6 +211,7 @@ const SingleProperty = (props) => {
 	const lightboxImages = propertyData.album.length === 0 ? ["/img/default_property.jpg"] : propertyData.album
 
 	return (
+	<main>
 		<section className="section single-property">
 			<Helmet>
                 <title>{(propertyData && propertyData.title)} - RentSIT</title>
@@ -265,6 +266,7 @@ const SingleProperty = (props) => {
 				</div>
 			</div>
 		</section>
+	</main>
 	);
 };
 

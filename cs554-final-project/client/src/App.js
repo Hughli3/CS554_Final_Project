@@ -25,25 +25,21 @@ function App() {
   return (
         <AuthProvider>
           <Router>
-            {/* <Header /> */}
-            <Route path='/' component={Header}/>
 
-            <main>
+            <Route path='/' component={Header}/>
+            
             <Route exact path='/' component={Home}/>
-			
             <Route exact path='/property' component={Property}/>
             <Route exact path='/property/:id' component={SingleProperty}/>
             <Route exact path='/user/:id' component={User}/>
-
             <PrivateRoute path='/account' component={Account}/>
-            
 
             <Switch>
               <Route exact path='/login' component={Login}/>
               <Route exact path='/signup' component={Signup}/>
               <Route path='/' component={Footer}/>
             </Switch>
-            </main>
+
           </Router>
         </AuthProvider>
   );
