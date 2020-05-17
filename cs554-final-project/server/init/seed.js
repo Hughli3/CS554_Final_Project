@@ -2,7 +2,6 @@ const dbConnection = require('../config/connection');
 const userData = require("../data/user");
 const propertyData = require("../data/property")
 const imageData = require("../data/img")
-const fs = require('fs');
 
 
 //  ==================== User and Property data ====================
