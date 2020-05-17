@@ -7,7 +7,7 @@ const user = require("../data/user");
 user1 = {
     _id: "seedseed1",
     password:"password1",
-    photo:"../img/", //TODO
+    photo:"../public/user/user_1.png", //TODO
     phone:"1029784458",
     email:"seedseed1@gmail.com"
 }
@@ -28,7 +28,7 @@ property1 = {
 user2 = {
     _id: "seedseed2",
     password:"password2",
-    photo:"../img/", //TODO
+    photo:"../public/user/user_2.png", //TODO
     phone:"1538649479",
     email:"seedseed2@gmail.com"
 }
@@ -49,7 +49,7 @@ property2 = {
 user3 = {
     _id: "seedseed3",
     password:"password3",
-    photo:"../img/", //TODO
+    photo:"../public/user/user_3.png", //TODO
     phone:"8489798468",
     email:"seedseed1@gmail.com"
 }
@@ -68,7 +68,7 @@ property3 = {
 // ------------------------------------------------------------
 user4 = {
     _id: "seedseed4",
-    password:"password4",
+    password:"../public/user/user_4.png",
     photo:"../img/", //TODO
     phone:"6458859931",
     email:"seedseed4@gmail.com"
@@ -89,7 +89,7 @@ property4 = {
 user5 = {
     _id: "seedseed5",
     password:"password5",
-    photo:"../img/", //TODO
+    photo:"../public/user/user_5.png", //TODO
     phone:"1147895642",
     email:"seedseed5@gmail.com"
 }
