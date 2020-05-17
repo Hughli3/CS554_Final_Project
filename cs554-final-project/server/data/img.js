@@ -14,12 +14,6 @@ const resizeImg = require('resize-img');
 var sizeOf = require('image-size');
 const FileType = require('file-type');
 
-const bluebird = require("bluebird");
-const redis = require("redis");
-const client = redis.createClient();
-bluebird.promisifyAll(redis.RedisClient.prototype);
-bluebird.promisifyAll(redis.Multi.prototype);
-
 //========================================
 // Validate functions
 async function validateImage(filePath) {
@@ -148,7 +142,6 @@ async function deletePhoto(id){
   if (deletionInfo1.deletedCount === 0 && deletionInfo2.deletedCount === 0)
       throw "could not delete photo";
 
-  await client.lpushxAsync("imgIdList", JSON.stringify(id))
   return true;
 }
 
