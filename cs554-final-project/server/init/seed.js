@@ -56,6 +56,119 @@ const main = async () => {
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property1)
     console.log("property1 created")
 
+    property6 = {
+        title:"Wharton, NJ (22 Huff St #A,)",
+        description:"WOW!! LARGE FENCED IN YARD! 3 SEASON SUNROOM. SPACIOUS RANCH HOME LOCATED ON DESIRABLE DEAD END STREET IN CONVENIENT LOCATION OF WHARTON. LOADED WITH UPDATES, NEWER KITCHEN W/ GRANITE, CABS, S/S APPL UPDATED BATHS, HW FLOORS, WINDOWS. FINISHED BASEMENT OFFERS 4TH BED OPTION OR OFFICE SPACE. FENCED IN YARD. NICE LEVEL PROPERTY. ",
+        price:1000,
+        zipcode:"07086",
+        type: "house",
+        bedroom:3,
+        bath:2,
+        date: "2020-05-04"
+    }
+    
+    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property6)
+    console.log("property6 created")
+
+    property7 = {
+        title:"Pitman, NJ (344 Edsam Ave #2,)",
+        description:"Nice 1 bedroom apartment on the 2nd Floor in Pitman near the lake. Modern kitchen with tiled back splash and built-in dishwasher. Energy Efficient Heating & A/C. Private drive - parking for 1 car with assigned parking.",
+        price:600,
+        zipcode:"07317",
+        type: "house",
+        bedroom:1,
+        bath:1,
+        date: "2020-04-29"
+    }
+    
+    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property7)
+    console.log("property7 created")
+
+    property8 = {
+        title:"BBQ & Fire Pit Lounge, Pool, Fitness Center-*NO FEES (Montclair)",
+        description:"Nestled in a serene area just 40 minutes from New York City is Montclair Residences at Bay St. Station. These high-end lodgings provide the safe, quiet neighborhood you crave with the excitement of the Big Apple close at hand. Relax and burn off steam at the building’s fitness center, dive into the clear waters of the heated pool, or lounge in the business center while completing your next assignment.",
+        price:2185,
+        zipcode:"07042",
+        type: "apartment",
+        bedroom:1,
+        bath:1,
+        date: "2020-04-24"
+    }
+    
+    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property8)
+    console.log("property8 created")
+
+    property9 = {
+        title:"Brand New One Bedroom - Immediate Move-In",
+        description:"Experience the difference at The Grande at Metropark! Our luxury residential apartments in the heart of Woodbridge, NJ — and convenient to Iselin and Edison — offer contemporary style, a wealth of resident amenities, an extensive resident activity program, and unparalleled conveniences, which are only the beginning. Magnificent modern living starts here!",
+        price:2075,
+        zipcode:"08830",
+        type: "apartment",
+        bedroom:1,
+        bath:1,
+        date: "2020-05-16"
+    }
+    
+    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property9)
+    console.log("property9 created")
+
+    property10 = {
+        title:"NICE!!!! (NORTH NEWARK)",
+        description:"2.5 bedroom apartment for rent\nEat in kitchen\nNice size rooms\nNear public transportation\nPublic schools",
+        price:1550,
+        zipcode:"07104",
+        type: "apartment",
+        bedroom:2,
+        bath:1,
+        date: "2020-05-16"
+    }
+    
+    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property10)
+    console.log("property10 created")
+
+    property11 = {
+        title:"3 bd/1 ba Hoboken $3500 1300sq ft (Hoboken)",
+        description:"3 bedroom / 1 bathroom 1300sq ft Hoboken apartment available for rent July 1 or 15. $3500. Full floor apartment on top floor of three unit walk up building at 6th and Adams St. Big closets and dishwasher. Laundry in building. Student and family friendly. 2 blocks to grocery store and 126 bus stop to Port Authority.",
+        price:3500,
+        zipcode:"07030",
+        type: "apartment",
+        bedroom:3,
+        bath:1,
+        date: "2020-04-17"
+    }
+    
+    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property11)
+    console.log("property11 created")
+
+    property12 = {
+        title:"1 Bd/1Ba - Prime Hoboken Area - $100 Application Fee",
+        description:"The Jordan in Hoboken, NJ offers condo style one- and two-bedroom apartments with six different floor plans to choose from. From the soaring 9 foot ceilings with expansive Pella Architect Series windows, to the natural oak hardwood floors and the Frigidaire washer/dryer set, your apartment offers plenty to love. Your home comes with 7-ft solid, wood doors and controlled central heating and air conditioning with programmable thermostats. In the gourmet style kitchen, you will notice Dal Torreon porcelain tiled floors with Nemo Metro gloss tiled backsplash, walnut cabinetry with soft-close features, Kohler chrome fixtures, and Caesarstone countertops. ",
+        price:3059,
+        zipcode:"07030",
+        type: "apartment",
+        bedroom:3,
+        bath:1,
+        date: "2020-05-16"
+    }
+    
+    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property12)
+    console.log("property12 created")
+
+    property13 = {
+        title:"Luxury 1 bedroom, Pet friendly community, 24 hr gym, yoga room, + Pool",
+        description:"Welcome home to The Highlands at Westwood! Newly renovated one, two bedroom and two bedroom with den luxury apartment homes, The Highlands at Westwood is a picturesque apartment community. In a suburban setting, our community has a neighborhood feeling, allwith a close proximity to Manhattan that makes it the perfect placeto live! Luxury features await you, including individual patios orbalconies, granite countertops and stainless steel appliances. Amenities include state of the art fitness center, clubroom, yoga room, computer stations, BBQ and picnic area, canine country club & beautifully landscaped courtyards.",
+        price:2363,
+        zipcode:"07675",
+        type: "apartment",
+        bedroom:1,
+        bath:1,
+        date: "2020-04-28"
+    }
+    
+    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property13)
+    console.log("property13 created")
+    
+
 // ------------------------------------------------------------
 user2 = {
     id: "gGGZfLVBFuTzVFY74cNJ0uRHYr02",
@@ -94,9 +207,9 @@ user3 = {
     password:"password3",
     photo:"user_3.jpg", //TODO
     phone:"8489798468",
-    email:"seedseed1@gmail.com"
+    email:"seedseed3@gmail.com"
     }
-    
+
     await fs.copyFile("./public/user/"+user3.photo, "./public/img/"+user3.photo, (err) => {
         if (err!=null) console.log(err);});
     let userThree = await imageData.createGridFS(user3.photo, "avatar", "./public/img/"+user3.photo);
@@ -162,7 +275,7 @@ user5 = {
     let userFive = await imageData.createGridFS(user5.photo, "avatar", "./public/img/"+user5.photo);
         await userData.add(user5.id, user5.email)
     await userData.updateUser(user5.id, user5.phone, userFive);
-    console.log("user4 created")
+    console.log("user5 created")
 
     property5 = {
         ownerid:"6T4h2MaNfzbtKxojCQn5dMAhsoq2",
