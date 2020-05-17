@@ -1,7 +1,6 @@
 const dbConnection = require('../config/connection');
 const userData = require("../data/user");
 const propertyData = require("../data/property")
-const ObjectId = require('mongodb').ObjectID;
 
 //  ==================== User and Property data ====================
 const main = async () => {
@@ -12,13 +11,14 @@ const main = async () => {
         id: "bCWDxwln7cMUYLvofdBRiaT5sZh1",
         email:"seedseed1@gmail.com",
         password:"password1",
-        photo:"../public/user/user_1.png", //TODO
+        photo: null, //TODO
         phone:"1029784458"
     }
+
     await userData.add(user1.id, user1.email)
     await userData.updateUser(user1.id, user1.phone, user1.photo);
     console.log("user1 created");
-    
+     
     property1 = {
         title:"1 Bd/1Ba - Prime Hoboken Area - $100 Application Fee",
         description:"The Jordan in Hoboken, NJ offers condo style one- and two-bedroom apartments with six different floor plans to choose from. From the soaring 9 foot ceilings with expansive Pella Architect Series windows, to the natural oak hardwood floors and the Frigidaire washer/dryer set, your apartment offers plenty to love. Your home comes with 7-ft solid, wood doors and controlled central heating and air conditioning with programmable thermostats. In the gourmet style kitchen, you will notice Dal Torreon porcelain tiled floors with Nemo Metro gloss tiled backsplash, walnut cabinetry with soft-close features, Kohler chrome fixtures, and Caesarstone countertops. ",
@@ -33,15 +33,14 @@ const main = async () => {
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property1)
     console.log("property1 created")
 
-    // ------------------------------------------------------------
-    user2 = {
-        id: "gGGZfLVBFuTzVFY74cNJ0uRHYr02",
-        password:"password2",
-        photo:"../public/user/user_2.png", //TODO
-        phone:"1538649479",
-        email:"seedseed2@gmail.com"
-    }
-
+// ------------------------------------------------------------
+user2 = {
+    id: "gGGZfLVBFuTzVFY74cNJ0uRHYr02",
+    password:"password2",
+    photo: null, //TODO
+    phone:"1538649479",
+    email:"seedseed2@gmail.com"
+}
     await userData.add(user2.id, user2.email)
     await userData.updateUser(user2.id, user2.phone, user2.photo);
     console.log("user2 created");
@@ -61,15 +60,14 @@ const main = async () => {
     await propertyData.add("gGGZfLVBFuTzVFY74cNJ0uRHYr02", property2)
     console.log("property2 created")
 
-    // ------------------------------------------------------------
-    user3 = {
-        id: "gba8X9WshQPpYWyr5kzag18kfL73",
-        password:"password3",
-        photo:"../public/user/user_3.png", //TODO
-        phone:"8489798468",
-        email:"seedseed1@gmail.com"
-    }
-
+// ------------------------------------------------------------
+user3 = {
+    id: "gba8X9WshQPpYWyr5kzag18kfL73",
+    password:"password3",
+    photo:null, //TODO
+    phone:"8489798468",
+    email:"seedseed1@gmail.com"
+}
     await userData.add(user3.id, user3.email)
     await userData.updateUser(user3.id, user3.phone, user3.photo);
     console.log("user3 created");
@@ -89,15 +87,14 @@ const main = async () => {
     await propertyData.add("gba8X9WshQPpYWyr5kzag18kfL73", property3)
     console.log("property3 created")
 
-    // ------------------------------------------------------------
-    user4 = {
-        id: "EBf4QO4DNqSCrYg2Sye5ae2Bft22",
-        password:"../public/user/user_4.png",
-        photo:"../public/user/user_4.png", //TODO
-        phone:"6458859931",
-        email:"seedseed4@gmail.com"
-    }
-
+// ------------------------------------------------------------
+user4 = {
+    id: "EBf4QO4DNqSCrYg2Sye5ae2Bft22",
+    password:"password4",
+    photo:null, //TODO
+    phone:"6458859931",
+    email:"seedseed4@gmail.com"
+}
     await userData.add(user4.id, user4.email)
     await userData.updateUser(user4.id, user4.phone, user4.photo);
     console.log("user4 created")
@@ -108,7 +105,7 @@ const main = async () => {
         description:"New Premium Rentals in Journal Square, Jersey City \n Studio, 1 to 3 bdrm units available for immediate move-in. Move-in costs covered by us. \n Sleek 16-story premium rental is intelligently designed, complemented by in-demand smart home features and unparalleled amenities. \n Exclusive indoor, outdoor and fitness amenities are paired with the luxuriously comfortable interiors in these exceptionally crafted apartments. \n Journal Square will entice you with its restaurants nightlife, shopping, and proximity to Manhattan. This charming community has a long history as the cultural center of Hudson County.",
         zipcode:"07047",
         price:2950,
-        date:"2020-05-161",
+        date:"2020-05-16",
         bedroom:2,
         bath:1,
         type: "house"
@@ -117,15 +114,14 @@ const main = async () => {
     await propertyData.add("EBf4QO4DNqSCrYg2Sye5ae2Bft22", property4)
     console.log("property4 created")
 
-    // ------------------------------------------------------------
-    user5 = {
-        id: "6T4h2MaNfzbtKxojCQn5dMAhsoq2",
-        password:"password5",
-        photo:"../public/user/user_5.png", //TODO
-        phone:"1147895642",
-        email:"seedseed5@gmail.com"
-    }
-
+// ------------------------------------------------------------
+user5 = {
+    id: "6T4h2MaNfzbtKxojCQn5dMAhsoq2",
+    password:"password5",
+    photo:null, //TODO
+    phone:"1147895642",
+    email:"seedseed5@gmail.com"
+}
     await userData.add(user5.id, user5.email)
     await userData.updateUser(user5.id, user5.phone, user5.photo);
     console.log("user4 created")
