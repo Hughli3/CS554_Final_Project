@@ -109,7 +109,7 @@ router.get('/', checkAuth, async (req, res) => {
     // get images data
     try {
         for (let property of user.property) {
-            console.log(property)
+            // console.log(property)
             let albumIds = property.album
             property.album = []
             for (let imageId of albumIds) {
@@ -198,9 +198,7 @@ router.delete('/watchlist/:pid', checkAuth, async (req, res) => {
         for (let pid of user.watchlist) {
             data.details.push(await propertyData.getById(pid))
         }
-        console.log(data)
-
-        await client.delAsync(res.locals.userUid+"wl")
+        // console.log(data)
 
         res.json(data)
     } catch (e) {
