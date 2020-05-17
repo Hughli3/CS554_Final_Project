@@ -84,7 +84,7 @@ export default function WatchList(props) {
 				<div className="col-lg-6 col-md-4 col-6 py-3">
 					<Link to={'/property/' + property._id}>
 
-						<h2 className="display-4 title">{property.title}</h2>
+						<h1 className="display-4 title">{property.title}</h1>
 						</Link>
 						{property.description ? (<p className="description">{property.description}</p>) : null}
 					

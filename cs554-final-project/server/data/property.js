@@ -53,6 +53,7 @@ let exportedMethods = {
             next: false,
             prev: false,
         }
+
         if (allProperty.length - page * take > 0) {
             data.next = true
         }

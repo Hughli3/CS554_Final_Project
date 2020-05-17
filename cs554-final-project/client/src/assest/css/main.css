@@ -336,6 +336,10 @@ p.card-text {
     color: #fff !important;
 }
 
+.page-item .sr-only{
+    color: #333 !important;
+}
+
 /* Loading */
 
 .lds-facebook {
