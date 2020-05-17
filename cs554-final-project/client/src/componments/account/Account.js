@@ -17,7 +17,9 @@ export default function Account(props){
     const { currentUser } = useContext(AuthContext);
     const [userData, setUserData] = useState({});
     const [loading, setLoading] = useState(true);
-    const colseModal = createRef();
+    const closeEditProfileModal = createRef();
+    const closeChangePasswordModal = createRef();
+
     const [imageData, setImageData] = useState([null, null, null]);
 
     const alert = useRef(useAlert());
@@ -80,7 +82,7 @@ export default function Account(props){
     }
 
     const editUser = async (event) => {
-        colseModal.current.click()
+        closeEditProfileModal.current.click()
         event.preventDefault();
         try{
             const data = event.target.elements;
@@ -108,7 +110,7 @@ export default function Account(props){
         }
 
         event.target.reset();
-        colseModal.current.click()
+        closeChangePasswordModal.current.click();
 
         try {
             console.log(currentPassword.value)
@@ -209,16 +211,26 @@ export default function Account(props){
 
                                 <div className="form-group">
                                     <label htmlFor="email">Email</label>
-                                    <input type="email" className="form-control" id="email" placeholder="title" value={userData.email} disabled/>
+                                    <div className="input-group">
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text disabled"><i className="fa fa-user"></i></span>
+                                        </div>
+                                        <input type="email" className="form-control" id="email" value={userData.email} disabled/>
+                                    </div>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="phone">Phone</label>
-                                    <input className="form-control" id="phone" name="phone" type="tel" placeholder="phone" defaultValue={userData.phone} data-tip="please input a 10 digit phone number"/>    
+                                    <div className="input-group">
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text"><i className="fa fa-phone"></i></span>
+                                        </div>
+                                        <input className="form-control" id="phone" name="phone" type="tel" placeholder="phone" defaultValue={userData.phone} data-tip="please input a 10 digit phone number"/>    
+                                    </div>
                                 </div>
                             </div>
                             <div className="modal-footer">
                                 <button type="submit" className="btn btn-primary">Update</button>
-                                <button type="button" ref={colseModal} className="btn btn-link ml-auto" data-dismiss="modal">Close</button>
+                                <button type="button" ref={closeEditProfileModal} className="btn btn-link ml-auto" data-dismiss="modal">Close</button>
                             </div>
                         </form>
                     </div>
@@ -270,7 +282,7 @@ export default function Account(props){
                                 </div>
                                 <div className="modal-footer">
                                     <button type="submit" className="btn btn-primary">Update</button>
-                                    <button type="button" ref={colseModal} className="btn btn-link ml-auto" data-dismiss="modal">Close</button>
+                                    <button type="button" ref={closeChangePasswordModal} className="btn btn-link ml-auto" data-dismiss="modal">Close</button>
                                 </div>
                             </form>
                         </div>

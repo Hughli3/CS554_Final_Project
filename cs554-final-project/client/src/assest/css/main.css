@@ -479,3 +479,8 @@ p.card-text {
     font-size: 19px;
     font-weight: 500;
 }
+
+span.input-group-text.disabled {
+    opacity: 1;
+    background-color: #e9ecef;
+}
