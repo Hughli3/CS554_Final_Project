@@ -79,7 +79,6 @@ let exportedMethods = {
             type: propertyInfo.type,
             bedroom: propertyInfo.bedroom,
             bath: propertyInfo.bath,
-            area: propertyInfo.float,
             date: propertyInfo.date,
             album: propertyInfo.album ? propertyInfo.album : [],
             owner: owner,
@@ -256,8 +255,8 @@ function checkPropertyInfo(propertyInfo){
     if(!propertyInfo.description){
         throw "property description not exist";
     }
-    if (propertyInfo.description.constructor !== String) throw "title is not a string";
-    if (propertyInfo.description.length > 200) throw "title length is greater than 200";
+    if (propertyInfo.description.constructor !== String) throw "description is not a string";
+    if (propertyInfo.description.length > 1000) throw "description length is greater than 1000";
     // ---------------------------------
     if(!propertyInfo.price){
         throw "property price not exist";

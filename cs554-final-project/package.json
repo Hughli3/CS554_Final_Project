@@ -4,6 +4,7 @@
   "description": "final for CS554",
   "main": "index.js",
   "scripts": {
+    "seed": "npm run seed --prefix server",
     "server": "npm start --prefix server",
     "client": "npm start --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1",

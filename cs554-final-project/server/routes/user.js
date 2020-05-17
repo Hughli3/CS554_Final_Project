@@ -109,7 +109,7 @@ router.get('/', checkAuth, async (req, res) => {
     // get images data
     try {
         for (let property of user.property) {
-            console.log(property)
+            // console.log(property)
             let albumIds = property.album
             property.album = []
             for (let imageId of albumIds) {
@@ -135,24 +135,19 @@ router.get('/', checkAuth, async (req, res) => {
 
 router.get('/watchlist', checkAuth, async (req, res) => {
     try {
-        let data
-
-        let wlExist = await client.existsAsync(res.locals.userUid+"wl");
-        if(wlExist){            
-            let jsonWatchlist = await client.getAsync(res.locals.userUid+"wl");
-            data = JSON.parse(jsonWatchlist);
-        } else {
-            const user = await userData.getUser(res.locals.userUid);
-            data = {
-                watchlist: user.watchlist,
-                details: []
+        const user = await userData.getUser(res.locals.userUid);
+        let data = {
+            watchlist: user.watchlist,
+            details: []
+        }
+        for (let pid of user.watchlist) {
+            let property = await propertyData.getById(pid)
+            let albumIds = property.album
+            property.album = []
+            for (let imageId of albumIds) {
+                property.album.push(await imageData.getPhotoDataId(imageId));
             }
-            for (let pid of user.watchlist) {
-                data.details.push(await propertyData.getById(pid))
-            }
-
-            let jsonWatchlist = JSON.stringify(data)
-            await client.setAsync(res.locals.userUid+"wl", jsonWatchlist);
+            data.details.push(property)
         }
 
         res.json(data)
@@ -203,9 +198,7 @@ router.delete('/watchlist/:pid', checkAuth, async (req, res) => {
         for (let pid of user.watchlist) {
             data.details.push(await propertyData.getById(pid))
         }
-        console.log(data)
-
-        await client.delAsync(res.locals.userUid+"wl")
+        // console.log(data)
 
         res.json(data)
     } catch (e) {
