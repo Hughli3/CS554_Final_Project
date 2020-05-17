@@ -221,16 +221,7 @@ const serverController = {
             if (e.response && e.response.data && e.response.data.error) throw Object.assign(new Error(e.response.data.error), { code: e.response.status });
             throw e
         }
-    },
-	
-	async getImage (imgid) {
-        try {
-            return await axios.get(baseUrl + "/api/image/" + imgid)
-        } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw Object.assign(new Error(e.response.data.error), { code: e.response.status });
-            throw e
-        }
-    },
+    }
 };
 
 export default serverController;
