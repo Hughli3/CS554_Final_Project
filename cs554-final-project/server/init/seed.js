@@ -34,13 +34,12 @@ const main = async () => {
     }
 
     await fs.copyFile("./public/user/"+user1.photo, "./public/img/"+user1.photo, (err) => {
-        if (err!=null) console.log(err);
-    });
-    let id = await imageData.createGridFS(user1.photo, "avatar", "./public/img/"+user1.photo);
+        if (err!=null) console.log(err);});
+    let userOne = await imageData.createGridFS(user1.photo, "avatar", "./public/img/"+user1.photo);
 
 
     await userData.add(user1.id, user1.email)
-    await userData.updateUser(user1.id, user1.phone, id);
+    await userData.updateUser(user1.id, user1.phone, userOne);
     console.log("user1 created");
      
     property1 = {
@@ -61,13 +60,18 @@ const main = async () => {
 user2 = {
     id: "gGGZfLVBFuTzVFY74cNJ0uRHYr02",
     password:"password2",
-    photo: null, //TODO
+    photo: "user_2.jpg", //TODO
     phone:"1538649479",
     email:"seedseed2@gmail.com"
-}
+    }   
+    await fs.copyFile("./public/user/"+user2.photo, "./public/img/"+user2.photo, (err) => {
+        if (err!=null) console.log(err);});
+    let userTwo = await imageData.createGridFS(user2.photo, "avatar", "./public/img/"+user2.photo);
     await userData.add(user2.id, user2.email)
-    await userData.updateUser(user2.id, user2.phone, user2.photo);
+    await userData.updateUser(user2.id, user2.phone, userTwo);
     console.log("user2 created");
+
+    
 
     property2 = {
         ownerid:"gGGZfLVBFuTzVFY74cNJ0uRHYr02",
@@ -88,12 +92,16 @@ user2 = {
 user3 = {
     id: "gba8X9WshQPpYWyr5kzag18kfL73",
     password:"password3",
-    photo:null, //TODO
+    photo:"user_3.jpg", //TODO
     phone:"8489798468",
     email:"seedseed1@gmail.com"
-}
+    }
+    
+    await fs.copyFile("./public/user/"+user3.photo, "./public/img/"+user3.photo, (err) => {
+        if (err!=null) console.log(err);});
+    let userThree = await imageData.createGridFS(user3.photo, "avatar", "./public/img/"+user3.photo);
     await userData.add(user3.id, user3.email)
-    await userData.updateUser(user3.id, user3.phone, user3.photo);
+    await userData.updateUser(user3.id, user3.phone, userThree);
     console.log("user3 created");
 
     property3 = {
@@ -115,12 +123,15 @@ user3 = {
 user4 = {
     id: "EBf4QO4DNqSCrYg2Sye5ae2Bft22",
     password:"password4",
-    photo:null, //TODO
+    photo:"user_4.jpg", //TODO
     phone:"6458859931",
     email:"seedseed4@gmail.com"
-}
+}   
+    await fs.copyFile("./public/user/"+user4.photo, "./public/img/"+user4.photo, (err) => {
+        if (err!=null) console.log(err);});
+    let userFour = await imageData.createGridFS(user4.photo, "avatar", "./public/img/"+user4.photo);
     await userData.add(user4.id, user4.email)
-    await userData.updateUser(user4.id, user4.phone, user4.photo);
+    await userData.updateUser(user4.id, user4.phone, userFour);
     console.log("user4 created")
 
     property4 = {
@@ -142,12 +153,15 @@ user4 = {
 user5 = {
     id: "6T4h2MaNfzbtKxojCQn5dMAhsoq2",
     password:"password5",
-    photo:null, //TODO
+    photo:"user_5.jpg", //TODO
     phone:"1147895642",
     email:"seedseed5@gmail.com"
 }
-    await userData.add(user5.id, user5.email)
-    await userData.updateUser(user5.id, user5.phone, user5.photo);
+    await fs.copyFile("./public/user/"+user5.photo, "./public/img/"+user5.photo, (err) => {
+        if (err!=null) console.log(err);});
+    let userFive = await imageData.createGridFS(user5.photo, "avatar", "./public/img/"+user5.photo);
+        await userData.add(user5.id, user5.email)
+    await userData.updateUser(user5.id, user5.phone, userFive);
     console.log("user4 created")
 
     property5 = {
