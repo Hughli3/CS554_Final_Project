@@ -28,7 +28,7 @@ const Header = () => {
                 <li className="nav-item dropdown">
                   <Link className='nav-link' to='/property'>
                     <i className="fa fa-building mr-2"></i>
-                    <span className="nav-link-inner--text">Propertys</span>
+                    <span className="nav-link-inner--text">Property</span>
                   </Link>
                 </li>
               </ul>
