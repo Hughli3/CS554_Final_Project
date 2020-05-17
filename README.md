@@ -17,8 +17,9 @@ RentSIT is a rental platform for Stevens students. This site allows property own
 3. run `npm run seed`
 4. run `npm start`
 
-Client: http://localhost:5000
-Server: http://localhost:3000
+> Client(Use this): http://localhost:5000
+> Server: http://localhost:3000
+
 
 ## How to use 
 Here are some seed user you could use, their username and password are listed as follow:
