@@ -154,7 +154,7 @@ const EditProperty = (props) => {
             if (!data.title.value) throw Object.assign(new Error("title not exist"),{ code: null });
             if (data.title.value.length > 70) throw Object.assign(new Error("title too long"),{ code: null });
             if (!data.description.value) throw Object.assign(new Error("description not exist"),{ code: null });
-            if (data.description.value.length > 200) throw Object.assign(new Error("description too long"),{ code: null });
+            if (data.description.value.length > 1000) throw Object.assign(new Error("description too long"),{ code: null });
             if (!data.bedroom.value) throw Object.assign(new Error("bedroom not exist"),{ code: null });
             if (parseInt(data.bedroom.value) < 1 || parseInt(data.bedroom.value) > 10 ) throw Object.assign(new Error("bedroom number invalid"),{ code: null });
             if (!data.bath.value) throw Object.assign(new Error("bath not exist"),{ code: null });
