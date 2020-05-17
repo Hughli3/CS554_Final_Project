@@ -43,30 +43,30 @@ const Property = (props) => {
 			<Helmet>
                 <title>Property - RentSIT</title>
             </Helmet>
-				<div class="row property-card my-3">
-					<div class="col-lg-6 col-md-4 col-6 pl-0">
+				<div className="row property-card my-3">
+					<div className="col-lg-6 col-md-4 col-6 pl-0">
 						<Link to={'/property/' + property._id}>
 							{property.album.length == 0 ?
-							(<img src="/img/default_property.jpg" class="card-img-left" alt="property image" />)
+							(<img src="/img/default_property.jpg" className="card-img-left" alt="property image" />)
 							:
-							(<img src={property.album[0]} class="card-img-left" alt="property image" />)
+							(<img src={property.album[0]} className="card-img-left" alt="property image" />)
 							}
 						</Link>
 					</div>
-					<div class="col-lg-6 col-md-4 col-6 py-3">
+					<div className="col-lg-6 col-md-4 col-6 py-3">
 						<Link to={'/property/' + property._id}>
-							<h1 class="display-4" class="title">{property.title}</h1>
+							<h1 className="display-4" className="title">{property.title}</h1>
 							</Link>
-							{property.description ? (<p class="description">{property.description}</p>) : null}
+							{property.description ? (<p className="description">{property.description}</p>) : null}
 						
 							{ property.price || property.zipcode || property.type || property.bedroom || property.bath ?
-							(<div class="icon-group">
+							(<div className="icon-group">
 								<p>
-									{property.price ? (<><i class="fas fa-dollar-sign"></i>{property.price}</>): null}
-									{property.zipcode ? (<><i class="fas fa-map-marker-alt"></i>{property.zipcode}</>): null}
-									{property.type ? (<><i class="fas fa-building"></i>{property.type}</>): null}
-									{property.bedroom ? (<><i class="fas fa-bed"></i>{property.bedroom}</>): null}
-									{property.bath ? (<><i class="fas fa-bath"></i>{property.bath}</>): null}
+									{property.price ? (<><i className="fas fa-dollar-sign"></i>{property.price}</>): null}
+									{property.zipcode ? (<><i className="fas fa-map-marker-alt"></i>{property.zipcode}</>): null}
+									{property.type ? (<><i className="fas fa-building"></i>{property.type}</>): null}
+									{property.bedroom ? (<><i className="fas fa-bed"></i>{property.bedroom}</>): null}
+									{property.bath ? (<><i className="fas fa-bath"></i>{property.bath}</>): null}
 									{/* TODO add last update */}
 								</p>
 							</div>) : null	
@@ -87,27 +87,27 @@ const Property = (props) => {
 
 		if (pageData.prev) {
 			prev = (
-				<li class="page-item">
+				<li className="page-item">
 					<Link to={"?page=" + prevPageNumber} className="page-link">
-						<i class="fa fa-angle-left"></i>
-						<span class="sr-only ">Previous page</span>
+						<i className="fa fa-angle-left"></i>
+						<span className="sr-only ">Previous page</span>
 					</Link>
 				</li> )
 		}
 
 		if (pageData.next) {
 			next = (
-				<li class="page-item">
+				<li className="page-item">
 					<Link to={"?page=" + nextPageNumber} className="page-link">
-						<i class="fa fa-angle-right"></i>
-						<span class="sr-only">Next page</span>
+						<i className="fa fa-angle-right"></i>
+						<span className="sr-only">Next page</span>
 					</Link>
 				</li> )
 		}
 
 		if (pageData.next || pageData.prev) {
 			curr = (
-				<li class="page-item {{@active}}">
+				<li className="page-item {{@active}}">
 					<Link to={"?page=" + page} className="page-link" aria-label={"go to page " + currentPageNumber}>
 						{currentPageNumber}
 					</Link>
@@ -117,7 +117,7 @@ const Property = (props) => {
 		if (pageData.next || pageData.prev) {
 			return (
 				<nav>
-					<ul class="pagination justify-content-center">
+					<ul className="pagination justify-content-center">
 						{prev}
 						{curr}
 						{next}
@@ -133,14 +133,14 @@ const Property = (props) => {
 
     if (loading) {
         return (
-            <div class="lds-facebook"><div></div><div></div><div></div></div>
+            <div className="lds-facebook"><div></div><div></div><div></div></div>
         )
     }
 
 	if (!(Array.isArray(propertyData) && propertyData.length) && !(filter || sort)) {
 		return (
-			<section class="section">
-				<div class="container">
+			<section className="section">
+				<div className="container">
 					<h1>No Property!</h1>
 				</div>
 			</section>
@@ -148,15 +148,15 @@ const Property = (props) => {
 	}
 
 	return (
-		<section class="section">
-			<div class="container">
+		<section className="section">
+			<div className="container">
 				<div className="row mb-5">	
 					<div className="col-3 p-0">
-						<div class="dropdown w-100 pr-2">
-							<button class="btn btn-default dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<div className="dropdown w-100 pr-2">
+							<button className="btn btn-default dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								filter Days on RentSIT
 							</button>
-							<div class="dropdown-menu w-100 pr-2" aria-labelledby="dropdownMenuButton">
+							<div className="dropdown-menu w-100 pr-2" aria-labelledby="dropdownMenuButton">
 							<Link to={"?page=" + page + "&filter=" + "3days" + "&sort=" + sort} className="dropdown-item">In 3 Days</Link>
 							<Link to={"?page=" + page + "&filter=" + "10days" + "&sort=" + sort} className="dropdown-item">In 10 Days</Link>
 							<Link to={"?page=" + page + "&filter=" + "30days" + "&sort=" + sort} className="dropdown-item">In 30 Days</Link>
@@ -165,11 +165,11 @@ const Property = (props) => {
 					</div>
 
 					<div className="col-3 p-0">
-						<div class="dropdown w-100 pr-2">
-							<button class="btn btn-default dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<div className="dropdown w-100 pr-2">
+							<button className="btn btn-default dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								filter price
 							</button>
-							<div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+							<div className="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
 							<Link to={"?page=" + page + "&filter=" + "price1" + "&sort=" + sort} className="dropdown-item">$ 0 - 1000</Link>
 							<Link to={"?page=" + page + "&filter=" + "price2" + "&sort=" + sort} className="dropdown-item">$ 1000 - 2000</Link>
 							<Link to={"?page=" + page + "&filter=" + "price3" + "&sort=" + sort} className="dropdown-item">$ 2000 +</Link>
@@ -178,11 +178,11 @@ const Property = (props) => {
 					</div>
 
 					<div className="col-3 p-0">
-						<div class="dropdown w-100 pr-2">
-							<button class="btn btn-primary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<div className="dropdown w-100 pr-2">
+							<button className="btn btn-primary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								sort price
 							</button>
-							<div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+							<div className="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
 							<Link to={"?page=" + page + "&filter=" + filter + "&sort=" + "priceUp"} className="dropdown-item">Low to High</Link>
 							<Link to={"?page=" + page + "&filter=" + filter + "&sort=" + "priceDown"} className="dropdown-item">High to Low</Link>
 							</div>

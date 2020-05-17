@@ -69,7 +69,7 @@ const Home = () => {
     
     if (loading) {
         return (
-            <div class="lds-facebook"><div></div><div></div><div></div></div>
+            <div className="lds-facebook"><div></div><div></div><div></div></div>
         )
     }
 
@@ -190,7 +190,7 @@ const Home = () => {
                     </div>
                     <h2>Interested? Add to watchlist!</h2>
                     <p className="lead">Use watchlist to save rental information you are interested in. Quick comparison before making a decision</p>
-                    <a href="/property" className="font-weight-bold text-warning mt-5">see all properties renting</a>
+                    <Link to="/property" className="font-weight-bold text-warning mt-5">see all properties renting</Link>
                     </div>
                 </div>
                 </div>
