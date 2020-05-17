@@ -1,14 +1,14 @@
 {
-  "name": "lab1",
+  "name": "cs554-final-project",
   "version": "1.0.0",
-  "description": "Lab 1 for CS554",
+  "description": "CS554 Final",
   "main": "index.js",
   "scripts": {
     "seed": "node ./init/seed.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "author": "Xinyu Chen 10454941",
+  "author": "Xinyu Chen, Yanzhe Wu, Yong Que, Zheng Li",
   "license": "MIT",
   "dependencies": {
     "base64-img": "^1.0.4",

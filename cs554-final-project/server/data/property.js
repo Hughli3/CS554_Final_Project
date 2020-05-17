@@ -2,7 +2,6 @@
 const collections = require("../config/collections");
 const properties = collections.property;
 const users = collections.user;
-const imgData = require("./img");
 const ObjectId = require('mongodb').ObjectID;
 const xss = require("xss");
 

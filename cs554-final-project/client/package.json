@@ -9,7 +9,6 @@
     "argon-design-system-react": "^1.1.0",
     "axios": "^0.19.2",
     "firebase": "^7.14.3",
-    "mongodb": "^3.5.7",
     "react": "^16.13.1",
     "react-alert": "^7.0.0",
     "react-dom": "^16.13.1",
