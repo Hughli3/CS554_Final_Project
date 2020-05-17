@@ -12,7 +12,7 @@ const main = async () => {
     let oldUDis = "./public/user/"
     let oldPDis = "./public/property/"
     let newDis = "./public/img/"
-
+    
     let user1 = {
         id: "bCWDxwln7cMUYLvofdBRiaT5sZh1",
         email:"seedseed1@gmail.com",
@@ -21,11 +21,7 @@ const main = async () => {
         phone:"1029784458"
     }
 
-    // await fs.copyFile("./public/user/"+user1.photo, "./public/img/"+user1.photo, (err) => {
-    //     if (err!=null) console.log(err);});
     let userOne = await imageData.createGridFS(user1.photo, "avatar", "./public/user/"+user1.photo);
-
-
     await userData.add(user1.id, user1.email)
     await userData.updateUser(user1.id, user1.phone, userOne);
     console.log("user1 created");
@@ -38,7 +34,7 @@ const main = async () => {
         type: "apartment",
         bedroom:1,
         bath:1,
-        date: "2020-04-17"
+        date: 1587154999
     }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property1)
@@ -52,7 +48,7 @@ const main = async () => {
         type: "house",
         bedroom:3,
         bath:2,
-        date: "2020-05-04"
+        date: 1588578388
     }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property6)
@@ -66,7 +62,7 @@ const main = async () => {
         type: "house",
         bedroom:1,
         bath:1,
-        date: "2020-04-29"
+        date: 1588200928
     }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property7)
@@ -80,7 +76,7 @@ const main = async () => {
         type: "apartment",
         bedroom:1,
         bath:1,
-        date: "2020-04-24"
+        date: 1587784342
     }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property8)
@@ -94,7 +90,7 @@ const main = async () => {
         type: "apartment",
         bedroom:1,
         bath:1,
-        date: "2020-05-16"
+        date: 1589687942
     }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property9)
@@ -108,7 +104,7 @@ const main = async () => {
         type: "apartment",
         bedroom:2,
         bath:1,
-        date: "2020-05-16"
+        date: 1589646134
     }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property10)
@@ -122,7 +118,7 @@ const main = async () => {
         type: "apartment",
         bedroom:3,
         bath:1,
-        date: "2020-04-17"
+        date: 1587145064
     }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property11)
@@ -136,7 +132,7 @@ const main = async () => {
         type: "apartment",
         bedroom:3,
         bath:1,
-        date: "2020-05-16"
+        date: 1589502719
     }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property12)
@@ -150,7 +146,7 @@ const main = async () => {
         type: "apartment",
         bedroom:1,
         bath:1,
-        date: "2020-04-28"
+        date: 1585387207
     }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property13)
@@ -165,9 +161,8 @@ user2 = {
     phone:"1538649479",
     email:"seedseed2@gmail.com"
     }   
-    await fs.copyFile("./public/user/"+user2.photo, "./public/img/"+user2.photo, (err) => {
-        if (err!=null) console.log(err);});
-    let userTwo = await imageData.createGridFS(user2.photo, "avatar", "./public/img/"+user2.photo);
+
+    let userTwo = await imageData.createGridFS(user2.photo, "avatar", "./public/user/"+user2.photo);
     await userData.add(user2.id, user2.email)
     await userData.updateUser(user2.id, user2.phone, userTwo);
     console.log("user2 created");
@@ -180,7 +175,7 @@ user2 = {
         description:"3/4 Bedroom Dutch Colonial. Very large master bedroom, pets ok, all hardwood and tile floors. 1.5 BATH. Formal Dining room , Full walk out Basement, New Central Air and Heat with Blue Tooth controls, new roof ,windows ,siding, bathrooms and more. Optional Private beach. Available Immediately.",
         zipcode:"07849",
         price:2400,
-        date:"2020-04-24",
+        date:1587758628,
         bedroom:3,
         bath:1,
         type: "house"
@@ -198,9 +193,7 @@ user3 = {
     email:"seedseed3@gmail.com"
     }
 
-    await fs.copyFile("./public/user/"+user3.photo, "./public/img/"+user3.photo, (err) => {
-        if (err!=null) console.log(err);});
-    let userThree = await imageData.createGridFS(user3.photo, "avatar", "./public/img/"+user3.photo);
+    let userThree = await imageData.createGridFS(user3.photo, "avatar", "./public/user/"+user3.photo);
     await userData.add(user3.id, user3.email)
     await userData.updateUser(user3.id, user3.phone, userThree);
     console.log("user3 created");
@@ -211,7 +204,7 @@ user3 = {
         description:"HUGE 3 BEDROOM APT..2200 sq ft \n ONLY 1 APT ABOVE A STORE . \n HARDWOOD FLOORS THROUGHOUT \n HUGE DECK OFF YOUR BACK DOOR \n WASHER & DRYER HOOKUP IN APT \n 3 ZONES OF HEATING \n YOUR OWN GAS FED BOILER \n CEILING FANS IN EVERY ROOM \n CENTRAL AIR \n HUGE FAMILY ROOM PLUS LIVING ROOM",
         zipcode:"07416",
         price:1850,
-        date:"2020-03-04",
+        date:1583363547,
         bedroom:3,
         bath:1,
         type: "house"
@@ -228,9 +221,7 @@ user4 = {
     phone:"6458859931",
     email:"seedseed4@gmail.com"
 }   
-    await fs.copyFile("./public/user/"+user4.photo, "./public/img/"+user4.photo, (err) => {
-        if (err!=null) console.log(err);});
-    let userFour = await imageData.createGridFS(user4.photo, "avatar", "./public/img/"+user4.photo);
+    let userFour = await imageData.createGridFS(user4.photo, "avatar", "./public/user/"+user4.photo);
     await userData.add(user4.id, user4.email)
     await userData.updateUser(user4.id, user4.phone, userFour);
     console.log("user4 created")
@@ -241,7 +232,7 @@ user4 = {
         description:"New Premium Rentals in Journal Square, Jersey City \n Studio, 1 to 3 bdrm units available for immediate move-in. Move-in costs covered by us. \n Sleek 16-story premium rental is intelligently designed, complemented by in-demand smart home features and unparalleled amenities. \n Exclusive indoor, outdoor and fitness amenities are paired with the luxuriously comfortable interiors in these exceptionally crafted apartments. \n Journal Square will entice you with its restaurants nightlife, shopping, and proximity to Manhattan. This charming community has a long history as the cultural center of Hudson County.",
         zipcode:"07047",
         price:2950,
-        date:"2020-05-161",
+        date:1589691682,
         bedroom:2,
         bath:1,
         type: "house"
@@ -258,10 +249,8 @@ user5 = {
     phone:"1147895642",
     email:"seedseed5@gmail.com"
 }
-    await fs.copyFile("./public/user/"+user5.photo, "./public/img/"+user5.photo, (err) => {
-        if (err!=null) console.log(err);});
-    let userFive = await imageData.createGridFS(user5.photo, "avatar", "./public/img/"+user5.photo);
-        await userData.add(user5.id, user5.email)
+    let userFive = await imageData.createGridFS(user5.photo, "avatar", "./public/user/"+user5.photo);
+    await userData.add(user5.id, user5.email)
     await userData.updateUser(user5.id, user5.phone, userFive);
     console.log("user5 created")
 
@@ -271,7 +260,7 @@ user5 = {
         description:"This large, 4 bedroom apartment features a huge, separate windowed kitchen with dishwasher, a large, windowed bathroom, high ceilings, gorgeous hardwood floors, closets and more! This is an elevator building with a laundry room, video intercom and is only two short blocks to the 1 train. Pets are welcome. Heat and water included. This is a beautiful, prewar building. The super lives on the premises. Perfect as a share or for a family. A must see! \n Fabulous location! Just steps to Riverside Park, Columbia University, shopping and transportation. Please call/text Ruth at (917) 592-3145 to schedule an appointment. Move-in date is flexible. **ONE MONTH FREE!** \n do NOT contact me with unsolicited services or offers",
         zipcode:"07030",
         price:2970,
-        date:"2019-06-29",
+        date:1574886102,
         bedroom:3,
         bath:1,
         type: "apartment"
