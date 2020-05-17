@@ -130,9 +130,6 @@ export default function Account(props){
     return(
     <main>
         <section className="section account">
-        <Helmet>
-              <title>Account - RentSIT</title>
-        </Helmet>
             <div className="container">
                 {/* <h1 className='mb-5'>Account</h1> */}
                 <div className="row justify-content-center">
