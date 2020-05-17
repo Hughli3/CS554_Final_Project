@@ -28,7 +28,7 @@ const main = async () => {
 
 
     let user1 = {
-        id: "bCWDxwln7cMUYLvofdBRiaT5sZh1",
+        id: "BXLknbeyvYX200Ewj8fsQUqarzi1",
         email:"seedseed1@gmail.com",
         password:"password1",
         photo: "user_1.jpg",
@@ -57,7 +57,7 @@ const main = async () => {
         property1.album.push(id);
     }
     
-    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property1)
+    await propertyData.add("BXLknbeyvYX200Ewj8fsQUqarzi1", property1)
     console.log("property1 created")
 
     property2 = {
@@ -77,7 +77,7 @@ const main = async () => {
         property2.album.push(id);
     }
     
-    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property2)
+    await propertyData.add("BXLknbeyvYX200Ewj8fsQUqarzi1", property2)
     console.log("property2 created")
 
     property3 = {
@@ -94,7 +94,7 @@ const main = async () => {
     for (let i = 0; i < imagesInfo3.length; i++) {
         let id = await imageData.createGridFS(imagesInfo3[i], "album", "./public/property/3/"+imagesInfo3[i]);
         property3.album.push(id);}
-    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property3)
+    await propertyData.add("BXLknbeyvYX200Ewj8fsQUqarzi1", property3)
     console.log("property3 created")
 
     property4 = {
@@ -111,7 +111,7 @@ const main = async () => {
     for (let i = 0; i < imagesInfo4.length; i++) {
         let id = await imageData.createGridFS(imagesInfo4[i], "album", "./public/property/4/"+imagesInfo4[i]);
         property4.album.push(id);}
-    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property4)
+    await propertyData.add("BXLknbeyvYX200Ewj8fsQUqarzi1", property4)
     console.log("property4 created")
 
     property5 = {
@@ -128,7 +128,7 @@ const main = async () => {
     for (let i = 0; i < imagesInfo5.length; i++) {
         let id = await imageData.createGridFS(imagesInfo5[i], "album", "./public/property/5/"+imagesInfo5[i]);
         property5.album.push(id);}
-    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property5)
+    await propertyData.add("BXLknbeyvYX200Ewj8fsQUqarzi1", property5)
     console.log("property5 created")
 
     property6 = {
@@ -145,7 +145,7 @@ const main = async () => {
     for (let i = 0; i < imagesInfo6.length; i++) {
         let id = await imageData.createGridFS(imagesInfo6[i], "album", "./public/property/6/"+imagesInfo6[i]);
         property6.album.push(id);}
-    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property6)
+    await propertyData.add("BXLknbeyvYX200Ewj8fsQUqarzi1", property6)
     console.log("property6 created")
 
     property7 = {
@@ -162,7 +162,7 @@ const main = async () => {
     for (let i = 0; i < imagesInfo7.length; i++) {
         let id = await imageData.createGridFS(imagesInfo7[i], "album", "./public/property/7/"+imagesInfo7[i]);
         property7.album.push(id);}
-    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property7)
+    await propertyData.add("BXLknbeyvYX200Ewj8fsQUqarzi1", property7)
     console.log("property7 created")
 
     property8 = {
@@ -179,7 +179,7 @@ const main = async () => {
     for (let i = 0; i < imagesInfo8.length; i++) {
         let id = await imageData.createGridFS(imagesInfo8[i], "album", "./public/property/8/"+imagesInfo8[i]);
         property8.album.push(id);}
-    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property8)
+    await propertyData.add("BXLknbeyvYX200Ewj8fsQUqarzi1", property8)
     console.log("property8 created")
 
     property9 = {
@@ -196,13 +196,13 @@ const main = async () => {
     for (let i = 0; i < imagesInfo9.length; i++) {
         let id = await imageData.createGridFS(imagesInfo9[i], "album", "./public/property/9/"+imagesInfo9[i]);
         property9.album.push(id);}
-    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property9)
+    await propertyData.add("BXLknbeyvYX200Ewj8fsQUqarzi1", property9)
     console.log("property9 created")
     
 
 // ------------------------------------------------------------
 user2 = {
-    id: "gGGZfLVBFuTzVFY74cNJ0uRHYr02",
+    id: "lPaabnTW4VbDuTQ3KURLn5DjtgY2",
     password:"password2",
     photo: "user_2.jpg", //TODO
     phone:"1538649479",
@@ -217,7 +217,7 @@ user2 = {
     
 
     property10 = {
-        ownerid:"gGGZfLVBFuTzVFY74cNJ0uRHYr02",
+        ownerid:"lPaabnTW4VbDuTQ3KURLn5DjtgY2",
         title:"3/4 Bedroom house for rent",
         description:"3/4 Bedroom Dutch Colonial. Very large master bedroom, pets ok, all hardwood and tile floors. 1.5 BATH. Formal Dining room , Full walk out Basement, New Central Air and Heat with Blue Tooth controls, new roof ,windows ,siding, bathrooms and more. Optional Private beach. Available Immediately.",
         zipcode:"07849",
@@ -231,12 +231,12 @@ user2 = {
     for (let i = 0; i < imagesInfo10.length; i++) {
         let id = await imageData.createGridFS(imagesInfo10[i], "album", "./public/property/10/"+imagesInfo10[i]);
         property10.album.push(id);}
-    await propertyData.add("gGGZfLVBFuTzVFY74cNJ0uRHYr02", property10)
+    await propertyData.add("lPaabnTW4VbDuTQ3KURLn5DjtgY2", property10)
     console.log("property10 created")
 
 // ------------------------------------------------------------
 user3 = {
-    id: "gba8X9WshQPpYWyr5kzag18kfL73",
+    id: "0s2C7Gdl6AZl7Jz6UeHSMZZCCK33",
     password:"password3",
     photo:"user_3.jpg", //TODO
     phone:"8489798468",
@@ -249,7 +249,7 @@ user3 = {
     console.log("user3 created");
 
     property11 = {
-        ownerid:"gba8X9WshQPpYWyr5kzag18kfL73",
+        ownerid:"0s2C7Gdl6AZl7Jz6UeHSMZZCCK33",
         title:"AWESOME 3 BEDROOM APT (FRANKLIN,NJ)",
         description:"HUGE 3 BEDROOM APT..2200 sq ft \n ONLY 1 APT ABOVE A STORE . \n HARDWOOD FLOORS THROUGHOUT \n HUGE DECK OFF YOUR BACK DOOR \n WASHER & DRYER HOOKUP IN APT \n 3 ZONES OF HEATING \n YOUR OWN GAS FED BOILER \n CEILING FANS IN EVERY ROOM \n CENTRAL AIR \n HUGE FAMILY ROOM PLUS LIVING ROOM",
         zipcode:"07416",
@@ -263,12 +263,12 @@ user3 = {
     for (let i = 0; i < imagesInfo11.length; i++) {
         let id = await imageData.createGridFS(imagesInfo11[i], "album", "./public/property/11/"+imagesInfo11[i]);
         property11.album.push(id);}
-    await propertyData.add("gba8X9WshQPpYWyr5kzag18kfL73", property11)
+    await propertyData.add("0s2C7Gdl6AZl7Jz6UeHSMZZCCK33", property11)
     console.log("property11 created")
 
 // ------------------------------------------------------------
 user4 = {
-    id: "EBf4QO4DNqSCrYg2Sye5ae2Bft22",
+    id: "W35jI2trL3h4j0l8OUuOqGjT7hv1",
     password:"password4",
     photo:"user_4.jpg", //TODO
     phone:"6458859931",
@@ -280,7 +280,7 @@ user4 = {
     console.log("user4 created")
 
     property12 = {
-        ownerid:"EBf4QO4DNqSCrYg2Sye5ae2Bft22",
+        ownerid:"W35jI2trL3h4j0l8OUuOqGjT7hv1",
         title:"Journal Square Luxury 2 Bedroom. No fees (Journal Square, Jersey City)",
         description:"New Premium Rentals in Journal Square, Jersey City \n Studio, 1 to 3 bdrm units available for immediate move-in. Move-in costs covered by us. \n Sleek 16-story premium rental is intelligently designed, complemented by in-demand smart home features and unparalleled amenities. \n Exclusive indoor, outdoor and fitness amenities are paired with the luxuriously comfortable interiors in these exceptionally crafted apartments. \n Journal Square will entice you with its restaurants nightlife, shopping, and proximity to Manhattan. This charming community has a long history as the cultural center of Hudson County.",
         zipcode:"07047",
@@ -294,12 +294,12 @@ user4 = {
     for (let i = 0; i < imagesInfo12.length; i++) {
         let id = await imageData.createGridFS(imagesInfo12[i], "album", "./public/property/12/"+imagesInfo12[i]);
         property12.album.push(id);}
-    await propertyData.add("EBf4QO4DNqSCrYg2Sye5ae2Bft22", property12)
+    await propertyData.add("W35jI2trL3h4j0l8OUuOqGjT7hv1", property12)
     console.log("property12 created")
 
 // ------------------------------------------------------------
 user5 = {
-    id: "6T4h2MaNfzbtKxojCQn5dMAhsoq2",
+    id: "m17QqRBX2eTQOyRg3nnZneBFDxp2",
     password:"password5",
     photo:"user_5.jpg", //TODO
     phone:"1147895642",
@@ -311,7 +311,7 @@ user5 = {
     console.log("user5 created")
 
     property13 = {
-        ownerid:"6T4h2MaNfzbtKxojCQn5dMAhsoq2",
+        ownerid:"m17QqRBX2eTQOyRg3nnZneBFDxp2",
         title:"BEAUTIFUL, SUNNY, LG 4 BR!* LNDRY, ELEV, PETS OK!",
         description:"This large, 4 bedroom apartment features a huge, separate windowed kitchen with dishwasher, a large, windowed bathroom, high ceilings, gorgeous hardwood floors, closets and more! This is an elevator building with a laundry room, video intercom and is only two short blocks to the 1 train. Pets are welcome. Heat and water included. This is a beautiful, prewar building. The super lives on the premises. Perfect as a share or for a family. A must see! \n Fabulous location! Just steps to Riverside Park, Columbia University, shopping and transportation. Please call/text Ruth at (917) 592-3145 to schedule an appointment. Move-in date is flexible. **ONE MONTH FREE!** \n do NOT contact me with unsolicited services or offers",
         zipcode:"07030",
@@ -325,7 +325,7 @@ user5 = {
     for (let i = 0; i < imagesInfo13.length; i++) {
         let id = await imageData.createGridFS(imagesInfo13[i], "album", "./public/property/13/"+imagesInfo13[i]);
         property13.album.push(id);}
-    await propertyData.add("6T4h2MaNfzbtKxojCQn5dMAhsoq2", property13)
+    await propertyData.add("m17QqRBX2eTQOyRg3nnZneBFDxp2", property13)
     console.log("property13 created")
 
     await db.serverConfig.close();
