@@ -138,7 +138,7 @@ router.get('/watchlist', checkAuth, async (req, res) => {
         let data
 
         let wlExist = await client.existsAsync(res.locals.userUid+"wl");
-        if(wlExist){            
+        if (wlExist){            
             let jsonWatchlist = await client.getAsync(res.locals.userUid+"wl");
             data = JSON.parse(jsonWatchlist);
         } else {
@@ -149,6 +149,14 @@ router.get('/watchlist', checkAuth, async (req, res) => {
             }
             for (let pid of user.watchlist) {
                 data.details.push(await propertyData.getById(pid))
+            }
+
+            for (let property of data.details) {
+                let album = property.album;
+                property.album = []
+                for (let image of album) {
+                    property.album.push(await imageData.getPhotoDataId(image))
+                }
             }
 
             let jsonWatchlist = JSON.stringify(data)
