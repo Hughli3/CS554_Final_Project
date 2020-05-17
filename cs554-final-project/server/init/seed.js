@@ -12,7 +12,7 @@ const main = async () => {
         id: "bCWDxwln7cMUYLvofdBRiaT5sZh1",
         email:"seedseed1@gmail.com",
         password:"password1",
-        photo:null,
+        photo: null, //TODO
         phone:"1029784458"
     }
     await userData.add(user1.id, user1.email)
@@ -33,15 +33,14 @@ const main = async () => {
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property1)
     console.log("property1 created")
 
-    // ------------------------------------------------------------
-    user2 = {
-        id: "gGGZfLVBFuTzVFY74cNJ0uRHYr02",
-        password:"password2",
-        photo:null,
-        phone:"1538649479",
-        email:"seedseed2@gmail.com"
-    }
-
+// ------------------------------------------------------------
+user2 = {
+    id: "gGGZfLVBFuTzVFY74cNJ0uRHYr02",
+    password:"password2",
+    photo: null, //TODO
+    phone:"1538649479",
+    email:"seedseed2@gmail.com"
+}
     await userData.add(user2.id, user2.email)
     await userData.updateUser(user2.id, user2.phone, user2.photo);
     console.log("user2 created");
@@ -61,15 +60,14 @@ const main = async () => {
     await propertyData.add("gGGZfLVBFuTzVFY74cNJ0uRHYr02", property2)
     console.log("property2 created")
 
-    // ------------------------------------------------------------
-    user3 = {
-        id: "gba8X9WshQPpYWyr5kzag18kfL73",
-        password:"password3",
-        photo:null,
-        phone:"8489798468",
-        email:"seedseed1@gmail.com"
-    }
-
+// ------------------------------------------------------------
+user3 = {
+    id: "gba8X9WshQPpYWyr5kzag18kfL73",
+    password:"password3",
+    photo:null, //TODO
+    phone:"8489798468",
+    email:"seedseed1@gmail.com"
+}
     await userData.add(user3.id, user3.email)
     await userData.updateUser(user3.id, user3.phone, user3.photo);
     console.log("user3 created");
@@ -89,15 +87,14 @@ const main = async () => {
     await propertyData.add("gba8X9WshQPpYWyr5kzag18kfL73", property3)
     console.log("property3 created")
 
-    // ------------------------------------------------------------
-    user4 = {
-        id: "EBf4QO4DNqSCrYg2Sye5ae2Bft22",
-        password:"password4",
-        photo:null,
-        phone:"6458859931",
-        email:"seedseed4@gmail.com"
-    }
-
+// ------------------------------------------------------------
+user4 = {
+    id: "EBf4QO4DNqSCrYg2Sye5ae2Bft22",
+    password:"password4",
+    photo:null, //TODO
+    phone:"6458859931",
+    email:"seedseed4@gmail.com"
+}
     await userData.add(user4.id, user4.email)
     await userData.updateUser(user4.id, user4.phone, user4.photo);
     console.log("user4 created")
@@ -117,15 +114,14 @@ const main = async () => {
     await propertyData.add("EBf4QO4DNqSCrYg2Sye5ae2Bft22", property4)
     console.log("property4 created")
 
-    // ------------------------------------------------------------
-    user5 = {
-        id: "6T4h2MaNfzbtKxojCQn5dMAhsoq2",
-        password:"password5",
-        photo:null,
-        phone:"1147895642",
-        email:"seedseed5@gmail.com"
-    }
-
+// ------------------------------------------------------------
+user5 = {
+    id: "6T4h2MaNfzbtKxojCQn5dMAhsoq2",
+    password:"password5",
+    photo:null, //TODO
+    phone:"1147895642",
+    email:"seedseed5@gmail.com"
+}
     await userData.add(user5.id, user5.email)
     await userData.updateUser(user5.id, user5.phone, user5.photo);
     console.log("user4 created")
