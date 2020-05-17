@@ -5,7 +5,7 @@ import serverController from '../../serverController';
 import { useAlert } from 'react-alert'
 import ReactTooltip from "react-tooltip";
 import {useDropzone} from 'react-dropzone';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 const AddProperty = (props) => {
     const alert = useRef(useAlert());

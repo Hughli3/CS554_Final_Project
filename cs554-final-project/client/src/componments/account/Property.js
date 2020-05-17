@@ -3,7 +3,7 @@ import { AuthContext } from "../auth/Auth";
 import serverController from '../../serverController';
 import { Link } from 'react-router-dom';
 import { useAlert } from 'react-alert';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 const Property = (props) => {
 	const { currentUser } = useContext(AuthContext);

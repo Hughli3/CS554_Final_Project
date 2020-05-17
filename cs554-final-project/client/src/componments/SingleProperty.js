@@ -3,7 +3,9 @@ import serverController from '../serverController'
 import { Link } from 'react-router-dom';
 import { AuthContext } from "./auth/Auth";
 import { useAlert } from 'react-alert'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
 
 const SingleProperty = (props) => {
 	const [ propertyData, setPropertyData ] = useState();
@@ -11,6 +13,10 @@ const SingleProperty = (props) => {
 	const [ loading, setLoading ] = useState(true);
 	const { currentUser } = useContext(AuthContext);
 	const alert = useRef(useAlert());
+	
+	const [ photoIndex, setPhotoIndex ] = useState(0);
+	const [ isOpen, setIsOpen ] = useState(false);
+
 
 	let lastUpdate;
 	if (propertyData && propertyData.date){
@@ -208,11 +214,24 @@ const SingleProperty = (props) => {
                 <title>{(propertyData && propertyData.title)} - RentSIT</title>
             </Helmet>
 			<div className="container">
-				{/* <h1 className="mb-5">All Property</h1> */}
+				{isOpen && (
+				<Lightbox
+					mainSrc={propertyData.album[photoIndex]}
+					nextSrc={propertyData.album[(photoIndex + 1) % propertyData.album.length]}
+					prevSrc={propertyData.album[(photoIndex + propertyData.album.length - 1) % propertyData.album.length]}
+					onCloseRequest={() => setIsOpen(false)}
+					onMovePrevRequest={() =>
+						setPhotoIndex((photoIndex + propertyData.album.length - 1) % propertyData.album.length)
+					}
+					onMoveNextRequest={() =>
+						setPhotoIndex((photoIndex + 1) % propertyData.album.length)
+					}
+				/>
+				)}
+				
 				<h1 className='cap-first-letter'>{(propertyData && propertyData.title) || 'Not Provided'}</h1>
 				<div className="icon-group">
 					<p><i className="fas fa-clock"></i> Last Update {lastUpdate || 'Not Provided'}</p>
-				
 				</div>
 				<div className="row">
 					<div className='col-lg-7 col-12'>
@@ -220,7 +239,7 @@ const SingleProperty = (props) => {
 							<ol className="carousel-indicators">
 								{carouselIndicator}
 							</ol>
-							<div className="carousel-inner">
+							<div className="carousel-inner" onClick={() => setIsOpen(true)}>
 								{carouselImages}
 							</div>
 							<a className="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">

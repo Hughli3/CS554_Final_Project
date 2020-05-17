@@ -4,7 +4,7 @@ import { app, googleProvider } from "./AuthBase.js";
 import { AuthContext } from "./Auth.js";
 import ReactTooltip from "react-tooltip";
 import { useAlert } from 'react-alert'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 const Login = () => {
   const alert = useAlert()

@@ -11,7 +11,7 @@ import { useAlert } from 'react-alert';
 import { Link, Switch } from 'react-router-dom';
 import ReactTooltip from "react-tooltip";
 import {useDropzone} from 'react-dropzone'
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 export default function Account(props){
     const { currentUser } = useContext(AuthContext);

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider as AlertProvider } from 'react-alert'
-// import AlertTemplate from 'react-alert-template-basic'
+import { HelmetProvider } from 'react-helmet-async';
 
 const AlertTemplate = ({ style, options, message, close }) => {
   let classes = 
@@ -21,7 +21,9 @@ const AlertTemplate = ({ style, options, message, close }) => {
 ReactDOM.render(
   <React.StrictMode>
     <AlertProvider template={AlertTemplate} transition='fade' timeout={3000} position='top center'>
-      <App />
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
     </AlertProvider>  
   </React.StrictMode>,
   document.getElementById('root')

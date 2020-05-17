@@ -3,7 +3,7 @@ import React, {useEffect, useState, useRef} from 'react';
 import serverController from "../serverController";
 import { useAlert } from 'react-alert'
 import { Link} from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 export default function User(props){
 

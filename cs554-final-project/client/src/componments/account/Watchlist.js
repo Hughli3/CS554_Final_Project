@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react"
 import serverController from '../../serverController';
 import { AuthContext } from "../auth/Auth";
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import { useAlert } from 'react-alert';
 
 export default function WatchList(props) {

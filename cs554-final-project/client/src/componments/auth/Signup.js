@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Redirect } from "react-router";
 import { AuthContext } from "./Auth.js";
 import { app } from "./AuthBase";
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import ReactTooltip from "react-tooltip";
 import { useAlert } from 'react-alert'
 
