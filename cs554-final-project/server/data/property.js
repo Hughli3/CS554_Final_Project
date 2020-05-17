@@ -4,6 +4,7 @@ const properties = collections.property;
 const users = collections.user;
 const imgData = require("./img");
 const ObjectId = require('mongodb').ObjectID;
+const xss = require("xss");
 
 let exportedMethods = {
 
@@ -72,8 +73,8 @@ let exportedMethods = {
         isOwner(owner);
         checkPropertyInfo(propertyInfo);
         let data = {
-            title: propertyInfo.title,
-            description: propertyInfo.description,
+            title: xss(propertyInfo.title),
+            description: xss(propertyInfo.description),
             price: propertyInfo.price,
             zipcode: propertyInfo.zipcode,
             type: propertyInfo.type,
@@ -122,8 +123,8 @@ let exportedMethods = {
         checkPropertyInfo(propertyInfo);
         
         let data = {
-            title: propertyInfo.title,
-            description: propertyInfo.description,
+            title: xss(propertyInfo.title),
+            description: xss(propertyInfo.description),
             zipcode: propertyInfo.zipcode,
             bedroom: propertyInfo.bedroom,
             bath: propertyInfo.bath,
