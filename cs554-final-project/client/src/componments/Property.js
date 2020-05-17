@@ -28,7 +28,7 @@ const Property = (props) => {
 					setPageData({next: resData.next, prev: resData.prev});
 					setLoading(false);
 				} catch (e) {
-					alert.error(e)
+					alert.error(e.message)
 					setLoading(false);
 				}
 			}

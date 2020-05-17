@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import { Provider as AlertProvider } from 'react-alert'
 // import AlertTemplate from 'react-alert-template-basic'
 
 const AlertTemplate = ({ style, options, message, close }) => {

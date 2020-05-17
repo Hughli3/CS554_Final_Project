@@ -27,8 +27,7 @@ const Property = (props) => {
 				}
 			}
 			fetchData();
-		},
-		[]
+		}, []
 	);
 
 	const handleDelete = async (event) => {
@@ -40,7 +39,7 @@ const Property = (props) => {
 			setPropertyData(resData.property);
 			alert.success('deleted')
 		} catch (e) {
-			alert.error(e)
+			alert.error(e.message)
 		}
 	};
 
@@ -55,17 +54,17 @@ const Property = (props) => {
 			<div className="row property-card mb-4">
 				<div className="col-lg-6 col-6 pl-0">
 					<Link to={'/property/' + property._id}>
-						{property.album.length == 0 ?
-							(<img src="/img/default_property.jpg" className="card-img-left" alt="property image" />)
+						{property.album.length === 0 ?
+							(<img src="/img/default_property.jpg" className="card-img-left" alt="property" />)
 							:
-							(<img src={property.album[0]} className="card-img-left" alt="property image" />)
+							(<img src={property.album[0]} className="card-img-left" alt="property" />)
 						}
 					</Link>
 				</div>
 				<div className="col-lg-6 col-6 py-3">
 					<Link to={'/property/' + property._id}>
 
-						<h1 className="display-4" className="title">{property.title}</h1>
+						<h1 className="display-4 title">{property.title}</h1>
 						</Link>
 						{property.description ? (<p className="description">{property.description}</p>) : null}
 					

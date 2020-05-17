@@ -15,7 +15,7 @@ const SignUp = () => {
     event.preventDefault();
     const { email, password, confirmPassword} = event.target.elements;
     try {
-      if (password.value != confirmPassword.value) throw "different password"
+      if (password.value != confirmPassword.value) throw {code: null, message:"different password"}
       await app.auth().createUserWithEmailAndPassword(email.value, password.value);
       alert.success('Signup sucessfully')
     } catch (error) {
