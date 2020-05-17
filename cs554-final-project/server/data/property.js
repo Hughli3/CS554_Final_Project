@@ -281,6 +281,7 @@ function checkPropertyInfo(propertyInfo){
     if (propertyInfo.bath < 0) throw "bath is invalid"
 
     let today = new Date()
+    if(propertyInfo.date.constructor != Number) throw "date is not a valid format";
     if (propertyInfo.date > Date.parse(today)) throw "Date invalid";
 }
 
