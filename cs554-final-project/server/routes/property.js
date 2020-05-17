@@ -44,7 +44,6 @@ router.get('/', async (req, res) => {
         }
         
         // console.log(filter, sort)
-        allSave = "all"+filter+sort        
     } catch (e) {
         res.status(400).json({error: "invalid parameter"});
         return;
@@ -52,25 +51,13 @@ router.get('/', async (req, res) => {
 
     let resData;
     try {
-        let allCExist = await client.existsAsync(allSave+"c");
-        let allExist = await client.existsAsync(allSave);
-        if(allCExist&&allExist){            
-            let jsonProperty = await client.getAsync(allSave);
-            resData = JSON.parse(jsonProperty);
-        } else {            
-            resData = await propertyData.getAll(page, filter, sort);
-            for (let property of resData.properties) {
-                let albumIds = property.album
-                property.album = []
-                for (let imageId of albumIds) {
-                    property.album.push(await imageData.getPhotoDataId(imageId));
-                }
+        resData = await propertyData.getAll(page, filter, sort);
+        for (let property of resData.properties) {
+            let albumIds = property.album
+            property.album = []
+            for (let imageId of albumIds) {
+                property.album.push(await imageData.getPhotoDataId(imageId));
             }
-
-            let jsonProperty = JSON.stringify(resData)
-            await client.setAsync(allSave, jsonProperty);
-            await client.setAsync(allSave+"c", true);
-            allC.push(allSave+"c")
         }
         res.json(resData);
     } catch (e) {
@@ -151,13 +138,6 @@ router.post('/', checkAuth, async (req, res) => {
     
     try {
         const property = await propertyData.add(owner, propertyInfo);
-
-        // reset all property redis
-        for(let i=0; i<allC.length;i++){
-            await client.delAsync(allC[i]);
-        }
-        allC = []
-
         res.json(property);
     } catch (e) {
         res.status(500).json({error: e});
@@ -219,10 +199,6 @@ router.put("/:id", checkAuth, async(req, res) => {
 
         // reset property redis
         await client.delAsync("property"+pid);
-        for(let i=0; i<allC.length;i++){
-            await client.delAsync(allC[i]);
-        }
-        allC = []
 
         res.json(property);
     }catch(e){
@@ -263,10 +239,6 @@ router.delete('/:id', checkAuth, async (req, res) => {
 
         // reset property redis
         await client.delAsync("property"+req.params.id);
-        for(let i=0; i<allC.length;i++){
-            await client.delAsync(allC[i]);
-        }
-        allC = []
 
         res.json(resData);
     } catch (e) {
