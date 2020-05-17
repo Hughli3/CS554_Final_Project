@@ -12,6 +12,14 @@ const main = async () => {
     let oldUDis = "./public/user/"
     let oldPDis = "./public/property/"
     let newDis = "./public/img/"
+    // imagesInfo1 = ["property1-1.jpg"]
+    // imagesInfo2 = ["property2-1.jpg", "property2-2.jpg", "property2-3.jpg", "property2-4.jpg", "property2-5.jpg", "property2-6.jpg", "property2-7.jpg", "property2-8.jpg", "property2-9.jpg", "property2-10.jpg", "property2-11.jpg", "property2-12.jpg", "property2-13.jpg", "property2-14.jpg"]
+    // imagesInfo3 = ["property3-1.jpg", "property3-2.jpg", "property3-3.jpg"]
+    // imagesInfo4 = ["property4-1.jpg", "property4-2.jpg", "property4-3.jpg", "property4-4.jpg", "property4-5.jpg", "property4-6.jpg", "property4-7.jpg", "property4-8.jpg", "property4-9.jpg", "property4-10.jpg"]
+    // imagesInfo5 = ["property5-1.jpg", "property5-2.jpg", "property5-3.jpg", "property5-4.jpg", "property5-5.jpg", "property5-6.jpg", "property5-7.jpg"]
+    // imagesInfo6 = ["property6-1.jpg", "property6-2.jpg", "property6-3.jpg", "property6-4.jpg", "property6-5.jpg", "property6-6.jpg", "property6-7.jpg", "property6-8.jpg"]
+    // imagesInfo7 = ["property7-1.jpg", "property7-2.jpg", "property7-3.jpg"]
+    // imagesInfo8 = ["property8-1.jpg", "property8-2.jpg", "property8-3.jpg", "property8-4.jpg"]
     
     let user1 = {
         id: "bCWDxwln7cMUYLvofdBRiaT5sZh1",
@@ -34,8 +42,14 @@ const main = async () => {
         type: "apartment",
         bedroom:1,
         bath:1,
-        date: 1587154999
+        date: 1587154999213,
+        album: []
     }
+    
+    // for (let i = 0; i < imagesInfo1.length; i++) {
+    //     let id = await imageData.createGridFS(imagesInfo1[i], "album", "./public/property/1/"+imagesInfo1[i]);
+    //     property1.album.push(id);
+    // }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property1)
     console.log("property1 created")
@@ -48,7 +62,7 @@ const main = async () => {
         type: "house",
         bedroom:3,
         bath:2,
-        date: 1588578388
+        date: 1588578388387
     }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property6)
@@ -62,7 +76,7 @@ const main = async () => {
         type: "house",
         bedroom:1,
         bath:1,
-        date: 1588200928
+        date: 1588200928841
     }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property7)
@@ -76,7 +90,7 @@ const main = async () => {
         type: "apartment",
         bedroom:1,
         bath:1,
-        date: 1587784342
+        date: 1587784342374
     }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property8)
@@ -90,7 +104,7 @@ const main = async () => {
         type: "apartment",
         bedroom:1,
         bath:1,
-        date: 1589687942
+        date: 1589687942111
     }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property9)
@@ -104,7 +118,7 @@ const main = async () => {
         type: "apartment",
         bedroom:2,
         bath:1,
-        date: 1589646134
+        date: 1589646134199
     }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property10)
@@ -118,21 +132,21 @@ const main = async () => {
         type: "apartment",
         bedroom:3,
         bath:1,
-        date: 1587145064
+        date: 1587145064491
     }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property11)
     console.log("property11 created")
 
     property12 = {
-        title:"1 Bd/1Ba - Prime Hoboken Area - $100 Application Fee",
-        description:"The Jordan in Hoboken, NJ offers condo style one- and two-bedroom apartments with six different floor plans to choose from. From the soaring 9 foot ceilings with expansive Pella Architect Series windows, to the natural oak hardwood floors and the Frigidaire washer/dryer set, your apartment offers plenty to love. Your home comes with 7-ft solid, wood doors and controlled central heating and air conditioning with programmable thermostats. In the gourmet style kitchen, you will notice Dal Torreon porcelain tiled floors with Nemo Metro gloss tiled backsplash, walnut cabinetry with soft-close features, Kohler chrome fixtures, and Caesarstone countertops. ",
-        price:3059,
-        zipcode:"07030",
+        title:"One bedroom lake walk out apartment for rent (Lake Hopatcong)",
+        description:"One bedroom walk out Lake house apartment for rent Furnished or unfurnished basic cable included all utilities included washer and dryer included off street parking included No Smoking no Pets, professional single adult only must pass background check. Must send Background history, renting, work... Leave your phone number with background history thank you",
+        price:1200,
+        zipcode:"07885",
         type: "apartment",
-        bedroom:3,
+        bedroom:1,
         bath:1,
-        date: 1589502719
+        date: 1589146280000
     }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property12)
@@ -146,7 +160,7 @@ const main = async () => {
         type: "apartment",
         bedroom:1,
         bath:1,
-        date: 1585387207
+        date: 1585387207100
     }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property13)
@@ -175,7 +189,7 @@ user2 = {
         description:"3/4 Bedroom Dutch Colonial. Very large master bedroom, pets ok, all hardwood and tile floors. 1.5 BATH. Formal Dining room , Full walk out Basement, New Central Air and Heat with Blue Tooth controls, new roof ,windows ,siding, bathrooms and more. Optional Private beach. Available Immediately.",
         zipcode:"07849",
         price:2400,
-        date:1587758628,
+        date:1587758628562,
         bedroom:3,
         bath:1,
         type: "house"
@@ -204,7 +218,7 @@ user3 = {
         description:"HUGE 3 BEDROOM APT..2200 sq ft \n ONLY 1 APT ABOVE A STORE . \n HARDWOOD FLOORS THROUGHOUT \n HUGE DECK OFF YOUR BACK DOOR \n WASHER & DRYER HOOKUP IN APT \n 3 ZONES OF HEATING \n YOUR OWN GAS FED BOILER \n CEILING FANS IN EVERY ROOM \n CENTRAL AIR \n HUGE FAMILY ROOM PLUS LIVING ROOM",
         zipcode:"07416",
         price:1850,
-        date:1583363547,
+        date:1583363547084,
         bedroom:3,
         bath:1,
         type: "house"
@@ -232,7 +246,7 @@ user4 = {
         description:"New Premium Rentals in Journal Square, Jersey City \n Studio, 1 to 3 bdrm units available for immediate move-in. Move-in costs covered by us. \n Sleek 16-story premium rental is intelligently designed, complemented by in-demand smart home features and unparalleled amenities. \n Exclusive indoor, outdoor and fitness amenities are paired with the luxuriously comfortable interiors in these exceptionally crafted apartments. \n Journal Square will entice you with its restaurants nightlife, shopping, and proximity to Manhattan. This charming community has a long history as the cultural center of Hudson County.",
         zipcode:"07047",
         price:2950,
-        date:1589691682,
+        date:1589691682715,
         bedroom:2,
         bath:1,
         type: "house"
@@ -260,7 +274,7 @@ user5 = {
         description:"This large, 4 bedroom apartment features a huge, separate windowed kitchen with dishwasher, a large, windowed bathroom, high ceilings, gorgeous hardwood floors, closets and more! This is an elevator building with a laundry room, video intercom and is only two short blocks to the 1 train. Pets are welcome. Heat and water included. This is a beautiful, prewar building. The super lives on the premises. Perfect as a share or for a family. A must see! \n Fabulous location! Just steps to Riverside Park, Columbia University, shopping and transportation. Please call/text Ruth at (917) 592-3145 to schedule an appointment. Move-in date is flexible. **ONE MONTH FREE!** \n do NOT contact me with unsolicited services or offers",
         zipcode:"07030",
         price:2970,
-        date:1574886102,
+        date:1574886102819,
         bedroom:3,
         bath:1,
         type: "apartment"
