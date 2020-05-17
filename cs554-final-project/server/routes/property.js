@@ -58,11 +58,7 @@ router.get('/', async (req, res) => {
             let jsonProperty = await client.getAsync(allSave);
             resData = JSON.parse(jsonProperty);
         } else {            
-            // console.log("I'm hrere, check me!!!!!!!!!")
             resData = await propertyData.getAll(page, filter, sort);
-            // console.log("I'm hrere, check me, again!!!!!!!!!")
-            // res.json(resData);
-
             for (let property of resData.properties) {
                 let albumIds = property.album
                 property.album = []
@@ -76,20 +72,6 @@ router.get('/', async (req, res) => {
             await client.setAsync(allSave+"c", true);
             allC.push(allSave+"c")
         }
-    // } catch (e) {
-    //     res.status(500).json({error: e});
-    //     return
-    // }
-
-    // get images data
-    // try {
-        // for (let property of resData.properties) {
-        //     let albumIds = property.album
-        //     property.album = []
-        //     for (let imageId of albumIds) {
-        //         property.album.push(await imageData.getPhotoDataId(imageId));
-        //     }
-        // }
         res.json(resData);
     } catch (e) {
         res.status(500).json({error: e});
@@ -151,20 +133,6 @@ router.get('/:id', async (req, res) => {
 router.post('/', checkAuth, async (req, res) => {
     let propertyInfo = req.body;
     let owner = res.locals.userUid;
-    // try {
-    //     if (propertyInfo.title === undefined) throw "title is undefinded";
-    //     if (typeof taskInfo.title != "string") throw "title is not a string";
-    //     if (taskInfo.description === undefined) throw "description is undefinded";
-    //     if (typeof taskInfo.description != "string") throw "description is not a string";
-    //     if (taskInfo.hoursEstimated === undefined) throw "hoursEstimated is undefinded";
-    //     if (typeof taskInfo.hoursEstimated != "number") throw "hoursEstimated is not of the proper type";
-    //     if (taskInfo.hoursEstimated <= 0 ) throw "hoursEstimated is not a positive number";
-    //     if (taskInfo.completed === undefined) throw "completed is undefinded";
-    //     if (typeof taskInfo.completed != "boolean") throw "completed is not of the proper type";
-    // } catch (e) {
-    //     res.status(400).json({error: e});
-    //     return;
-    // }
 
     let imagesInfo = propertyInfo.album;
     propertyInfo.album = []
@@ -174,7 +142,6 @@ router.post('/', checkAuth, async (req, res) => {
             imageData.validateBase64(imagesInfo[i][2])
             let filepath = await base64Img.imgSync(imagesInfo[i][2], './public/img', imagesInfo[i][0].split(".")[0]);            
             let id = await imageData.createGridFS(imagesInfo[i][0], imagesInfo[i][1], filepath);
-            await client.lpushAsync("imgIdList", JSON.stringify(id))
             propertyInfo.album.push(id);
         }
     } catch (e) {

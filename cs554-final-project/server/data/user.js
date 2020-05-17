@@ -1,11 +1,6 @@
 //==================== Requires ====================
-
 const collections = require("../config/collections");
 const users = collections.user
-const properties = collections.property
-
-const imgData = require("./img");
-// const propertyData = require("../data/property");
 
 //==================== Main ====================
 let exportedMethods = {
@@ -58,7 +53,6 @@ let exportedMethods = {
 
   
   async updateUser(id, phone, avatar) {
-    // let avatarid = await this.updateAvatar(id, avatar)
     validatePhone(phone);
     let data = {
       phone: phone

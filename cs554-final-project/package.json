@@ -7,8 +7,7 @@
     "server": "npm start --prefix server",
     "client": "npm start --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run server\" \" npm run client\" ",
-    "end": "concurrently --kill-other "
+    "start": "concurrently \"npm run server\" \"npm run client\" "
   },
   "author": "",
   "license": "MIT",
