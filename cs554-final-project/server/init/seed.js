@@ -1,6 +1,7 @@
 const dbConnection = require('../config/connection');
 const userData = require("../data/user");
 const propertyData = require("../data/property")
+const ObjectId = require('mongodb').ObjectID;
 
 //  ==================== User and Property data ====================
 const main = async () => {
@@ -29,7 +30,7 @@ const main = async () => {
         date: "2020-04-17"
     }
     
-    let propertyOne = await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property1)
+    await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property1)
     console.log("property1 created")
 
 // ------------------------------------------------------------
@@ -57,7 +58,7 @@ property2 = {
     type: "house"
 }
 
-let propertyTwo = await propertyData.add("gGGZfLVBFuTzVFY74cNJ0uRHYr02", property2)
+await propertyData.add("gGGZfLVBFuTzVFY74cNJ0uRHYr02", property2)
 console.log("property2 created")
 
 // ------------------------------------------------------------
@@ -85,7 +86,7 @@ property3 = {
     type: "house"
 }
 
-let propertyThree = await propertyData.add("gba8X9WshQPpYWyr5kzag18kfL73", property3)
+await propertyData.add("gba8X9WshQPpYWyr5kzag18kfL73", property3)
 console.log("property3 created")
 
 // ------------------------------------------------------------
@@ -113,7 +114,7 @@ property4 = {
     type: "house"
 }
 
-let propertyFour = await propertyData.add("EBf4QO4DNqSCrYg2Sye5ae2Bft22", property4)
+await propertyData.add("EBf4QO4DNqSCrYg2Sye5ae2Bft22", property4)
 console.log("property4 created")
 
 // ------------------------------------------------------------
@@ -131,7 +132,7 @@ console.log("user4 created")
 
 property5 = {
     ownerid:"6T4h2MaNfzbtKxojCQn5dMAhsoq2",
-    title:"BEAUTIFUL, SUNNY, LG 4 BR!* LNDRY, ELEV, PETS OK! Off B’way/120th St (Upper West Side)",
+    title:"BEAUTIFUL, SUNNY, LG 4 BR!* LNDRY, ELEV, PETS OK!",
     description:"This large, 4 bedroom apartment features a huge, separate windowed kitchen with dishwasher, a large, windowed bathroom, high ceilings, gorgeous hardwood floors, closets and more! This is an elevator building with a laundry room, video intercom and is only two short blocks to the 1 train. Pets are welcome. Heat and water included. This is a beautiful, prewar building. The super lives on the premises. Perfect as a share or for a family. A must see! \n Fabulous location! Just steps to Riverside Park, Columbia University, shopping and transportation. Please call/text Ruth at (917) 592-3145 to schedule an appointment. Move-in date is flexible. **ONE MONTH FREE!** \n do NOT contact me with unsolicited services or offers",
     zipcode:"07030",
     price:2970,
@@ -140,7 +141,7 @@ property5 = {
     bath:1,
     type: "apartment"
 }
-let propertyFive = await propertyData.add("6T4h2MaNfzbtKxojCQn5dMAhsoq2", property5)
+await propertyData.add("6T4h2MaNfzbtKxojCQn5dMAhsoq2", property5)
 console.log("property5 created")
 
 await db.serverConfig.close();
