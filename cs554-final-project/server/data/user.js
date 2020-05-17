@@ -32,8 +32,8 @@ let exportedMethods = {
   async addWatchlist(propertyId, userId) {
     const userCollection = await users();
     const updateInfo = await userCollection.updateOne(
-      {_id: userId},
-      {$addToSet: {watchlist: propertyId}}
+      {_id: userId, watchlist: { $ne: propertyId } },
+      {$push: { watchlist: { $each: [propertyId], $position: 0 } }}
     );
     if (!updateInfo.matchedCount && !updateInfo.modifiedCount) throw 'add to watchlist failed';
 

@@ -92,9 +92,10 @@ let exportedMethods = {
 
         const userCollection = await users();
         const updateInfo = await userCollection.updateOne(
-          {_id: owner},
-          {$addToSet: {property: newId}}
+            {_id: owner, property: { $ne: newId } },
+            {$push: { property: { $each: [newId], $position: 0 } }}
         );
+    
         if (!updateInfo.matchedCount && !updateInfo.modifiedCount) throw 'add to user info failed';
 
         return await this.getById(newId.toString());    
