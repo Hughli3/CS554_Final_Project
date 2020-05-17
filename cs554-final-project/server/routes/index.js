@@ -1,7 +1,5 @@
 const propertyRoutes = require('./property');
 const userRoutes = require('./user');
-const imageRoutes = require('./image');
-// const watchlistRoutes = require('./watchlist');
 
 const constructorMethod = (app) => {
 
@@ -19,8 +17,6 @@ const constructorMethod = (app) => {
   app.use('/api/property', propertyRoutes);
   app.use('/api/user', userRoutes);
   
-  app.use('/api/image', imageRoutes);
-
   app.use('*', (req, res) => {
     res.status(404).json({error: 'Not found'});
   });
