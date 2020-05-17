@@ -12,14 +12,14 @@ const main = async () => {
     let oldUDis = "./public/user/"
     let oldPDis = "./public/property/"
     let newDis = "./public/img/"
-    // imagesInfo1 = ["property1-1.jpg"]
-    // imagesInfo2 = ["property2-1.jpg", "property2-2.jpg", "property2-3.jpg", "property2-4.jpg", "property2-5.jpg", "property2-6.jpg", "property2-7.jpg", "property2-8.jpg", "property2-9.jpg", "property2-10.jpg", "property2-11.jpg", "property2-12.jpg", "property2-13.jpg", "property2-14.jpg"]
-    // imagesInfo3 = ["property3-1.jpg", "property3-2.jpg", "property3-3.jpg"]
-    // imagesInfo4 = ["property4-1.jpg", "property4-2.jpg", "property4-3.jpg", "property4-4.jpg", "property4-5.jpg", "property4-6.jpg", "property4-7.jpg", "property4-8.jpg", "property4-9.jpg", "property4-10.jpg"]
-    // imagesInfo5 = ["property5-1.jpg", "property5-2.jpg", "property5-3.jpg", "property5-4.jpg", "property5-5.jpg", "property5-6.jpg", "property5-7.jpg"]
-    // imagesInfo6 = ["property6-1.jpg", "property6-2.jpg", "property6-3.jpg", "property6-4.jpg", "property6-5.jpg", "property6-6.jpg", "property6-7.jpg", "property6-8.jpg"]
-    // imagesInfo7 = ["property7-1.jpg", "property7-2.jpg", "property7-3.jpg"]
-    // imagesInfo8 = ["property8-1.jpg", "property8-2.jpg", "property8-3.jpg", "property8-4.jpg"]
+    imagesInfo1 = ["property1-1.jpg"]
+    imagesInfo2 = ["property2-1.jpg", "property2-2.jpg", "property2-3.jpg", "property2-4.jpg", "property2-5.jpg", "property2-6.jpg", "property2-7.jpg", "property2-8.jpg", "property2-9.jpg", "property2-10.jpg", "property2-11.jpg", "property2-12.jpg", "property2-13.jpg", "property2-14.jpg"]
+    imagesInfo3 = ["property3-1.jpg", "property3-2.jpg", "property3-3.jpg"]
+    imagesInfo4 = ["property4-1.jpg", "property4-2.jpg", "property4-3.jpg", "property4-4.jpg", "property4-5.jpg", "property4-6.jpg", "property4-7.jpg", "property4-8.jpg", "property4-9.jpg", "property4-10.jpg"]
+    imagesInfo5 = ["property5-1.jpg", "property5-2.jpg", "property5-3.jpg", "property5-4.jpg", "property5-5.jpg", "property5-6.jpg", "property5-7.jpg"]
+    imagesInfo6 = ["property6-1.jpg", "property6-2.jpg", "property6-3.jpg", "property6-4.jpg", "property6-5.jpg", "property6-6.jpg", "property6-7.jpg", "property6-8.jpg"]
+    imagesInfo7 = ["property7-1.jpg", "property7-2.jpg", "property7-3.jpg"]
+    imagesInfo8 = ["property8-1.jpg", "property8-2.jpg", "property8-3.jpg", "property8-4.jpg"]
     
     let user1 = {
         id: "bCWDxwln7cMUYLvofdBRiaT5sZh1",
@@ -46,10 +46,10 @@ const main = async () => {
         album: []
     }
     
-    // for (let i = 0; i < imagesInfo1.length; i++) {
-    //     let id = await imageData.createGridFS(imagesInfo1[i], "album", "./public/property/1/"+imagesInfo1[i]);
-    //     property1.album.push(id);
-    // }
+    for (let i = 0; i < imagesInfo1.length; i++) {
+        let id = await imageData.createGridFS(imagesInfo1[i], "album", "./public/property/1/"+imagesInfo1[i]);
+        property1.album.push(id);
+    }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property1)
     console.log("property1 created")
@@ -62,7 +62,13 @@ const main = async () => {
         type: "house",
         bedroom:3,
         bath:2,
-        date: 1588578388387
+        date: 1588578388387,
+        album: []
+    }
+    
+    for (let i = 0; i < imagesInfo2.length; i++) {
+        let id = await imageData.createGridFS(imagesInfo2[i], "album", "./public/property/2/"+imagesInfo2[i]);
+        property6.album.push(id);
     }
     
     await propertyData.add("bCWDxwln7cMUYLvofdBRiaT5sZh1", property6)
