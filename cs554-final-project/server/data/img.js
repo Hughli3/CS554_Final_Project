@@ -67,6 +67,9 @@ function chunkSubstr(str) {
 }
 
 async function createGridFS(fileName, fieldName, filePath){
+  console.log(filePath);
+  console.log(filePath.includes("./public/img/"));
+  
   let mimetype = await validateImage(filePath);
 
   // read file
@@ -88,7 +91,9 @@ async function createGridFS(fileName, fieldName, filePath){
           imageminPngquant({quality: [0.6, 0.8]})]}
   );
   // write back
-  fs.writeFileSync(filePath, buf);
+  if(filePath.includes("./public/img/")){
+    fs.writeFileSync(filePath, buf);
+  }
 
   const fsFilesCollection = await fsFiles();
   const fsChunksCollection = await fsChunks();
@@ -105,7 +110,9 @@ async function createGridFS(fileName, fieldName, filePath){
 
   const insertFilesInfo = await fsFilesCollection.insertOne(newFiles);  
   if (insertFilesInfo.insertedCount === 0){
-    fs.unlinkSync(filePath);
+    if(filePath.includes("./public/img/")){
+      fs.unlinkSync(filePath);
+    }
     throw "could not create a new file";
   }
   
@@ -125,7 +132,9 @@ async function createGridFS(fileName, fieldName, filePath){
     }    
   }
 
-  fs.unlinkSync(filePath);
+  if(filePath.includes("./public/img/")){
+    fs.unlinkSync(filePath);
+  }
   return insertFilesInfo.insertedId;
 }
 
