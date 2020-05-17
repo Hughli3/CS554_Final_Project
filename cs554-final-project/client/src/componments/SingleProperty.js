@@ -189,7 +189,7 @@ const SingleProperty = (props) => {
 	};
 
 	const buildIndicator = (image, idx) => {
-		return <li data-target="#carouselExampleIndicators" data-slide-to={idx} className={idx === 0 ? ("active") : ""}></li>
+		return <li key={idx} data-target="#carouselExampleIndicators" data-slide-to={idx} className={idx === 0 ? ("active") : ""}></li>
 	}
 	const carouselIndicator = propertyData.album.length === 0 ? 
 			(<li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>)
@@ -197,7 +197,7 @@ const SingleProperty = (props) => {
 
 	const buildCarouselImages = (image, idx) => {
 		return (
-			<div className={idx === 0 ? ("carousel-item active") : "carousel-item"}>
+			<div key={idx} className={idx === 0 ? ("carousel-item active") : "carousel-item"}>
 				<img className="d-block w-100" src={image} alt="property images"/>
 			</div>
 		)					

@@ -44,17 +44,6 @@ export default function WatchList(props) {
             <div className="lds-facebook"><div></div><div></div><div></div></div>
         )
     }
-    
-    if (!properties) {
-        return (
-            <div className='show-body'>
-            <Helmet>
-                <title>WatchList - RentSIT</title>
-            </Helmet>
-                <p>empty</p>
-            </div>
-        )
-    }
 
     const watchlistComponents = properties.length === 0 ? (
             <div className="row property-card property-watch-empty mb-3">
@@ -65,13 +54,9 @@ export default function WatchList(props) {
                     </div>
                 </Link>
             </div>
-        ) : properties.map(property => {
+        ) : properties.map((property, idx) => {
         return (
-        <>
-        <Helmet>
-              <title>WatchList - RentSIT</title>
-        </Helmet>
-			<div className="row property-card mb-4">
+			<div key={idx} className="row property-card mb-4">
 				<div className="col-lg-6 col-md-4 col-6 pl-0">
                     <Link to={'/property/' + property._id}>
                         {property.album.length > 0 ?
@@ -102,7 +87,6 @@ export default function WatchList(props) {
                     <button type="button" onClick={handleDelete} data-property={property._id} className="btn btn-danger btn-sm btn-round btn-shadow btn-delete-property position-absolute">delete</button>
 				</div>
 			</div>
-		</>
 		);
         // <div key={property._id}>
         //     <a className='cap-first-letter' href={`/property/${property._id}`}> {property.title} </a>
@@ -112,6 +96,9 @@ export default function WatchList(props) {
 
     return (
         <div>
+            <Helmet>
+                <title>WatchList - RentSIT</title>
+            </Helmet>
             {watchlistComponents}
         </div>
     )

@@ -42,8 +42,6 @@ const EditProperty = (props) => {
         })
     }
 
-
-
     const onDrop = useCallback(async(acceptedFiles, rejectedFiles) => {
         const getData = async (Files) => {
           return Promise.all(Files.map(file => getbase64(file)))
@@ -107,7 +105,7 @@ const EditProperty = (props) => {
 
     let existing_preview = propertyData && propertyData.album && propertyData.album.length > 0 && propertyData.album.map((image, idx) => {
         return (
-          <div className="col-3 mb-2">
+          <div key={idx} className="col-3 mb-2">
             <div className="img-preview-container avatar-container">
               <img className="img-fluid img-preview" src={image} alt="property" />
               <button type="button" onClick={() => removeExistingImage(image)} className="btn btn-danger btn-sm btn-round btn-shadow btn-delete-preview position-absolute">delete</button>
@@ -118,7 +116,7 @@ const EditProperty = (props) => {
 
     let preview = imageData && imageData.length > 0 && imageData.map((key, idx) => {
       return (
-        <div className="col-3 mb-2">
+        <div key={idx} className="col-3 mb-2">
           <div className="img-preview-container avatar-container">
             <img className="img-fluid img-preview" src={key[2]} alt={key[0]} />
             <button type="button" onClick={() => removeImage(idx)} data-idx={idx} className="btn btn-danger btn-sm btn-round btn-shadow btn-delete-preview position-absolute">delete</button>
@@ -171,9 +169,9 @@ const EditProperty = (props) => {
 
             await serverController.editProperty(props.match.params.id,currentUser, data);
             // setIsSuccess(true);
-            props.history.push("/account")
             setLoading(false)
             alert.current.success('Edit sucessfully');
+            props.history.push("/account")
         }catch(error){
             setLoading(false)
             alert.current.error(error.message)

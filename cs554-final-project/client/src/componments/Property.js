@@ -39,41 +39,36 @@ const Property = (props) => {
 
 	li = propertyData && propertyData.map((property) => { 
 		return (
-			<>
-			<Helmet>
-                <title>Property - RentSIT</title>
-            </Helmet>
-				<div className="row property-card my-3">
-					<div className="col-lg-6 col-md-4 col-6 pl-0">
-						<Link to={'/property/' + property._id}>
-							{property.album.length === 0 ?
-							(<img src="/img/default_property.jpg" className="card-img-left" alt="property" />)
-							:
-							(<img src={property.album[0]} className="card-img-left" alt="property" />)
-							}
-						</Link>
-					</div>
-					<div className="col-lg-6 col-md-4 col-6 py-3">
-						<Link to={'/property/' + property._id}>
-							<h1 className="display-4 title">{property.title}</h1>
-							</Link>
-							{property.description ? (<p className="description">{property.description}</p>) : null}
-						
-							{ property.price || property.zipcode || property.type || property.bedroom || property.bath ?
-							(<div className="icon-group">
-								<p>
-									{property.price ? (<><i className="fas fa-dollar-sign"></i>{property.price}</>): null}
-									{property.zipcode ? (<><i className="fas fa-map-marker-alt"></i>{property.zipcode}</>): null}
-									{property.type ? (<><i className="fas fa-building"></i>{property.type}</>): null}
-									{property.bedroom ? (<><i className="fas fa-bed"></i>{property.bedroom}</>): null}
-									{property.bath ? (<><i className="fas fa-bath"></i>{property.bath}</>): null}
-									{/* TODO add last update */}
-								</p>
-							</div>) : null	
-							}												
-					</div>
+			<div key={property._id} className="row property-card my-3">
+				<div className="col-lg-6 col-md-4 col-6 pl-0">
+					<Link to={'/property/' + property._id}>
+						{property.album.length === 0 ?
+						(<img src="/img/default_property.jpg" className="card-img-left" alt="property" />)
+						:
+						(<img src={property.album[0]} className="card-img-left" alt="property" />)
+						}
+					</Link>
 				</div>
-			</>
+				<div className="col-lg-6 col-md-4 col-6 py-3">
+					<Link to={'/property/' + property._id}>
+						<h1 className="display-4 title">{property.title}</h1>
+						</Link>
+						{property.description ? (<p className="description">{property.description}</p>) : null}
+					
+						{ property.price || property.zipcode || property.type || property.bedroom || property.bath ?
+						(<div className="icon-group">
+							<p>
+								{property.price ? (<><i className="fas fa-dollar-sign"></i>{property.price}</>): null}
+								{property.zipcode ? (<><i className="fas fa-map-marker-alt"></i>{property.zipcode}</>): null}
+								{property.type ? (<><i className="fas fa-building"></i>{property.type}</>): null}
+								{property.bedroom ? (<><i className="fas fa-bed"></i>{property.bedroom}</>): null}
+								{property.bath ? (<><i className="fas fa-bath"></i>{property.bath}</>): null}
+								{/* TODO add last update */}
+							</p>
+						</div>) : null	
+						}												
+				</div>
+			</div>
 		)
 	});
 
@@ -149,6 +144,9 @@ const Property = (props) => {
 
 	return (
 	<main>
+		<Helmet>
+			<title>Property - RentSIT</title>
+		</Helmet>
 		<section className="section">
 			<div className="container">
 				<div className="row mb-5">	

@@ -34,7 +34,7 @@ const Home = () => {
     
     const buildSelectedProperty = (img, name, id) => {
         return (
-        <div className="col-6 col-md-3 mb-5 mb-lg-0 home-selected-property">
+        <div key={id} className="col-6 col-md-3 mb-5 mb-lg-0 home-selected-property">
             <div className="px-4">
             <Link to={"/property/" + id}>
                 <div className="avatar-container">

@@ -47,8 +47,7 @@ const Property = (props) => {
 	
 	const buildListItem = (property) => {
 		return (
-		<>
-			<div className="row property-card mb-4">
+			<div key={property._id} className="row property-card mb-4">
 				<div className="col-lg-6 col-6 pl-0">
 					<Link to={'/property/' + property._id}>
 						{property.album.length === 0 ?
@@ -80,7 +79,6 @@ const Property = (props) => {
 						<button type="button" onClick={handleDelete} data-property={property._id} className="btn btn-danger btn-sm btn-round btn-shadow btn-delete-property position-absolute">delete</button>
 				</div>
 			</div>
-		</>
 		);
 	};
 
