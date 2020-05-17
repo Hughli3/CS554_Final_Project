@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = "http://localhost:3001"
+const baseUrl = "http://localhost:3000"
 
 const serverController = {
 
@@ -23,8 +23,6 @@ const serverController = {
         } catch (e) {
             if (e.response && e.response.data && e.response.data.error) throw Object.assign(new Error(e.response.data.error), { code: e.response.status });
             throw e
-
-            
         }
     },
 
