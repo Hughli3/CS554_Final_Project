@@ -81,7 +81,7 @@ export default function Account(props){
         event.preventDefault();
         try{
             const data = event.target.elements;
-            if (data.phone.value.length != 10 && data.phone.value.length != 0) throw {code: null, message:"phone number wrong format"};
+            if (data.phone.value.length !== 10 && data.phone.value.length !== 0) throw Object.assign(new Error("phone number wrong format"),{ code: null });
             const {data: resData} = await serverController.editUser(currentUser, data.phone.value, imageData);
             setUserData(resData);
             alert.success('Edit sucessfully');

@@ -57,7 +57,7 @@ export default function WatchList(props) {
         )
     }
 
-    const watchlistComponents = properties.length == 0 ? (
+    const watchlistComponents = properties.length === 0 ? (
             <div className="row property-card property-watch-empty mb-3">
                 <Link className="align-self-center d-flex align-items-center justify-content-center" to='/property'>
                     <div>
@@ -75,17 +75,17 @@ export default function WatchList(props) {
 			<div className="row property-card mb-4">
 				<div className="col-lg-6 col-md-4 col-6 pl-0">
                     <Link to={'/property/' + property._id}>
-                        {property.avatar ?
-                        (<img src="https://cdngeneral.rentcafe.com/dmslivecafe/3/509605/Avant-Apartments-Parking-Garage-Entrance-Carmel,-Indiana_WEB.jpg" className="card-img-left" alt="property image" />)
+                        {property.album.length > 0 ?
+                        (<img src={property.album[0]} className="card-img-left" alt="property" />)
                         :
-                        (<img src="https://cdngeneral.rentcafe.com/dmslivecafe/3/509605/Avant-Apartments-Parking-Garage-Entrance-Carmel,-Indiana_WEB.jpg" className="card-img-left" alt="property image" />)
+                        (<img src="/img/default_property.jpg" className="card-img-left" alt="property" />)
                         }
                     </Link>
 				</div>
 				<div className="col-lg-6 col-md-4 col-6 py-3">
 					<Link to={'/property/' + property._id}>
 
-						<h2 className="display-4" className="title">{property.title}</h2>
+						<h2 className="display-4 title">{property.title}</h2>
 						</Link>
 						{property.description ? (<p className="description">{property.description}</p>) : null}
 					

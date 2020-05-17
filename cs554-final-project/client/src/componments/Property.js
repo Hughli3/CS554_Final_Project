@@ -46,16 +46,16 @@ const Property = (props) => {
 				<div className="row property-card my-3">
 					<div className="col-lg-6 col-md-4 col-6 pl-0">
 						<Link to={'/property/' + property._id}>
-							{property.album.length == 0 ?
-							(<img src="/img/default_property.jpg" className="card-img-left" alt="property image" />)
+							{property.album.length === 0 ?
+							(<img src="/img/default_property.jpg" className="card-img-left" alt="property" />)
 							:
-							(<img src={property.album[0]} className="card-img-left" alt="property image" />)
+							(<img src={property.album[0]} className="card-img-left" alt="property" />)
 							}
 						</Link>
 					</div>
 					<div className="col-lg-6 col-md-4 col-6 py-3">
 						<Link to={'/property/' + property._id}>
-							<h1 className="display-4" className="title">{property.title}</h1>
+							<h1 className="display-4 title">{property.title}</h1>
 							</Link>
 							{property.description ? (<p className="description">{property.description}</p>) : null}
 						
@@ -157,9 +157,9 @@ const Property = (props) => {
 								filter Days on RentSIT
 							</button>
 							<div className="dropdown-menu w-100 pr-2" aria-labelledby="dropdownMenuButton">
-							<Link to={"?page=" + page + "&filter=" + "3days" + "&sort=" + sort} className="dropdown-item">In 3 Days</Link>
-							<Link to={"?page=" + page + "&filter=" + "10days" + "&sort=" + sort} className="dropdown-item">In 10 Days</Link>
-							<Link to={"?page=" + page + "&filter=" + "30days" + "&sort=" + sort} className="dropdown-item">In 30 Days</Link>
+							<Link to={"?page=" + page + "&filter=3days&sort=" + sort} className="dropdown-item">In 3 Days</Link>
+							<Link to={"?page=" + page + "&filter=10days&sort=" + sort} className="dropdown-item">In 10 Days</Link>
+							<Link to={"?page=" + page + "&filter=30days&sort=" + sort} className="dropdown-item">In 30 Days</Link>
 							</div>
 						</div>
 					</div>
@@ -170,9 +170,9 @@ const Property = (props) => {
 								filter price
 							</button>
 							<div className="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-							<Link to={"?page=" + page + "&filter=" + "price1" + "&sort=" + sort} className="dropdown-item">$ 0 - 1000</Link>
-							<Link to={"?page=" + page + "&filter=" + "price2" + "&sort=" + sort} className="dropdown-item">$ 1000 - 2000</Link>
-							<Link to={"?page=" + page + "&filter=" + "price3" + "&sort=" + sort} className="dropdown-item">$ 2000 +</Link>
+							<Link to={"?page=" + page + "&filter=price1&sort=" + sort} className="dropdown-item">$ 0 - 1000</Link>
+							<Link to={"?page=" + page + "&filter=price2&sort=" + sort} className="dropdown-item">$ 1000 - 2000</Link>
+							<Link to={"?page=" + page + "&filter=price3&sort=" + sort} className="dropdown-item">$ 2000 +</Link>
 							</div>
 						</div>
 					</div>
@@ -183,14 +183,14 @@ const Property = (props) => {
 								sort price
 							</button>
 							<div className="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-							<Link to={"?page=" + page + "&filter=" + filter + "&sort=" + "priceUp"} className="dropdown-item">Low to High</Link>
-							<Link to={"?page=" + page + "&filter=" + filter + "&sort=" + "priceDown"} className="dropdown-item">High to Low</Link>
+							<Link to={"?page=" + page + "&filter=" + filter + "&sort=priceUp"} className="dropdown-item">Low to High</Link>
+							<Link to={"?page=" + page + "&filter=" + filter + "&sort=priceDown"} className="dropdown-item">High to Low</Link>
 							</div>
 						</div>
 					</div>
 
 					<div className="col-3 p-0">
-							<Link  className="btn btn-secondary w-100" aria-haspopup="true" aria-expanded="false" to={"?page=" + page + "&filter=" + "null" + "&sort=" + "null"} >Reset</Link>
+							<Link  className="btn btn-secondary w-100" aria-haspopup="true" aria-expanded="false" to={"?page=" + page + "&filter=null&sort=null"} >Reset</Link>
 					</div>
 				</div>
 				{li}

@@ -107,7 +107,7 @@ const EditProperty = (props) => {
         return (
           <div className="col-3 mb-2">
             <div className="img-preview-container avatar-container">
-              <img className="img-fluid img-preview" src={image} alt="property image" />
+              <img className="img-fluid img-preview" src={image} alt="property" />
               <button type="button" onClick={() => removeExistingImage(image)} className="btn btn-danger btn-sm btn-round btn-shadow btn-delete-preview position-absolute">delete</button>
             </div>
           </div>
@@ -151,21 +151,21 @@ const EditProperty = (props) => {
             data.newImages = imageData;
             data.removedImages = removedImage;
 
-            if (!data.title.value) throw {code: null, message:"title not exist"} 
-            if (data.title.value.length > 70) throw {code: null, message:"title too long"};
-            if (!data.description.value) throw {code: null, message:"description not exist"};
-            if (data.description.value.length > 200) throw {code: null, message:"description too long"};
-            if (!data.bedroom.value) throw {code: null, message:"bedroom not exist"}
-            if (parseInt(data.bedroom.value) < 1 || parseInt(data.bedroom.value) > 10 ) throw {code: null, message:"bedroom number invalid"};
-            if (!data.bath.value) throw {code: null, message:"bath not exist"}
+            if (!data.title.value) throw Object.assign(new Error("title not exist"),{ code: null });
+            if (data.title.value.length > 70) throw Object.assign(new Error("title too long"),{ code: null });
+            if (!data.description.value) throw Object.assign(new Error("description not exist"),{ code: null });
+            if (data.description.value.length > 200) throw Object.assign(new Error("description too long"),{ code: null });
+            if (!data.bedroom.value) throw Object.assign(new Error("bedroom not exist"),{ code: null });
+            if (parseInt(data.bedroom.value) < 1 || parseInt(data.bedroom.value) > 10 ) throw Object.assign(new Error("bedroom number invalid"),{ code: null });
+            if (!data.bath.value) throw Object.assign(new Error("bath not exist"),{ code: null });
     
-            if (parseInt(data.bath.value) < 0|| parseInt(data.bath.value) > 10) throw {code: null, message:"bath number invalid"};
-            if (!data.price.value) throw {code: null, message:"price not exist"}
-            if (parseInt(data.price.value) < 0) throw {code: null, message:"price invalid"};
-            if (!data.zipcode.value) throw {code: null, message:"zipcode not exist"};
-            if (data.zipcode.value.length != 5) throw {code: null, message:"zipcode invalid"};
-            if (!data.type.value) throw {code: null, message:"type is not exist"};
-            if (data.type.value !== "apartment" && data.type.value !== "house" ) throw {code: null, message:"type is invalid"};
+            if (parseInt(data.bath.value) < 0|| parseInt(data.bath.value) > 10) throw Object.assign(new Error("bath number invalid"),{ code: null });
+            if (!data.price.value) throw Object.assign(new Error("price not exist"),{ code: null });
+            if (parseInt(data.price.value) < 0) throw Object.assign(new Error("price invalid"),{ code: null });
+            if (!data.zipcode.value) throw Object.assign(new Error("zipcode not exist"),{ code: null });
+            if (data.zipcode.value.length !== 5) throw Object.assign(new Error("zipcode invalid"),{ code: null });
+            if (!data.type.value) throw Object.assign(new Error("type is not exist"),{ code: null });
+            if (data.type.value !== "apartment" && data.type.value !== "house" ) throw Object.assign(new Error("type is invalid"),{ code: null });
 
             await serverController.editProperty(props.match.params.id,currentUser, data);
             // setIsSuccess(true);

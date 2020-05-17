@@ -94,7 +94,7 @@ const Home = () => {
                     </div>
                     </div>
                     <div className="col-lg-6 d-none d-lg-block">
-                    <img src= "./img/home/1.jpg" className="img-fluid rounded" alt="an apartment photo" />
+                    <img src= "./img/home/1.jpg" className="img-fluid rounded" alt="an apartment" />
                     </div>
                 </div>
             </div>
@@ -161,7 +161,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="col-md-5 d-none d-lg-block">
-                    <img src="./img/home/2.jpg" className="img-fluid floating" alt="an apartment photo" />
+                    <img src="./img/home/2.jpg" className="img-fluid floating" alt="an apartment" />
                 </div>
                 </div>
             </div>
@@ -172,7 +172,7 @@ const Home = () => {
                 <div className="row row-grid align-items-center">
                 <div className="col-12 col-lg-6">
                     <div className="card bg-default shadow border-0">
-                    <img src="./img/home/3.jpg" className="card-img-top" alt="a dog image" />
+                    <img src="./img/home/3.jpg" className="card-img-top" alt="community" />
                     <blockquote className="card-blockquote">
                         <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" className="svg-bg">
                         <polygon points="0,52 583,95 0,95" className="fill-default" />

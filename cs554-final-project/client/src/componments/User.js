@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState} from 'react';
 // import { AuthContext } from "../auth/Auth";
 import serverController from "../serverController";
 import { useAlert } from 'react-alert'
@@ -45,10 +45,10 @@ export default function User(props){
                         <div className="col-lg-6 col-md-4 col-6 pl-0">
                             <Link to={'/property/' + property._id}>
                                 {/* <div className="avatar-container"> */}
-                                    {property.album.length == 0 ?
-                                    (<img src="/img/default_property.jpg" className="card-img-left" alt="property image" />)
+                                    {property.album.length === 0 ?
+                                    (<img src="/img/default_property.jpg" className="card-img-left" alt="property" />)
                                     :
-                                    (<img src={property.album[0]} className="card-img-left" alt="property image" />)
+                                    (<img src={property.album[0]} className="card-img-left" alt="property" />)
                                     }
                                 </Link>
                                 {/* </div> */}

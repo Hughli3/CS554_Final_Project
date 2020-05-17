@@ -15,7 +15,7 @@ const Footer = () => {
             <div className="col-md-6">
               <ul className="nav nav-footer justify-content-end">
                 <li className="nav-item">
-                  <a href="https://github.com/Hughli3/CS554_Fincal_Project" className="nav-link" target="_blank">Project Code</a>
+                  <a href="https://github.com/Hughli3/CS554_Fincal_Project" rel="noopener noreferrer" className="nav-link" target="_blank">Project Code</a>
                 </li>
               </ul>
             </div>

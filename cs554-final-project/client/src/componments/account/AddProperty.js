@@ -111,21 +111,21 @@ const AddProperty = (props) => {
       
       try {
         // TODO move these checker into function
-        if (!data.title) throw {code: null, message:"title not exist"}
-        if (data.title.length > 70) throw {code: null, message:"title too long"}
-        if(!data.description) throw {code: null, message:"description not exist"}
-        if (data.description.length > 200) throw {code: null, message:"description too long"}
-        if (!data.bedroom) throw {code: null, message:"bedroom not exist"}
-        if (parseInt(data.bedroom) < 1 || parseInt(data.bedroom) > 10 ) throw {code: null, message:"bedroom number invalid"}
-        if (!data.bath) throw {code: null, message:"bath not exist"}
+        if (!data.title) throw Object.assign(new Error("title not exist"),{ code: null });
+        if (data.title.length > 70) throw Object.assign(new Error("title too long"),{ code: null });
+        if(!data.description) throw Object.assign(new Error("description not exist"),{ code: null });
+        if (data.description.length > 200) throw Object.assign(new Error("description too long"),{ code: null });
+        if (!data.bedroom) throw Object.assign(new Error("bedroom not exist"),{ code: null });
+        if (parseInt(data.bedroom) < 1 || parseInt(data.bedroom) > 10 ) throw Object.assign(new Error("bedroom number invalid"),{ code: null });
+        if (!data.bath) throw Object.assign(new Error("bath not exist"),{ code: null });
 
-        if (parseInt(data.bath) < 0|| parseInt(data.bath) > 10) throw {code: null, message:"bath number invalid"}
-        if (!data.price) throw {code: null, message:"price not exist"}
-        if (parseInt(data.price) < 0) throw {code: null, message:"price invalid"}
-        if (!data.zipcode) throw {code: null, message:"zipcode not exist"}
-        if (data.zipcode.length != 5) throw {code: null, message:"zipcode invalid"}
-        if (!data.type) throw {code: null, message:"type is not exist"}
-        if (data.type != "apartment" && data.type != "house" ) throw {code: null, message:"type is invalid"}
+        if (parseInt(data.bath) < 0|| parseInt(data.bath) > 10) throw Object.assign(new Error("bath number invalid"),{ code: null });
+        if (!data.price) throw Object.assign(new Error("price not exist"),{ code: null });
+        if (parseInt(data.price) < 0) throw Object.assign(new Error("price invalid"),{ code: null });
+        if (!data.zipcode) throw Object.assign(new Error("zipcode not exist"),{ code: null });
+        if (data.zipcode.length !== 5) throw Object.assign(new Error("zipcode invalid"),{ code: null });
+        if (!data.type) throw Object.assign(new Error("type is not exist"),{ code: null });
+        if (data.type !== "apartment" && data.type !== "house" ) throw Object.assign(new Error("type is invalid"),{ code: null });
 
         await serverController.postProperty(currentUser, data);
 

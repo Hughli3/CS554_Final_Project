@@ -21,8 +21,10 @@ const serverController = {
             }
             
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            if (e.response && e.response.data && e.response.data.error) throw Object.assign(new Error(e.response.data.error), { code: e.response.status });
             throw e
+
+            
         }
     },
 
@@ -30,7 +32,7 @@ const serverController = {
         try {
             return await axios.get(baseUrl + "/api/property/" + pid)
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            if (e.response && e.response.data && e.response.data.error) throw Object.assign(new Error(e.response.data.error), { code: e.response.status });
             throw e
         }
     },
@@ -58,7 +60,7 @@ const serverController = {
         try {
             return await axios.post(baseUrl + "/api/property/", data, {headers: {'Authorization': token}})
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            if (e.response && e.response.data && e.response.data.error) throw Object.assign(new Error(e.response.data.error), { code: e.response.status });
             throw e
         }
     },
@@ -89,7 +91,7 @@ const serverController = {
         try {
             return await axios.put(baseUrl + "/api/property/" + pid, data, {headers: {'Authorization': token}})
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            if (e.response && e.response.data && e.response.data.error) throw Object.assign(new Error(e.response.data.error), { code: e.response.status });
             throw e
         }
     },
@@ -105,7 +107,7 @@ const serverController = {
         try {
             return await axios.delete(baseUrl + "/api/property/" + pid, {headers: {'Authorization': token}})
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            if (e.response && e.response.data && e.response.data.error) throw Object.assign(new Error(e.response.data.error), { code: e.response.status });
             throw e
         }
     },
@@ -121,7 +123,7 @@ const serverController = {
         try {
             return await axios.post(baseUrl + "/api/user/", null, {headers: {'Authorization': token}})
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            if (e.response && e.response.data && e.response.data.error) throw Object.assign(new Error(e.response.data.error), { code: e.response.status });
             throw e
         }
     },
@@ -133,11 +135,11 @@ const serverController = {
         } catch (e) {
             throw e
         }
-        
+
         try {
             return await axios.get(baseUrl + "/api/user/", {headers: {'Authorization': token}})
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            if (e.response && e.response.data && e.response.data.error) throw Object.assign(new Error(e.response.data.error), { code: e.response.status });
             throw e
         }
     },
@@ -146,7 +148,7 @@ const serverController = {
         try {
             return await axios.get(baseUrl + "/api/user/" + userId)
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            if (e.response && e.response.data && e.response.data.error) throw Object.assign(new Error(e.response.data.error), { code: e.response.status });
             throw e
         }
     },
@@ -165,7 +167,7 @@ const serverController = {
         try {
             return await axios.post(baseUrl + "/api/user/watchlist", data, {headers: {'Authorization': token}})
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            if (e.response && e.response.data && e.response.data.error) throw Object.assign(new Error(e.response.data.error), { code: e.response.status });
             throw e
         }
     },
@@ -181,7 +183,7 @@ const serverController = {
         try {
             return await axios.delete(baseUrl + "/api/user/watchlist/" + propertyId, {headers: {'Authorization': token}})
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            if (e.response && e.response.data && e.response.data.error) throw Object.assign(new Error(e.response.data.error), { code: e.response.status });
             throw e
         }
     },
@@ -197,7 +199,7 @@ const serverController = {
         try {
             return await axios.get(baseUrl + "/api/user/watchlist", {headers: {'Authorization': token}})
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            if (e.response && e.response.data && e.response.data.error) throw Object.assign(new Error(e.response.data.error), { code: e.response.status });
             throw e
         }
     },
@@ -216,7 +218,7 @@ const serverController = {
         try {
             return await axios.patch(baseUrl + "/api/user/", data, {headers: {'Authorization': token}})
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            if (e.response && e.response.data && e.response.data.error) throw Object.assign(new Error(e.response.data.error), { code: e.response.status });
             throw e
         }
     },
@@ -225,7 +227,7 @@ const serverController = {
         try {
             return await axios.get(baseUrl + "/api/image/" + imgid)
         } catch (e) {
-            if (e.response && e.response.data && e.response.data.error) throw {code: e.response.status, message: e.response.data.error}
+            if (e.response && e.response.data && e.response.data.error) throw Object.assign(new Error(e.response.data.error), { code: e.response.status });
             throw e
         }
     },
