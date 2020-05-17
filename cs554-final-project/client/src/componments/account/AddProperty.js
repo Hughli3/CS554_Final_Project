@@ -114,7 +114,7 @@ const AddProperty = (props) => {
         if (!data.title) throw Object.assign(new Error("title not exist"),{ code: null });
         if (data.title.length > 70) throw Object.assign(new Error("title too long"),{ code: null });
         if(!data.description) throw Object.assign(new Error("description not exist"),{ code: null });
-        if (data.description.length > 200) throw Object.assign(new Error("description too long"),{ code: null });
+        if (data.description.length > 1000) throw Object.assign(new Error("description too long"),{ code: null });
         if (!data.bedroom) throw Object.assign(new Error("bedroom not exist"),{ code: null });
         if (parseInt(data.bedroom) < 1 || parseInt(data.bedroom) > 10 ) throw Object.assign(new Error("bedroom number invalid"),{ code: null });
         if (!data.bath) throw Object.assign(new Error("bath not exist"),{ code: null });
@@ -163,7 +163,7 @@ const AddProperty = (props) => {
             <div className="col-md-12">
               <div className="form-group">
                 <label htmlFor="description">Description</label>
-                <textarea id="description" rows="10" className="form-control" name="description" type="text" placeholder="description" data-tip="description length need to less than 200" />
+                <textarea id="description" rows="10" className="form-control" name="description" type="text" placeholder="description" data-tip="description length need to less than 1000" />
               </div>
             </div>
 
