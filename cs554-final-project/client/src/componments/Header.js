@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-import {BrowserRouter as Router, Link} from "react-router-dom";
-
+import { Link } from 'react-router-dom';
 import { AuthContext } from "./auth/Auth";
 import { app } from "./auth/AuthBase"
 // import PropertyList from './properties/PropertyList'

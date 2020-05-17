@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {BrowserRouter as Router, Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet'
 import serverController from '../serverController';
 
