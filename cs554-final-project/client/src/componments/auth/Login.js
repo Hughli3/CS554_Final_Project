@@ -39,12 +39,12 @@ const Login = () => {
                 <h1 className="text-center mb-4">Login</h1>
                 <form id="login-form" onSubmit={handleLogin}>
                   <div className="form-group">
-                      <label htmlFor="username">Email</label>
+                      <label htmlFor="email">Email</label>
                       <div className="input-group input-group-alternative" data-tip="username is case-insensitive">
                         <div className="input-group-prepend">
                           <span className="input-group-text"><i className="fa fa-user"></i></span>
                         </div>
-                        <input className="form-control"  type="email"  placeholder="Email" name="email" id="email" />
+                        <input className="form-control" type="email" placeholder="Email" name="email" id="email" />
                       </div>
                   </div>
                   <div className="form-group">
