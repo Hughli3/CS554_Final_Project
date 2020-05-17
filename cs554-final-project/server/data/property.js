@@ -43,7 +43,7 @@ let exportedMethods = {
         }
 
         sort.date = -1;
-        console.log(sort);
+        
         const propertyCollection = await properties();
         let allProperty = await propertyCollection.find(filter).sort(sort).toArray();
         if (!allProperty) throw 'no property in system';
@@ -101,7 +101,7 @@ let exportedMethods = {
     
     async getById(id){
         if (id === undefined)  throw "id is undefinded";
-        if (!ObjectId.isValid(id)) throw "id is invalid 2";
+        if (!ObjectId.isValid(id)) throw "id is invalid";
         if (typeof id != "string") id = id.toString();
         const objId = ObjectId.createFromHexString(id);
 
@@ -281,7 +281,6 @@ function checkPropertyInfo(propertyInfo){
     if(propertyInfo.bath.constructor != Number) throw "bath is not a number";
     if (propertyInfo.bath < 0) throw "bath is invalid"
 
-    // TODO Add date checker
     let today = new Date()
     if (propertyInfo.date > Date.parse(today)) throw "Date invalid";
 }
