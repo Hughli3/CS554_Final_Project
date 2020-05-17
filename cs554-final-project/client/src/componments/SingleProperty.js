@@ -208,6 +208,8 @@ const SingleProperty = (props) => {
 		</div>
 		 : propertyData.album.map( (image, idx) => buildCarouselImages(image, idx))
 
+	const lightboxImages = propertyData.album.length === 0 ? ["/img/default_property.jpg"] : propertyData.album
+
 	return (
 		<section className="section single-property">
 			<Helmet>
@@ -216,19 +218,18 @@ const SingleProperty = (props) => {
 			<div className="container">
 				{isOpen && (
 				<Lightbox
-					mainSrc={propertyData.album[photoIndex]}
-					nextSrc={propertyData.album[(photoIndex + 1) % propertyData.album.length]}
-					prevSrc={propertyData.album[(photoIndex + propertyData.album.length - 1) % propertyData.album.length]}
+					mainSrc={lightboxImages[photoIndex]}
+					nextSrc={lightboxImages[(photoIndex + 1) % lightboxImages.length]}
+					prevSrc={lightboxImages[(photoIndex + lightboxImages.length - 1) % lightboxImages.length]}
 					onCloseRequest={() => setIsOpen(false)}
 					onMovePrevRequest={() =>
-						setPhotoIndex((photoIndex + propertyData.album.length - 1) % propertyData.album.length)
+						setPhotoIndex((photoIndex + lightboxImages.length - 1) % lightboxImages.length)
 					}
 					onMoveNextRequest={() =>
-						setPhotoIndex((photoIndex + 1) % propertyData.album.length)
+						setPhotoIndex((photoIndex + 1) % lightboxImages.length)
 					}
 				/>
 				)}
-				
 				<h1 className='cap-first-letter'>{(propertyData && propertyData.title) || 'Not Provided'}</h1>
 				<div className="icon-group">
 					<p><i className="fas fa-clock"></i> Last Update {lastUpdate || 'Not Provided'}</p>
