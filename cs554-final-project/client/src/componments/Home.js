@@ -119,7 +119,7 @@ const Home = () => {
                 <div className="col-12 col-lg-7">
                     <div className="pr-md-5">
                     <h1>Rent near Stevens Easily</h1>
-                    <p className="lead">RentSIT provies cool features for you to help you quickly rent a house near Stevens Institute of Technology.</p>
+                    <p className="lead">RentSIT provides cool features for you to help you quickly rent a house near Stevens Institute of Technology.</p>
                     <ul className="list-unstyled mt-5">
                         <li className="py-2">
                         <div className="d-flex align-items-center">
@@ -179,7 +179,7 @@ const Home = () => {
                         <polygon points="0,42 583,95 683,0 0,95" opacity=".2" className="fill-default" />
                         </svg>
                         <h1 className="display-3 font-weight-bold text-white">Lovely Community</h1>
-                        <p className="lead text-italic text-white">Share your valueable information with others. Build the lovely community together.</p>
+                        <p className="lead text-italic text-white">Share your valuable information with others. Build the lovely community together.</p>
                     </blockquote>
                     </div>
                 </div>
