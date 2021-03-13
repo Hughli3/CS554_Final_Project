@@ -5,7 +5,7 @@ const userData = data.user;
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://finalproject-e61f4.firebaseio.com"
+    databaseURL: "https://rentsit-c6ba5-default-rtdb.firebaseio.com"
 });
 
 const checkAuth = async (req, res, next) => {
